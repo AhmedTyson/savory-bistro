@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap');
+@import './styles/variables.css';
+@import "tailwindcss";
+
+/* ─── RESETS ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── RESPONSIVE CONTAINER ────────────────────────── */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 16px;                      /* Mobile: 16px sides */
+}
+
+@media (min-width: 768px) {
+  .container { padding: 0 24px; }       /* Tablet: 24px sides */
+}
+
+@media (min-width: 1024px) {
+  .container { padding: 0 32px; }       /* Desktop: 32px sides */
+}
+
+/* ─── UTILITY CLASSES ─────────────────────────────── */
+.section-padding {
+  padding: var(--space-section) 0;
+}

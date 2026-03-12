@@ -1,0 +1,51 @@
+.dish-card {
+  display: flex;
+  align-items: flex-start;              /* flex-start on mobile to handle long text */
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  transition: box-shadow var(--transition-fast);
+  width: 100%;                          /* Always full width of its container */
+}
+.dish-card:hover { box-shadow: var(--shadow-card); }
+
+.dish-card__img-wrap { position: relative; flex-shrink: 0; }
+
+.dish-card__img {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-circle);
+  object-fit: cover;
+}
+
+/* Smaller image on very small phones */
+@media (max-width: 375px) {
+  .dish-card__img { width: 56px; height: 56px; }
+}
+
+.dish-card__badge {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.dish-card__body  { flex: 1; min-width: 0; }  /* min-width: 0 prevents text overflow */
+.dish-card__name  { font-size: 15px; font-weight: 600; color: var(--color-text-heading); word-break: break-word; }
+.dish-card__price { font-size: 15px; font-weight: 700; color: var(--color-text-price); white-space: nowrap; margin-left: var(--space-sm); }
+.dish-card__desc  { font-size: 13px; color: var(--color-text-body); line-height: 1.5; margin-bottom: 6px; word-break: break-word; }
+
+.dish-card__dot { display: inline-block; width: 10px; height: 10px; border-radius: var(--radius-circle); }
+.dish-card__dot--vegetarian { background-color: var(--color-diet-vegetarian); }
+.dish-card__dot--seafood    { background-color: var(--color-diet-seafood); }
+.dish-card__dot--spicy      { background-color: var(--color-diet-spicy); }

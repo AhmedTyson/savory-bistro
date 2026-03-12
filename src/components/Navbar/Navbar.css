@@ -1,0 +1,110 @@
+/* ─── NAVBAR BASE ─────────────────────────────────────── */
+.navbar {
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.navbar__brand {
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__brand-icon {
+  color: var(--color-primary);
+}
+
+.navbar__brand-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+/* ─── DESKTOP NAV LINKS ───────────────────────────────── */
+.navbar__link {
+  font-size: 14px;
+  color: var(--color-text-nav-default);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.navbar__link:hover {
+  color: var(--color-primary);
+}
+
+.navbar__link--active {
+  color: var(--color-primary);
+}
+
+/* ─── CTA BUTTON ──────────────────────────────────────── */
+.navbar__cta {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.navbar__cta:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* ─── HAMBURGER BUTTON ────────────────────────────────── */
+.navbar__hamburger {
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-heading);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.navbar__hamburger:hover {
+  color: var(--color-primary);
+}
+
+/* ─── MOBILE DROPDOWN MENU ────────────────────────────── */
+.navbar__mobile-menu {
+  background-color: var(--color-bg-white);
+  border-top: 1px solid var(--color-border-light);
+  padding: var(--space-md) 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.navbar__mobile-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar__mobile-link {
+  display: block;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-nav-default);
+  text-decoration: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.navbar__mobile-link:hover {
+  background-color: var(--color-bg-page);
+  color: var(--color-primary);
+}
+
+.navbar__mobile-link--active {
+  color: var(--color-primary);
+  background-color: var(--color-bg-page);
+  font-weight: 600;
+}
+
+.navbar__mobile-cta {
+  padding: var(--space-md) var(--space-lg);
+}

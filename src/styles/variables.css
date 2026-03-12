@@ -1,0 +1,77 @@
+:root {
+
+  /* ─── PRIMARY BRAND COLORS ──────────────────────────────────── */
+  --color-primary:          #E07B39;
+  --color-primary-hover:    #C96B2A;
+  --color-chef-badge:       #C8973A;
+  --color-gold-accent:      #C9A84C;
+  --color-green-sustain:    #5A8A5A;
+
+  /* ─── BACKGROUNDS ───────────────────────────────────────────── */
+  --color-bg-page:          #F5F0EB;
+  --color-bg-white:         #FFFFFF;
+  --color-bg-hero:          #111111;
+  --color-bg-chef-special:  #2B3A42;
+  --color-bg-testimonial:   #1A1A1A;
+  --color-bg-footer:        #1C1C1C;
+  --color-bg-tasting-menu:  #1A1200;
+  --color-bg-sustainability: #F0EFEA;
+  --color-bg-map:           #B8D4C8;
+
+  /* ─── TEXT COLORS ───────────────────────────────────────────── */
+  --color-text-heading:     #1A1A1A;
+  --color-text-body:        #555555;
+  --color-text-muted:       #888888;
+  --color-text-placeholder: #AAAAAA;
+  --color-text-white:       #FFFFFF;
+  --color-text-nav-default: #2D2D2D;
+  --color-text-nav-active:  #E07B39;
+  --color-text-price:       #E07B39;
+  --color-text-gold-price:  #C9A84C;
+  --color-text-hero-script: #E8C99A;
+
+  /* ─── BORDERS ───────────────────────────────────────────────── */
+  --color-border-light:     #E8E2D9;
+  --color-border-input:     #D5CFC8;
+  --color-border-gold:      #C9A84C;
+  --color-border-quote:     #E07B39;
+  --color-border-error:     #E53935;
+
+  /* ─── DIET ICON DOTS (Menu page) ────────────────────────────── */
+  --color-diet-vegetarian:  #4CAF50;
+  --color-diet-seafood:     #2196F3;
+  --color-diet-spicy:       #F44336;
+
+  /* ─── SPACING ───────────────────────────────────────────────── */
+  --space-xs:      4px;
+  --space-sm:      8px;
+  --space-md:      16px;
+  --space-lg:      24px;
+  --space-xl:      40px;
+  --space-2xl:     64px;
+  --space-3xl:     96px;
+  --space-section: 100px;
+
+  /* ─── BORDER RADIUS ─────────────────────────────────────────── */
+  --radius-sm:     4px;
+  --radius-md:     8px;
+  --radius-lg:     12px;
+  --radius-pill:   999px;
+  --radius-circle: 50%;
+
+  /* ─── TYPOGRAPHY ────────────────────────────────────────────── */
+  --font-serif:  'Playfair Display', Georgia, serif;
+  --font-sans:   'Inter', 'Segoe UI', sans-serif;
+  --font-script: 'Dancing Script', cursive;
+
+  /* ─── LAYOUT ────────────────────────────────────────────────── */
+  --container-max: 1200px;
+
+  /* ─── SHADOWS ───────────────────────────────────────────────── */
+  --shadow-card:   0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-button: 0 4px 12px rgba(224, 123, 57, 0.30);
+
+  /* ─── TRANSITIONS ───────────────────────────────────────────── */
+  --transition-fast: 0.2s ease;
+  --transition-med:  0.3s ease;
+}

@@ -1,0 +1,36 @@
+.floating-reserve {
+  position: fixed;
+  bottom: 24px;
+  right: 16px;                          /* Closer to edge on mobile */
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 13px;                      /* Slightly smaller on mobile */
+  font-weight: 600;
+  padding: 10px 16px;                   /* Tighter padding on mobile */
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: var(--shadow-button);
+  transition: background-color var(--transition-fast),
+              transform var(--transition-fast);
+  min-height: 44px;                     /* Touch target */
+}
+
+@media (min-width: 768px) {
+  .floating-reserve {
+    bottom: 32px;
+    right: 32px;
+    font-size: 14px;
+    padding: 12px 20px;
+    gap: 8px;
+  }
+}
+
+.floating-reserve:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+}

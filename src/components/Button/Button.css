@@ -1,0 +1,39 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast),
+              border-color var(--transition-fast);
+  white-space: nowrap;
+  min-height: 44px;               /* iOS touch target minimum */
+  min-width: 44px;                /* iOS touch target minimum */
+}
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn--full    { width: 100%; }
+
+/* Mobile — slightly smaller padding to fit narrow screens */
+@media (max-width: 375px) {
+  .btn { padding: 10px 20px; font-size: 14px; }
+}
+
+/* Primary */
+.btn--primary { background-color: var(--color-primary); color: #FFFFFF; border-color: var(--color-primary); }
+.btn--primary:hover:not(:disabled) { background-color: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+
+/* Outlined — on light backgrounds */
+.btn--outlined { background-color: transparent; color: var(--color-primary); border-color: var(--color-primary); }
+.btn--outlined:hover:not(:disabled) { background-color: var(--color-primary); color: #FFFFFF; }
+
+/* Outlined dark — on hero/dark backgrounds */
+.btn--outlined-dark { background-color: transparent; color: #FFFFFF; border-color: #FFFFFF; }
+.btn--outlined-dark:hover:not(:disabled) { background-color: #FFFFFF; color: var(--color-text-heading); }
