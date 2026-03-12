@@ -1,6 +1,5 @@
 import './Button.css';
 
-// variant: 'primary' | 'outlined' | 'outlined-dark'
 function Button({ children, variant = 'primary', onClick, type = 'button', disabled = false, fullWidth = false }) {
   return (
     <button

@@ -14,20 +14,17 @@ const navLinks = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <nav className="navbar sticky top-0 z-50 bg-white">
+    <nav className="navbar sticky top-0 z-50 bg-white border-b border-[var(--color-border-light)]">
       <div className="container flex items-center justify-between h-16">
 
-        {/* Brand Logo */}
-        <NavLink to="/" className="navbar__brand flex items-center gap-2" onClick={closeMenu}>
-          <UtensilsCrossed className="navbar__brand-icon" size={20} />
-          <span className="navbar__brand-name">Savory Bistro</span>
+        <NavLink to="/" className="flex items-center gap-2 no-underline shrink-0" onClick={closeMenu}>
+          <UtensilsCrossed className="text-[var(--color-primary)]" size={20} />
+          <span className="font-serif text-lg font-bold text-[var(--color-text-heading)]">Savory Bistro</span>
         </NavLink>
 
-        {/* Desktop Nav Links */}
         <ul className="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
           {navLinks.map((link) => (
             <li key={link.path}>
@@ -35,7 +32,7 @@ function Navbar() {
                 to={link.path}
                 end={link.end}
                 className={({ isActive }) =>
-                  isActive ? 'navbar__link navbar__link--active' : 'navbar__link'
+                  `nav-link ${isActive ? 'nav-link--active' : ''}`
                 }
               >
                 {link.label}
@@ -44,16 +41,14 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* Desktop CTA + Mobile Hamburger */}
         <div className="flex items-center gap-3">
-          <NavLink to="/reservations" className="navbar__cta hidden md:flex items-center gap-2">
+          <NavLink to="/reservations" className="nav-cta hidden md:flex items-center gap-2">
             <CalendarDays size={16} />
             Book Table
           </NavLink>
 
-          {/* Hamburger button — mobile only */}
           <button
-            className="navbar__hamburger flex md:hidden"
+            className="flex md:hidden items-center justify-center p-1 bg-transparent border-none cursor-pointer text-[var(--color-text-heading)] hover:text-[var(--color-primary)]"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
@@ -61,22 +56,18 @@ function Navbar() {
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
       </div>
 
-      {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="navbar__mobile-menu md:hidden">
-          <ul className="navbar__mobile-links">
+        <div className="md:hidden bg-white border-t border-[var(--color-border-light)] py-4 shadow-lg">
+          <ul className="flex flex-col">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <NavLink
                   to={link.path}
                   end={link.end}
                   className={({ isActive }) =>
-                    isActive
-                      ? 'navbar__mobile-link navbar__mobile-link--active'
-                      : 'navbar__mobile-link'
+                    `mobile-link ${isActive ? 'mobile-link--active' : ''}`
                   }
                   onClick={closeMenu}
                 >
@@ -85,12 +76,10 @@ function Navbar() {
               </li>
             ))}
           </ul>
-
-          {/* Mobile CTA Button */}
-          <div className="navbar__mobile-cta">
+          <div className="px-6 pt-4">
             <NavLink
               to="/reservations"
-              className="navbar__cta flex items-center justify-center gap-2 w-full"
+              className="nav-cta flex items-center justify-center gap-2 w-full"
               onClick={closeMenu}
             >
               <CalendarDays size={16} />

@@ -3,7 +3,6 @@ import { UtensilsCrossed, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import './Footer.css';
 
-// variant: 'full' | 'light'
 function Footer({ variant = 'full' }) {
   const [email, setEmail] = useState('');
 
@@ -12,12 +11,12 @@ function Footer({ variant = 'full' }) {
       <div className="container">
         <div className="footer__grid">
 
-          <div className="footer__brand">
+          <div>
             <div className="flex items-center gap-2 mb-3">
-              <UtensilsCrossed className="footer__brand-icon" size={20} />
-              <span className="footer__brand-name">Savory Bistro</span>
+              <UtensilsCrossed className="text-[var(--color-primary)]" size={20} />
+              <span className="font-serif text-lg font-bold">Savory Bistro</span>
             </div>
-            <p className="footer__tagline">
+            <p className="footer__muted text-[13px] leading-relaxed max-w-[280px]">
               {variant === 'full'
                 ? 'Refining the art of seasonal dining with locally sourced ingredients and a commitment to culinary excellence.'
                 : 'Crafting unforgettable dining experiences since 2012. Our focus is on seasonal ingredients and soulful cooking.'}
@@ -25,9 +24,9 @@ function Footer({ variant = 'full' }) {
           </div>
 
           {variant === 'full' && (
-            <div className="footer__col">
-              <h4 className="footer__col-heading">Quick Links</h4>
-              <ul className="footer__links">
+            <div>
+              <h4 className="text-sm font-semibold text-white mb-4">Quick Links</h4>
+              <ul className="footer__links flex flex-col gap-2">
                 <li><NavLink to="/about">Our Story</NavLink></li>
                 <li><NavLink to="/reservations">Book a Table</NavLink></li>
                 <li><a href="#">Private Events</a></li>
@@ -38,16 +37,16 @@ function Footer({ variant = 'full' }) {
           )}
 
           {variant === 'light' && (
-            <div className="footer__col">
-              <h4 className="footer__col-heading">Visit Us</h4>
-              <p className="footer__address">123 Culinary Avenue<br />Gastronomy District, NY 10012</p>
+            <div>
+              <h4 className="text-sm font-semibold text-white mb-4">Visit Us</h4>
+              <p className="footer__muted text-[13px] leading-loose">123 Culinary Avenue<br />Gastronomy District, NY 10012</p>
             </div>
           )}
 
-          <div className="footer__col">
-            <h4 className="footer__col-heading">Newsletter</h4>
-            <p className="footer__newsletter-text">Get exclusive offers and recipes delivered to your inbox.</p>
-            <div className="footer__subscribe">
+          <div>
+            <h4 className="text-sm font-semibold text-white mb-4">Newsletter</h4>
+            <p className="footer__muted text-[13px] mb-4">Get exclusive offers and recipes delivered to your inbox.</p>
+            <div className="flex gap-2">
               <input
                 type="email"
                 placeholder="Your Email"
@@ -63,8 +62,8 @@ function Footer({ variant = 'full' }) {
 
         </div>
       </div>
-      <div className="footer__bottom">
-        <p>© 2024 Savory Bistro. All rights reserved.</p>
+      <div className="border-t border-white/8 py-4 text-center">
+        <p className="text-xs text-[#666]">© 2024 Savory Bistro. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -4,7 +4,7 @@ import './FloatingReserveBtn.css';
 
 function FloatingReserveBtn() {
   return (
-    <NavLink to="/reservations" className="floating-reserve">
+    <NavLink to="/reservations" className="floating-btn">
       <CalendarDays size={16} />
       Reserve Now
     </NavLink>

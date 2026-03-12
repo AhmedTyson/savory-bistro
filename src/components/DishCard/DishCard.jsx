@@ -1,20 +1,19 @@
 import './DishCard.css';
 
-// dietIcon: 'vegetarian' | 'seafood' | 'spicy' | null
 function DishCard({ image, name, description, price, badge, dietIcon }) {
   return (
-    <div className="dish-card">
-      <div className="dish-card__img-wrap">
-        {badge && <span className="dish-card__badge">{badge}</span>}
-        <img src={image} alt={name} className="dish-card__img" />
+    <div className="dish-card flex items-start gap-4 p-4 w-full bg-white border border-[var(--color-border-light)] rounded-lg hover:shadow-md transition-shadow">
+      <div className="relative shrink-0">
+        {badge && <span className="dish-badge">{badge}</span>}
+        <img src={image} alt={name} className="dish-img" />
       </div>
-      <div className="dish-card__body flex-1 min-w-0">
+      <div className="flex-1 min-w-0">
         <div className="flex justify-between items-start mb-1">
-          <h3 className="dish-card__name">{name}</h3>
-          <span className="dish-card__price">${price}</span>
+          <h3 className="text-[15px] font-semibold text-[var(--color-text-heading)] break-words">{name}</h3>
+          <span className="text-[15px] font-bold text-[var(--color-text-price)] whitespace-nowrap ml-2">${price}</span>
         </div>
-        <p className="dish-card__desc">{description}</p>
-        {dietIcon && <span className={`dish-card__dot dish-card__dot--${dietIcon}`} />}
+        <p className="text-[13px] text-[var(--color-text-body)] leading-normal mb-1.5 break-words">{description}</p>
+        {dietIcon && <span className={`diet-dot diet-dot--${dietIcon}`} />}
       </div>
     </div>
   );
