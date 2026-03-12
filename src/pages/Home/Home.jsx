@@ -10,8 +10,8 @@ function Home() {
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: 'url("/images/Home_Page/Burger_index_hero_section.webp")',
-          backgroundColor: 'var(--color-bg-hero)' 
+          backgroundImage: 'url("../../public/images/HomePage/Burger_index_hero_section.webp")',
+          backgroundColor: 'var(--color-bg-hero)'
         }}
       >
         {/* Darkening overlay as seen in the image */}
