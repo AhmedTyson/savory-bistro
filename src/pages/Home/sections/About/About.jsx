@@ -8,20 +8,20 @@ const ArrowRight = () => (
 
 export default function About() {
   return (
-    <section className="about-section py-20 lg:py-28 bg-[#fafafa]">
+    <section className="about-section py-16 lg:py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
           {/* Content Side */}
           <div className="order-2 lg:order-1">
-            <div className="mb-10">
-              <h2 className="about-title text-[42px] lg:text-[56px] font-bold text-[#1a1a1a] leading-tight mb-4">
+            <div className="mb-6">
+              <h2 className="about-title text-[40px] font-bold text-[#1a1a1a] leading-tight">
                 Our Story
               </h2>
-              <div className="title-divider w-16 h-1 bg-[#e67e22]"></div>
+              <div className="title-divider bg-[#e67e22]"></div>
             </div>
             
-            <div className="space-y-8 text-[#555] text-[17px] leading-relaxed font-medium">
+            <div className="space-y-6 text-[#555] text-[15px] leading-[1.75] font-medium">
               <p>
                 Founded in 1998, Savory Bistro began as a small family passion project in the heart of the city. 
                 We believe that fine dining should be an approachable, soul-stirring experience. 
@@ -34,7 +34,7 @@ export default function About() {
               </p>
             </div>
 
-            <div className="mt-12">
+            <div className="mt-10">
               <button className="meet-chef-btn group">
                 Meet the Chef <ArrowRight />
               </button>
@@ -43,13 +43,13 @@ export default function About() {
 
           {/* Image Side */}
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div className="chef-frame-outer p-4 border border-[#e67e22]/20 rounded-[2rem]">
-              <div className="chef-frame-inner p-1 bg-white rounded-[1.8rem] shadow-2xl relative overflow-hidden group">
+            <div className="chef-frame-outer">
+              <div className="chef-card">
                 <img 
                   src="/images/HomePage/The_Chef.webp" 
                   alt="Our Head Chef" 
                   loading="lazy"
-                  className="w-full h-auto rounded-[1.6rem] transition-transform duration-700 group-hover:scale-105"
+                  className="transition-transform duration-700 hover:scale-[1.02]"
                 />
               </div>
             </div>
