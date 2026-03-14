@@ -22,7 +22,7 @@ export default function SignatureDishes({ dishes }) {
       <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
         <div className="flex justify-between items-end mb-12">
           <div>
-            <h2 className="section-title text-[40px] mb-2">Signature Dishes</h2>
+            <h2 className="section-title mb-2">Signature Dishes</h2>
             <p className="section-subtitle text-[#e67e22]">Hand-crafted culinary masterpieces</p>
           </div>
           

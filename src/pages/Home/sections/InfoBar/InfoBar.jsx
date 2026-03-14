@@ -48,7 +48,7 @@ const PhoneIcon = () => (
 
 export default function InfoBar() {
   return (
-    <div className="info-bar bg-[#f1f4f6] border-b border-black/5 relative z-[5]">
+    <div className="info-bar bg-[#f1f5f9] border-b border-black/5 relative z-[5]">
       <div className="max-w-[1400px] mx-auto px-4 md:px-12">
         <div className="flex flex-col md:flex-row items-stretch py-3 md:py-5">
           {/* Hours Section */}

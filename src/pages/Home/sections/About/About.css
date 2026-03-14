@@ -1,10 +1,11 @@
 .about-section {
-  background-color: #F5F0EB;
+  background-color: #f8f7f6;
 }
 
 .about-title {
   font-family: 'Playfair Display', serif;
   font-size: 40px !important;
+  color: #001b3a;
 }
 
 .meet-chef-btn {

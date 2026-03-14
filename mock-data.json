@@ -285,5 +285,28 @@
       "email": "ahmedm2580@gmail.com",
       "password": "user1234"
     }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "text": "The most incredible culinary experience I've had in years. The truffle pasta is to die for, and the service is impeccably warm.",
+      "author": "Sarah Jenkins",
+      "role": "FOOD CRITIC",
+      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+    },
+    {
+      "id": 2,
+      "text": "A masterclass in flavor and presentation. Each course told a unique story of local ingredients meeting world-class technique.",
+      "author": "Michael Chen",
+      "role": "LIFESTYLE BLOGGER",
+      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+    },
+    {
+      "id": 3,
+      "text": "Authentic, vibrant, and unforgettable. Savory Bistro has set a new standard for fine dining in the city.",
+      "author": "Elena Rodriguez",
+      "role": "GASTRONOMY EXPERT",
+      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+    }
   ]
 }

@@ -1,9 +1,8 @@
-import Button from '../../../../components/Button/Button';
 import './ChefSpecial.css';
 
 export default function ChefSpecial() {
   return (
-    <section className="special-section py-32 lg:py-48 relative overflow-hidden">
+    <section className="special-section py-20 lg:py-28 relative overflow-hidden">
       <div 
         className="special-bg absolute inset-0 z-0"
         style={{ 
@@ -16,7 +15,7 @@ export default function ChefSpecial() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10 text-center">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <span className="special-tag mb-6 block">CHEF'S SPECIAL</span>
           <h2 className="special-title mb-6">Wild Caught Halibut</h2>
           
@@ -29,9 +28,9 @@ export default function ChefSpecial() {
             <span className="text-4xl md:text-5xl font-bold text-[var(--color-gold-accent)]">$39</span>
           </div>
 
-          <Button variant="primary" size="large">
+          <button className="special-order-btn">
             Order Now
-          </Button>
+          </button>
         </div>
       </div>
     </section>

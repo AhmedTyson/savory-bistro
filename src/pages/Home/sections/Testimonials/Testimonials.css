@@ -1,6 +1,6 @@
 .testimonials-section {
-  background-color: var(--color-bg-testimonial);
-  color: var(--color-text-white);
+  background-color: #2c3e50; /* Match ChefSpecial and dark screenshot */
+  color: white;
 }
 
 .quote-icon {
@@ -9,51 +9,95 @@
 }
 
 .testimonial-quote {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
   font-style: italic;
-  font-weight: 500;
-  line-height: 1.4;
+  font-weight: 900; /* Maximum bold for the editorial look */
+  line-height: 1.15;
+  color: white;
+  max-width: 760px;
+  margin: 0 auto;
+  letter-spacing: -0.02em;
 }
 
-.author-image-wrapper {
+.author-image-outer {
   width: 80px;
   height: 80px;
+  margin: 0 auto;
+  border: 2px solid #c8973a; /* Thin bronze border from screenshot */
+  border-radius: 50%;
+  padding: 3px;
+  background: transparent;
+}
+
+.author-image-inner {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto;
-  border: 4px solid var(--color-bg-testimonial);
-  box-shadow: 0 0 0 2px var(--color-primary);
 }
 
 .author-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .author-name {
-  font-size: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 4px;
+  color: white;
+  letter-spacing: -0.01em;
 }
 
 .author-role {
-  color: var(--color-gold-accent);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-family: var(--font-sans);
+  color: #e07b39; /* Brand Orange */
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Carousel Animation */
+.testimonial-fade-in {
+  animation: testimonialFade 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes testimonialFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 10px 0;
 }
 
 .testimonial-dots .dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: #374151; /* Dark grey-blue charcoal */
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
 }
 
 .testimonial-dots .dot.active {
-  background: var(--color-gold-accent);
+  background: #eab308; /* Gold active dot */
+  transform: scale(1.3);
 }

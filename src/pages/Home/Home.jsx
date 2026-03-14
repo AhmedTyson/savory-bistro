@@ -38,7 +38,7 @@ function Home() {
       <About />
       <SignatureDishes dishes={mockData.signatureDishes} />
       <ChefSpecial />
-      <Testimonials />
+      <Testimonials reviews={mockData.testimonials} />
     </div>
   );
 }
