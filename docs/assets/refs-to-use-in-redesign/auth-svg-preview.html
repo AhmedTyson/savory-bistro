@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SVG Preview — Savory Bistro Auth Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --primary:#E07B39;
+    --primary-hover:#C96B2A;
+    --bg-page:#F5F0EB;
+    --white:#FFFFFF;
+    --heading:#1A1A1A;
+    --muted:#888888;
+    --border-input:#D5CFC8;
+    --border-error:#E53935;
+    --font-serif:'Playfair Display',Georgia,serif;
+    --font-sans:'Inter',sans-serif;
+    --font-script:'Dancing Script',cursive;
+  }
+  body{font-family:var(--font-sans);background:#eee;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+
+  /* ── PAGE ── */
+  .auth-page{
+    display:flex;
+    width:100%;
+    max-width:1100px;
+    height:680px;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.18);
+  }
+
+  /* ── LEFT PANEL ── */
+  .auth-left{
+    width:40%;
+    background:#111111;
+    position:relative;
+    overflow:hidden;
+    flex-shrink:0;
+  }
+  .auth-left-bg{
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,#1a0a00 0%,#111 60%,#0a0a0a 100%);
+  }
+  /* Leaf SVG — full panel background decoration */
+  .leaf-svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  /* Dark overlay so text is readable */
+  .left-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.55));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:12px;padding:40px;text-align:center;
+    z-index:2;
+  }
+  .left-icon{
+    width:52px;height:52px;
+    background:rgba(224,123,57,0.15);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:1.5px solid rgba(224,123,57,0.4);
+    margin-bottom:4px;
+  }
+  .left-title{font-family:var(--font-serif);font-size:2rem;font-weight:700;color:#fff;line-height:1.1}
+  .left-script{font-family:var(--font-script);font-size:1.1rem;color:#E8C99A;margin-top:4px}
+
+  /* ── RIGHT PANEL ── */
+  .auth-right{
+    flex:1;
+    position:relative;
+    overflow:hidden;
+    background:var(--primary); /* orange — will be partially covered by curve */
+  }
+
+  /* Curve SVG sits on top of orange, reveals cream behind card */
+  .curve-svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+
+  /* Zigzag decorations */
+  .zz{position:absolute;opacity:0.9}
+  .zz-1{top:28px;right:80px}
+  .zz-2{top:60px;right:48px;transform:rotate(15deg);opacity:0.5}
+  .zz-3{bottom:48px;left:32px;transform:rotate(-10deg)}
+  .zz-4{bottom:100px;right:28px;transform:rotate(8deg);opacity:0.6}
+
+  /* Floating card */
+  .auth-card{
+    position:relative;z-index:2;
+    background:var(--white);
+    border-radius:20px;
+    padding:40px 44px;
+    width:88%;
+    max-width:420px;
+    box-shadow:0 8px 40px rgba(0,0,0,0.13);
+    margin:0 auto;
+    top:50%;transform:translateY(-50%);
+  }
+  .pill{
+    display:inline-block;font-size:10px;font-weight:700;
+    letter-spacing:0.14em;color:var(--primary);
+    text-transform:uppercase;margin-bottom:10px;
+  }
+  .card-title{
+    font-family:var(--font-serif);font-size:1.75rem;font-weight:700;
+    color:var(--heading);margin-bottom:6px;
+  }
+  .card-sub{
+    font-family:var(--font-script);color:var(--primary);
+    font-size:1.05rem;margin-bottom:24px;
+  }
+  .divider{height:1px;background:#E8E2D9;margin-bottom:22px}
+  .lbl{display:block;font-size:10px;font-weight:600;letter-spacing:0.1em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .fg{margin-bottom:16px}
+  .iw{position:relative}
+  .inp{
+    width:100%;height:46px;padding:0 14px;
+    border:1.5px solid var(--border-input);border-radius:8px;
+    font-family:var(--font-sans);font-size:0.9rem;color:var(--heading);
+    background:#fff;outline:none;
+  }
+  .inp:focus{border-color:var(--primary)}
+  .fgt{text-align:right;font-size:0.78rem;color:var(--primary);margin-bottom:16px;cursor:pointer}
+  .btn{
+    width:100%;height:50px;background:var(--primary);color:#fff;border:none;
+    border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;
+    font-family:var(--font-sans);transition:background .2s;
+  }
+  .btn:hover{background:var(--primary-hover)}
+  .sw{text-align:center;margin-top:18px;font-size:0.85rem;color:var(--muted)}
+  .sw a{color:var(--primary);font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="auth-page">
+
+  <!-- ═══ LEFT PANEL ═══ -->
+  <div class="auth-left">
+    <div class="auth-left-bg"></div>
+
+    <!-- LEAF LINE ART SVG — decorative botanical background -->
+    <svg class="leaf-svg" viewBox="0 0 400 500" fill="none" preserveAspectRatio="xMidYMid slice">
+      <!-- Central large leaf -->
+      <path d="M 200,460 C 120,380 80,280 100,180 C 120,80 180,20 200,10 C 220,20 280,80 300,180 C 320,280 280,380 200,460 Z"
+        stroke="#E07B39" stroke-opacity="0.35" stroke-width="1.5"/>
+      <line x1="200" y1="10" x2="200" y2="460" stroke="#E07B39" stroke-opacity="0.22" stroke-width="1"/>
+      <path d="M 200,120 Q 155,130 140,150" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <path d="M 200,180 Q 148,195 130,220" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <path d="M 200,240 Q 145,258 128,288" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <path d="M 200,300 Q 152,320 142,350" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <path d="M 200,120 Q 245,130 260,150" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <path d="M 200,180 Q 252,195 270,220" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <path d="M 200,240 Q 255,258 272,288" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <path d="M 200,300 Q 248,320 258,350" stroke="#E07B39" stroke-opacity="0.2" stroke-width="1"/>
+      <!-- Top-left small leaf -->
+      <path d="M 60,200 C 20,160 10,100 30,60 C 50,20 80,10 90,50 C 100,90 80,160 60,200 Z"
+        stroke="#E07B39" stroke-opacity="0.28" stroke-width="1.2"/>
+      <line x1="65" y1="55" x2="62" y2="195" stroke="#E07B39" stroke-opacity="0.18" stroke-width="0.8"/>
+      <!-- Bottom-right small leaf -->
+      <path d="M 340,300 C 380,260 395,200 375,160 C 355,120 325,115 318,155 C 310,195 325,265 340,300 Z"
+        stroke="#E07B39" stroke-opacity="0.28" stroke-width="1.2"/>
+      <line x1="335" y1="158" x2="338" y2="298" stroke="#E07B39" stroke-opacity="0.18" stroke-width="0.8"/>
+      <!-- Branch -->
+      <path d="M 20,420 Q 80,390 140,410 Q 200,430 260,400 Q 320,370 390,390"
+        stroke="#E07B39" stroke-opacity="0.22" stroke-width="1.2" fill="none"/>
+      <!-- Dots -->
+      <circle cx="88" cy="48" r="3" fill="#E07B39" fill-opacity="0.2"/>
+      <circle cx="318" cy="153" r="3" fill="#E07B39" fill-opacity="0.2"/>
+      <circle cx="200" cy="8" r="3" fill="#E07B39" fill-opacity="0.2"/>
+    </svg>
+
+    <!-- Branding overlay -->
+    <div class="left-overlay">
+      <div class="left-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E07B39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>
+        </svg>
+      </div>
+      <div class="left-title">Savory Bistro</div>
+      <div class="left-script">Authentic Flavors, Unforgettable Moments</div>
+    </div>
+  </div>
+
+  <!-- ═══ RIGHT PANEL ═══ -->
+  <div class="auth-right">
+
+    <!-- BG CURVE SVG — organic shape revealing cream background -->
+    <svg class="curve-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <filter id="soft-shadow">
+          <feDropShadow dx="-3" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.10"/>
+        </filter>
+      </defs>
+      <path
+        d="M 100,0 L 100,100 L 0,100 L 0,48 C 8,44 18,38 28,28 C 42,14 52,0 100,0 Z"
+        fill="#F5F0EB"
+        filter="url(#soft-shadow)"
+      />
+    </svg>
+
+    <!-- ZIGZAG decorations — dark on orange area, orange on cream area -->
+    <!-- Top-right corner (on orange) -->
+    <div class="zz zz-1">
+      <svg width="36" height="50" viewBox="0 0 36 50" fill="none">
+        <polyline points="26,2 8,20 22,28 6,48" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="zz zz-2">
+      <svg width="22" height="32" viewBox="0 0 36 50" fill="none">
+        <polyline points="26,2 8,20 22,28 6,48" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <!-- Bottom-left (on cream area) -->
+    <div class="zz zz-3">
+      <svg width="36" height="50" viewBox="0 0 36 50" fill="none">
+        <polyline points="26,2 8,20 22,28 6,48" stroke="#E07B39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="zz zz-4">
+      <svg width="24" height="34" viewBox="0 0 36 50" fill="none">
+        <polyline points="26,2 8,20 22,28 6,48" stroke="#E07B39" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- FLOATING CARD -->
+    <div class="auth-card">
+      <div class="pill">Member Access</div>
+      <h1 class="card-title">Welcome Back!</h1>
+      <p class="card-sub">Sign in to your account</p>
+      <div class="divider"></div>
+      <div class="fg">
+        <label class="lbl">Email Address</label>
+        <div class="iw">
+          <input type="email" class="inp" placeholder="john@example.com"/>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="lbl">Password</label>
+        <div class="iw">
+          <input type="password" class="inp" placeholder="Enter your password"/>
+        </div>
+      </div>
+      <div class="fgt">Forgot password?</div>
+      <button class="btn">Sign In</button>
+      <p class="sw">Don't have an account? <a href="#">Create one</a></p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
