@@ -284,6 +284,13 @@
       "lastName": "Tyson",
       "email": "ahmedm2580@gmail.com",
       "password": "user1234"
+    },
+    {
+      "id": 4,
+      "firstName": "Ahmed",
+      "lastName": "Mido",
+      "email": "ahmedkk3@gmail.com",
+      "password": "user1234"
     }
   ],
   "testimonials": [

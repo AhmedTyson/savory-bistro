@@ -72,6 +72,9 @@
   --shadow-button: 0 4px 12px rgba(224, 123, 57, 0.30);
 
   /* ─── TRANSITIONS ───────────────────────────────────────────── */
+  --z-nav:         100;
+  --z-modal:       500;
+  --z-toast:       1000;
   --transition-fast: 0.2s ease;
   --transition-med:  0.3s ease;
 }

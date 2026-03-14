@@ -8,7 +8,7 @@ import './LoginForm.css'
 export default function LoginForm({
   isReturningUser, email, onEmailChange, emailError, onEmailErrorClear,
   password, onPasswordChange, passwordError, onPasswordErrorClear,
-  showPassword, onTogglePassword, submitError, successMsg, onSubmit
+  showPassword, onTogglePassword, submitError, onSubmit
 }) {
   return (
     <div className="auth-right">
@@ -29,11 +29,11 @@ export default function LoginForm({
           </span>
           <div className="auth-divider" />
 
-          {successMsg && <div className="auth-ok">✓ {successMsg}</div>}
           {submitError && <div className="auth-err-banner">{submitError}</div>}
 
           <form onSubmit={onSubmit}>
             {/* Email field */}
+
             <div className="auth-fg">
               <label className="auth-lbl">Email Address</label>
               <div className="auth-iw">

@@ -13,7 +13,7 @@ export default function SignupForm({
   confirmPassword, onConfirmPasswordChange, confirmPasswordError, onConfirmPasswordErrorClear,
   showPassword, onTogglePassword,
   showConfirm, onToggleConfirm,
-  successMsg, onSubmit
+  onSubmit
 }) {
   return (
     <div className="auth-right">
@@ -30,10 +30,9 @@ export default function SignupForm({
           <span className="auth-sub">Join us for a better experience</span>
           <div className="auth-divider" />
 
-          {successMsg && <div className="auth-ok">✓ {successMsg}</div>}
-
           <form onSubmit={onSubmit}>
             <div className="auth-row2">
+
               <div>
                 <label className="auth-lbl">First Name</label>
                 <div className="auth-iw">

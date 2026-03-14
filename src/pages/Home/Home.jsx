@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import Toast from '../../components/Toast/Toast';
 import mockData from '../../../mock-data.json';
 
@@ -15,11 +16,20 @@ import './Home.css';
 
 function Home() {
   const location = useLocation();
+  const { pendingToast, clearPendingToast } = useAuth();
+
   const [toast, setToast] = useState(() => {
     const s = location.state;
     if (s?.toast && s?.firstName) return { type: s.toast, firstName: s.firstName };
     return null;
   });
+
+  useEffect(() => {
+    if (pendingToast) {
+      setToast(pendingToast);
+      clearPendingToast();
+    }
+  }, [pendingToast, clearPendingToast]);
 
   const dismissToast = useCallback(() => setToast(null), []);
 

@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { UtensilsCrossed, CalendarDays, Menu, X, UserCircle, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useState } from 'react';
@@ -17,6 +17,12 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
   const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate('/');
+  }
 
   return (
     <nav className="navbar sticky top-0 z-50 bg-white border-b border-[var(--color-border-light)]">
@@ -56,7 +62,7 @@ function Navbar() {
                 {currentUser.firstName}
               </span>
               <button
-                onClick={() => logout()}
+                onClick={handleLogout}
                 style={{
                   background: 'none',
                   border: '1px solid var(--color-border-input)',
@@ -142,7 +148,7 @@ function Navbar() {
                   </span>
                 </div>
                 <button
-                  onClick={() => { logout(); closeMenu(); }}
+                  onClick={() => { handleLogout(); closeMenu(); }}
                   style={{
                     background: 'none',
                     border: '1px solid var(--color-border-input)',

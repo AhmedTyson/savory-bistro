@@ -5,6 +5,7 @@ const AuthContext = createContext(null)
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null)
   const [allUsers, setAllUsers]       = useState([])
+  const [pendingToast, setPendingToast] = useState(null)
 
   // On mount, load users from our new Backend API
   useEffect(() => {
@@ -26,7 +27,13 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    const name = currentUser?.firstName || ''
     setCurrentUser(null)
+    setPendingToast({ type: 'logout', firstName: name })
+  }
+
+  function clearPendingToast() {
+    setPendingToast(null)
   }
 
   // Register is now async!
@@ -101,6 +108,8 @@ export function AuthProvider({ children }) {
       logout,
       registerUser,
       validateLogin,
+      pendingToast,
+      clearPendingToast,
     }}>
       {children}
     </AuthContext.Provider>
