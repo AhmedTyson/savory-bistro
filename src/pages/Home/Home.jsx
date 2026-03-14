@@ -25,11 +25,17 @@ function Home() {
   });
 
   useEffect(() => {
+    // 1. Handle pending toasts from Context (e.g. Logout)
     if (pendingToast) {
       setToast(pendingToast);
       clearPendingToast();
     }
-  }, [pendingToast, clearPendingToast]);
+
+    // 2. Clear location state to prevent toast repeating on refresh
+    if (location.state?.toast) {
+      window.history.replaceState({}, document.title);
+    }
+  }, [pendingToast, clearPendingToast, location.state]);
 
   const dismissToast = useCallback(() => setToast(null), []);
 

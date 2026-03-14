@@ -291,6 +291,20 @@
       "lastName": "Mido",
       "email": "ahmedkk3@gmail.com",
       "password": "user1234"
+    },
+    {
+      "id": 5,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmed80@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 6,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmedgg2580@gmail.com",
+      "password": "user1234"
     }
   ],
   "testimonials": [

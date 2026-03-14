@@ -1,5 +1,5 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { UtensilsCrossed, CalendarDays, Menu, X, UserCircle, LogOut } from 'lucide-react';
+import { UtensilsCrossed, Menu, X, UserCircle, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useState } from 'react';
 import './Navbar.css';
@@ -20,8 +20,9 @@ function Navbar() {
   const navigate = useNavigate();
 
   function handleLogout() {
-    logout();
-    navigate('/');
+    logout();      // sets pendingToast in AuthContext
+    navigate('/'); // go to Home so toast appears
+    closeMenu();   // close mobile drawer if open
   }
 
   return (
@@ -49,43 +50,39 @@ function Navbar() {
           ))}
         </ul>
 
+        {/* Desktop Right Zone */}
         <div className="flex items-center gap-3">
           {!currentUser ? (
-            <NavLink to="/reservations" className="nav-cta hidden md:flex items-center gap-2">
-              <CalendarDays size={16} />
-              Book Table
-            </NavLink>
+            <div className="hidden md:flex items-center gap-2">
+              <Link
+                to="/login"
+                className="nav-auth-login hidden md:flex items-center px-3 min-h-[44px] text-sm font-semibold transition-colors cursor-pointer"
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="nav-auth-signup hidden md:flex items-center px-[18px] min-h-[44px] text-sm font-semibold rounded-lg border border-solid transition-all cursor-pointer"
+              >
+                Sign Up
+              </Link>
+            </div>
           ) : (
-            <div className="hidden md:flex items-center gap-[8px]">
-              <UserCircle size={20} color="var(--color-primary)" />
-              <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--color-text-heading)' }}>
+            <div className="hidden md:flex items-center gap-3">
+              <UserCircle
+                size={22}
+                className="text-[color:var(--color-primary)] flex-shrink-0"
+              />
+              <span className="text-sm font-semibold whitespace-nowrap nav-user-name">
                 {currentUser.firstName}
               </span>
+              <div className="w-px h-5 flex-shrink-0 nav-separator" />
               <button
                 onClick={handleLogout}
-                style={{
-                  background: 'none',
-                  border: '1px solid var(--color-border-input)',
-                  borderRadius: 'var(--radius-md, 6px)',
-                  padding: '6px 12px',
-                  cursor: 'pointer',
-                  fontSize: '13px',
-                  color: 'var(--color-text-muted)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  minHeight: '44px'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-primary)';
-                  e.currentTarget.style.color = 'var(--color-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border-input)';
-                  e.currentTarget.style.color = 'var(--color-text-muted)';
-                }}
+                className="flex items-center gap-[6px] px-[14px] min-h-[44px] text-[13px] font-medium rounded-lg border border-solid cursor-pointer transition-all nav-logout-btn"
               >
-                <LogOut size={14} /> Logout
+                <LogOut size={14} />
+                Logout
               </button>
             </div>
           )}
@@ -101,6 +98,7 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Drawer */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-[var(--color-border-light)] py-4 shadow-lg">
           <ul className="flex flex-col">
@@ -118,64 +116,47 @@ function Navbar() {
                 </NavLink>
               </li>
             ))}
-            {!currentUser && (
-              <>
-                <li>
-                  <Link to="/login" className="mobile-link" onClick={closeMenu}>Login</Link>
-                </li>
-                <li>
-                  <Link to="/signup" className="mobile-link" onClick={closeMenu}>Sign Up</Link>
-                </li>
-              </>
-            )}
           </ul>
-          <div className="px-6 pt-4">
-            {!currentUser ? (
-              <NavLink
-                to="/reservations"
-                className="nav-cta flex items-center justify-center gap-2 w-full"
+
+          <div className="mx-0 my-2 nav-mobile-divider" />
+
+          {!currentUser ? (
+            <>
+              <Link
+                to="/login"
+                className="mobile-link block"
                 onClick={closeMenu}
               >
-                <CalendarDays size={16} />
-                Book Table
-              </NavLink>
-            ) : (
-              <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg border border-[var(--color-border-light)]">
-                <div className="flex items-center gap-2">
-                  <UserCircle size={20} color="var(--color-primary)" />
-                  <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--color-text-heading)' }}>
-                    {currentUser.firstName} {currentUser.lastName}
-                  </span>
-                </div>
-                <button
-                  onClick={() => { handleLogout(); closeMenu(); }}
-                  style={{
-                    background: 'none',
-                    border: '1px solid var(--color-border-input)',
-                    borderRadius: 'var(--radius-md, 6px)',
-                    padding: '6px 12px',
-                    cursor: 'pointer',
-                    fontSize: '13px',
-                    color: 'var(--color-text-muted)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    minHeight: '44px'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-primary)';
-                    e.currentTarget.style.color = 'var(--color-primary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border-input)';
-                    e.currentTarget.style.color = 'var(--color-text-muted)';
-                  }}
-                >
-                  <LogOut size={14} /> Logout
-                </button>
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="mobile-link block font-semibold mobile-signup-link"
+                onClick={closeMenu}
+              >
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-[10px] px-6 py-[14px] border-b mobile-user-row">
+                <UserCircle
+                  size={18}
+                  className="text-[color:var(--color-primary)] flex-shrink-0"
+                />
+                <span className="text-[15px] font-semibold nav-user-name">
+                  {currentUser.firstName}
+                </span>
               </div>
-            )}
-          </div>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 w-full px-6 py-[14px] text-[15px] font-medium border-b cursor-pointer transition-colors bg-transparent mobile-logout-row"
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            </>
+          )}
         </div>
       )}
     </nav>
