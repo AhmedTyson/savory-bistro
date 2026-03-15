@@ -1,5 +1,8 @@
-import { useContext, useState, useEffect } from 'react'
-import { AuthContext } from './AuthContextInstance'
+import { createContext, useContext, useState, useEffect } from 'react'
+
+export const AuthContext = createContext(null);
+
+const API_BASE_URL = 'http://localhost:3001/api';
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(() => {
@@ -9,11 +12,11 @@ export function AuthProvider({ children }) {
   const [allUsers, setAllUsers]       = useState([])
   const [pendingToast, setPendingToast] = useState(null)
 
-  // On mount, load users from our new Backend API
+  // On mount, load users from our Backend API
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch('http://localhost:3001/api/users')
+        const response = await fetch(`${API_BASE_URL}/users`)
         if (!response.ok) throw new Error('API failed')
         const data = await response.json()
         setAllUsers(data.users || [])
@@ -61,7 +64,7 @@ export function AuthProvider({ children }) {
 
     try {
       // 3. Post to Node Backend
-      const response = await fetch('http://localhost:3001/api/users', {
+      const response = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -123,5 +126,9 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
-  return useContext(AuthContext)
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 }

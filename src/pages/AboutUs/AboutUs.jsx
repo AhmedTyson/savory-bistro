@@ -1,7 +1,15 @@
 import './AboutUs.css';
-function AboutUs() {
-  return <div className="min-h-screen py-24 container"><h1 className="text-4xl font-bold">About Us Page</h1>
-  <div></div>
-  </div>;
+
+export default function AboutUs() {
+  return (
+    <div className="AboutUs">
+      <div className="AboutUs__container">
+        <h1 className="AboutUs__title">Our Story</h1>
+        <p className="AboutUs__placeholder-text">
+          Discover the history and passion behind Savory Bistro. 
+          Our full story and philosophies on sustainable dining will be shared here soon.
+        </p>
+      </div>
+    </div>
+  );
 }
-export default AboutUs;

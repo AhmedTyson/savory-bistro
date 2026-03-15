@@ -1,5 +1,15 @@
 import './Contact.css';
-function Contact() {
-  return <div className="min-h-screen py-24 container"><h1 className="text-4xl font-bold">Contact Page</h1></div>;
+
+export default function Contact() {
+  return (
+    <div className="Contact">
+      <div className="Contact__container">
+        <h1 className="Contact__title">Contact Us</h1>
+        <p className="Contact__placeholder-text">
+          We look forward to hearing from you. Our contact details and inquiry form 
+          will be available shortly. For immediate assistance, please visit us in person.
+        </p>
+      </div>
+    </div>
+  );
 }
-export default Contact;

@@ -1,1 +1,29 @@
-/* Contact page styles */
+.Contact {
+  min-height: calc(100vh - 64px);
+  background-color: var(--color-bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-section) 0;
+}
+
+.Contact__container {
+  width: 90%;
+  max-width: var(--container-max);
+  text-align: center;
+}
+
+.Contact__title {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-md);
+}
+
+.Contact__placeholder-text {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}

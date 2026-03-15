@@ -319,6 +319,13 @@
       "lastName": "User",
       "email": "tester@example.com",
       "password": "Password123"
+    },
+    {
+      "id": 9,
+      "firstName": "Ahmed",
+      "lastName": "Gamer",
+      "email": "ahmed05@gmail.com",
+      "password": "user123"
     }
   ],
   "testimonials": [
