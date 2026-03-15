@@ -29,9 +29,9 @@ function Footer({ variant = 'full' }) {
               <ul className="Footer__links">
                 <li><NavLink className="Footer__link" to="/about">Our Story</NavLink></li>
                 <li><NavLink className="Footer__link" to="/reservations">Book a Table</NavLink></li>
-                <li><a className="Footer__link" href="#">Private Events</a></li>
-                <li><a className="Footer__link" href="#">Gift Cards</a></li>
-                <li><a className="Footer__link" href="#">Careers</a></li>
+                <li><NavLink className="Footer__link" to="/private-events">Private Events</NavLink></li>
+                <li><NavLink className="Footer__link" to="/gift-cards">Gift Cards</NavLink></li>
+                <li><NavLink className="Footer__link" to="/careers">Careers</NavLink></li>
               </ul>
             </div>
           )}

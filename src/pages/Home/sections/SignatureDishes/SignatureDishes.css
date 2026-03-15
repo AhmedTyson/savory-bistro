@@ -33,16 +33,16 @@
 
 .SignatureDishes__title {
   font-family: var(--font-serif);
-  font-size: 40px;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--color-bg-chef-special); /* Dark navy equivalent */
+  color: var(--color-bg-chef-special);
   line-height: 1.2;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .SignatureDishes__subtitle {
   font-weight: 600;
-  font-size: 14px;
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--color-primary);
@@ -167,13 +167,13 @@
 
 .SignatureDishes__dish-name {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: var(--font-size-base);
   font-weight: 700;
   color: var(--color-text-dark);
 }
 
 .SignatureDishes__dish-price {
-  font-size: 15px;
+  font-size: var(--font-size-base);
   font-weight: 600;
   color: var(--color-primary);
 }
