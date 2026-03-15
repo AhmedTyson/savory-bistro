@@ -153,62 +153,13 @@
     }
   ],
   "gallery": [
-    {
-      "id": 1,
-      "src": "/images/HomePage/Small_Avatar.webp",
-      "alt": "Pan-seared salmon dish",
-      "category": "food",
-      "type": "photo",
-      "size": "medium"
-    },
-    {
-      "id": 2,
-      "src": "/images/gallery/chocolate-cake.jpg",
-      "alt": "Chocolate dessert",
-      "category": "food",
-      "type": "photo",
-      "size": "medium"
-    },
-    {
-      "id": 3,
-      "src": "/images/gallery/pizza.jpg",
-      "alt": "Wood-fired pizza",
-      "category": "chefsCreations",
-      "type": "photo",
-      "size": "medium"
-    },
-    {
-      "id": 4,
-      "src": "/images/gallery/chef-prep.jpg",
-      "alt": "Chef preparing food",
-      "category": "events",
-      "type": "video",
-      "size": "medium"
-    },
-    {
-      "id": 5,
-      "src": "/images/gallery/cocktail.jpg",
-      "alt": "Craft cocktail",
-      "category": "food",
-      "type": "photo",
-      "size": "tall"
-    },
-    {
-      "id": 6,
-      "src": "/images/gallery/dining-room.jpg",
-      "alt": "Bright dining room interior",
-      "category": "interior",
-      "type": "photo",
-      "size": "medium"
-    },
-    {
-      "id": 7,
-      "src": "/images/gallery/bar-interior.jpg",
-      "alt": "Warm bar interior",
-      "category": "interior",
-      "type": "photo",
-      "size": "tall"
-    }
+    { "id": 1, "src": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 2, "src": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=800", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 3, "src": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=800", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
+    { "id": 4, "src": "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=800", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium" },
+    { "id": 5, "src": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
+    { "id": 6, "src": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
+    { "id": 7, "src": "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&q=80&w=800", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
   ],
   "team": [
     {
