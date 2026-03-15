@@ -1,26 +1,26 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter, Routes, Route, Navigate }       from 'react-router-dom';
+import { useContext }                                    from 'react';
+import './styles/variables.css';
+import './index.css';
 
-import Navbar             from './components/Navbar/Navbar';
-import Footer             from './components/Footer/Footer';
-import FloatingReserveBtn from './components/FloatingReserveBtn/FloatingReserveBtn';
+import { Navbar, Footer, FloatingReserveBtn }           from './components';
+import { Home, Menu, Reservations, Gallery,
+         Contact, AboutUs, Login, Signup }              from './pages';
+import { AuthContext }                                  from './context';
 
-import Home         from './pages/Home/Home';
-import Menu         from './pages/Menu/Menu';
-import Reservations from './pages/Reservations/Reservations';
-import Gallery      from './pages/Gallery/Gallery';
-import Contact      from './pages/Contact/Contact';
-import AboutUs      from './pages/AboutUs/AboutUs';
-import Login        from './pages/Login/Login';
-import Signup       from './pages/Signup/Signup'; 
+function ProtectedRoute({ children }) {
+  const { user } = useContext(AuthContext);
+  if (!user) return <Navigate to="/login" replace />;
+  return children;
+}
 
-function Layout({ children }) {
+function Layout({ children, footerVariant = 'full' }) {
   return (
     <>
       <Navbar />
       <main>{children}</main>
       <FloatingReserveBtn />
-      <Footer />
+      <Footer variant={footerVariant} />
     </>
   );
 }
@@ -34,23 +34,23 @@ function AuthLayout({ children }) {
   );
 }
 
-function App() {
+export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login"        element={<AuthLayout><Login /></AuthLayout>} />
-          <Route path="/signup"       element={<AuthLayout><Signup /></AuthLayout>} />
-          <Route path="/"             element={<Layout><Home /></Layout>} />
-          <Route path="/menu"         element={<Layout><Menu /></Layout>} />
-          <Route path="/reservations" element={<Layout><Reservations /></Layout>} />
-          <Route path="/gallery"      element={<Layout><Gallery /></Layout>} />
-          <Route path="/contact"      element={<Layout><Contact /></Layout>} />
-          <Route path="/about"        element={<Layout><AboutUs /></Layout>} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/"             element={<Layout><Home /></Layout>} />
+        <Route path="/menu"         element={<Layout><Menu /></Layout>} />
+        <Route path="/reservations" element={
+          <ProtectedRoute>
+            <Layout><Reservations /></Layout>
+          </ProtectedRoute>
+        } />
+        <Route path="/gallery"      element={<Layout footerVariant="light"><Gallery /></Layout>} />
+        <Route path="/contact"      element={<Layout><Contact /></Layout>} />
+        <Route path="/about"        element={<Layout><AboutUs /></Layout>} />
+        <Route path="/login"        element={<AuthLayout><Login /></AuthLayout>} />
+        <Route path="/signup"       element={<AuthLayout><Signup /></AuthLayout>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

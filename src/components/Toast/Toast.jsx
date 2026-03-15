@@ -42,20 +42,20 @@ export default function Toast({ type, firstName, onDismiss }) {
   }
 
   return (
-    <div className={`toast ${exiting ? 'toast--exit' : 'toast--enter'}`}
+    <div className={`Toast ${exiting ? 'Toast--exit' : 'Toast--enter'}`}
          role="status" aria-live="polite">
-      <div className="toast-icon">
+      <div className="Toast__icon">
         <CheckCircle size={22} />
       </div>
-      <div className="toast-body">
-        <p className="toast-title">{title}</p>
-        <p className="toast-subtitle">{subtitle}</p>
+      <div className="Toast__body">
+        <p className="Toast__title">{title}</p>
+        <p className="Toast__subtitle">{subtitle}</p>
       </div>
-      <button className="toast-close" onClick={handleClose} aria-label="Dismiss">
+      <button className="Toast__close" onClick={handleClose} aria-label="Dismiss">
         <X size={16} />
       </button>
       {/* Progress bar that drains over 4 seconds */}
-      <div className="toast-progress" />
+      <div className="Toast__progress" />
     </div>
   )
 }

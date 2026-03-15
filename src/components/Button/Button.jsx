@@ -6,7 +6,7 @@ function Button({ children, variant = 'primary', onClick, type = 'button', disab
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`btn btn--${variant} ${fullWidth ? 'w-full' : ''}`}
+      className={`Button Button--${variant} ${fullWidth ? 'Button--full-width' : ''}`}
     >
       {children}
     </button>

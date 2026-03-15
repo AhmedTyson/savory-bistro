@@ -305,6 +305,20 @@
       "lastName": "Tyson",
       "email": "ahmedgg2580@gmail.com",
       "password": "user1234"
+    },
+    {
+      "id": 7,
+      "firstName": "Vince",
+      "lastName": "Test",
+      "email": "vince@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 8,
+      "firstName": "Tester",
+      "lastName": "User",
+      "email": "tester@example.com",
+      "password": "Password123"
     }
   ],
   "testimonials": [

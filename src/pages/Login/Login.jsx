@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useAuth } from '../../context'
 import LoginPanel from './sections/LoginPanel/LoginPanel'
 import LoginForm  from './sections/LoginForm/LoginForm'
 import './Login.css'
@@ -8,16 +8,16 @@ import './Login.css'
 export default function Login() {
   const { validateLogin, login, currentUser } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const mountedRef = useRef(false)
 
   // Only redirect on MOUNT if user is already logged in.
-  // This does NOT run again when currentUser changes during login.
   useEffect(() => {
     if (!mountedRef.current) {
       mountedRef.current = true
       if (currentUser) navigate('/', { replace: true })
     }
-  }, []) // empty dependency array — runs once on mount only
+  }, [currentUser, navigate])
 
   // Returning user detection
   const [isReturningUser, setIsReturningUser] = useState(false)
@@ -56,26 +56,27 @@ export default function Login() {
     }
     if (hasError) return
 
-    const user = validateLogin(email, password)
-    if (!user) {
+    const userFound = validateLogin(email, password)
+    if (!userFound) {
       setSubmitError('Incorrect email or password. Please try again.')
       return
     }
 
     // Set currentUser in context
-    login(user)
+    login(userFound)
     // Mark as returning user for future visits
     localStorage.setItem('sb_has_logged_in', 'true')
-    // Navigate IMMEDIATELY — do not wait for useEffect
-    // Pass toast state via router — Home.jsx reads this on mount
-    navigate('/', {
+    
+    // Auth-aware navigation
+    const from = location.state?.from || '/';
+    navigate(from, { 
       replace: true,
-      state: { toast: 'login', firstName: user.firstName }
+      state: { toast: 'login', firstName: userFound.firstName }
     })
   }
 
   return (
-    <div className="auth-page">
+    <div className="Login">
       <LoginPanel />
       <LoginForm
         isReturningUser={isReturningUser}

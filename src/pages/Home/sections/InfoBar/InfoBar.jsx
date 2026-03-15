@@ -48,51 +48,39 @@ const PhoneIcon = () => (
 
 export default function InfoBar() {
   return (
-    <div className="info-bar bg-[#f1f5f9] border-b border-black/5 relative z-[5]">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-        <div className="flex flex-col md:flex-row items-stretch py-3 md:py-5">
+    <div className="InfoBar">
+      <div className="InfoBar__container">
+        <div className="InfoBar__grid">
           {/* Hours Section */}
-          <div className="flex-1 flex items-center justify-start md:justify-center gap-4 px-4 md:border-r md:border-black/10 py-4 md:py-0">
-            <div className="text-[#e67e22] shrink-0">
+          <div className="InfoBar__item InfoBar__item--hours">
+            <div className="InfoBar__icon-wrapper">
               <ClockIcon />
             </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-[#e67e22] text-[10px] font-black tracking-widest uppercase mb-0.5">
-                HOURS
-              </span>
-              <p className="text-[#475569] text-[13px] font-bold whitespace-nowrap">
-                Tue – Sun: 11:00 AM – 10:00 PM
-              </p>
+            <div className="InfoBar__content">
+              <span className="InfoBar__label">HOURS</span>
+              <p className="InfoBar__value">Tue – Sun: 11:00 AM – 10:00 PM</p>
             </div>
           </div>
 
           {/* Address Section */}
-          <div className="flex-1 flex items-center justify-start md:justify-center gap-4 px-4 md:border-r md:border-black/10 py-4 md:py-0">
-            <div className="text-[#e67e22] shrink-0">
+          <div className="InfoBar__item InfoBar__item--address">
+            <div className="InfoBar__icon-wrapper">
               <PinIcon />
             </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-[#e67e22] text-[10px] font-black tracking-widest uppercase mb-0.5">
-                ADDRESS
-              </span>
-              <p className="text-[#475569] text-[13px] font-bold whitespace-nowrap">
-                123 Culinary Ave, Foodie District
-              </p>
+            <div className="InfoBar__content">
+              <span className="InfoBar__label">ADDRESS</span>
+              <p className="InfoBar__value">123 Culinary Ave, Foodie District</p>
             </div>
           </div>
 
           {/* Phone Section */}
-          <div className="flex-1 flex items-center justify-start md:justify-center gap-4 px-4 py-4 md:py-0">
-            <div className="text-[#e67e22] shrink-0">
+          <div className="InfoBar__item InfoBar__item--phone">
+            <div className="InfoBar__icon-wrapper">
               <PhoneIcon />
             </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-[#e67e22] text-[10px] font-black tracking-widest uppercase mb-0.5">
-                PHONE
-              </span>
-              <p className="text-[#475569] text-[13px] font-bold whitespace-nowrap">
-                +1 (555) 123 - 4567
-              </p>
+            <div className="InfoBar__content">
+              <span className="InfoBar__label">PHONE</span>
+              <p className="InfoBar__value">+1 (555) 123 - 4567</p>
             </div>
           </div>
         </div>

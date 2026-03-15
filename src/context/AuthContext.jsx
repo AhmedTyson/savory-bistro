@@ -1,9 +1,11 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-
-const AuthContext = createContext(null)
+import { useContext, useState, useEffect } from 'react'
+import { AuthContext } from './AuthContextInstance'
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem('savory_user');
+    return saved ? JSON.parse(saved) : null;
+  })
   const [allUsers, setAllUsers]       = useState([])
   const [pendingToast, setPendingToast] = useState(null)
 
@@ -23,11 +25,13 @@ export function AuthProvider({ children }) {
   }, [])
 
   function login(user) {
+    localStorage.setItem('savory_user', JSON.stringify(user))
     setCurrentUser(user)
   }
 
   function logout() {
     const name = currentUser?.firstName || ''
+    localStorage.removeItem('savory_user')
     setCurrentUser(null)
     setPendingToast({ type: 'logout', firstName: name })
   }
@@ -78,6 +82,7 @@ export function AuthProvider({ children }) {
         email:     data.user.email,
       }
       
+      localStorage.setItem('savory_user', JSON.stringify(safeUser))
       setCurrentUser(safeUser)
       return { success: true, user: safeUser }
 
@@ -104,6 +109,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={{
       currentUser,
+      user: currentUser, // Alias for requested logic
       login,
       logout,
       registerUser,
