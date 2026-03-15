@@ -9,6 +9,7 @@
 ```
 PROJECT: Savory Bistro restaurant website
 REPO: AhmedTyson/savory-bistro
+VERSION: 3.2.0 - Hagar's Contributions Integrated
 STACK: React + Vite | Tailwind (layout only) + Custom CSS (brand) | React Router DOM v6 | Lucide Icons | Axios
 AUTH: AuthContext at src/context/AuthContext.jsx — useContext(AuthContext) gives { user, login, logout }
 BUILD: npm run dev → localhost:5173 | npm run build → production

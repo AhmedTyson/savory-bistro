@@ -1,8 +1,9 @@
 # SAVORY BISTRO — TEAM GUIDE
 ## How Every Developer Uses the PRD System
 
-| Version | 3.1.0 — Polished UI |
-| Updated | March 2026 |
+| Version | 3.2.0 — Hagar's Contributions Integrated |
+| Updated | March 2024 |
+| Status | Phase 10 - Integration Complete |
 
 > One rule that prevents every known mistake: **paste `00_Session_Opener.md` before every prompt. No exceptions.**
 
@@ -60,16 +61,10 @@ The refactor is complete. Here is what exists and what still needs building:
 - Auth system: AuthContext, ProtectedRoute, Login page, Signup page
 - Home page: all 6 sections built
 - All page structures: sections/ folders exist for all 8 pages
+- **Menu & Gallery:** Professionally integrated from Hagar's contributions.
 
-### Built but sections are placeholders
-These pages have their sections/ structure in place but individual sections need content:
-- Menu — sections exist, some placeholders
-- Reservations — sections exist, some placeholders
-- Gallery — sections exist, some placeholders
-- Contact — sections exist, some placeholders
-- AboutUs — sections exist, some placeholders
-
-**Your job as a developer picking up a section:** open the placeholder file, build the section content following the spec in `01_PRD_Antigravity_Edition.md`. Do not touch any other file.
+### Current Phase: Stable / Maintenance
+All initial refactor phases (0-10) are complete. Documentation is synced to v3.2.0.
 
 ---
 
@@ -154,71 +149,6 @@ git commit -m "feat([page]): build [SectionName] section"
 git push origin feature/[page]-[section-name]
 ```
 
-Open PR: `feature/[page]-[section-name]` → `develop`. Get 1 approval. Merge. Delete branch.
-
----
-
-## PART 5 — SHARED FILE RULES
-
-### The most common conflict: two developers editing the same file
-
-**Scenario:** Dev A is building Menu FilterTabs. Dev B is building Menu TastingMenu.
-Both are on `feature/menu-filter-tabs` and `feature/menu-tasting-menu`.
-Neither touches `Menu.jsx` (the assembler) — they only touch their own section files.
-This is correct. The assembler already imports all sections.
-
-**If you need a change in a shared component:**
-```
-[TEAM CHAT MESSAGE]
-I need a change in [ComponentName]:
-File: src/components/[Name]/[Name].jsx
-Problem: [describe exactly what you need]
-I have NOT edited the file. Requesting change from component owner.
-```
-
-**If you need a new CSS token:**
-```
-[TEAM CHAT MESSAGE]
-I need a new token in variables.css:
-Proposed name: --color-[name]
-Value: #XXXXXX
-Used on: [page/section name]
-@ProjectLead approve?
-```
-
----
-
-## PART 6 — GIT WORKFLOW
-
-### Daily start
-```bash
-git checkout develop
-git pull origin develop
-git checkout feature/[your-section]
-git merge develop
-```
-
-### Commit format
-```
-feat([page]): build [SectionName] section
-fix([component]): correct hover state color
-style([section]): adjust spacing to match design
-refactor([page]): extract inline styles to CSS file
-chore(data): add menu items to mock-data.json
-```
-
-### PR rules
-1. PR: `feature/[name]` → `develop` — never directly to `main`
-2. Minimum 1 reviewer approval
-3. Zero build errors — `npm run build` must pass
-4. Delete feature branch after merge
-
-### Never
-- Push directly to `main` or `develop`
-- Merge your own PR without a reviewer
-- Commit node_modules, .env, or build output
-- Use `git push --force` on shared branches
-
 ---
 
 ## PART 7 — QUICK REFERENCE CARDS
@@ -245,80 +175,6 @@ In App.jsx ONLY — use barrels:
   import { AuthContext }    from './context'
 ```
 
-### Card 2 — Auth Quick Reference
-
-```
-Read auth state anywhere:
-  import { useContext }  from 'react'
-  import { AuthContext } from '../../context/AuthContext'
-  const { user } = useContext(AuthContext)
-
-Navigate with auth awareness:
-  import { useNavigate } from 'react-router-dom'
-  const navigate = useNavigate()
-  if (user) navigate('/reservations')
-  else navigate('/login', { state: { from: '/reservations' } })
-
-Redirect after login:
-  import { useLocation, useNavigate } from 'react-router-dom'
-  const location = useLocation()
-  const from = location.state?.from || '/'
-  navigate(from, { replace: true })
-```
-
-### Card 3 — BEM Quick Reference
-
-```
-Block:     .Navbar
-Element:   .Navbar__link
-Modifier:  .Navbar__link--active
-
-Block:     .DishCard
-Element:   .DishCard__badge
-Modifier:  .DishCard__badge--featured
-
-Block:     .FilterTabs
-Element:   .FilterTabs__pill
-Modifier:  .FilterTabs__pill--active
-
-NEVER:     .link  .active  .badge  .pill  .container
-ALWAYS:    .ComponentName__element  .ComponentName__element--modifier
-```
-
-### Card 4 — Routing Quick Reference
-
-```
-Internal nav (SPA — no page reload):
-  <NavLink to="/menu">    ← for nav items (auto active class)
-  <Link to="/menu">       ← for other internal links
-  useNavigate()           ← for programmatic navigation
-
-External (opens new tab):
-  <a href="https://..." target="_blank" rel="noopener noreferrer">
-
-NEVER for internal:
-  <a href="/menu">        ← causes full page reload, breaks SPA
-```
-
-### Card 5 — State Quick Reference
-
-```
-All interactive state uses useState — never direct DOM:
-
-Navbar mobile:     const [menuOpen, setMenuOpen] = useState(false)
-Menu filter:       const [activeCategory, setActiveCategory] = useState('all')
-Gallery filter:    const [activeFilter, setActiveFilter] = useState('all')
-FAQ accordion:     const [openIndex, setOpenIndex] = useState(null)
-Testimonials dot:  const [activeIndex, setActiveIndex] = useState(0)
-Form fields:       const [name, setName] = useState('')
-Form errors:       const [nameError, setNameError] = useState('')
-
-NEVER:
-  document.querySelector() for toggling
-  document.getElementById() for form values
-  className manipulation directly on DOM nodes
-```
-
 ---
 
 ## PART 8 — QA PROTOCOL
@@ -343,4 +199,4 @@ Run before every PR. Every item must pass.
 
 ---
 
-*Savory Bistro Team Guide v3.0 — March 2026*
+*Savory Bistro Team Guide v3.2.0 — March 2024*

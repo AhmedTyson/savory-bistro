@@ -1,8 +1,9 @@
 # SAVORY BISTRO — PROMPT LIBRARY
 ## Ready-to-Use Prompts for Every Section
 
-| Version | 3.1.0 — Polished UI |
-| Updated | March 2026 |
+| Version | 3.2.0 — Hagar's Contributions Integrated |
+| Updated | March 2024 |
+| Status | Phase 10 - Integration Complete |
 
 > **How to use:** Paste `00_Session_Opener.md` first. Then paste the prompt for the section you need. Replace only `[BRACKETED]` placeholders. Never remove the session opener.
 
@@ -741,4 +742,4 @@ Fix the import in [FILE PATH]. Show me only the corrected import line.
 
 ---
 
-*Savory Bistro Prompt Library v3.0 — March 2026*
+*Savory Bistro Prompt Library v3.2.0 — March 2024*
