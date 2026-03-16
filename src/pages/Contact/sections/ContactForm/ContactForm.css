@@ -1,0 +1,205 @@
+@import '../../../../styles/variables.css';
+
+.ContactForm {
+  padding: 100px 0;
+  background-color: var(--color-bg-white);
+}
+
+.ContactForm__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+.ContactForm__heading {
+  margin-bottom: 24px;
+}
+
+.ContactForm__title {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--color-text-heading);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.ContactForm__subtitle {
+  color: var(--color-text-muted);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.ContactForm__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ContactForm__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.ContactForm__group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ContactForm__label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3748; /* Matching specific UI color */
+  margin-left: 2px;
+}
+
+.ContactForm__input,
+.ContactForm__textarea,
+.ContactForm__select {
+  padding: 14px 18px;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-input);
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all var(--transition-normal);
+  outline: none;
+  color: var(--color-text-body);
+}
+
+.ContactForm__input::placeholder,
+.ContactForm__textarea::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.ContactForm__input:focus,
+.ContactForm__textarea:focus,
+.ContactForm__select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(239, 139, 37, 0.1);
+}
+
+.ContactForm__custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.ContactForm__select-trigger {
+  padding: 14px 18px;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-input);
+  border-radius: 10px;
+  font-size: 16px;
+  color: var(--color-text-body);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  user-select: none;
+}
+
+.ContactForm__select-trigger:hover {
+  border-color: var(--color-primary);
+}
+
+.ContactForm__select-trigger--active {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(239, 139, 37, 0.1);
+}
+
+.ContactForm__select-icon {
+  color: var(--color-text-muted);
+  transition: transform var(--transition-normal);
+}
+
+.ContactForm__select-icon--rotated {
+  transform: rotate(180deg);
+}
+
+.ContactForm__select-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-input);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  overflow: hidden;
+  animation: dropdownSlideDown var(--transition-normal) forwards, 
+             dropdownFadeIn var(--transition-normal) forwards;
+  transform-origin: top;
+}
+
+.ContactForm__select-item {
+  padding: 12px 18px;
+  font-size: 15px;
+  color: var(--color-text-body);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.ContactForm__select-item:hover {
+  background: #fdf2f0; /* Soft primary tint */
+  color: var(--color-primary);
+}
+
+.ContactForm__select-item--selected {
+  background: #fff5eb;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+@keyframes dropdownSlideDown {
+  from { transform: scaleY(0.8) translateY(-10px); }
+  to { transform: scaleY(1) translateY(0); }
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ContactForm__footer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ContactForm__submit-btn {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-white) !important;
+  font-weight: 700 !important;
+  padding: 16px 56px !important;
+  border-radius: 10px !important;
+  font-size: 16px !important;
+  box-shadow: var(--shadow-button);
+  transition: transform var(--transition-normal), background-color var(--transition-normal) !important;
+  width: fit-content;
+}
+
+.ContactForm__submit-btn:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-primary-hover) !important;
+}
+
+.ContactForm__note {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 1024px) {
+  .ContactForm__grid { grid-template-columns: 1fr; gap: 60px; }
+}
+
+@media (max-width: 640px) {
+  .ContactForm__row { grid-template-columns: 1fr; }
+  .ContactForm__submit-btn { width: 100%; justify-content: center; }
+}

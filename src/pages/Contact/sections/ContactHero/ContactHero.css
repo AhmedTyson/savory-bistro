@@ -1,0 +1,133 @@
+@import '../../../../styles/variables.css';
+
+.ContactHero {
+  position: relative;
+  height: 520px;
+  background-image: url('https://images.unsplash.com/photo-1514361892635-6b07e31e75f9?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-white);
+}
+
+.ContactHero__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-hero-overlay);
+}
+
+.ContactHero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.ContactHero__title {
+  font-family: var(--font-sans);
+  font-size: 84px;
+  font-weight: 800;
+  margin-bottom: var(--space-md);
+  letter-spacing: -2px;
+}
+
+.ContactHero__sub {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+/* ── INFO CARDS (Nested in Hero Section logic but visually distinct) ── */
+.ContactHero__info {
+  padding: 80px 0;
+  background-color: var(--color-bg-page);
+}
+
+.ContactHero__info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.ContactHero__card {
+  background: var(--color-bg-white);
+  padding: 48px 32px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  border: 1px solid var(--color-border-card);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-normal);
+}
+
+.ContactHero__card:hover {
+  transform: translateY(-4px);
+}
+
+.ContactHero__card-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  background-color: #fffaf0; /* Special accent, not in variables, keeping for UI fidelity */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: var(--color-primary);
+}
+
+.ContactHero__card-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--color-text-heading);
+}
+
+.ContactHero__card-content {
+  margin-bottom: 16px;
+}
+
+.ContactHero__card-line {
+  font-size: 14.5px;
+  color: var(--color-text-body);
+  line-height: 1.6;
+}
+
+.ContactHero__card-link {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.ContactHero__card-socials {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.ContactHero__social-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 4px;
+  transition: color var(--transition-fast);
+}
+
+.ContactHero__social-btn:hover {
+  color: var(--color-primary);
+}
+
+@media (max-width: 1024px) {
+  .ContactHero__info-grid { grid-template-columns: 1fr; }
+  .ContactHero__title { font-size: 64px; }
+}
+
+@media (max-width: 640px) {
+  .ContactHero__title { font-size: 48px; }
+}
