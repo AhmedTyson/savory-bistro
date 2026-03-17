@@ -1,1 +1,20 @@
-/* Reservations page styles */
+#party {
+    width: 245px;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#occasiontext {
+ margin-left: 197px;
+}
+
+#occasion {
+    width: 245px;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    margin-left: 30px;
+}
