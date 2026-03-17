@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Frontend Architecture Canvas — Savory Bistro Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f7f3ec;
+    --accent1: #e07b39;
+    --accent2: #2b3a42;
+    --accent3: #c9a84c;
+    --accent4: #4a7c59;
+    --accent5: #8b3a62;
+    --accent6: #3a5f8b;
+    --line: rgba(15,15,15,0.15);
+    --card-bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* Grid paper background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(15,15,15,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,15,15,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .canvas {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .header-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .header h1 span {
+    color: var(--accent1);
+    position: relative;
+    display: inline-block;
+  }
+
+  .header h1 span::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent1);
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+
+  .header p {
+    margin-top: 16px;
+    font-size: 16px;
+    color: #555;
+    font-weight: 300;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Decorative scribble lines */
+  .scribble {
+    position: absolute;
+    opacity: 0.12;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.4;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ── CATEGORY BLOCK ── */
+  .category {
+    margin-bottom: 56px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .category:nth-child(2) { animation-delay: 0.1s; }
+  .category:nth-child(3) { animation-delay: 0.2s; }
+  .category:nth-child(4) { animation-delay: 0.3s; }
+  .category:nth-child(5) { animation-delay: 0.4s; }
+  .category:nth-child(6) { animation-delay: 0.5s; }
+  .category:nth-child(7) { animation-delay: 0.6s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .cat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    border: 2px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+  }
+
+  .cat-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .cat-desc {
+    font-size: 13px;
+    color: #666;
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    padding: 18px 16px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .card.active {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+
+  .card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 99px;
+    border: 1px solid currentColor;
+    opacity: 0.6;
+  }
+
+  .used-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    padding: 3px 7px;
+    border-radius: 99px;
+    text-transform: uppercase;
+  }
+
+  /* ── TOOLTIP ── */
+  .tooltip-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(15,15,15,0.5);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .tooltip-overlay.show {
+    display: flex;
+  }
+
+  .tooltip-box {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 36px;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    animation: popIn 0.22s ease;
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .tooltip-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: 1.5px solid var(--ink);
+    background: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    transition: background 0.15s;
+  }
+
+  .tooltip-close:hover { background: var(--ink); color: var(--paper); }
+
+  .tooltip-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-bottom: 10px;
+  }
+
+  .tooltip-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .tooltip-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444;
+    font-weight: 300;
+  }
+
+  .tooltip-example {
+    margin-top: 16px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .tooltip-bistro {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent1);
+    background: rgba(224,123,57,0.06);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .tooltip-bistro strong {
+    color: var(--accent1);
+    font-weight: 600;
+  }
+
+  /* ── BIG PICTURE SECTION ── */
+  .big-picture {
+    margin-top: 64px;
+    padding: 40px;
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .big-picture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .big-picture-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 16px;
+  }
+
+  .big-picture h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .bp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    position: relative;
+  }
+
+  .bp-card {
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .bp-card-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    opacity: 0.4;
+    margin-bottom: 6px;
+  }
+
+  .bp-card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .bp-card-what {
+    font-size: 12px;
+    opacity: 0.6;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .bp-card .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-top: 10px;
+  }
+
+  /* Color themes per category */
+  .c1 { --cat: var(--accent1); }
+  .c2 { --cat: var(--accent2); }
+  .c3 { --cat: var(--accent3); }
+  .c4 { --cat: var(--accent4); }
+  .c5 { --cat: var(--accent5); }
+  .c6 { --cat: var(--accent6); }
+
+  .cat-icon { background: color-mix(in srgb, var(--cat) 12%, white); border-color: var(--cat); }
+  .cat-title { color: var(--cat); }
+  .card::before { background: var(--cat); }
+  .card-tag { color: var(--cat); border-color: var(--cat); }
+  .bp-card .dot { background: var(--cat); }
+
+  /* ── ATOMIC DESIGN DIAGRAM ── */
+  .atomic-diagram {
+    margin: 24px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .atom-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .atom-box {
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    position: relative;
+    background: white;
+  }
+
+  .atom-example {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  .atom-arrow {
+    font-size: 20px;
+    opacity: 0.3;
+    align-self: center;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .canvas { padding: 40px 20px 80px; }
+    .cards-grid { grid-template-columns: 1fr 1fr; }
+    .atomic-diagram { flex-direction: column; }
+    .atom-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="canvas">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Savory Bistro Dev Team</div>
+    <h1>Frontend <span>Architecture</span><br/>Patterns</h1>
+    <p>Every methodology your team needs to know — click any card to learn more.</p>
+  </div>
+
+  <!-- 1. CSS ARCHITECTURE -->
+  <div class="category c1">
+    <div class="section-label">01 — CSS & Styling</div>
+    <div class="category-header">
+      <div class="cat-icon">🎨</div>
+      <div>
+        <div class="cat-title">CSS Architecture</div>
+        <div class="cat-desc">How to name, organize, and scope your styles</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="card c1" onclick="showTooltip('bem')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">BEM</div>
+        <div class="card-desc">Block__Element--Modifier. Zero class collisions across the team.</div>
+        <div class="card-tag">Naming</div>
+      </div>
+      <div class="card c1" onclick="showTooltip('smacss')">
+        <div class="card-name">SMACSS</div>
+        <div class="card-desc">Splits CSS into 5 layers: Base, Layout, Module, State, Theme.</div>
+        <div class="card-tag">Structure</div>
+      </div>
+      <div class="card c1" onclick="showTooltip('atomic-css')">
+        <div class="card-name">Atomic CSS</div>
+        <div class="card-desc">One class = one rule. Tailwind is built entirely on this idea.</div>
+        <div class="card-tag">Utility</div>
+      </div>
+      <div class="card c1" onclick="showTooltip('css-modules')">
+        <div class="card-name">CSS Modules</div>
+        <div class="card-desc">Scopes class names to a single component file automatically.</div>
+        <div class="card-tag">Scoping</div>
+      </div>
+      <div class="card c1" onclick="showTooltip('css-tokens')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Design Tokens</div>
+        <div class="card-desc">CSS variables that hold brand values — colors, spacing, fonts.</div>
+        <div class="card-tag">Tokens</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. COMPONENT ARCHITECTURE -->
+  <div class="category c2">
+    <div class="section-label">02 — Component Design</div>
+    <div class="category-header">
+      <div class="cat-icon">🧩</div>
+      <div>
+        <div class="cat-title">Component Architecture</div>
+        <div class="cat-desc">How to break UI into reusable, logical building blocks</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="card c2" onclick="showTooltip('atomic-design')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Atomic Design</div>
+        <div class="card-desc">Atoms → Molecules → Organisms → Templates → Pages.</div>
+        <div class="card-tag">Hierarchy</div>
+      </div>
+      <div class="card c2" onclick="showTooltip('container-presentational')">
+        <div class="card-name">Container / Presentational</div>
+        <div class="card-desc">Separate logic components from display components.</div>
+        <div class="card-tag">Separation</div>
+      </div>
+      <div class="card c2" onclick="showTooltip('compound')">
+        <div class="card-name">Compound Components</div>
+        <div class="card-desc">Parent + children share state implicitly. Like Select + Option.</div>
+        <div class="card-tag">Pattern</div>
+      </div>
+      <div class="card c2" onclick="showTooltip('feature-folders')">
+        <div class="card-name">Feature-Based Folders</div>
+        <div class="card-desc">Group files by feature, not by file type. Scales well.</div>
+        <div class="card-tag">Structure</div>
+      </div>
+    </div>
+
+    <!-- Atomic Design Visual Diagram -->
+    <div style="margin-top:24px; padding:20px; border:1.5px dashed rgba(43,58,66,0.3); border-radius:12px; background:rgba(43,58,66,0.03);">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;opacity:0.4;margin-bottom:16px;">Atomic Design in Savory Bistro</div>
+      <div class="atomic-diagram">
+        <div class="atom-level">
+          <div class="atom-box" style="border-color:#e07b39;background:rgba(224,123,57,0.08)">⚛ Atoms</div>
+          <div class="atom-example">Button<br/>SectionHeader</div>
+        </div>
+        <div class="atom-arrow">→</div>
+        <div class="atom-level">
+          <div class="atom-box" style="border-color:#2b3a42;background:rgba(43,58,66,0.08)">🔬 Molecules</div>
+          <div class="atom-example">DishCard<br/>FloatingBtn</div>
+        </div>
+        <div class="atom-arrow">→</div>
+        <div class="atom-level">
+          <div class="atom-box" style="border-color:#c9a84c;background:rgba(201,168,76,0.08)">🏛 Organisms</div>
+          <div class="atom-example">Navbar<br/>Footer</div>
+        </div>
+        <div class="atom-arrow">→</div>
+        <div class="atom-level">
+          <div class="atom-box" style="border-color:#4a7c59;background:rgba(74,124,89,0.08)">📐 Templates</div>
+          <div class="atom-example">Layout<br/>(App.jsx)</div>
+        </div>
+        <div class="atom-arrow">→</div>
+        <div class="atom-level">
+          <div class="atom-box" style="border-color:#8b3a62;background:rgba(139,58,98,0.08)">📄 Pages</div>
+          <div class="atom-example">Home, Menu<br/>Reservations…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. FOLDER STRUCTURE -->
+  <div class="category c3">
+    <div class="section-label">03 — Folder Structure</div>
+    <div class="category-header">
+      <div class="cat-icon">📁</div>
+      <div>
+        <div class="cat-title">Project Structure Conventions</div>
+        <div class="cat-desc">How to organize files so the whole team can navigate instantly</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="card c3" onclick="showTooltip('type-based')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Type-Based</div>
+        <div class="card-desc">/components/, /pages/, /styles/ — grouped by what the file IS.</div>
+        <div class="card-tag">Convention</div>
+      </div>
+      <div class="card c3" onclick="showTooltip('feature-based')">
+        <div class="card-name">Feature-Based</div>
+        <div class="card-desc">/features/menu/, /features/reservations/ — everything for one feature together.</div>
+        <div class="card-tag">Convention</div>
+      </div>
+      <div class="card c3" onclick="showTooltip('domain-driven')">
+        <div class="card-name">Domain-Driven</div>
+        <div class="card-desc">Mirrors business domains. Used in large enterprise apps.</div>
+        <div class="card-tag">Enterprise</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. STATE MANAGEMENT -->
+  <div class="category c4">
+    <div class="section-label">04 — State Management</div>
+    <div class="category-header">
+      <div class="cat-icon">🔄</div>
+      <div>
+        <div class="cat-title">State Management Patterns</div>
+        <div class="cat-desc">How data flows and lives inside your app</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="card c4" onclick="showTooltip('lift-state')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Lifting State Up</div>
+        <div class="card-desc">Move shared state to the nearest common parent. React default.</div>
+        <div class="card-tag">React</div>
+      </div>
+      <div class="card c4" onclick="showTooltip('context')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Context API</div>
+        <div class="card-desc">Share state across many components without prop drilling.</div>
+        <div class="card-tag">React</div>
+      </div>
+      <div class="card c4" onclick="showTooltip('redux')">
+        <div class="card-name">Redux / Flux</div>
+        <div class="card-desc">Single source of truth. One-directional data flow. For large apps.</div>
+        <div class="card-tag">Library</div>
+      </div>
+      <div class="card c4" onclick="showTooltip('server-state')">
+        <div class="card-name">Server State</div>
+        <div class="card-desc">Separate server data from UI state. React Query, SWR.</div>
+        <div class="card-tag">Pattern</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. CORE TECHNOLOGIES -->
+  <div class="category c5">
+    <div class="section-label">05 — Core Engine</div>
+    <div class="category-header">
+      <div class="cat-icon">🚀</div>
+      <div>
+        <div class="cat-title">Modern Stack (v1.0)</div>
+        <div class="cat-desc">The high-performance foundations of Savory Bistro</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="card c5" onclick="showTooltip('react-19')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">React 19</div>
+        <div class="card-desc">The latest version with improved Actions, useTransition, and SEO.</div>
+        <div class="card-tag">Framework</div>
+      </div>
+      <div class="card c5" onclick="showTooltip('vite-7')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Vite 7</div>
+        <div class="card-desc">ESM-native build tool. Blazing fast HMR and optimized builds.</div>
+        <div class="card-tag">Build Tool</div>
+      </div>
+      <div class="card c5" onclick="showTooltip('tailwind-4')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Tailwind 4</div>
+        <div class="card-desc">Utility-first CSS with native variable integration. No config needed.</div>
+        <div class="card-tag">Styling</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. API PATTERNS -->
+  <div class="category c6">
+    <div class="section-label">06 — API & Data</div>
+    <div class="category-header">
+      <div class="cat-icon">📡</div>
+      <div>
+        <div class="cat-title">Data & Authentication</div>
+        <div class="cat-desc">Connecting UI to real-world services</div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="card c6" onclick="showTooltip('auth-context')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Auth Service</div>
+        <div class="card-desc">Centralized login, registration, and user persistence logic.</div>
+        <div class="card-tag">Context</div>
+      </div>
+      <div class="card c6" onclick="showTooltip('service-layer')">
+        <div class="card-name">Service Layer</div>
+        <div class="card-desc">Isolated files for API communication. Keeps pages clean.</div>
+        <div class="card-tag">Structure</div>
+      </div>
+      <div class="card c6" onclick="showTooltip('mock-first')">
+        <div class="used-badge">✓ Used</div>
+        <div class="card-name">Mock-First</div>
+        <div class="card-desc">Build UI against local data before a real backend exists.</div>
+        <div class="card-tag">Strategy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIG PICTURE -->
+  <div class="big-picture">
+    <div class="big-picture-label">What Savory Bistro Actually Uses</div>
+    <h2>Savory Bistro = Hybrid Architecture</h2>
+    <div class="bp-grid">
+      <div class="bp-card c1">
+        <div class="bp-card-num">01</div>
+        <div class="bp-card-name">BEM + Tailwind 4</div>
+        <div class="bp-card-what">البي م بيدينا نظام للتسمية، والتيل ويند بيهتم بالـ Layout السريع.</div>
+        <div class="dot c1"></div>
+      </div>
+      <div class="bp-card c3">
+        <div class="bp-card-num">02</div>
+        <div class="bp-card-name">AuthContext API</div>
+        <div class="bp-card-what">الـ مخزن المركزي لكل بيانات المشتركين والأمان في الموقع كله.</div>
+        <div class="dot c3"></div>
+      </div>
+      <div class="bp-card c2">
+        <div class="bp-card-num">03</div>
+        <div class="bp-card-name">Atomic Structure</div>
+        <div class="bp-card-what">بنينا الموقع حتة حتة، من أبسط زرار لأكبر صفحة زي المنيو.</div>
+        <div class="dot c2"></div>
+      </div>
+      <div class="bp-card c5">
+        <div class="bp-card-num">04</div>
+        <div class="bp-card-name">Vite 7 Power</div>
+        <div class="bp-card-what">المحرك الجديد اللي بيخلي الكود يفتح في المتصفح في لحظتها.</div>
+        <div class="dot c5"></div>
+      </div>
+      <div class="bp-card c6">
+        <div class="bp-card-num">05</div>
+        <div class="bp-card-name">Mock Integration</div>
+        <div class="bp-card-what">شغالين ببيانات تجريبية جاهزة للاستبدال بسيرفر حقيقي فوراً.</div>
+        <div class="dot c6"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TOOLTIP OVERLAY -->
+<div class="tooltip-overlay" id="overlay" onclick="closeIfOutside(event)">
+  <div class="tooltip-box" id="tooltip-box">
+    <button class="tooltip-close" onclick="hideTooltip()">✕</button>
+    <div class="tooltip-tag" id="tt-tag"></div>
+    <div class="tooltip-title" id="tt-title"></div>
+    <div class="tooltip-body-arabic" id="tt-arabic" style="margin-bottom:20px; font-weight:500; color:var(--accent2); font-size:15px; border-bottom:1px solid var(--line); padding-bottom:16px;"></div>
+    <div class="tooltip-body" id="tt-body"></div>
+    <div class="tooltip-example" id="tt-example" style="display:none"></div>
+    <div class="tooltip-bistro" id="tt-bistro" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+const data = {
+  bem: {
+    tag: "CSS Naming",
+    title: "BEM (Block Element Modifier)",
+    arabic: "بالنسبة لـ الـ BEM، فهي دي الطريقة اللي بنسمي بيها الـ Classes عشان الكود يفضل منظم وما يحصلش أي تداخل بين الاستايلات. الـ Block هو المكون الكبير، والـ Element هو حتة جواه، والـ Modifier هو التعديل اللي بيغير شكله.",
+    body: "BEM is a naming convention that creates a strong relationship between HTML and CSS. It prevents style collisions and makes the stylesheet infinitely more predictable for a team of developers.",
+    example: `.Hero { }              /* Block: The main section */
+.Hero__title { }       /* Element: Part of the Hero (double underscore) */
+.btn--primary { }      /* Modifier: A variant of the button (double dash) */
+.Navbar__logo { }      /* Element inside Navbar */`,
+    bistro: "✓ Used in Savory Bistro — <strong>Hero.css</strong> uses .Hero__title and .Hero__subtitle. Our custom <strong>Button.css</strong> uses modifiers like .btn--primary and .btn--outlined-dark."
+  },
+  smacss: {
+    tag: "CSS Structure",
+    title: "SMACSS",
+    arabic: "الـ SMACSS بتساعدنا نقسم ملفات الـ CSS لطبقات، زي طبقة الـ Base اللي فيها أساسيات الموقع، وطبقة الـ Modules اللي فيها المكونات القابلة لإعادة الاستخدام. ده بيخلينا نعرف مكان كل كود بسهولة.",
+    body: "Scalable and Modular Architecture for CSS. It categorizes CSS rules into 5 buckets: Base, Layout, Module, State, and Theme. This architecture ensures that CSS grows linearly without becoming a 'spaghetti wrap'.",
+    example: `/* 1. Base — Global defaults */
+body { font-family: sans-serif; }
+
+/* 2. Theme — Design Tokens */
+:root { --color-primary: #E07B39; }
+
+/* 3. Module — Specialized components */
+.dish-card { border: 1px solid #eee; }`,
+    bistro: "Savory Bistro applies SMACSS principles by separating <strong>variables.css</strong> (Theme/Tokens) from <strong>index.css</strong> (Base) and component-specific files (Modules)."
+  },
+  "atomic-css": {
+    tag: "Utility CSS",
+    title: "Atomic CSS & Tailwind",
+    arabic: "بالنسبة لـ الـ Atomic CSS، فكرتها إن كل Class يعمل وظيفة واحدة بس. إحنا بنستخدم Tailwind عشان نكتب الاستايلات دي بسرعة جوه الـ HTML من غير ما نفتح ملفات CSS خارجية لكل حاجة.",
+    body: "Atomic CSS is a methodology where styles are applied through single-purpose utility classes. Tailwind CSS takes this to the next level by generating only the CSS you actually use in your project.",
+    example: `/* The Tailwind way */
+<div class="flex items-center justify-between p-6 bg-white shadow-lg">
+  <!-- Layout built instantly without custom CSS -->
+</div>`,
+    bistro: "✓ Used — <strong>Tailwind 4</strong> is our primary engine for layouts. It talks directly to our CSS variables, giving us the speed of utilities with the control of custom property tokens."
+  },
+  "css-modules": {
+    tag: "CSS Scoping",
+    title: "CSS Modules",
+    arabic: "الـ CSS Modules هي تقنية بتخلي الـ Classes حصرية لكل Component لوحده، يعني لو سميت زرار 'btn' في صفحة، مش هيأثر على زرار تاني اسمه 'btn' في صفحة تانية خالص.",
+    body: "CSS Modules locally scope your class names by appending a unique hash at build time. This provides perfect encapsulation and truly modular styling.",
+    example: `/* In Home.module.css */
+.title { color: orange; }
+
+/* In the Browser (React outputs this) */
+<h1 class="Home_title__x8s2z">...</h1>`,
+    bistro: "Currently not used — Savory Bistro uses <strong>BEM</strong> (e.g., .Hero__title) which achieves similar safety through manual naming conventions."
+  },
+  "css-tokens": {
+    tag: "Design Tokens",
+    title: "Design Tokens (CSS Variables)",
+    arabic: "بالنسبة لـ الـ Design Tokens، دي هي قلب التصميم بتاعنا. بنعرف كل الألوان والمسافات والخطوط في ملف واحد، وبنستدعيها في الموقع كله بأسماء سهلة زي `var(--color-primary)`.",
+    body: "Design tokens are the visual atoms of the brand. They represent semantic decisions rather than literal values, allowing for theme switches (like Dark Mode) by changing one file.",
+    example: `/* variables.css: The Brain */
+--color-bg-page: #F5F0EB;
+--font-serif: 'Playfair Display';
+
+/* CSS component: The Consumer */
+.card { background: var(--color-bg-page); }`,
+    bistro: "✓ Mandatory — <strong>src/styles/variables.css</strong> is strictly used for every color, radius, and shadow. No hex codes are allowed in component CSS files."
+  },
+  "atomic-design": {
+    tag: "Component Hierarchy",
+    title: "Atomic Design",
+    arabic: "بالنسبة لـ الـ Atomic Design، ده نظام بننظم بيه الـ Components من الأصغر للأكبر. الـ Atoms هي الحاجات البسيطة زي الزراير، والـ Pages هي النسخة النهائية اللي بتجمع كل التفاصيل دي.",
+    body: "Created by Brad Frost, this system follows a chemical metaphor to organize UIs. Components are designed to be reused and composed into increasingly complex structures.",
+    example: `Atoms     → <Button />
+Molecules → <DishCard /> (composed of Button + Image)
+Organisms → <Navbar /> (composed of Logo + Links + Button)
+Pages     → Full View (Home, Menu)`,
+    bistro: "✓ Used — Our folder <strong>src/components</strong> contains atoms like Button and molecules like DishCard. Our <strong>src/pages</strong> combine these into full user experiences."
+  },
+  "container-presentational": {
+    tag: "Component Pattern",
+    title: "Container / Presentational",
+    arabic: "الـ فكرة هنا إننا بنفصل الكود اللي بيجيب الداتا (Container) عن الكود اللي بيرسم الشكل (Presentational). ده بيخلينا نقدر نغير شكل الموقع من غير ما نلمس الكود اللي فيه الداتا الحقيقية.",
+    body: "Separating concerns between Logic (Containers) and View (Presentational) components increases testability and prevents your UI code from becoming bloated with business logic.",
+    example: `/* MenuContainer.jsx: Logic */
+const dishes = useFetchDishes(); // Fetching
+return <MenuView data={dishes} />; // Rendering display`,
+    bistro: "Implemented partially — Our <strong>Menu.jsx</strong> page currently handles both. Extracting a 'MenuGrid' presentation component is a planned refactor."
+  },
+  context: {
+    tag: "React API",
+    title: "Context API",
+    arabic: "بالنسبة لـ الـ Context API، دي هي الطريقة اللي الـ React بيوزع بيها الداتا على الموقع كله من غير ما نفضل نبعت 'Props' من أب لابن لحفيد. زي الكهرباء اللي واصلة لكل غرف البيت.",
+    body: "Context provides a way to pass data through the component tree without having to pass props down manually at every level. It's ideal for global data like Themes, Auth, or Settings.",
+    example: `export const AppContext = createContext();
+<AppContext.Provider value={globalData}>
+  <App />
+</AppContext.Provider>`,
+    bistro: "✓ Used — <strong>AuthContext.jsx</strong> uses this to provide user login status and profile data to the Navbar and protected pages."
+  },
+  "auth-context": {
+    tag: "Global State",
+    title: "AuthContext Service",
+    arabic: "الـ AuthContext هو المحرك اللي بيدير هوية المستخدم. هو اللي بيعرف لو حد سجل دخول، وهو اللي بيحفظ بياناته في الـ LocalStorage عشان لما يقفل الموقع بياناته ما تضيعش.",
+    body: "The AuthContext serves as a global shared state for user identity. It encapsulates login logic, registration, and persistent storage synchronization in one place.",
+    example: `const { user, login, logout } = useAuth();
+if (user) return <Profile user={user} />;`,
+    bistro: "✓ Critical — <strong>src/context/AuthContext.jsx</strong> handles our mock backend integration and keeps the user's name visible across the app."
+  },
+  "react-19": {
+    tag: "Core Framework",
+    title: "React 19 Engine",
+    arabic: "بالنسبة لـ React 19، دي أحدث نسخة وفيها مميزات جديدة بتهتم بالأداء العالي والتعامل الأسهل مع السيرفر. بتستخدم الـ Virtual DOM بطريقة أذكى عشان التحديثات تكون سريعة جداً.",
+    body: "React 19 introduces automatic performance optimizations and first-class support for Server Components and better Action handling. It reduces boilerplate for data fetching and state updates.",
+    bistro: "✓ Powered by — Savory Bistro runs on <strong>React 19.2</strong>, ensuring we have the latest security patches and the fastest rendering reconciliation possible."
+  },
+  "vite-7": {
+    tag: "Build Tool",
+    title: "Vite 7 (Next Gen)",
+    arabic: "الـ Vite 7 هو اللي بيخلينا نبرمج بسرعة خرافية. هو المسؤول عن تشغيل الـ Dev Server وتجهيز الكود عشان يشتغل في المتصفح في أقل من ثانية. ميزته إنه بيعتمد على الـ ESM Native.",
+    body: "Vite 7 leverages native browser ES modules to serve code without bundling during development. This makes the HMR (Hot Module Replacement) nearly instantaneous regardless of project size.",
+    bistro: "✓ Used — Our <strong>vite.config.js</strong> is set up for Vite 7, delivering a development experience that makes coding feel smooth and lag-free."
+  },
+  "tailwind-4": {
+    tag: "Styling Engine",
+    title: "Tailwind CSS 4",
+    arabic: "بالنسبة لـ Tailwind 4، دي نقلة كبيرة لأنها بتفهم الـ CSS العادي والـ Variables لوحدها من غير ملفات Config معقدة. ده بيخلينا ندمج الـ BEM مع الـ Utilities في تناغم كامل.",
+    body: "Tailwind 4 is zero-config by default. It parses your CSS for theme variables and automatically maps them to utility classes, making the bridge between brand design and UI development seamless.",
+    bistro: "✓ Integrated — All our spacing and typography in <strong>index.css</strong> is perfectly synced with Tailwind utility classes like 'p-4' and 'text-serif'."
+  },
+  "mock-first": {
+    tag: "Development Strategy",
+    title: "Mock-First Development",
+    arabic: "الـ فكرة هنا إننا بنبني الموقع كله ببيانات تجريبية موجودة في ملف `mock-data.json`. ده بيخليلنا نقدر نخلص الموقع كله حتى لو لسه السيرفر الأساسي بتاع الداتابيز مش جاهز.",
+    body: "Mock-First ensures that UI development is never blocked by backend availability. By using a standardized local JSON format, the frontend can be fully verified before the first real API call is made.",
+    example: `import data from './mock-data.json';
+const menu = data.menu; // Ready to use immediately`,
+    bistro: "✓ Used — <strong>mock-data.json</strong> at the root directory powers every single page in the current version of Savory Bistro."
+  }
+}
+
+function showTooltip(key) {
+  const d = data[key]
+  if (!d) return
+  document.getElementById('tt-tag').textContent = d.tag
+  document.getElementById('tt-title').textContent = d.title
+  document.getElementById('tt-arabic').textContent = d.arabic || d.body.split('.')[0] + '.'
+  document.getElementById('tt-body').textContent = d.body
+  const ex = document.getElementById('tt-example')
+  if (d.example) { ex.textContent = d.example; ex.style.display = 'block' }
+  else ex.style.display = 'none'
+  const bi = document.getElementById('tt-bistro')
+  if (d.bistro) { bi.innerHTML = d.bistro; bi.style.display = 'block' }
+  else bi.style.display = 'none'
+  document.getElementById('overlay').classList.add('show')
+  document.body.style.overflow = 'hidden'
+}
+
+function hideTooltip() {
+  document.getElementById('overlay').classList.remove('show')
+  document.body.style.overflow = ''
+}
+
+function closeIfOutside(e) {
+  if (e.target === document.getElementById('overlay')) hideTooltip()
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hideTooltip() })
+</script>
+</body>
+</html>
