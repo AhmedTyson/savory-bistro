@@ -18,18 +18,18 @@ export default function SignatureDishes({ dishes }) {
   };
 
   return (
-    <section className="signature-section py-20 lg:py-28">
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="section-title mb-2">Signature Dishes</h2>
-            <p className="section-subtitle text-[#e67e22]">Hand-crafted culinary masterpieces</p>
+    <section className="SignatureDishes">
+      <div className="SignatureDishes__container">
+        <div className="SignatureDishes__header">
+          <div className="SignatureDishes__heading-group">
+            <h2 className="SignatureDishes__title">Signature Dishes</h2>
+            <p className="SignatureDishes__subtitle">Hand-crafted culinary masterpieces</p>
           </div>
           
-          <div className="carousel-nav flex gap-3">
+          <div className="SignatureDishes__carousel-nav">
             <button 
               onClick={handlePrev} 
-              className={`nav-btn ${currentIndex === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+              className={`SignatureDishes__nav-btn ${currentIndex === 0 ? 'SignatureDishes__nav-btn--disabled' : ''}`}
               disabled={currentIndex === 0}
               aria-label="Previous dish"
             >
@@ -37,7 +37,7 @@ export default function SignatureDishes({ dishes }) {
             </button>
             <button 
               onClick={handleNext} 
-              className={`nav-btn ${currentIndex === maxIndex ? 'opacity-40 cursor-not-allowed' : ''}`}
+              className={`SignatureDishes__nav-btn ${currentIndex === maxIndex ? 'SignatureDishes__nav-btn--disabled' : ''}`}
               disabled={currentIndex === maxIndex}
               aria-label="Next dish"
             >
@@ -46,33 +46,33 @@ export default function SignatureDishes({ dishes }) {
           </div>
         </div>
 
-        <div className="carousel-viewport overflow-visible md:overflow-hidden lg:-mr-48">
+        <div className="SignatureDishes__carousel-viewport">
           <div 
-            className="carousel-track flex transition-transform duration-500 ease-out"
+            className="SignatureDishes__carousel-track"
             style={{ 
               transform: `translateX(calc(-1 * ${currentIndex} * (var(--card-width) + var(--card-gap))))` 
             }}
           >
             {dishes.map((dish) => (
-              <div key={dish.id} className="dish-card-wrapper">
-                <div className="dish-card group">
-                  <div className="dish-image-wrapper">
+              <div key={dish.id} className="SignatureDishes__card-wrapper">
+                <div className="SignatureDishes__card">
+                  <div className="SignatureDishes__image-wrapper">
                     <img 
                       src={`/images/HomePage/${dish.name.replace(/ /g, '_')}.webp`} 
                       alt={dish.name} 
                       loading="lazy"
-                      className="dish-image"
+                      className="SignatureDishes__image"
                     />
                     {dish.badge && (
-                      <span className="dish-badge">Popular</span>
+                      <span className="SignatureDishes__badge">Popular</span>
                     )}
                   </div>
-                  <div className="dish-info p-[16px]">
-                    <div className="flex justify-between items-baseline mb-2">
-                      <h3 className="dish-name text-[16px] font-bold">{dish.name}</h3>
-                      <span className="dish-price text-[15px] font-semibold">${dish.price}</span>
+                  <div className="SignatureDishes__info">
+                    <div className="SignatureDishes__card-header">
+                      <h3 className="SignatureDishes__dish-name">{dish.name}</h3>
+                      <span className="SignatureDishes__dish-price">${dish.price}</span>
                     </div>
-                    <p className="dish-desc text-[14px] leading-relaxed text-[#666] line-clamp-2">
+                    <p className="SignatureDishes__dish-desc">
                       {dish.description}
                     </p>
                   </div>

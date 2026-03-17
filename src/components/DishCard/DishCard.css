@@ -1,17 +1,23 @@
-.dish-img {
+.DishCard__image {
   width: 72px;
   height: 72px;
   border-radius: var(--radius-circle);
   object-fit: cover;
 }
-@media (max-width: 375px) { .dish-img { width: 56px; height: 56px; } }
 
-.dish-badge {
+@media (max-width: 375px) {
+  .DishCard__image {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.DishCard__badge {
   position: absolute;
   top: -6px;
   left: -6px;
   background-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-text-white);
   font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
@@ -21,7 +27,21 @@
   white-space: nowrap;
 }
 
-.diet-dot { display: inline-block; width: 10px; height: 10px; border-radius: var(--radius-circle); }
-.diet-dot--vegetarian { background-color: var(--color-diet-vegetarian); }
-.diet-dot--seafood    { background-color: var(--color-diet-seafood); }
-.diet-dot--spicy      { background-color: var(--color-diet-spicy); }
+.DishCard__diet-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-circle);
+}
+
+.DishCard__diet-dot--vegetarian {
+  background-color: var(--color-diet-vegetarian);
+}
+
+.DishCard__diet-dot--seafood {
+  background-color: var(--color-diet-seafood);
+}
+
+.DishCard__diet-dot--spicy {
+  background-color: var(--color-diet-spicy);
+}

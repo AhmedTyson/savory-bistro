@@ -1,6 +1,6 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { UtensilsCrossed, Menu, X, UserCircle, LogOut } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context';
 import { useState } from 'react';
 import './Navbar.css';
 
@@ -26,22 +26,22 @@ function Navbar() {
   }
 
   return (
-    <nav className="navbar sticky top-0 z-50 bg-white border-b border-[var(--color-border-light)]">
-      <div className="container flex items-center justify-between h-16">
+    <nav className="Navbar">
+      <div className="Navbar__container container">
 
-        <NavLink to="/" className="flex items-center gap-2 no-underline shrink-0" onClick={closeMenu}>
-          <UtensilsCrossed className="text-[var(--color-primary)]" size={20} />
-          <span className="font-serif text-lg font-bold text-[var(--color-text-heading)]">Savory Bistro</span>
+        <NavLink to="/" className="Navbar__brand" onClick={closeMenu}>
+          <UtensilsCrossed className="Navbar__brand-icon" size={20} />
+          <span className="Navbar__brand-name">Savory Bistro</span>
         </NavLink>
 
-        <ul className="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
+        <ul className="Navbar__links">
           {navLinks.map((link) => (
             <li key={link.path}>
               <NavLink
                 to={link.path}
                 end={link.end}
                 className={({ isActive }) =>
-                  `nav-link ${isActive ? 'nav-link--active' : ''}`
+                  `Navbar__link ${isActive ? 'Navbar__link--active' : ''}`
                 }
               >
                 {link.label}
@@ -51,35 +51,35 @@ function Navbar() {
         </ul>
 
         {/* Desktop Right Zone */}
-        <div className="flex items-center gap-3">
+        <div className="Navbar__right">
           {!currentUser ? (
-            <div className="hidden md:flex items-center gap-2">
+            <div className="Navbar__auth">
               <Link
                 to="/login"
-                className="nav-auth-login hidden md:flex items-center px-3 min-h-[44px] text-sm font-semibold transition-colors cursor-pointer"
+                className="Navbar__auth-link Navbar__auth-link--login"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="nav-auth-signup hidden md:flex items-center px-[18px] min-h-[44px] text-sm font-semibold rounded-lg border border-solid transition-all cursor-pointer"
+                className="Navbar__auth-link Navbar__auth-link--signup"
               >
                 Sign Up
               </Link>
             </div>
           ) : (
-            <div className="hidden md:flex items-center gap-3">
+            <div className="Navbar__user">
               <UserCircle
                 size={22}
-                className="text-[color:var(--color-primary)] flex-shrink-0"
+                className="Navbar__user-icon"
               />
-              <span className="text-sm font-semibold whitespace-nowrap nav-user-name">
+              <span className="Navbar__user-name">
                 {currentUser.firstName}
               </span>
-              <div className="w-px h-5 flex-shrink-0 nav-separator" />
+              <div className="Navbar__separator" />
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-[6px] px-[14px] min-h-[44px] text-[13px] font-medium rounded-lg border border-solid cursor-pointer transition-all nav-logout-btn"
+                className="Navbar__logout-btn"
               >
                 <LogOut size={14} />
                 Logout
@@ -88,7 +88,7 @@ function Navbar() {
           )}
 
           <button
-            className="flex md:hidden items-center justify-center p-1 bg-transparent border-none cursor-pointer text-[var(--color-text-heading)] hover:text-[var(--color-primary)]"
+            className="Navbar__hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
@@ -100,15 +100,15 @@ function Navbar() {
 
       {/* Mobile Drawer */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-[var(--color-border-light)] py-4 shadow-lg">
-          <ul className="flex flex-col">
+        <div className="Navbar__mobile-menu">
+          <ul className="Navbar__mobile-links">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <NavLink
                   to={link.path}
                   end={link.end}
                   className={({ isActive }) =>
-                    `mobile-link ${isActive ? 'mobile-link--active' : ''}`
+                    `Navbar__mobile-link ${isActive ? 'Navbar__mobile-link--active' : ''}`
                   }
                   onClick={closeMenu}
                 >
@@ -118,44 +118,44 @@ function Navbar() {
             ))}
           </ul>
 
-          <div className="mx-0 my-2 nav-mobile-divider" />
+          <div className="Navbar__mobile-divider" />
 
           {!currentUser ? (
-            <>
+            <div className="Navbar__mobile-auth">
               <Link
                 to="/login"
-                className="mobile-link block"
+                className="Navbar__mobile-link"
                 onClick={closeMenu}
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="mobile-link block font-semibold mobile-signup-link"
+                className="Navbar__mobile-link Navbar__mobile-link--signup"
                 onClick={closeMenu}
               >
                 Sign Up
               </Link>
-            </>
+            </div>
           ) : (
-            <>
-              <div className="flex items-center gap-[10px] px-6 py-[14px] border-b mobile-user-row">
+            <div className="Navbar__mobile-user">
+              <div className="Navbar__mobile-user-row">
                 <UserCircle
                   size={18}
-                  className="text-[color:var(--color-primary)] flex-shrink-0"
+                  className="Navbar__user-icon"
                 />
-                <span className="text-[15px] font-semibold nav-user-name">
+                <span className="Navbar__user-name">
                   {currentUser.firstName}
                 </span>
               </div>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 w-full px-6 py-[14px] text-[15px] font-medium border-b cursor-pointer transition-colors bg-transparent mobile-logout-row"
+                className="Navbar__mobile-logout-row"
               >
                 <LogOut size={16} />
                 Logout
               </button>
-            </>
+            </div>
           )}
         </div>
       )}

@@ -1,17 +1,22 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 
-const AuthContext = createContext(null)
+export const AuthContext = createContext(null);
+
+const API_BASE_URL = 'http://localhost:3001/api';
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem('savory_user');
+    return saved ? JSON.parse(saved) : null;
+  })
   const [allUsers, setAllUsers]       = useState([])
   const [pendingToast, setPendingToast] = useState(null)
 
-  // On mount, load users from our new Backend API
+  // On mount, load users from our Backend API
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch('http://localhost:3001/api/users')
+        const response = await fetch(`${API_BASE_URL}/users`)
         if (!response.ok) throw new Error('API failed')
         const data = await response.json()
         setAllUsers(data.users || [])
@@ -23,11 +28,13 @@ export function AuthProvider({ children }) {
   }, [])
 
   function login(user) {
+    localStorage.setItem('savory_user', JSON.stringify(user))
     setCurrentUser(user)
   }
 
   function logout() {
     const name = currentUser?.firstName || ''
+    localStorage.removeItem('savory_user')
     setCurrentUser(null)
     setPendingToast({ type: 'logout', firstName: name })
   }
@@ -57,7 +64,7 @@ export function AuthProvider({ children }) {
 
     try {
       // 3. Post to Node Backend
-      const response = await fetch('http://localhost:3001/api/users', {
+      const response = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -78,6 +85,7 @@ export function AuthProvider({ children }) {
         email:     data.user.email,
       }
       
+      localStorage.setItem('savory_user', JSON.stringify(safeUser))
       setCurrentUser(safeUser)
       return { success: true, user: safeUser }
 
@@ -104,6 +112,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={{
       currentUser,
+      user: currentUser, // Alias for requested logic
       login,
       logout,
       registerUser,
@@ -117,5 +126,9 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
-  return useContext(AuthContext)
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 }

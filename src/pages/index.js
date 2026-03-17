@@ -1,0 +1,8 @@
+export { default as Home }         from './Home/Home';
+export { default as Menu }         from './Menu/Menu';
+export { default as Reservations } from './Reservations/Reservations';
+export { default as Gallery }      from './Gallery/Gallery';
+export { default as Contact }      from './Contact/Contact';
+export { default as AboutUs }      from './AboutUs/AboutUs';
+export { default as Login }        from './Login/Login';
+export { default as Signup }       from './Signup/Signup';

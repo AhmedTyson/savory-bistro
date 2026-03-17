@@ -1,23 +1,40 @@
-.floating-btn {
+.FloatingReserveBtn {
   position: fixed;
   bottom: 24px;
   right: 16px;
-  z-index: 999;
+  z-index: var(--z-floating);
   display: flex;
   align-items: center;
   gap: 6px;
   background-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-text-white);
   font-size: 13px;
   font-weight: 600;
   padding: 10px 16px;
   border-radius: var(--radius-pill);
   text-decoration: none;
-  box-shadow: var(--shadow-button);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
   min-height: 44px;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
 }
+
 @media (min-width: 768px) {
-  .floating-btn { bottom: 32px; right: 32px; font-size: 14px; padding: 12px 20px; gap: 8px; }
+  .FloatingReserveBtn {
+    bottom: 32px;
+    right: 32px;
+    font-size: 14px;
+    padding: 12px 20px;
+    gap: 8px;
+  }
 }
-.floating-btn:hover { background-color: var(--color-primary-hover); transform: translateY(-2px); }
+
+.FloatingReserveBtn:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.FloatingReserveBtn__icon {
+  flex-shrink: 0;
+}

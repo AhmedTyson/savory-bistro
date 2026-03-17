@@ -1,18 +1,18 @@
-import { useState, useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import Toast from '../../components/Toast/Toast';
-import mockData from '../../../mock-data.json';
+import { useState, useCallback, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useAuth } from "../../context";
+import Toast from "../../components/Toast/Toast";
+import mockData from "../../../mock-data.json";
 
 // Sections
-import Hero from './sections/Hero/Hero';
-import InfoBar from './sections/InfoBar/InfoBar';
-import About from './sections/About/About';
-import SignatureDishes from './sections/SignatureDishes/SignatureDishes';
-import ChefSpecial from './sections/ChefSpecial/ChefSpecial';
-import Testimonials from './sections/Testimonials/Testimonials';
+import Hero from "./sections/Hero/Hero";
+import InfoBar from "./sections/InfoBar/InfoBar";
+import OurStory from "./sections/OurStory/OurStory";
+import SignatureDishes from "./sections/SignatureDishes/SignatureDishes";
+import ChefSpecial from "./sections/ChefSpecial/ChefSpecial";
+import Testimonials from "./sections/Testimonials/Testimonials";
 
-import './Home.css';
+import "./Home.css";
 
 function Home() {
   const location = useLocation();
@@ -20,7 +20,8 @@ function Home() {
 
   const [toast, setToast] = useState(() => {
     const s = location.state;
-    if (s?.toast && s?.firstName) return { type: s.toast, firstName: s.firstName };
+    if (s?.toast && s?.firstName)
+      return { type: s.toast, firstName: s.firstName };
     return null;
   });
 
@@ -42,21 +43,20 @@ function Home() {
   return (
     <div className="home-page overflow-x-hidden">
       {toast && (
-        <Toast 
-          type={toast.type} 
-          firstName={toast.firstName} 
-          onDismiss={dismissToast} 
+        <Toast
+          type={toast.type}
+          firstName={toast.firstName}
+          onDismiss={dismissToast}
         />
       )}
 
       <Hero />
       <InfoBar />
-      <About />
+      <OurStory />
       <SignatureDishes dishes={mockData.signatureDishes} />
       <ChefSpecial />
       <Testimonials reviews={mockData.testimonials} />
     </div>
   );
 }
-
 export default Home;

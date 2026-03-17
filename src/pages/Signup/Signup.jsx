@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../context'
 import mockData from '../../../mock-data.json'
 import SignupPanel from './sections/SignupPanel/SignupPanel'
 import SignupForm  from './sections/SignupForm/SignupForm'

@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context';
 import './Reservations.css';
 
-function Reservations() {
+export default function Reservations() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
@@ -11,12 +11,15 @@ function Reservations() {
     if (!currentUser) navigate('/login');
   }, [currentUser, navigate]);
 
-  // eslint-disable-next-line no-unused-vars
-  const [name, setName] = useState(currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : '');
-  // eslint-disable-next-line no-unused-vars
-  const [email, setEmail] = useState(currentUser?.email || '');
-
-  return <div className="min-h-screen py-24 container"><h1 className="text-4xl font-bold">Reservations Page</h1></div>;
+  return (
+    <div className="Reservations">
+      <div className="Reservations__container">
+        <h1 className="Reservations__title">Reservations</h1>
+        <p className="Reservations__placeholder-text">
+          Table bookings are currently managed by our host team. 
+          Please contact the restaurant directly or check back later for online reservations.
+        </p>
+      </div>
+    </div>
+  );
 }
-
-export default Reservations;
