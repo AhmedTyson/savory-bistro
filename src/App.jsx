@@ -1,8 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar             from './components/Navbar/Navbar';
 import Footer             from './components/Footer/Footer';
 import FloatingReserveBtn from './components/FloatingReserveBtn/FloatingReserveBtn';
+import LoginModal         from './components/LoginModal/LoginModal';
 
 import Home         from './pages/Home/Home';
 import Menu         from './pages/Menu/Menu';
@@ -18,21 +21,44 @@ function Layout({ children }) {
       <main>{children}</main>
       <FloatingReserveBtn />
       <Footer />
+      <LoginModal />
     </>
   );
+}
+
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, setShowLogin, setPendingRedirect } = useAuth();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setPendingRedirect('/reservations');
+      setShowLogin(true);
+    }
+  }, [isAuthenticated, setShowLogin, setPendingRedirect]);
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
 }
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/"             element={<Layout><Home /></Layout>} />
-        <Route path="/menu"         element={<Layout><Menu /></Layout>} />
-        <Route path="/reservations" element={<Layout><Reservations /></Layout>} />
-        <Route path="/gallery"      element={<Layout><Gallery /></Layout>} />
-        <Route path="/contact"      element={<Layout><Contact /></Layout>} />
-        <Route path="/about"        element={<Layout><AboutUs /></Layout>} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/"             element={<Layout><Home /></Layout>} />
+          <Route path="/menu"         element={<Layout><Menu /></Layout>} />
+          <Route path="/reservations" element={
+            <Layout>
+              <ProtectedRoute><Reservations /></ProtectedRoute>
+            </Layout>
+          } />
+          <Route path="/gallery"      element={<Layout><Gallery /></Layout>} />
+          <Route path="/contact"      element={<Layout><Contact /></Layout>} />
+          <Route path="/about"        element={<Layout><AboutUs /></Layout>} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

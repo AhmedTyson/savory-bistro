@@ -1,6 +1,7 @@
-import { NavLink } from 'react-router-dom';
-import { UtensilsCrossed, CalendarDays, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { UtensilsCrossed, CalendarDays, Menu, X, User, LogOut } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
 const navLinks = [
@@ -14,7 +15,35 @@ const navLinks = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userDropdown, setUserDropdown] = useState(false);
+  const { isAuthenticated, user, logout, setShowLogin } = useAuth();
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setUserDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  const handleUserClick = () => {
+    if (isAuthenticated) {
+      setUserDropdown(!userDropdown);
+    } else {
+      setShowLogin(true);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    setUserDropdown(false);
+    navigate('/');
+  };
 
   return (
     <nav className="navbar sticky top-0 z-50 bg-white border-b border-[var(--color-border-light)]">
@@ -42,6 +71,32 @@ function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
+          {/* User Icon */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              className="navbar__user-btn"
+              onClick={handleUserClick}
+              aria-label={isAuthenticated ? 'User menu' : 'Sign in'}
+            >
+              {isAuthenticated ? (
+                <span className="navbar__user-avatar">{user.name.charAt(0)}</span>
+              ) : (
+                <User size={20} />
+              )}
+            </button>
+
+            {userDropdown && isAuthenticated && (
+              <div className="navbar__dropdown">
+                <p className="navbar__dropdown-name">{user.name}</p>
+                <p className="navbar__dropdown-email">{user.email}</p>
+                <hr className="navbar__dropdown-divider" />
+                <button className="navbar__dropdown-logout" onClick={handleLogout}>
+                  <LogOut size={14} /> Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+
           <NavLink to="/reservations" className="nav-cta hidden md:flex items-center gap-2">
             <CalendarDays size={16} />
             Book Table

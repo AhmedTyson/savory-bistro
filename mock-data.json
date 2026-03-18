@@ -50,5 +50,73 @@
     { "id": 3, "question": "Do you accept walk-ins?",                  "answer": "We welcome walk-ins based on availability. Reservations are strongly recommended on weekends."            },
     { "id": 4, "question": "Can I bring my own wine?",                 "answer": "Corkage is available at $25 per bottle for special occasions."                                            },
     { "id": 5, "question": "Do you offer gift certificates?",          "answer": "Yes, available in any denomination at the restaurant or online."                                          }
-  ]
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "firstName": "Sarah",
+      "lastName": "Ahmed",
+      "email": "sarah@example.com",
+      "password": "password456"
+    },
+    {
+      "id": 3,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmedm2580@gmail.com",
+      "password": "user1234"
+    },
+     {
+      "id": 4,
+      "firstName": "Ahmed",
+      "lastName": "Mido",
+      "email": "ahmedkk3@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 5,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmed80@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 6,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmedgg2580@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 7,
+      "firstName": "Vince",
+      "lastName": "Test",
+      "email": "vince@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 8,
+      "firstName": "Tester",
+      "lastName": "User",
+      "email": "tester@example.com",
+      "password": "Password123"
+    },
+    {
+      "id": 9,
+      "firstName": "Ahmed",
+      "lastName": "Gamer",
+      "email": "ahmed05@gmail.com",
+      "password": "user123"
+    }
+  ],
+  "reservations": [],
+  "privateDiningInquiries": []
 }
+
