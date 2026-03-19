@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Calendar, Tag, Clock, Users, Info, ChevronRight, CheckCircle, FileText, ChevronDown } from 'lucide-react';
+import { Calendar, Tag, Clock, Users, Info, ChevronRight, CheckCircle, FileText, ChevronDown, X } from 'lucide-react';
 import './ReservationReport.css';
 
 function ReservationReport({ history = [], showReport, setShowReport }) {
@@ -80,6 +80,18 @@ function ReservationReport({ history = [], showReport, setShowReport }) {
                 <p>"{latestItem.specialRequests || latestItem.message}"</p>
               </div>
             )}
+
+            {/* Premium Close Action at bottom of card */}
+            <div className="res-report-footer">
+              <button 
+                type="button" 
+                className="res-report-close-btn"
+                onClick={() => setShowReport(false)}
+              >
+                <X size={14} />
+                <span>Close Report</span>
+              </button>
+            </div>
           </div>
           
           <ChevronRight size={20} className="ReservationHistory__arrow" />

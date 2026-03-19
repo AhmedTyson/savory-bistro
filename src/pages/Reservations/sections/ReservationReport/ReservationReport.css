@@ -19,7 +19,7 @@
   font-weight: 700;
   font-family: var(--font-sans);
   cursor: pointer;
-  transition: transform .2s, background .2s;
+  transition: transform .2s, background .2s, border-radius .4s cubic-bezier(.4,0,.2,1);
   box-shadow: 0 4px 15px rgba(45,27,14,0.15);
 }
 .res-report-btn:hover { background: #3d2514; transform: translateY(-1px); }
@@ -146,6 +146,41 @@
   margin: 0;
 }
 .ReservationHistory__arrow { align-self: center; color: #D4CDC5; }
+
+/* Report Footer Close Button */
+.res-report-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px dashed #E6E1DC;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.res-report-close-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FDF5EF;
+  color: #E07B39;
+  border: 1px solid #F3E4D8;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.res-report-close-btn:hover {
+  background: #E07B39;
+  color: #fff;
+  border-color: #E07B39;
+  transform: translateY(-1px);
+}
+
+.res-report-close-btn svg {
+  opacity: 0.8;
+}
 
 @media (max-width: 600px) {
   .ReservationHistory__card-sidebar { display: none; }
