@@ -12,7 +12,7 @@
 **A full-featured, modern restaurant website built with React and Vite.**  
 Browse the menu, make reservations, explore the gallery, and manage your account — all in one polished experience.
 
-[Live Demo](#) · [Report a Bug](https://github.com/AhmedTyson/savory-bistro/issues) · [Request a Feature](https://github.com/AhmedTyson/savory-bistro/issues)
+[Live Demo](https://savory-bistro.netlify.app) · [Report a Bug](https://github.com/AhmedTyson/savory-bistro/issues) · [Request a Feature](https://github.com/AhmedTyson/savory-bistro/issues)
 
 </div>
 
@@ -348,10 +348,10 @@ This project was built by a team of 5 developers, each responsible for specific 
 | Developer | Pages / Responsibility | GitHub |
 |---|---|---|
 | **Ahmed Tyson (Team Lead)** | Architecture, Home, Login, Signup, Dashboard, Auth System | [@AhmedTyson](https://github.com/AhmedTyson) |
-| **Hagar Ashraf** | Gallery, Menu | — |
-| **Bassant Hesham** | Reservations | — |
-| **Youssef Elsherif** | Contact | — |
-| **Ahmed Sorour** | About Us | — |
+| **Hagar Ashraf** | Gallery, Menu | [@Hagar2005](https://github.com/Hagar2005) |
+| **Bassant Hesham** | Reservations | [@bassanthesham2410](https://github.com/bassanthesham2410) |
+| **Youssef Elsherif** | Contact | [@yousefsherifchifo-pixel](https://github.com/yousefsherifchifo-pixel) |
+| **Ahmed Sorour** | About Us | [@A-udo](https://github.com/A-udo) |
 
 ---
 
