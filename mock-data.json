@@ -2,7 +2,7 @@
   "menu": [
     {
       "id": 1,
-      "src": "/menu/salad (6).png",
+      "src": "/images/menu/salad (6).webp",
       "name": "Avocado Salad",
       "description": "Avocado, tomato, cucumber, olive oil, lemon juice.",
       "price": 28,
@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "src": "/menu/small salmon (1).png",
+      "src": "/images/menu/small salmon (1).webp",
       "name": "Pan-Seared Salmon",
       "description": "Atlantic salmon, asparagus, lemon-butter sauce, baby potatoes.",
       "price": 34,
@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "src": "/menu/meat (2).png",
+      "src": "/images/menu/meat (2).webp",
       "name": "Ribeye Steak",
       "description": "12oz Prime ribeye, garlic herb butter, roasted root vegetables.",
       "price": 42,
@@ -32,7 +32,7 @@
     },
     {
       "id": 4,
-      "src": "/menu/pasta (3).png",
+      "src": "/images/menu/pasta (3).webp",
       "name": "Harvest Pasta",
       "description": "Fresh fettuccine, seasonal vegetables, garlic, olive oil, vegan parmesan.",
       "price": 24,
@@ -42,7 +42,7 @@
     },
     {
       "id": 5,
-      "src": "/menu/meat lamp (4).png",
+      "src": "/images/menu/meat lamp (4).webp",
       "name": "Lamb Shank",
       "description": "Slow-braised lamb, creamy polenta, red wine reduction, rosemary.",
       "price": 38,
@@ -52,7 +52,7 @@
     },
     {
       "id": 6,
-      "src": "/menu/fish (5).png",
+      "src": "/images/menu/fish (5).webp",
       "name": "Chilean Sea Bass",
       "description": "Pan-seared sea bass, miso glaze, bok choy, ginger-soy broth.",
       "price": 45,
@@ -159,13 +159,13 @@
     }
   ],
   "gallery": [
-    { "id": 1, "src": "/images/gallery/salmon.png", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 2, "src": "/images/gallery/chocolate cake (3).png", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 3, "src": "/images/gallery/pizza (5).png", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
-    { "id": 4, "src": "/images/gallery/chef (1).png", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium" },
-    { "id": 5, "src": "/images/gallery/drink (4).png", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
-    { "id": 6, "src": "/images/gallery/interior (6).png", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
-    { "id": 7, "src": "/images/gallery/table(2).png", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
+    { "id": 1, "src": "/images/gallery/salmon.webp", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 2, "src": "/images/gallery/chocolate cake (3).webp", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 3, "src": "/images/gallery/pizza (5).webp", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
+    { "id": 4, "src": "/images/gallery/chef (1).webp", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium" },
+    { "id": 5, "src": "/images/gallery/drink (4).webp", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
+    { "id": 6, "src": "/images/gallery/interior (6).webp", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
+    { "id": 7, "src": "/images/gallery/table(2).webp", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
   ],
   "team": [
     {
@@ -236,71 +236,6 @@
       "socials": ["web", "insta", "share"]
     }
   },
-  "users": [
-    {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john@example.com",
-      "password": "password123"
-    },
-    {
-      "id": 2,
-      "firstName": "Sarah",
-      "lastName": "Ahmed",
-      "email": "sarah@example.com",
-      "password": "password456"
-    },
-    {
-      "id": 3,
-      "firstName": "Ahmed",
-      "lastName": "Tyson",
-      "email": "ahmedm2580@gmail.com",
-      "password": "user1234"
-    },
-    {
-      "id": 4,
-      "firstName": "Ahmed",
-      "lastName": "Mido",
-      "email": "ahmedkk3@gmail.com",
-      "password": "user1234"
-    },
-    {
-      "id": 5,
-      "firstName": "Ahmed",
-      "lastName": "Tyson",
-      "email": "ahmed80@gmail.com",
-      "password": "user1234"
-    },
-    {
-      "id": 6,
-      "firstName": "Ahmed",
-      "lastName": "Tyson",
-      "email": "ahmedgg2580@gmail.com",
-      "password": "user1234"
-    },
-    {
-      "id": 7,
-      "firstName": "Vince",
-      "lastName": "Test",
-      "email": "vince@example.com",
-      "password": "password123"
-    },
-    {
-      "id": 8,
-      "firstName": "Tester",
-      "lastName": "User",
-      "email": "tester@example.com",
-      "password": "Password123"
-    },
-    {
-      "id": 9,
-      "firstName": "Ahmed",
-      "lastName": "Gamer",
-      "email": "ahmed05@gmail.com",
-      "password": "user123"
-    }
-  ],
   "testimonials": [
     {
       "id": 1,

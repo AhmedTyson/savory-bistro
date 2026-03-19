@@ -1,9 +1,93 @@
 import { Link } from 'react-router-dom'
-import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock, User, Eye, EyeOff, CheckCircle } from 'lucide-react'
 import authBgCurve from '../../../../assets/auth-bg-curve.svg'
 import zigzag from '../../../../assets/zigzag.svg'
 import zigzagOrange from '../../../../assets/zigzag-orange.svg'
 import './SignupForm.css'
+
+/* Password strength rules */
+function getPasswordRules(password) {
+  return {
+    minLength: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    number:    /[0-9]/.test(password),
+    special:   /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+  }
+}
+
+function getStrengthScore(rules) {
+  return Object.values(rules).filter(Boolean).length
+}
+
+const strengthLevels = [
+  null, // 0
+  { label: 'Weak',        bars: 1, modifier: '--weak' },
+  { label: 'Weak',        bars: 1, modifier: '--weak' },
+  { label: 'Fair',        bars: 2, modifier: '--fair' },
+  { label: 'Strong',      bars: 3, modifier: '--strong' },
+  { label: 'Very Strong', bars: 4, modifier: '--very-strong' },
+]
+
+function PasswordStrength({ password }) {
+  if (!password) return null
+  const rules = getPasswordRules(password)
+  const score = getStrengthScore(rules)
+  if (score === 0) return null
+  const level = strengthLevels[score]
+
+  const checkItems = [
+    { met: rules.minLength, label: 'At least 8 characters' },
+    { met: rules.uppercase, label: 'One uppercase letter' },
+    { met: rules.lowercase, label: 'One lowercase letter' },
+    { met: rules.number,    label: 'One number' },
+    { met: rules.special,   label: 'One special character' },
+  ]
+
+  return (
+    <div className="SignupForm__strength-wrap">
+      <div className="SignupForm__strength-bars">
+        {[0, 1, 2, 3].map(i => (
+          <div
+            key={i}
+            className={`SignupForm__strength-bar${
+              i < level.bars
+                ? ` SignupForm__strength-bar--filled SignupForm__strength-bar${level.modifier}`
+                : ''
+            }`}
+          />
+        ))}
+      </div>
+      <span className={`SignupForm__strength-label SignupForm__strength-label${level.modifier}`}>
+        {level.label}
+      </span>
+      <ul className="SignupForm__checklist">
+        {checkItems.map((item, i) => (
+          <li
+            key={i}
+            className={`SignupForm__check-item${item.met ? ' SignupForm__check-item--met' : ''}`}
+          >
+            {item.met ? '✓' : '•'} {item.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function PasswordMatch({ password, confirmPassword }) {
+  if (!confirmPassword) return null
+  if (confirmPassword === password) {
+    return (
+      <span className="SignupForm__match-ok">
+        <CheckCircle size={14} /> Passwords match
+      </span>
+    )
+  }
+  return (
+    <span className="auth-em">Passwords do not match</span>
+  )
+}
 
 export default function SignupForm({
   firstName, onFirstNameChange, firstNameError, onFirstNameErrorClear,
@@ -13,6 +97,7 @@ export default function SignupForm({
   confirmPassword, onConfirmPasswordChange, confirmPasswordError, onConfirmPasswordErrorClear,
   showPassword, onTogglePassword,
   showConfirm, onToggleConfirm,
+  cooldownSeconds = 0,
   onSubmit
 }) {
   return (
@@ -72,13 +157,14 @@ export default function SignupForm({
                 <span className="auth-ii"><Lock size={15} /></span>
                 <input type={showPassword ? 'text' : 'password'}
                   className={`auth-inp${passwordError ? ' err' : ''}`}
-                  placeholder="Min. 6 characters" value={password}
+                  placeholder="Min. 8 characters" value={password}
                   onChange={e => { onPasswordChange(e.target.value); onPasswordErrorClear(); }} />
                 <button type="button" className="auth-eye" onClick={onTogglePassword}>
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
               {passwordError && <span className="auth-em">{passwordError}</span>}
+              <PasswordStrength password={password} />
             </div>
 
             <div className="auth-fg" style={{ marginBottom: 4 }}>
@@ -94,9 +180,16 @@ export default function SignupForm({
                 </button>
               </div>
               {confirmPasswordError && <span className="auth-em">{confirmPasswordError}</span>}
+              <PasswordMatch password={password} confirmPassword={confirmPassword} />
             </div>
 
-            <button type="submit" className="auth-btn">Create Account</button>
+            <button
+              type="submit"
+              className="auth-btn"
+              disabled={cooldownSeconds > 0}
+            >
+              {cooldownSeconds > 0 ? `Please wait ${cooldownSeconds}s` : 'Create Account'}
+            </button>
           </form>
           <p className="auth-tn">
             By signing up you agree to our{' '}

@@ -8,7 +8,9 @@ import './LoginForm.css'
 export default function LoginForm({
   isReturningUser, email, onEmailChange, emailError, onEmailErrorClear,
   password, onPasswordChange, passwordError, onPasswordErrorClear,
-  showPassword, onTogglePassword, submitError, onSubmit
+  showPassword, onTogglePassword, submitError,
+  cooldownSeconds = 0,
+  onSubmit
 }) {
   return (
     <div className="LoginForm">
@@ -62,7 +64,13 @@ export default function LoginForm({
             </div>
 
             <div className="LoginForm__forgot">Forgot password?</div>
-            <button type="submit" className="LoginForm__submit-btn">Sign In</button>
+            <button
+              type="submit"
+              className="LoginForm__submit-btn"
+              disabled={cooldownSeconds > 0}
+            >
+              {cooldownSeconds > 0 ? `Please wait ${cooldownSeconds}s` : 'Sign In'}
+            </button>
           </form>
           <p className="LoginForm__switch">
             Don't have an account?{' '}

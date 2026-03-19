@@ -51,7 +51,7 @@
 
 .OurStory__title {
   font-family: var(--font-serif);
-  font-size: 40px;
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   color: var(--color-text-heading);
   line-height: 1.2;

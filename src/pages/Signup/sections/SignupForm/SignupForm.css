@@ -194,3 +194,80 @@
 /* Hover effect for zigzags */
 .zz { transition: opacity var(--transition-normal); }
 .zz:hover { opacity: 1; filter: drop-shadow(0 0 8px rgba(255,255,255,0.4)); }
+
+/* ─── PASSWORD STRENGTH INDICATOR ──────────────── */
+.SignupForm__strength-wrap {
+  margin-top: 8px;
+}
+.SignupForm__strength-bars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.SignupForm__strength-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border-input);
+  transition: background var(--transition-fast);
+}
+.SignupForm__strength-bar--filled.SignupForm__strength-bar--weak {
+  background: var(--color-border-error);
+}
+.SignupForm__strength-bar--filled.SignupForm__strength-bar--fair {
+  background: var(--color-primary);
+}
+.SignupForm__strength-bar--filled.SignupForm__strength-bar--strong {
+  background: var(--color-gold-accent);
+}
+.SignupForm__strength-bar--filled.SignupForm__strength-bar--very-strong {
+  background: var(--color-green-sustain);
+}
+.SignupForm__strength-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.SignupForm__strength-label--weak       { color: var(--color-border-error); }
+.SignupForm__strength-label--fair        { color: var(--color-primary); }
+.SignupForm__strength-label--strong      { color: var(--color-gold-accent); }
+.SignupForm__strength-label--very-strong { color: var(--color-green-sustain); }
+
+/* ─── PASSWORD CHECKLIST ───────────────────────── */
+.SignupForm__checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 4px;
+}
+.SignupForm__check-item {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+.SignupForm__check-item--met {
+  color: var(--color-green-sustain);
+}
+
+/* ─── PASSWORD MATCH INDICATOR ─────────────────── */
+.SignupForm__match-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-green-sustain);
+  margin-top: 4px;
+}
+
+/* ─── DISABLED BUTTON ──────────────────────────── */
+.auth-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(224,123,57,0.15);
+}
+.auth-btn:disabled:hover {
+  transform: none;
+  box-shadow: 0 2px 8px rgba(224,123,57,0.15);
+}

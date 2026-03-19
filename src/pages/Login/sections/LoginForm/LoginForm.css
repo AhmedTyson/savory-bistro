@@ -194,3 +194,15 @@
 /* Hover effect for zigzags */
 .LoginForm__zigzag { transition: opacity var(--transition-normal); }
 .LoginForm__zigzag:hover { opacity: 1; filter: drop-shadow(0 0 8px rgba(255,255,255,0.4)); }
+
+/* ─── DISABLED BUTTON ──────────────────────────── */
+.LoginForm__submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(224,123,57,0.15);
+}
+.LoginForm__submit-btn:disabled:hover {
+  transform: none;
+  box-shadow: 0 2px 8px rgba(224,123,57,0.15);
+}
