@@ -25,6 +25,8 @@ function ReservationReport({ activeReport, showReport, setShowReport }) {
     );
   }, [activeReport]);
 
+  if (!activeReport) return null;
+
   return (
     <>
       {/* ── REPORT TOGGLE ── */}

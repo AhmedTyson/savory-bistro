@@ -1,7 +1,7 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { UtensilsCrossed, Menu, X, UserCircle, LogOut } from 'lucide-react';
+import { UtensilsCrossed, Menu, X, UserCircle, LogOut, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../context';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './Navbar.css';
 
 const navLinks = [
@@ -15,6 +15,8 @@ const navLinks = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const userDropdownRef = useRef(null);
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -22,9 +24,21 @@ function Navbar() {
 
   function handleLogout() {
     logout();      // sets pendingToast in AuthContext
+    setIsUserDropdownOpen(false); // Close dropdown on logout
     navigate('/'); // go to Home so toast appears
     closeMenu();   // close mobile drawer if open
   }
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
+        setIsUserDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <nav className="Navbar">
@@ -36,19 +50,24 @@ function Navbar() {
         </NavLink>
 
         <ul className="Navbar__links">
-          {navLinks.map((link) => (
-            <li key={link.path}>
-              <NavLink
-                to={link.path}
-                end={link.end}
-                className={({ isActive }) =>
-                  `Navbar__link ${isActive ? 'Navbar__link--active' : ''}`
-                }
-              >
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            // Task 5: Hide Reservations link for guests
+            if (link.path === '/reservations' && !currentUser) return null;
+            
+            return (
+              <li key={link.path}>
+                <NavLink
+                  to={link.path}
+                  end={link.end}
+                  className={({ isActive }) =>
+                    `Navbar__link ${isActive ? 'Navbar__link--active' : ''}`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Desktop Right Zone */}
@@ -69,22 +88,31 @@ function Navbar() {
               </Link>
             </div>
           ) : (
-            <div className="Navbar__user">
-              <UserCircle
-                size={22}
-                className="Navbar__user-icon"
-              />
-              <span className="Navbar__user-name">
-                {currentUser.firstName}
-              </span>
-              <div className="Navbar__separator" />
-              <button
-                onClick={handleLogout}
-                className="Navbar__logout-btn"
+            <div className="Navbar__user" ref={userDropdownRef}>
+              <div 
+                className={`Navbar__user-trigger ${isUserDropdownOpen ? 'Navbar__user-trigger--active' : ''}`}
+                onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
               >
-                <LogOut size={14} />
-                Logout
-              </button>
+                <UserCircle size={22} className="Navbar__user-icon" />
+                <span className="Navbar__user-name">{currentUser.firstName}</span>
+                <ChevronDown size={14} className={`Navbar__dropdown-chevron ${isUserDropdownOpen ? 'Navbar__dropdown-chevron--rotated' : ''}`} />
+              </div>
+              
+              <div className={`Navbar__dropdown ${isUserDropdownOpen ? 'Navbar__dropdown--open' : ''}`}>
+                <Link 
+                  to="/dashboard" 
+                  className="Navbar__dropdown-item"
+                  onClick={() => setIsUserDropdownOpen(false)}
+                >
+                  <UserCircle size={16} />
+                  My Account
+                </Link>
+                <div className="Navbar__dropdown-divider" />
+                <button onClick={handleLogout} className="Navbar__dropdown-item Navbar__dropdown-item--logout">
+                  <LogOut size={16} />
+                  Logout
+                </button>
+              </div>
             </div>
           )}
 
@@ -103,20 +131,25 @@ function Navbar() {
       {menuOpen && (
         <div className="Navbar__mobile-menu">
           <ul className="Navbar__mobile-links">
-            {navLinks.map((link) => (
-              <li key={link.path}>
-                <NavLink
-                  to={link.path}
-                  end={link.end}
-                  className={({ isActive }) =>
-                    `Navbar__mobile-link ${isActive ? 'Navbar__mobile-link--active' : ''}`
-                  }
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+               // Task 5: Hide Reservations link for guests in mobile too
+               if (link.path === '/reservations' && !currentUser) return null;
+
+               return (
+                <li key={link.path}>
+                  <NavLink
+                    to={link.path}
+                    end={link.end}
+                    className={({ isActive }) =>
+                      `Navbar__mobile-link ${isActive ? 'Navbar__mobile-link--active' : ''}`
+                    }
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </NavLink>
+                </li>
+               );
+            })}
           </ul>
 
           <div className="Navbar__mobile-divider" />
@@ -149,6 +182,11 @@ function Navbar() {
                   {currentUser.firstName}
                 </span>
               </div>
+              <Link
+                to="/dashboard"
+                className="Navbar__mobile-link"
+                onClick={closeMenu}
+              >My Account</Link>
               <button
                 onClick={handleLogout}
                 className="Navbar__mobile-logout-row"

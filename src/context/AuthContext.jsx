@@ -43,6 +43,12 @@ export function AuthProvider({ children }) {
     setPendingToast(null)
   }
 
+  function updateUser(updatedFields) {
+    const newUser = { ...currentUser, ...updatedFields }
+    localStorage.setItem('savory_user', JSON.stringify(newUser))
+    setCurrentUser(newUser)
+  }
+
   // Register is now async!
   async function registerUser({ firstName, lastName, email, password }) {
     // 1. Initial frontend duplicate check
@@ -117,6 +123,7 @@ export function AuthProvider({ children }) {
       logout,
       registerUser,
       validateLogin,
+      updateUser,
       pendingToast,
       clearPendingToast,
     }}>

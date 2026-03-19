@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../../../context';
 import { CheckCircle, X, AlertCircle, ChevronDown } from 'lucide-react';
 
 function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
+  const { currentUser } = useAuth();
   const [inqName,    setInqName]    = useState('');
   const [inqEmail,   setInqEmail]   = useState('');
   const [inqPhone,   setInqPhone]   = useState('');
@@ -12,11 +14,24 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
   const [inqErrors,  setInqErrors]  = useState({});
   const [inqSuccess, setInqSuccess] = useState(false);
 
+  // Pre-fill fields when modal opens/user changes
+  useEffect(() => {
+    if (showInquiry && currentUser) {
+      setInqName(`${currentUser.firstName} ${currentUser.lastName || ""}`.trim());
+      setInqEmail(currentUser.email || "");
+    }
+  }, [showInquiry, currentUser]);
+
   const validateInquiry = () => {
     const e = {};
     if (!inqName.trim())  e.name  = 'Name is required';
-    if (!inqEmail.trim()) e.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inqEmail)) e.email = 'Enter a valid email';
+    if (!inqEmail.trim()) {
+      e.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inqEmail)) {
+      e.email = 'Enter a valid email';
+    } else if (currentUser && inqEmail.trim().toLowerCase() !== currentUser.email.toLowerCase()) {
+      e.email = 'Email must match your account email';
+    }
     if (!inqPhone.trim()) e.phone = 'Phone is required';
     return e;
   };
@@ -29,6 +44,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
 
     const inquiry = {
       id:        Date.now(),
+      userId:    currentUser?.id || 'guest',
       name:      inqName.trim(),
       email:     inqEmail.trim(),
       phone:     inqPhone.trim(),

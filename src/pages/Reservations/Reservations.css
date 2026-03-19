@@ -129,6 +129,89 @@
 }
 .res-error--center { justify-content: center; }
 
+/* ─── CUSTOM DROPDOWN (REPLICATED FROM CONTACT) ──────── */
+.ContactForm__custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.ContactForm__select-trigger {
+  padding: 13px 15px;
+  background: #FCFAF7;
+  border: 1.5px solid #E4DDD4;
+  border-radius: 10px;
+  font-size: 15px;
+  color: var(--color-text-body);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all .15s;
+  user-select: none;
+}
+
+.ContactForm__select-trigger:hover {
+  border-color: var(--color-primary);
+}
+
+.ContactForm__select-trigger--active {
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(224,123,57,0.1);
+}
+
+.ContactForm__select-icon {
+  color: #9E9184;
+  transition: transform .2s ease;
+}
+
+.ContactForm__select-icon--rotated {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+.ContactForm__select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #E4DDD4;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-y: auto;
+  max-height: 240px;
+}
+
+/* Custom scrollbar for dropdown menu */
+.ContactForm__select-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.ContactForm__select-menu::-webkit-scrollbar-thumb {
+  background: #E4DDD4;
+  border-radius: 10px;
+}
+
+.ContactForm__select-item {
+  padding: 11px 15px;
+  font-size: 14px;
+  color: var(--color-text-body);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.ContactForm__select-item:hover {
+  background: #fdf2f0;
+  color: var(--color-primary);
+}
+
+.ContactForm__select-item--selected {
+  background: #fff5eb;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
 /* ─── SUBMIT BUTTON ──────────────────────────────────── */
 .res-submit-btn {
   width: 100%;
@@ -244,8 +327,8 @@
   color: var(--color-primary);
 }
 .res-calendar__cell--today {
-  background: var(--color-primary);
-  color: #fff !important;
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary) !important;
   font-weight: 700;
 }
 .res-calendar__cell--active {
@@ -253,6 +336,7 @@
   color: #fff !important;
   font-weight: 700;
   box-shadow: 0 3px 10px rgba(224,123,57,.32);
+  border: none !important; /* active overrides today border if both true */
 }
 .res-calendar__cell--disabled {
   color: #D8CFC4;

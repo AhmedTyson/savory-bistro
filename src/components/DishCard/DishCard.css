@@ -27,21 +27,20 @@
   white-space: nowrap;
 }
 
-.DishCard__diet-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-circle);
+.DishCard__diet-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.DishCard__diet-dot--vegetarian {
-  background-color: var(--color-diet-vegetarian);
+.DishCard__diet-icon--vegetarian {
+  color: var(--color-diet-vegetarian);
 }
 
-.DishCard__diet-dot--seafood {
-  background-color: var(--color-diet-seafood);
+.DishCard__diet-icon--seafood {
+  color: var(--color-diet-seafood);
 }
 
-.DishCard__diet-dot--spicy {
-  background-color: var(--color-diet-spicy);
+.DishCard__diet-icon--spicy {
+  color: var(--color-diet-spicy);
 }

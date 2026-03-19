@@ -4,7 +4,7 @@ import './styles/variables.css';
 import './index.css';
 
 import { Navbar, Footer, FloatingReserveBtn } from './components';
-import { Home, Menu, Reservations, Gallery, Contact, AboutUs, Login, Signup } from './pages';
+import { Home, Menu, Reservations, Gallery, Contact, AboutUs, Login, Signup, Dashboard } from './pages';
 import { AuthContext, AuthProvider } from './context';
 
 function ProtectedRoute({ children }) {
@@ -50,6 +50,11 @@ export default function App() {
           <Route path="/about"        element={<Layout><AboutUs /></Layout>} />
           <Route path="/login"        element={<AuthLayout><Login /></AuthLayout>} />
           <Route path="/signup"       element={<AuthLayout><Signup /></AuthLayout>} />
+          <Route path="/dashboard"    element={
+            <ProtectedRoute>
+              <Layout footerVariant="light"><Dashboard /></Layout>
+            </ProtectedRoute>
+          } />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

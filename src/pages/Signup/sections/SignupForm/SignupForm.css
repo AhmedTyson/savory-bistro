@@ -43,19 +43,30 @@
 .auth-form-area {
   position: absolute; inset: 0; z-index: 3;
   display: flex; align-items: center; justify-content: center;
-  padding: 16px 40px;
+  padding: 12px 40px;
 }
 .auth-form-inner {
   width: 100%; max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-lg);
-  padding: 24px 28px;
+  padding: 20px 24px;
   box-shadow:
     0 8px 32px rgba(0,0,0,0.08),
     0 1px 0 rgba(255,255,255,0.6) inset;
   border: 1px solid rgba(255,255,255,0.5);
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.auth-form-inner::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.auth-form-inner {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Typography */
@@ -155,7 +166,7 @@
   font-family: var(--font-sans); font-size: 0.95rem;
   font-weight: 700; cursor: pointer;
   transition: all var(--transition-slow);
-  letter-spacing: 0.03em; margin-top: 0px;
+  letter-spacing: 0.03em; margin-top: 14px;
   box-shadow: 0 4px 16px rgba(224,123,57,0.3);
 }
 .auth-btn:hover {

@@ -1,0 +1,146 @@
+/* ═══════════════════════════════════════════════════════
+   RESERVATIONHISTORY — sections/ReservationHistory/ReservationHistory.css
+   ═══════════════════════════════════════════════════════ */
+
+.ReservationHistory {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.ReservationHistory__title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Loading ── */
+.ReservationHistory__loading {
+  color: var(--color-text-muted);
+  text-align: center;
+  font-size: var(--font-size-base);
+  padding: var(--space-xl) 0;
+}
+
+/* ── Empty state ── */
+.ReservationHistory__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl) 0;
+  text-align: center;
+}
+
+.ReservationHistory__empty-icon {
+  color: var(--color-text-muted);
+}
+
+.ReservationHistory__empty-text {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+}
+
+.ReservationHistory__book-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.ReservationHistory__book-link:hover {
+  opacity: 0.8;
+}
+
+/* ── List ── */
+.ReservationHistory__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── Card ── */
+.ReservationHistory__card {
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--color-bg-page);
+  padding: var(--space-md);
+}
+
+.ReservationHistory__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ReservationHistory__card-date {
+  font-weight: 700;
+  color: var(--color-text-heading);
+  font-size: var(--font-size-base);
+}
+
+.ReservationHistory__card-badge {
+  background: rgba(90, 138, 90, 0.10);
+  color: var(--color-green-sustain);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ReservationHistory__card-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
+
+.ReservationHistory__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ReservationHistory__detail-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.ReservationHistory__detail-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+/* ── Card footer (special requests) ── */
+.ReservationHistory__card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--color-border-card);
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+}
+
+.ReservationHistory__requests-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.ReservationHistory__requests-value {
+  font-size: 13px;
+  color: var(--color-text-body);
+  line-height: 1.5;
+}

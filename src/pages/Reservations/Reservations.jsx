@@ -100,22 +100,79 @@ function Reservations() {
 
   /* Load last reservation and last inquiry from localStorage on mount */
   useEffect(() => {
-    const resKey    = `sb_last_reservation_${currentUser?.id || "guest"}`;
-    const resStored = localStorage.getItem(resKey);
-    if (resStored) {
-      try { setLastRes(JSON.parse(resStored)); } catch { /* ignore */ }
+    if (!currentUser) {
+      setLastRes(null);
+      setLastInquiry(null);
+      return;
     }
 
+    const userIdStr = String(currentUser.id);
+
+    // 1. Load last reservation
+    const resKey    = `sb_last_reservation_${userIdStr}`;
+    const resStored = localStorage.getItem(resKey);
+    
+    if (resStored) {
+      try { 
+        const parsed = JSON.parse(resStored);
+        if (parsed.userId && String(parsed.userId) === userIdStr) {
+          setLastRes(parsed);
+        } else {
+          setLastRes(null);
+        }
+      } catch { setLastRes(null); }
+    } else {
+      // Fallback: Fetch from API if localStorage is empty
+      const fetchLastRes = async () => {
+        try {
+          const { data } = await axios.get(`${API}/reservations?userId=${userIdStr}`);
+          const userRes = data.reservations || [];
+          if (userRes.length > 0) {
+            // Sort by submittedAt descending to get the newest
+            const sorted = [...userRes].sort((a, b) => 
+              new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0)
+            );
+            const latest = sorted[0];
+            setLastRes(latest);
+            // Sync to localStorage
+            localStorage.setItem(resKey, JSON.stringify(latest));
+          } else {
+            setLastRes(null);
+          }
+        } catch (err) {
+          console.error("Failed to fetch reservation history:", err);
+          setLastRes(null);
+        }
+      };
+      fetchLastRes();
+    }
+
+    // 2. Load last inquiry from shared pool (Inquiries are currently localStorage only)
     const inqStored = localStorage.getItem("sb_inquiries");
     if (inqStored) {
       try {
         const inquiries = JSON.parse(inqStored);
-        if (Array.isArray(inquiries) && inquiries.length > 0) {
-          setLastInquiry(inquiries[inquiries.length - 1]);
+        if (Array.isArray(inquiries)) {
+          const userInquiries = inquiries.filter(i => i.userId && String(i.userId) === userIdStr);
+          if (userInquiries.length > 0) {
+            setLastInquiry(userInquiries[userInquiries.length - 1]);
+          } else {
+            setLastInquiry(null);
+          }
+        } else {
+          setLastInquiry(null);
         }
-      } catch { /* ignore */ }
+      } catch { setLastInquiry(null); }
+    } else {
+      setLastInquiry(null);
     }
-  }, [currentUser?.id]);
+
+    // 3. Sync form fields with current user
+    if (currentUser) {
+      setFullName(`${currentUser.firstName} ${currentUser.lastName || ""}`.trim());
+      setEmail(currentUser.email || "");
+    }
+  }, [currentUser]);
 
   /* ── calendar ── */
   const calendarDays = useMemo(() => {
@@ -163,18 +220,31 @@ function Reservations() {
     if (!phone.trim())    e.phone     = "Phone number is required";
     else if (!/^[\d\s\-\+\(\)]{7,}$/.test(phone.trim()))
       e.phone = "Please enter a valid phone number";
-    if (!email.trim())    e.email     = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+    if (!email.trim()) {
+      e.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       e.email = "Please enter a valid email";
+    } else if (currentUser && email.trim().toLowerCase() !== currentUser.email.toLowerCase()) {
+      e.email = "Email must match your account email";
+    }
     return e;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!currentUser) {
+      alert('Please log in to make a reservation.');
+      navigate('/login');
+      return;
+    }
+    setLoading(true);
     setSubmitError("");
     const errs = validate();
     setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+    if (Object.keys(errs).length > 0) {
+      setLoading(false); // Stop loading if validation fails
+      return;
+    }
 
     const payload = {
       id:              Date.now().toString(),

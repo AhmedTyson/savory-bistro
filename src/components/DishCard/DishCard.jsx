@@ -1,3 +1,4 @@
+import { Leaf, Fish, Flame } from 'lucide-react';
 import './DishCard.css';
 
 function DishCard({ image, name, description, price, badge, dietIcon }) {
@@ -13,7 +14,13 @@ function DishCard({ image, name, description, price, badge, dietIcon }) {
           <span className="DishCard__price text-[15px] font-bold text-[var(--color-text-price)] whitespace-nowrap ml-2">${price}</span>
         </div>
         <p className="DishCard__description text-[13px] text-[var(--color-text-body)] leading-normal mb-1.5 break-words">{description}</p>
-        {dietIcon && <span className={`DishCard__diet-dot DishCard__diet-dot--${dietIcon}`} />}
+        {dietIcon && (
+          <div className={`DishCard__diet-icon DishCard__diet-icon--${dietIcon}`}>
+            {dietIcon === 'vegetarian' && <Leaf size={14} />}
+            {dietIcon === 'seafood' && <Fish size={14} />}
+            {dietIcon === 'spicy' && <Flame size={14} />}
+          </div>
+        )}
       </div>
     </div>
   );

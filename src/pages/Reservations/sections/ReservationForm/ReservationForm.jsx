@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { AlertCircle, ChevronDown } from 'lucide-react';
 
 function ReservationForm({
@@ -19,6 +20,22 @@ function ReservationForm({
   OCCASIONS,
   children // This will be Calendar and TimeSlots
 }) {
+  const [isPartyOpen, setIsPartyOpen] = useState(false);
+  const [isOccasionOpen, setIsOccasionOpen] = useState(false);
+  const partyRef = useRef(null);
+  const occasionRef = useRef(null);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (partyRef.current && !partyRef.current.contains(event.target)) setIsPartyOpen(false);
+      if (occasionRef.current && !occasionRef.current.contains(event.target)) setIsOccasionOpen(false);
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const partyOptions = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
     <form className="res-form" onSubmit={handleSubmit} noValidate>
       {/* Party Size & Occasion */}
@@ -27,20 +44,28 @@ function ReservationForm({
           <label className="res-label">
             Party Size <span className="res-req">*</span>
           </label>
-          <div className="res-select-wrapper">
-            <select
-              className={`res-select ${errors.partySize ? "res-input--error" : ""}`}
-              value={partySize}
-              onChange={(e) => setPartySize(e.target.value)}
+          <div className="ContactForm__custom-select" ref={partyRef}>
+            <div 
+              className={`ContactForm__select-trigger ${isPartyOpen ? 'ContactForm__select-trigger--active' : ''} ${errors.partySize ? "res-input--error" : ""}`}
+              onClick={() => setIsPartyOpen(!isPartyOpen)}
             >
-              <option value="">Select guests</option>
-              {Array.from({ length: 20 }, (_, i) => i + 1).map((n) => (
-                <option key={n} value={n}>
-                  {n} {n === 1 ? "Guest" : "Guests"}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="res-select-icon" size={16} />
+              <span>{partySize ? `${partySize} ${parseInt(partySize) === 1 ? "Guest" : "Guests"}` : "Select guests"}</span>
+              <ChevronDown size={18} className={`ContactForm__select-icon ${isPartyOpen ? 'ContactForm__select-icon--rotated' : ''}`} />
+            </div>
+            
+            {isPartyOpen && (
+              <div className="ContactForm__select-menu">
+                {partyOptions.map((n) => (
+                  <div 
+                    key={n}
+                    className={`ContactForm__select-item ${partySize === n.toString() ? 'ContactForm__select-item--selected' : ''}`}
+                    onClick={() => { setPartySize(n.toString()); setIsPartyOpen(false); }}
+                  >
+                    {n} {n === 1 ? "Guest" : "Guests"}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           {errors.partySize && (
             <span className="res-error">
@@ -51,20 +76,34 @@ function ReservationForm({
 
         <div className="res-form__field">
           <label className="res-label">Occasion</label>
-          <div className="res-select-wrapper">
-            <select
-              className="res-select"
-              value={occasion}
-              onChange={(e) => setOccasion(e.target.value)}
+          <div className="ContactForm__custom-select" ref={occasionRef}>
+            <div 
+              className={`ContactForm__select-trigger ${isOccasionOpen ? 'ContactForm__select-trigger--active' : ''}`}
+              onClick={() => setIsOccasionOpen(!isOccasionOpen)}
             >
-              <option value="">Select occasion (optional)</option>
-              {OCCASIONS.map((o) => (
-                <option key={o} value={o}>
-                  {o}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="res-select-icon" size={16} />
+              <span>{occasion || "Select occasion (optional)"}</span>
+              <ChevronDown size={18} className={`ContactForm__select-icon ${isOccasionOpen ? 'ContactForm__select-icon--rotated' : ''}`} />
+            </div>
+            
+            {isOccasionOpen && (
+              <div className="ContactForm__select-menu">
+                <div 
+                  className={`ContactForm__select-item ${!occasion ? 'ContactForm__select-item--selected' : ''}`}
+                  onClick={() => { setOccasion(''); setIsOccasionOpen(false); }}
+                >
+                  None
+                </div>
+                {OCCASIONS.map((o) => (
+                  <div 
+                    key={o}
+                    className={`ContactForm__select-item ${occasion === o ? 'ContactForm__select-item--selected' : ''}`}
+                    onClick={() => { setOccasion(o); setIsOccasionOpen(false); }}
+                  >
+                    {o}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
