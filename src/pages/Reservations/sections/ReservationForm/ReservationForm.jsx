@@ -1,114 +1,44 @@
-import { useState, useRef, useEffect } from 'react';
-import { AlertCircle, ChevronDown } from 'lucide-react';
+import React from 'react';
+import { AlertCircle } from 'lucide-react';
+import SelectionField from '../../../../components/SelectionField/SelectionField';
 import './ReservationForm.css';
 
-
-function ReservationForm({
+const ReservationForm = ({
   handleSubmit,
-  partySize,
-  setPartySize,
-  occasion,
-  setOccasion,
-  fullName,
-  setFullName,
-  phone,
-  setPhone,
-  email,
-  setEmail,
-  specialReqs,
-  setSpecialReqs,
+  formData,
+  updateField,
   errors,
   submitError,
   loading,
   OCCASIONS,
-  children // This will be Calendar and TimeSlots
-}) {
-  const [isPartyOpen, setIsPartyOpen] = useState(false);
-  const [isOccasionOpen, setIsOccasionOpen] = useState(false);
-  const partyRef = useRef(null);
-  const occasionRef = useRef(null);
+  children
+}) => {
+  const partyOptions = Array.from({ length: 20 }, (_, i) => (i + 1).toString());
 
-  // Close dropdowns on outside click
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (partyRef.current && !partyRef.current.contains(event.target)) setIsPartyOpen(false);
-      if (occasionRef.current && !occasionRef.current.contains(event.target)) setIsOccasionOpen(false);
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const partyOptions = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
     <form className="res-form" onSubmit={handleSubmit} noValidate>
       {/* Party Size & Occasion */}
       <div className="res-form__row">
-        <div className="res-form__field">
-          <label className="res-label">
-            Party Size <span className="res-req">*</span>
-          </label>
-          <div className="ContactForm__custom-select" ref={partyRef}>
-            <div 
-              className={`ContactForm__select-trigger ${isPartyOpen ? 'ContactForm__select-trigger--active' : ''} ${errors.partySize ? "res-input--error" : ""}`}
-              onClick={() => setIsPartyOpen(!isPartyOpen)}
-            >
-              <span>{partySize ? `${partySize} ${parseInt(partySize) === 1 ? "Guest" : "Guests"}` : "Select guests"}</span>
-              <ChevronDown size={18} className={`ContactForm__select-icon ${isPartyOpen ? 'ContactForm__select-icon--rotated' : ''}`} />
-            </div>
-            
-            {isPartyOpen && (
-              <div className="ContactForm__select-menu">
-                {partyOptions.map((n) => (
-                  <div 
-                    key={n}
-                    className={`ContactForm__select-item ${partySize === n.toString() ? 'ContactForm__select-item--selected' : ''}`}
-                    onClick={() => { setPartySize(n.toString()); setIsPartyOpen(false); }}
-                  >
-                    {n} {n === 1 ? "Guest" : "Guests"}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          {errors.partySize && (
-            <span className="res-error">
-              <AlertCircle size={13} /> {errors.partySize}
-            </span>
-          )}
-        </div>
+        <SelectionField
+          label="Party Size"
+          required
+          value={formData.partySize}
+          options={partyOptions}
+          placeholder="Select guests"
+          onSelect={(val) => updateField('partySize', val)}
+          error={errors.partySize}
+          formatOption={(n) => `${n} ${parseInt(n) === 1 ? 'Guest' : 'Guests'}`}
+          className="res-form__field"
+        />
 
-        <div className="res-form__field">
-          <label className="res-label">Occasion</label>
-          <div className="ContactForm__custom-select" ref={occasionRef}>
-            <div 
-              className={`ContactForm__select-trigger ${isOccasionOpen ? 'ContactForm__select-trigger--active' : ''}`}
-              onClick={() => setIsOccasionOpen(!isOccasionOpen)}
-            >
-              <span>{occasion || "Select occasion (optional)"}</span>
-              <ChevronDown size={18} className={`ContactForm__select-icon ${isOccasionOpen ? 'ContactForm__select-icon--rotated' : ''}`} />
-            </div>
-            
-            {isOccasionOpen && (
-              <div className="ContactForm__select-menu">
-                <div 
-                  className={`ContactForm__select-item ${!occasion ? 'ContactForm__select-item--selected' : ''}`}
-                  onClick={() => { setOccasion(''); setIsOccasionOpen(false); }}
-                >
-                  None
-                </div>
-                {OCCASIONS.map((o) => (
-                  <div 
-                    key={o}
-                    className={`ContactForm__select-item ${occasion === o ? 'ContactForm__select-item--selected' : ''}`}
-                    onClick={() => { setOccasion(o); setIsOccasionOpen(false); }}
-                  >
-                    {o}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+        <SelectionField
+          label="Occasion"
+          value={formData.occasion}
+          options={OCCASIONS}
+          placeholder="Select occasion (optional)"
+          onSelect={(val) => updateField('occasion', val)}
+          className="res-form__field"
+        />
       </div>
 
       {/* Children: Calendar and TimeSlots */}
@@ -124,8 +54,8 @@ function ReservationForm({
             type="text"
             className={`res-input ${errors.fullName ? "res-input--error" : ""}`}
             placeholder="John Doe"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={formData.fullName}
+            onChange={(e) => updateField('fullName', e.target.value)}
           />
           {errors.fullName && (
             <span className="res-error">
@@ -141,8 +71,8 @@ function ReservationForm({
             type="tel"
             className={`res-input ${errors.phone ? "res-input--error" : ""}`}
             placeholder="(555) 000-0000"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={formData.phone}
+            onChange={(e) => updateField('phone', e.target.value)}
           />
           {errors.phone && (
             <span className="res-error">
@@ -161,8 +91,8 @@ function ReservationForm({
           type="email"
           className={`res-input ${errors.email ? "res-input--error" : ""}`}
           placeholder="john@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email}
+          onChange={(e) => updateField('email', e.target.value)}
         />
         {errors.email && (
           <span className="res-error">
@@ -178,8 +108,8 @@ function ReservationForm({
           className="res-textarea"
           placeholder="Dietary restrictions, seating preferences..."
           rows={4}
-          value={specialReqs}
-          onChange={(e) => setSpecialReqs(e.target.value)}
+          value={formData.specialReqs}
+          onChange={(e) => updateField('specialReqs', e.target.value)}
         />
       </div>
 
@@ -204,6 +134,6 @@ function ReservationForm({
       )}
     </form>
   );
-}
+};
 
 export default ReservationForm;

@@ -3,8 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-  position: sticky;
-  top: 84px;
+  align-self: flex-start;
 }
 
 .res-card {

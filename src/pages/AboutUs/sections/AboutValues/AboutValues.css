@@ -1,7 +1,3 @@
-.about-values {
-  padding: 60px 24px;
-}
-
 .values-container {
   background-color: var(--color-bg-sustain);
   border-radius: var(--radius-xl);
@@ -90,4 +86,9 @@
   font-weight: 700;
   color: var(--color-text-body);
   letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .values-container { padding: 40px 20px; }
+  .values-title { font-size: 1.7rem; }
 }

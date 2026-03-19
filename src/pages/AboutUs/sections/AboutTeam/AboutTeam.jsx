@@ -1,9 +1,10 @@
 import React from "react";
+import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutTeam.css";
 
 const AboutTeam = ({ teamMembers }) => {
   return (
-    <section className="about-team-section">
+    <AboutSection className="about-team-section">
       <div className="about-team container">
         <h2 className="team-section-title">Meet the Family</h2>
         <p className="team-section-subtitle">
@@ -43,7 +44,7 @@ const AboutTeam = ({ teamMembers }) => {
           ))}
         </div>
       </div>
-    </section>
+    </AboutSection>
   );
 };
 

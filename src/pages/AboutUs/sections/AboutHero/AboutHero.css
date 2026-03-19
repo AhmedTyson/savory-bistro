@@ -1,12 +1,11 @@
-.about-hero {
+.about-hero-layout {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 80px 24px;
 }
 
 @media (min-width: 900px) {
-  .about-hero {
+  .about-hero-layout {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -112,4 +111,9 @@
 .img-store {
   grid-column: 2;
   grid-row: 3 / 6;
+}
+
+@media (max-width: 768px) {
+  .about-title { font-size: 2.22rem; }
+  .about-hero-images { grid-template-rows: 40px 100px 40px 100px 40px; }
 }

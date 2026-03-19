@@ -1,8 +1,0 @@
-.auth-page {
-  display: flex; min-height: 100vh;
-  font-family: var(--font-sans);
-}
-
-@media (max-width: 768px) {
-  .auth-page { flex-direction: column; }
-}

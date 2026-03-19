@@ -43,6 +43,16 @@ function CalendarPicker({
     else setCalMonth(calMonth + 1);
   };
 
+  // Helper to compare current cell's date with selectedDate object
+  const isSelected = (d) => {
+    if (!selectedDate) return false;
+    return (
+      selectedDate.getFullYear() === calYear &&
+      selectedDate.getMonth() === calMonth &&
+      selectedDate.getDate() === d
+    );
+  };
+
   return (
     <div className="res-form__section">
       <label className="res-label">
@@ -74,11 +84,11 @@ function CalendarPicker({
         <div className="res-calendar__grid">
           {calendarDays.map((d, i) => {
             if (d === null) return <span key={`e${i}`} className="res-calendar__empty" />;
-            const key = toKey(calYear, calMonth, d);
+            
             const reserved = isDateReserved(d);
             const past = isDatePast(d);
             const isToday = isDateToday(d);
-            const active = selectedDate === key;
+            const active = isSelected(d);
             const disabled = reserved || past;
 
             return (
@@ -93,7 +103,8 @@ function CalendarPicker({
                   disabled && 'res-calendar__cell--disabled',
                 ].filter(Boolean).join(' ')}
                 onClick={() => {
-                  setSelectedDate(key);
+                  const newDt = new Date(calYear, calMonth, d);
+                  setSelectedDate(newDt);
                   if (typeof setSelectedTime === 'function') setSelectedTime('');
                 }}
               >

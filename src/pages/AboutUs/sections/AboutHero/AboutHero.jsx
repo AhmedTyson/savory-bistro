@@ -1,9 +1,10 @@
 import React from "react";
+import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutHero.css";
 
 const AboutHero = () => {
   return (
-    <section className="about-hero container">
+    <AboutSection className="about-hero" containerClass="about-hero-layout">
       <div className="about-hero-content">
         <span className="about-subtitle">SINCE 2015</span>
         <h1 className="about-title">Our Journey</h1>
@@ -79,7 +80,7 @@ const AboutHero = () => {
           style={{ backgroundImage: "url('/images/AboutUs/About us 3.webp')" }}
         ></div>
       </div>
-    </section>
+    </AboutSection>
   );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import AboutHero from "./sections/AboutHero/AboutHero";
 import AboutChef from "./sections/AboutChef/AboutChef";
 import AboutValues from "./sections/AboutValues/AboutValues";
