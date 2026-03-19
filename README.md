@@ -1,16 +1,42 @@
-# React + Vite
+# Savory Bistro Restaurant Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About
+Savory Bistro is a cozy restaurant dedicated to providing delicious meals made from the freshest ingredients. Our website offers a seamless experience for customers to browse our menu, make reservations, and learn about our story.
 
-Currently, two official plugins are available:
+## Features
+- **User-Friendly Interface:** Easy navigation for users to find what they need quickly.
+- **Online Reservations:** Customers can book a table directly through the website.
+- **Menu Display:** A detailed menu showcasing our dishes, including images and descriptions.
+- **Contact Information:** Easy access to our location and contact details.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
+- **HTML5 & CSS3:** For structure and styling.
+- **JavaScript:** To enhance user interaction and dynamic content.
+- **Node.js:** For server-side operations and API management.
+- **MongoDB:** To store user data and reservations efficiently.
 
-## React Compiler
+## Getting Started
+1. Clone the repository: `git clone https://github.com/AhmedTyson/savory-bistro.git`
+2. Navigate to the project directory: `cd savory-bistro`
+3. Install dependencies: `npm install`
+4. Start the server: `npm start`
+5. Visit `http://localhost:3000` to view the website.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
+```plaintext
+savory-bistro/
+│
+├── ┣ assets/             # Images, stylesheets, and other assets
+├── ┣ routes/             # API routes
+├── ┣ models/             # Database models
+├── ┣ views/              # Frontend views
+└── ┗ server.js           # Main server file
+```
 
-## Expanding the ESLint configuration
+## Contributing
+We welcome contributions! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Author
+**Ahmed Tyson**  
+Website: [yourwebsite.com](http://yourwebsite.com)  
+Github: [AhmedTyson](https://github.com/AhmedTyson)
