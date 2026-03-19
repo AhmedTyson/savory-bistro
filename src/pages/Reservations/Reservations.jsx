@@ -2,15 +2,14 @@ import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context';
-import {
-  CheckCircle, X, AlertCircle, ChevronDown, FileText
-} from 'lucide-react';
 
-import ReservationHero    from './sections/ReservationHero/ReservationHero';
-import CalendarPicker     from './sections/CalendarPicker/CalendarPicker';
-import TimeSlots          from './sections/TimeSlots/TimeSlots';
-import ReservationForm    from './sections/ReservationForm/ReservationForm';
-import ReservationSidebar from './sections/ReservationSidebar/ReservationSidebar';
+import ReservationHero     from './sections/ReservationHero/ReservationHero';
+import CalendarPicker      from './sections/CalendarPicker/CalendarPicker';
+import TimeSlots           from './sections/TimeSlots/TimeSlots';
+import ReservationForm     from './sections/ReservationForm/ReservationForm';
+import ReservationSidebar  from './sections/ReservationSidebar/ReservationSidebar';
+import ReservationReport   from './sections/ReservationReport/ReservationReport';
+import PrivateDiningModal  from './sections/PrivateDiningModal/PrivateDiningModal';
 
 import './Reservations.css';
 import './sections/ReservationForm/ReservationForm.css';
@@ -47,10 +46,10 @@ const MONTHS = [
 ];
 
 /* ─── HELPERS ───────────────────────────────────────── */
-const pad       = (n)     => String(n).padStart(2,"0");
-const toKey     = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
-const daysIn    = (y,m)   => new Date(y,m+1,0).getDate();
-const firstDay  = (y,m)   => new Date(y,m,1).getDay();
+const pad      = (n)     => String(n).padStart(2,"0");
+const toKey    = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
+const daysIn   = (y,m)   => new Date(y,m+1,0).getDate();
+const firstDay = (y,m)   => new Date(y,m,1).getDay();
 
 /* ─── COMPONENT ─────────────────────────────────────── */
 function Reservations() {
@@ -67,9 +66,9 @@ function Reservations() {
       ? `${currentUser.firstName} ${currentUser.lastName || ""}`.trim()
       : ""
   );
-  const [phone,        setPhone]        = useState("");
-  const [email,        setEmail]        = useState(currentUser?.email || "");
-  const [specialReqs,  setSpecialReqs]  = useState("");
+  const [phone,       setPhone]       = useState("");
+  const [email,       setEmail]       = useState(currentUser?.email || "");
+  const [specialReqs, setSpecialReqs] = useState("");
 
   /* calendar */
   const today = new Date();
@@ -82,28 +81,26 @@ function Reservations() {
   const [showInquiry, setShowInquiry] = useState(false);
 
   /* report */
-  const [showReport, setShowReport] = useState(false);
-  const [lastRes,    setLastRes]    = useState(null);
+  const [showReport,  setShowReport]  = useState(false);
+  const [lastRes,     setLastRes]     = useState(null);
   const [lastInquiry, setLastInquiry] = useState(null);
 
-  // The active object to show in the report panel
+  /* The active object to show in the report panel */
   const activeReport = useMemo(() => {
     if (!lastRes && !lastInquiry) return null;
-    if (!lastRes) return { ...lastInquiry, type: 'inquiry' };
-    if (!lastInquiry) return { ...lastRes, type: 'reservation' };
+    if (!lastRes)    return { ...lastInquiry, type: 'inquiry' };
+    if (!lastInquiry) return { ...lastRes,    type: 'reservation' };
 
-    // Compare timestamps to show the most recent
     const resTime = new Date(lastRes.submittedAt || 0).getTime();
     const inqTime = new Date(lastInquiry.createdAt || 0).getTime();
-
-    return resTime >= inqTime 
-      ? { ...lastRes, type: 'reservation' } 
+    return resTime >= inqTime
+      ? { ...lastRes,    type: 'reservation' }
       : { ...lastInquiry, type: 'inquiry' };
   }, [lastRes, lastInquiry]);
 
   /* Load last reservation and last inquiry from localStorage on mount */
   useEffect(() => {
-    const resKey = `sb_last_reservation_${currentUser?.id || "guest"}`;
+    const resKey    = `sb_last_reservation_${currentUser?.id || "guest"}`;
     const resStored = localStorage.getItem(resKey);
     if (resStored) {
       try { setLastRes(JSON.parse(resStored)); } catch { /* ignore */ }
@@ -114,23 +111,11 @@ function Reservations() {
       try {
         const inquiries = JSON.parse(inqStored);
         if (Array.isArray(inquiries) && inquiries.length > 0) {
-          // Get the last one in the array
           setLastInquiry(inquiries[inquiries.length - 1]);
         }
       } catch { /* ignore */ }
     }
   }, [currentUser?.id]);
-
-  /* inquiry */
-  const [inqName,    setInqName]    = useState("");
-  const [inqEmail,   setInqEmail]   = useState("");
-  const [inqPhone,   setInqPhone]   = useState("");
-  const [inqDate,    setInqDate]    = useState("");
-  const [inqSize,    setInqSize]    = useState("");
-  const [inqEvent,   setInqEvent]   = useState("");
-  const [inqMessage, setInqMessage] = useState("");
-  const [inqErrors,  setInqErrors]  = useState({});
-  const [inqSuccess, setInqSuccess] = useState(false);
 
   /* ── calendar ── */
   const calendarDays = useMemo(() => {
@@ -232,65 +217,6 @@ function Reservations() {
     }
   };
 
-  /* ── inquiry ── */
-  const validateInquiry = () => {
-    const e = {};
-    if (!inqName.trim())  e.name  = "Name is required";
-    if (!inqEmail.trim()) e.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inqEmail))
-      e.email = "Enter a valid email";
-    if (!inqPhone.trim()) e.phone = "Phone is required";
-    return e;
-  };
-
-  const handleInquirySubmit = (e) => {
-    e.preventDefault();
-    const errs = validateInquiry();
-    setInqErrors(errs);
-    if (Object.keys(errs).length > 0) return;
-    const inquiry = {
-      id:        Date.now(),
-      name:      inqName.trim(),
-      email:     inqEmail.trim(),
-      phone:     inqPhone.trim(),
-      eventDate: inqDate  || "Not specified",
-      partySize: inqSize  || "Not specified",
-      eventType: inqEvent || "Not specified",
-      message:   inqMessage.trim() || "None",
-      createdAt: new Date().toISOString(),
-    };
-    const stored = JSON.parse(localStorage.getItem("sb_inquiries") || "[]");
-    stored.push(inquiry);
-    localStorage.setItem("sb_inquiries", JSON.stringify(stored));
-    setLastInquiry(inquiry);
-    setInqSuccess(true);
-  };
-
-  const resetInquiry = () => {
-    setInqName(""); setInqEmail(""); setInqPhone(""); setInqDate("");
-    setInqSize(""); setInqEvent(""); setInqMessage("");
-    setInqErrors({}); setInqSuccess(false); setShowInquiry(false);
-  };
-
-  /* ── format stored report date ── */
-  const reportDate = useMemo(() => {
-    const dateValue = activeReport?.type === 'reservation' ? activeReport?.date : activeReport?.eventDate;
-    if (!dateValue || dateValue === "Not specified") return "—";
-    try {
-      return new Date(dateValue).toLocaleDateString("en-US", {
-        weekday: "long", month: "long", day: "numeric", year: "numeric",
-      });
-    } catch { return dateValue; }
-  }, [activeReport]);
-
-  const reportName = useMemo(() => {
-    if (!activeReport) return "—";
-    if (activeReport.type === 'inquiry') return activeReport.name || "—";
-    return (activeReport.fullName ||
-           `${activeReport.firstName || ""} ${activeReport.lastName || ""}`.trim() ||
-           "—");
-  }, [activeReport]);
-
   /* ═══════════════════════════════════════════════════
      RENDER
      ═══════════════════════════════════════════════════ */
@@ -338,113 +264,11 @@ function Reservations() {
               />
             </ReservationForm>
 
-            {/* ── REPORT TOGGLE ── */}
-            <button
-              type="button"
-              className={`res-report-toggle${showReport ? " active" : ""}`}
-              onClick={() => setShowReport(v => !v)}
-              aria-expanded={showReport}
-            >
-              <FileText size={15} />
-              {showReport 
-                ? (activeReport?.type === 'inquiry' ? "Hide Last Inquiry" : "Hide Last Reservation") 
-                : (activeReport?.type === 'inquiry' ? "View Last Inquiry Report" : "View Last Reservation Report")
-              }
-              <ChevronDown size={15} className="chevron" />
-            </button>
-
-            {/* ── REPORT PANEL ── */}
-            <div className={`res-report-panel${showReport ? " active" : ""}`}>
-              <div className="res-report-inner">
-                <div className="res-report-header">
-                  <span className="res-report-tag">
-                    {activeReport 
-                      ? (activeReport.type === 'reservation' 
-                          ? `Confirmation #${activeReport.id}` 
-                          : `Inquiry #${String(activeReport.id).slice(-6)}`)
-                      : "No activity on file"}
-                  </span>
-                  {activeReport && (
-                    <span className={`res-report-badge ${activeReport.type === 'inquiry' ? 'inquiry' : ''}`}>
-                      {activeReport.type === 'reservation' ? 'Confirmed' : 'Inquiry Sent'}
-                    </span>
-                  )}
-                </div>
-
-                {activeReport ? (
-                  <>
-                    <div className="res-report-grid">
-                      <div>
-                        <div className="res-report-label">Date</div>
-                        <div className="res-report-value">{reportDate}</div>
-                      </div>
-                      <div>
-                        <div className="res-report-label">
-                          {activeReport.type === 'reservation' ? 'Time' : 'Event Type'}
-                        </div>
-                        <div className="res-report-value">
-                          {activeReport.type === 'reservation' ? activeReport.time : activeReport.eventType}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="res-report-label">Party Size</div>
-                        <div className="res-report-value">
-                          {activeReport.partySize}{" "}
-                          {parseInt(activeReport.partySize) === 1 ? "Guest" : "Guests"}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="res-report-label">
-                          {activeReport.type === 'reservation' ? 'Occasion' : 'Status'}
-                        </div>
-                        <div className="res-report-value">
-                          {activeReport.type === 'reservation' 
-                            ? (activeReport.occasion && activeReport.occasion !== "None" ? activeReport.occasion : "—")
-                            : "Pending Review"}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="res-report-label">Name</div>
-                        <div className="res-report-value">{reportName}</div>
-                      </div>
-                      <div>
-                        <div className="res-report-label">Email</div>
-                        <div
-                          className="res-report-value"
-                          style={{ wordBreak: "break-all" }}
-                        >
-                          {activeReport.email}
-                        </div>
-                      </div>
-                    </div>
-
-                    {(activeReport.specialRequests || activeReport.message) &&
-                      (activeReport.specialRequests !== "None" && activeReport.message !== "None") && (
-                        <div className="res-report-footer">
-                          <div className="res-report-divider" />
-                          <div className="res-report-label" style={{ marginBottom: 4 }}>
-                            {activeReport.type === 'reservation' ? 'Special Requests' : 'Message'}
-                          </div>
-                          <div
-                            className="res-report-value"
-                            style={{
-                              fontWeight: 400,
-                              color: "var(--color-text-body)",
-                              fontSize: 13,
-                            }}
-                          >
-                            {activeReport.type === 'reservation' ? activeReport.specialRequests : activeReport.message}
-                          </div>
-                        </div>
-                      )}
-                  </>
-                ) : (
-                  <div className="res-report-empty">
-                    You haven't made any reservations or inquiries yet. Your activity will appear here.
-                  </div>
-                )}
-              </div>
-            </div>
+            <ReservationReport
+              activeReport={activeReport}
+              showReport={showReport}
+              setShowReport={setShowReport}
+            />
           </div>
 
           {/* ── RIGHT: SIDEBAR ── */}
@@ -453,192 +277,11 @@ function Reservations() {
       </div>
 
       {/* ══ PRIVATE DINING INQUIRY MODAL ══ */}
-      {showInquiry && (
-        <div className="res-modal-overlay" onClick={resetInquiry}>
-          <div
-            className="res-modal"
-            onClick={e => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Private Dining Inquiry"
-          >
-            {/* drag pill — visible on mobile only via CSS */}
-            <div className="res-modal-drag" />
-
-            <button
-              className="res-modal__close"
-              onClick={resetInquiry}
-              aria-label="Close"
-            >
-              <X size={18} />
-            </button>
-
-            {inqSuccess ? (
-              /* ── SUCCESS ── */
-              <div className="res-modal__success">
-                <div className="res-modal__success-icon">
-                  <CheckCircle size={36} />
-                </div>
-                <h2 className="res-modal__title">Inquiry Submitted</h2>
-                <p className="res-modal__subtitle">
-                  Our events team will reach out within 24 hours to
-                  discuss your special occasion.
-                </p>
-                <button
-                  className="res-submit-btn"
-                  style={{ maxWidth: 240, marginBottom: 0 }}
-                  onClick={resetInquiry}
-                >
-                  Done
-                </button>
-              </div>
-            ) : (
-              /* ── FORM ── */
-              <>
-                {/* Hero strip */}
-                <div className="res-modal__hero">
-                  <img
-                    src="/images/Reservations/Private_Dining.webp"
-                    alt=""
-                    className="res-modal__hero-img"
-                    onError={e => { e.target.style.display = "none"; }}
-                  />
-                  <div className="res-modal__hero-overlay" />
-                  <div className="res-modal__hero-content">
-                    <span className="res-modal__hero-tag">Private Event</span>
-                    <h2 className="res-modal__hero-title">Private Dining</h2>
-                    <p className="res-modal__hero-sub">
-                      Vault room · Garden terrace · Up to 60 guests
-                    </p>
-                  </div>
-                </div>
-
-                {/* Scrollable form body */}
-                <div className="res-modal__body">
-                  <p className="res-modal__lead">
-                    Tell us about your event and we'll craft a personalised
-                    experience just for you.
-                  </p>
-
-                  <form onSubmit={handleInquirySubmit} noValidate>
-                    <div className="res-form__row">
-                      <div className="res-form__field">
-                        <label className="res-label">
-                          Name <span className="res-req">*</span>
-                        </label>
-                        <input
-                          className={`res-input${inqErrors.name ? " res-input--error" : ""}`}
-                          placeholder="Your name"
-                          value={inqName}
-                          onChange={e => setInqName(e.target.value)}
-                        />
-                        {inqErrors.name && (
-                          <span className="res-error">
-                            <AlertCircle size={13} /> {inqErrors.name}
-                          </span>
-                        )}
-                      </div>
-                      <div className="res-form__field">
-                        <label className="res-label">
-                          Email <span className="res-req">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          className={`res-input${inqErrors.email ? " res-input--error" : ""}`}
-                          placeholder="you@email.com"
-                          value={inqEmail}
-                          onChange={e => setInqEmail(e.target.value)}
-                        />
-                        {inqErrors.email && (
-                          <span className="res-error">
-                            <AlertCircle size={13} /> {inqErrors.email}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="res-form__row">
-                      <div className="res-form__field">
-                        <label className="res-label">
-                          Phone <span className="res-req">*</span>
-                        </label>
-                        <input
-                          type="tel"
-                          className={`res-input${inqErrors.phone ? " res-input--error" : ""}`}
-                          placeholder="(555) 000-0000"
-                          value={inqPhone}
-                          onChange={e => setInqPhone(e.target.value)}
-                        />
-                        {inqErrors.phone && (
-                          <span className="res-error">
-                            <AlertCircle size={13} /> {inqErrors.phone}
-                          </span>
-                        )}
-                      </div>
-                      <div className="res-form__field">
-                        <label className="res-label">Preferred Date</label>
-                        <input
-                          type="date"
-                          className="res-input"
-                          value={inqDate}
-                          onChange={e => setInqDate(e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="res-form__row">
-                      <div className="res-form__field">
-                        <label className="res-label">Estimated Guests</label>
-                        <input
-                          type="number"
-                          className="res-input"
-                          placeholder="e.g. 25"
-                          min="11"
-                          value={inqSize}
-                          onChange={e => setInqSize(e.target.value)}
-                        />
-                      </div>
-                      <div className="res-form__field">
-                        <label className="res-label">Event Type</label>
-                        <div className="res-select-wrapper">
-                          <select
-                            className="res-select"
-                            value={inqEvent}
-                            onChange={e => setInqEvent(e.target.value)}
-                          >
-                            <option value="">Select type</option>
-                            <option>Corporate Dinner</option>
-                            <option>Wedding Reception</option>
-                            <option>Birthday Party</option>
-                            <option>Social Gathering</option>
-                            <option>Other Event</option>
-                          </select>
-                          <ChevronDown className="res-select-icon" size={14} />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="res-form__section">
-                      <label className="res-label">Message</label>
-                      <textarea
-                        className="res-textarea"
-                        rows={3}
-                        placeholder="Dietary requirements, theme, AV needs..."
-                        value={inqMessage}
-                        onChange={e => setInqMessage(e.target.value)}
-                      />
-                    </div>
-
-                    <button type="submit" className="res-submit-btn">
-                      Send Inquiry
-                    </button>
-                  </form>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+      <PrivateDiningModal
+        showInquiry={showInquiry}
+        setShowInquiry={setShowInquiry}
+        setLastInquiry={setLastInquiry}
+      />
     </section>
   );
 }
