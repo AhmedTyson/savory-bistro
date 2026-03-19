@@ -3,11 +3,10 @@ import { createPortal } from "react-dom";
 import { CheckCircle, X, Info, AlertTriangle, LogOut, Calendar } from "lucide-react";
 import "./Toast.css";
 
-// Unified Timeout Constants
+// unified timeout constants
 export const TOAST_VISIBLE_MS = 4000;
 export const TOAST_ANIM_MS    = 500;
 
-// Premium Message Configurations
 const TOAST_CONFIGS = {
   signup: (name) => ({
     title: `Welcome, ${name}!`,
@@ -34,6 +33,11 @@ const TOAST_CONFIGS = {
     subtitle: "We will contact you shortly about your event.",
     icon: <Info size={22} />,
   }),
+  contact: (name) => ({
+    title: "Message Sent",
+    subtitle: `Thank you, ${name}. We'll be in touch soon!`,
+    icon: <CheckCircle size={22} />,
+  }),
   nameUpdate: (name) => ({
     title: "Profile Updated",
     subtitle: "Your information has been saved successfully.",
@@ -51,10 +55,7 @@ const TOAST_CONFIGS = {
   }),
 };
 
-/**
- * Toast V2 - Re-engineered for stability and "Wow" factor.
- * Uses React Portal and sophisticated glassmorphism.
- */
+// portal-based — glassmorphism + manual dismissal support
 export default function Toast({
   type,
   firstName,
@@ -64,18 +65,15 @@ export default function Toast({
 }) {
   const [localExiting, setLocalExiting] = useState(false);
 
-  // Use either parent-controlled exit or local automatic exit
   const exiting = isExiting || localExiting;
 
   const config =
     TOAST_CONFIGS[type]?.(firstName, extra) || TOAST_CONFIGS.error();
 
   useEffect(() => {
-    // Reset state for new toast
     setLocalExiting(false);
 
-    // Automatic dismissal sequence: 
-    // Wait for the visible duration, then toggle exit animation state, then call onDismiss
+    // sequential dismissal: visibility period -> exit animation -> onDismiss
     const exitTimer = setTimeout(() => setLocalExiting(true), TOAST_VISIBLE_MS);
     const doneTimer = setTimeout(() => onDismiss(), TOAST_VISIBLE_MS + TOAST_ANIM_MS);
 
@@ -90,7 +88,7 @@ export default function Toast({
     setTimeout(() => onDismiss(), TOAST_ANIM_MS);
   };
 
-  // Portal target ensure it sits on top of everything
+  // портал to body guarantees it sits on top of all stacking contexts
   return createPortal(
     <div
       className={`Toast ${exiting ? "Toast--exit" : "Toast--enter"}`}

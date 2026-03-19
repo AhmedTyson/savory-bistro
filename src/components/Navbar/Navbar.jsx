@@ -1,6 +1,6 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { UtensilsCrossed, Menu, X, UserCircle, LogOut, ChevronDown } from 'lucide-react';
-import { useAuth } from '../../context';
+import { useAuth } from '../../context';;
 import { useState, useRef, useEffect } from 'react';
 import './Navbar.css';
 
@@ -23,13 +23,13 @@ function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   function handleLogout() {
-    logout();      // sets pendingToast in AuthContext
-    setIsUserDropdownOpen(false); // Close dropdown on logout
-    navigate('/'); // go to Home so toast appears
-    closeMenu();   // close mobile drawer if open
+    logout();      // toast fires on home page after navigate(), not here
+    setIsUserDropdownOpen(false); 
+    navigate('/'); 
+    closeMenu();   
   }
 
-  // Close dropdown if clicked outside
+  // close dropdown on click outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
@@ -51,7 +51,6 @@ function Navbar() {
 
         <ul className="Navbar__links">
           {navLinks.map((link) => {
-            // Task 5: Hide Reservations link for guests
             if (link.path === '/reservations' && !currentUser) return null;
             
             return (
@@ -70,7 +69,7 @@ function Navbar() {
           })}
         </ul>
 
-        {/* Desktop Right Zone */}
+        {/* desktop right zone */}
         <div className="Navbar__right">
           {!currentUser ? (
             <div className="Navbar__auth">
@@ -127,12 +126,11 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* mobile drawer */}
       {menuOpen && (
         <div className="Navbar__mobile-menu">
           <ul className="Navbar__mobile-links">
             {navLinks.map((link) => {
-               // Task 5: Hide Reservations link for guests in mobile too
                if (link.path === '/reservations' && !currentUser) return null;
 
                return (

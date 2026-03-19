@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AuthContext } from '../../context';
+import { useAuth } from '../../context';;
 import { CalendarDays } from 'lucide-react';
 import './FloatingReserveBtn.css';
 
 function FloatingReserveBtn() {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Hide on reservations page
+  // hidden on reservations page
   if (location.pathname === '/reservations') return null;
 
   function handleClick() {

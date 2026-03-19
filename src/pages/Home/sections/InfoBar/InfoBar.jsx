@@ -1,6 +1,6 @@
 import "./InfoBar.css";
 
-// Custom SVG Icons to match screenshot exactly
+// custom paths — matches Figma design specs exactly
 const ClockIcon = () => (
   <svg
     width="18"
@@ -51,7 +51,6 @@ export default function InfoBar() {
     <div className="InfoBar">
       <div className="InfoBar__container">
         <div className="InfoBar__grid">
-          {/* Hours Section */}
           <div className="InfoBar__item InfoBar__item--hours">
             <div className="InfoBar__icon-wrapper">
               <ClockIcon />
@@ -62,7 +61,6 @@ export default function InfoBar() {
             </div>
           </div>
 
-          {/* Address Section */}
           <div className="InfoBar__item InfoBar__item--address">
             <div className="InfoBar__icon-wrapper">
               <PinIcon />
@@ -73,7 +71,6 @@ export default function InfoBar() {
             </div>
           </div>
 
-          {/* Phone Section */}
           <div className="InfoBar__item InfoBar__item--phone">
             <div className="InfoBar__icon-wrapper">
               <PhoneIcon />

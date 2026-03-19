@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useAuth } from '../../context';;
 import Toast from "../../components/Toast/Toast";
 import mockData from "../../../mock-data.json";
 

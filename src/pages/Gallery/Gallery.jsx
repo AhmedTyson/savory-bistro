@@ -26,14 +26,12 @@ export default function Gallery() {
   return (
     <div className="Gallery">
       <div className="Gallery__container container">
-        {/* Header Section */}
         <SectionHeader 
           title="Moments at Savory Bistro" 
           subtitle="A visual journey through our signature dishes, curated dining spaces, and the passionate team behind the flavors."
           align="center"
         />
 
-        {/* Filter Bar */}
         <div className="Gallery__filter-bar">
           {categories.map(cat => (
             <button
@@ -46,7 +44,6 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Gallery Grid */}
         <div className="Gallery__grid">
           {filteredItems.map(item => (
             <div key={item.id} className={`Gallery__item Gallery__item--${item.size || 'medium'} Gallery__item--${item.type}`}>
@@ -75,7 +72,6 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Explore More */}
         <div className="Gallery__explore">
           <h3 className="Gallery__explore-title">Explore More</h3>
           <div className="Gallery__explore-grid">
@@ -101,7 +97,6 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Video Modal Popup */}
       {activeVideo && (
         <div className="Gallery__video-modal" onClick={() => setActiveVideo(null)}>
           <div className="Gallery__modal-content" onClick={e => e.stopPropagation()}>

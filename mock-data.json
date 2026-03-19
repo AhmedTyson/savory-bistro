@@ -28,7 +28,7 @@
       "price": 42,
       "category": "mainCourses",
       "badge": null,
-      "dietIcon": "spicy"
+      "dietIcon": "signature"
     },
     {
       "id": 4,
@@ -48,7 +48,7 @@
       "price": 38,
       "category": "mainCourses",
       "badge": "POPULAR",
-      "dietIcon": null
+      "dietIcon": "signature"
     },
     {
       "id": 6,
@@ -59,6 +59,156 @@
       "category": "seafood",
       "badge": null,
       "dietIcon": "seafood"
+    },
+    {
+      "id": 7,
+      "src": "/images/menu/menu-burrata.webp",
+      "name": "Burrata di Puglia",
+      "description": "Creamy burrata, heirloom tomatoes, aged balsamic, fresh basil oil.",
+      "price": 18,
+      "category": "appetizers",
+      "badge": "NEW",
+      "dietIcon": "vegetarian"
+    },
+    {
+      "id": 8,
+      "src": "/images/menu/menu-truffle-fries.webp",
+      "name": "Parmesan Truffle Fries",
+      "description": "Hand-cut fries, white truffle oil, 24-month aged parmesan, parsley.",
+      "price": 14,
+      "category": "appetizers",
+      "badge": null,
+      "dietIcon": "vegetarian"
+    },
+    {
+      "id": 9,
+      "src": "/images/menu/menu-crispy-calamari.webp",
+      "name": "Classic Calamari Fritti",
+      "description": "Lightly battered squid, lemon aioli, spicy pomodoro dipping sauce.",
+      "price": 22,
+      "category": "appetizers",
+      "badge": "POPULAR",
+      "dietIcon": "seafood"
+    },
+    {
+      "id": 10,
+      "src": "/images/menu/menu-duck-confit.webp",
+      "name": "Duck Confit",
+      "description": "Slow-cooked duck leg, braised red cabbage, orange gastrique.",
+      "price": 36,
+      "category": "mainCourses",
+      "badge": null,
+      "dietIcon": "signature"
+    },
+    {
+      "id": 11,
+      "src": "/images/menu/menu-mushroom-risotto.webp",
+      "name": "Wild Mushroom Risotto",
+      "description": "Arborio rice, porcini mushrooms, truffle essence, pecorino romano.",
+      "price": 28,
+      "category": "mainCourses",
+      "badge": null,
+      "dietIcon": "vegetarian"
+    },
+    {
+      "id": 12,
+      "src": "/images/menu/menu-lava-cake.webp",
+      "name": "Chocolate Fondant",
+      "description": "Warm molten chocolate cake, vanilla bean gelato, fresh berries.",
+      "price": 16,
+      "category": "desserts",
+      "badge": "POPULAR",
+      "dietIcon": "sweet"
+    },
+    {
+      "id": 13,
+      "src": "/images/menu/menu-tiramisu-classic.webp",
+      "name": "Signature Tiramisu",
+      "description": "Espresso-soaked ladyfingers, mascarpone cream, dusting of cocoa.",
+      "price": 14,
+      "category": "desserts",
+      "badge": null,
+      "dietIcon": "sweet"
+    },
+    {
+      "id": 14,
+      "src": "/images/menu/menu-creme-brulee.webp",
+      "name": "Vanilla Bean Creme Brulee",
+      "description": "Classic custard, caramelized sugar crust, fresh raspberries.",
+      "price": 15,
+      "category": "desserts",
+      "badge": null,
+      "dietIcon": "sweet"
+    },
+    {
+      "id": 15,
+      "src": "/images/menu/menu-grilled-octopus.webp",
+      "name": "Grilled Med Octopus",
+      "description": "Charred octopus, chickpea puree, chimichurri, smoked paprika.",
+      "price": 32,
+      "category": "seafood",
+      "badge": "NEW",
+      "dietIcon": "seafood"
+    },
+    {
+      "id": 16,
+      "src": "/images/menu/menu-sea-scallops.webp",
+      "name": "Pan-Seared Sea Scallops",
+      "description": "Jumbo scallops, cauliflower mash, crispy pancetta, lemon burro.",
+      "price": 42,
+      "category": "seafood",
+      "badge": null,
+      "dietIcon": "seafood"
+    },
+    {
+      "id": 17,
+      "src": "/images/menu/menu-eggplant-parm.webp",
+      "name": "Eggplant Parmigiana",
+      "description": "Layered eggplant, mozzarella, house-made marinara, basil leaves.",
+      "price": 24,
+      "category": "vegetarian",
+      "badge": null,
+      "dietIcon": "vegetarian"
+    },
+    {
+      "id": 18,
+      "src": "/images/menu/menu-stuffed-peppers.webp",
+      "name": "Roasted Stuffed Peppers",
+      "description": "Bell peppers, quinoa, black beans, corn, roasted tomato salsa.",
+      "price": 22,
+      "category": "vegetarian",
+      "badge": null,
+      "dietIcon": "vegetarian"
+    },
+    {
+      "id": 19,
+      "src": "/images/menu/menu-red-wine.webp",
+      "name": "House Reserve Red",
+      "description": "Full-bodied Cabernet Sauvignon with notes of dark cherry and oak.",
+      "price": 18,
+      "category": "drinks",
+      "badge": "NEW",
+      "dietIcon": "drink"
+    },
+    {
+      "id": 20,
+      "src": "/images/menu/menu-craft-ale.webp",
+      "name": "Savory Signature Ale",
+      "description": "Craft-brewed golden ale with a crisp finish and citrus undertones.",
+      "price": 12,
+      "category": "drinks",
+      "badge": null,
+      "dietIcon": "drink"
+    },
+    {
+      "id": 21,
+      "src": "/images/menu/menu-botanical-tonic.webp",
+      "name": "Elderflower Tonic",
+      "description": "Refreshing botanical blend with elderflower, cucumber, and lime.",
+      "price": 10,
+      "category": "drinks",
+      "badge": "POPULAR",
+      "dietIcon": "drink"
     }
   ],
   "tastingMenu": [
@@ -159,13 +309,64 @@
     }
   ],
   "gallery": [
-    { "id": 1, "src": "/images/gallery/gallery-grilled-salmon.webp", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 2, "src": "/images/gallery/gallery-chocolate-cake.webp", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 3, "src": "/images/gallery/gallery-wood-fired-pizza.webp", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
-    { "id": 4, "src": "/images/gallery/gallery-chef-cooking.webp", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium", "videoSrc": "/images/gallery/chef-intro-video.mp4" },
-    { "id": 5, "src": "/images/gallery/gallery-cocktail-close-up.webp", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
-    { "id": 6, "src": "/images/gallery/gallery-dining-interior.webp", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
-    { "id": 7, "src": "/images/gallery/gallery-table-setting.webp", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
+    {
+      "id": 1,
+      "src": "/images/gallery/gallery-grilled-salmon.webp",
+      "alt": "Gourmet Salmon Dish",
+      "category": "food",
+      "type": "photo",
+      "size": "medium"
+    },
+    {
+      "id": 2,
+      "src": "/images/gallery/gallery-chocolate-cake.webp",
+      "alt": "Chocolate Dessert",
+      "category": "food",
+      "type": "photo",
+      "size": "medium"
+    },
+    {
+      "id": 3,
+      "src": "/images/gallery/gallery-wood-fired-pizza.webp",
+      "alt": "Wood-fired Pizza",
+      "category": "chefsCreations",
+      "type": "photo",
+      "size": "medium"
+    },
+    {
+      "id": 4,
+      "src": "/images/gallery/gallery-chef-cooking.webp",
+      "alt": "Chef at Work",
+      "category": "events",
+      "type": "video",
+      "size": "medium",
+      "videoSrc": "/images/gallery/chef-intro-video.mp4"
+    },
+    {
+      "id": 5,
+      "src": "/images/gallery/gallery-cocktail-close-up.webp",
+      "alt": "Craft Cocktail",
+      "category": "food",
+      "type": "photo",
+      "size": "tall"
+    },
+    {
+      "id": 6,
+      "src": "/images/gallery/gallery-dining-interior.webp",
+      "alt": "Elegant Dining Room",
+      "category": "interior",
+      "type": "photo",
+      "size": "medium"
+    },
+    {
+      "id": 7,
+      "src": "/images/gallery/gallery-table-setting.webp",
+      "alt": "Warm Bar Interior",
+      "category": "interior",
+      "type": "photo",
+      "size": "tall",
+      "hasReservation": true
+    }
   ],
   "team": [
     {
@@ -198,7 +399,7 @@
       "id": 1,
       "name": "Ahmed Tyson",
       "role": "Home, Login and Register Pages",
-      "image": "/images/AboutUs/avatar-ahmed-tyson.jpg",
+      "image": "/images/about-us/avatar-ahmed-tyson.webp",
       "bio": "Ahmed leads our core frontend development. Bro cooked so hard! 😉",
       "linkedin": "https://www.linkedin.com/in/ahmed-elsayed-8b9bba28a"
     },
@@ -206,7 +407,7 @@
       "id": 2,
       "name": "Hagar Ashraf",
       "role": "Gallery and Menu Pages",
-      "image": "/images/AboutUs/avatar-hagar-ashraf.jpg",
+      "image": "/images/about-us/avatar-hagar-ashraf.webp",
       "bio": "Hagar designs our Gallery and Menu experiences with sophisticated detail.",
       "linkedin": "https://www.linkedin.com/in/hagar-ashraf-4550ba307"
     },
@@ -214,7 +415,7 @@
       "id": 3,
       "name": "Bassant Hesham",
       "role": "Reservation Page",
-      "image": "/images/AboutUs/avatar-bassant-hesham.jpg",
+      "image": "/images/about-us/avatar-bassant-hesham.webp",
       "bio": "Bassant specializes in streamlining our reservation systems.",
       "linkedin": "https://www.linkedin.com/in/bassant-hesham-221353378"
     },
@@ -222,7 +423,7 @@
       "id": 4,
       "name": "Youssef Elsherif",
       "role": "ContactUs Page",
-      "image": "/images/AboutUs/avatar-youssef-elsherif.jpg",
+      "image": "/images/about-us/avatar-youssef-elsherif.webp",
       "bio": "Youssef manages our contact systems with operational excellence.",
       "linkedin": "https://www.linkedin.com/in/yousef-sherif-41a736328"
     },
@@ -230,7 +431,7 @@
       "id": 5,
       "name": "Ahmed Sorour",
       "role": "AboutUs Page",
-      "image": "/images/AboutUs/avatar-ahmed-sorour.jpg",
+      "image": "/images/about-us/avatar-ahmed-sorour.webp",
       "bio": "Sorour architectures our brand story through modern web development.",
       "linkedin": "https://www.linkedin.com/in/ahmed-sorour-a41269368"
     }
@@ -287,7 +488,11 @@
     },
     "hours": {
       "title": "Hours",
-      "lines": ["Mon - Thu: 11am - 10pm", "Fri - Sat: 11am - 11pm", "Sunday: 10am - 9pm"]
+      "lines": [
+        "Mon - Thu: 11am - 10pm",
+        "Fri - Sat: 11am - 11pm",
+        "Sunday: 10am - 9pm"
+      ]
     },
     "contact": {
       "title": "Contact",
@@ -301,21 +506,21 @@
       "text": "The most incredible culinary experience I've had in years. The truffle pasta is to die for, and the service is impeccably warm.",
       "author": "Sarah Jenkins",
       "role": "FOOD CRITIC",
-      "image": "/images/HomePage/avatar-sara-jenkins.webp"
+      "image": "/images/home-page/avatar-sara-jenkins.webp"
     },
     {
       "id": 2,
       "text": "A masterclass in flavor and presentation. Each course told a unique story of local ingredients meeting world-class technique.",
       "author": "Michael Chen",
       "role": "LIFESTYLE BLOGGER",
-      "image": "/images/HomePage/avatar-sara-jenkins.webp"
+      "image": "/images/home-page/avatar-sara-jenkins.webp"
     },
     {
       "id": 3,
       "text": "Authentic, vibrant, and unforgettable. Savory Bistro has set a new standard for fine dining in the city.",
       "author": "Elena Rodriguez",
       "role": "GASTRONOMY EXPERT",
-      "image": "/images/HomePage/avatar-sara-jenkins.webp"
+      "image": "/images/home-page/avatar-sara-jenkins.webp"
     }
   ]
 }

@@ -43,7 +43,6 @@ function CalendarPicker({
     else setCalMonth(calMonth + 1);
   };
 
-  // Helper to compare current cell's date with selectedDate object
   const isSelected = (d) => {
     if (!selectedDate) return false;
     return (

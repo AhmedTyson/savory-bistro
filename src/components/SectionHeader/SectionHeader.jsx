@@ -1,9 +1,9 @@
 import './SectionHeader.css';
 
-function SectionHeader({ label, title, subtitle, align = 'left' }) {
+function SectionHeader({ label, title, subtitle, align = 'left', className = '' }) {
   const centered = align === 'center';
   return (
-    <div className={`SectionHeader ${centered ? 'SectionHeader--center' : ''}`}>
+    <div className={`SectionHeader ${centered ? 'SectionHeader--center' : ''} ${className}`}>
       {label && (
         <span className="SectionHeader__label">
           {label}

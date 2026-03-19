@@ -1,31 +1,53 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useAuth } from '../../../../context';;
 import Button from '../../../../components/Button/Button';
 import './ContactForm.css';
 
 const SUBJECT_OPTIONS = ['General Inquiry', 'Reservation', 'Feedback', 'Other'];
 
 export default function ContactForm({ children }) {
-  const [form, setForm] = useState({ name: '', email: '', subject: 'General Inquiry', message: '' });
+  const { showToast } = useAuth();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('General Inquiry');
+  const [message, setMessage] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dropdownRef = useRef(null);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  
   const handleSubjectSelect = (option) => {
-    setForm({ ...form, subject: option });
+    setSubject(option);
     setIsDropdownOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setForm({ name: '', email: '', subject: 'General Inquiry', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('http://localhost:3001/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      showToast({ type: 'contact', firstName: name });
+      setName('');
+      setEmail('');
+      setSubject('General Inquiry');
+      setMessage('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+      showToast({ type: 'error' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  // Close dropdown if clicked outside
+  // close dropdown on click outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -56,8 +78,8 @@ export default function ContactForm({ children }) {
                     className="ContactForm__input"
                     type="text"
                     placeholder="John Doe"
-                    value={form.name}
-                    onChange={handleChange}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
@@ -69,8 +91,8 @@ export default function ContactForm({ children }) {
                     className="ContactForm__input"
                     type="email"
                     placeholder="john@example.com"
-                    value={form.email}
-                    onChange={handleChange}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
@@ -83,7 +105,7 @@ export default function ContactForm({ children }) {
                     className={`ContactForm__select-trigger ${isDropdownOpen ? 'ContactForm__select-trigger--active' : ''}`}
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   >
-                    <span>{form.subject}</span>
+                    <span>{subject}</span>
                     <ChevronDown size={20} className={`ContactForm__select-icon ${isDropdownOpen ? 'ContactForm__select-icon--rotated' : ''}`} />
                   </div>
                   
@@ -92,7 +114,7 @@ export default function ContactForm({ children }) {
                       {SUBJECT_OPTIONS.map((option) => (
                         <div 
                           key={option}
-                          className={`ContactForm__select-item ${form.subject === option ? 'ContactForm__select-item--selected' : ''}`}
+                          className={`ContactForm__select-item ${subject === option ? 'ContactForm__select-item--selected' : ''}`}
                           onClick={() => handleSubjectSelect(option)}
                         >
                           {option}
@@ -110,23 +132,23 @@ export default function ContactForm({ children }) {
                   name="message"
                   className="ContactForm__textarea"
                   placeholder="How can we help you?"
-                  value={form.message}
-                  onChange={handleChange}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   rows={5}
                   required
                 />
               </div>
 
               <div className="ContactForm__footer">
-                <Button type="submit" variant="primary" className="ContactForm__submit-btn" disabled={submitted}>
-                  {submitted ? '✓ Message Sent!' : 'Send Message'}
+                <Button type="submit" variant="primary" className="ContactForm__submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
                 <p className="ContactForm__note">We reply within 24 hours</p>
               </div>
             </form>
           </div>
           
-          {/* Slot for MapEmbed */}
+
           <div className="ContactForm__media-area">
             {children}
           </div>

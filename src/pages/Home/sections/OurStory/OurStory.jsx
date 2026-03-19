@@ -24,7 +24,6 @@ export default function OurStory() {
     <section className="OurStory">
       <div className="OurStory__container">
         <div className="OurStory__grid">
-          {/* Content Side */}
           <div className="OurStory__content">
             <div className="OurStory__header">
               <h2 className="OurStory__title">
@@ -56,12 +55,11 @@ export default function OurStory() {
             </div>
           </div>
 
-          {/* Image Side */}
           <div className="OurStory__image-side">
             <div className="OurStory__chef-frame">
               <div className="OurStory__chef-card">
                 <img
-                  src="/images/HomePage/about-chef-rossi-home.webp"
+                  src="/images/home-page/about-chef-rossi-home.webp"
                   alt="Our Head Chef"
                   loading="lazy"
                   className="OurStory__chef-image"

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context';;
 import { useNavigate } from 'react-router-dom';
 import './LoginModal.css';
 
@@ -11,7 +11,6 @@ function LoginModal() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Reset fields when modal opens
   useEffect(() => {
     if (showLogin) {
       setEmail('');
@@ -31,7 +30,6 @@ function LoginModal() {
     }
     const result = login(email, password);
     if (result.success) {
-      // Redirect to the page they were trying to access
       if (pendingRedirect) {
         const target = pendingRedirect;
         setPendingRedirect(null);

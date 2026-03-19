@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '../../../../context';
-import { Button } from '../../../../components';
+import { useAuth } from '../../../../context';;
+import Button from '../../../../components/Button/Button';;
 import './ChangePassword.css';
 
 function ChangePassword() {
@@ -23,7 +23,7 @@ function ChangePassword() {
   async function handleSave() {
     let valid = true;
 
-    // 1. Validate current password not empty
+    // validate current password not empty
     if (!currentPw.trim()) {
       setCurrentPwError('Current password is required.');
       valid = false;
@@ -31,7 +31,7 @@ function ChangePassword() {
       setCurrentPwError('');
     }
 
-    // 2. Validate new password strength
+    // validate new password strength
     const hasMinLength = newPw.length >= 8;
     const hasUppercase = /[A-Z]/.test(newPw);
     const hasLowercase = /[a-z]/.test(newPw);
@@ -51,7 +51,7 @@ function ChangePassword() {
       setNewPwError('');
     }
 
-    // 3. Validate confirm matches
+    // validate confirm matches
     if (confirmPw !== newPw) {
       setConfirmPwError('Passwords do not match.');
       valid = false;
@@ -63,7 +63,7 @@ function ChangePassword() {
 
     setSaving(true);
     try {
-      // 4. Verify current password via GET /api/users
+      // verify current password via GET /api/users
       const { data } = await axios.get('http://localhost:3001/api/users');
       const found = (data.users || []).find(u => u.email === currentUser.email);
       if (!found || found.password !== currentPw) {
@@ -72,12 +72,12 @@ function ChangePassword() {
         return;
       }
 
-      // 5. PATCH new password
+      // PATCH new password
       await axios.patch(`http://localhost:3001/api/users/${currentUser.id}`, {
         password: newPw,
       });
 
-      // 6. Clear fields, show success
+      // clear fields, show success
       setCurrentPw(''); setNewPw(''); setConfirmPw('');
       showToast({ type: 'passwordUpdate', firstName: currentUser.firstName });
       setSuccess(true);
@@ -93,7 +93,6 @@ function ChangePassword() {
     <div className="ChangePassword">
       <h2 className="ChangePassword__title">Change Password</h2>
 
-      {/* Email (read-only) */}
       <div className="ChangePassword__group ChangePassword__email-group">
         <label className="ChangePassword__label">Email Address</label>
         <input
@@ -104,7 +103,6 @@ function ChangePassword() {
         <span className="ChangePassword__email-note">Email address cannot be changed.</span>
       </div>
 
-      {/* Current Password */}
       <div className="ChangePassword__group">
         <label className="ChangePassword__label">Current Password</label>
         <div className="ChangePassword__input-wrap">
@@ -129,7 +127,6 @@ function ChangePassword() {
         )}
       </div>
 
-      {/* New Password */}
       <div className="ChangePassword__group">
         <label className="ChangePassword__label">New Password</label>
         <div className="ChangePassword__input-wrap">
@@ -154,7 +151,6 @@ function ChangePassword() {
         )}
       </div>
 
-      {/* Confirm New Password */}
       <div className="ChangePassword__group">
         <label className="ChangePassword__label">Confirm New Password</label>
         <div className="ChangePassword__input-wrap">

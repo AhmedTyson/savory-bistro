@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../../../context';
+import { useAuth } from '../../../../context';;
 import { CheckCircle, X, AlertCircle, ChevronDown } from 'lucide-react';
+import { isValidEmail, isValidPhone } from '../../../../utils/validation';
 import './PrivateDiningModal.css';
 
 function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
@@ -12,7 +13,9 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
   const [inqSize,    setInqSize]    = useState('');
   const [inqEvent,   setInqEvent]   = useState('');
   const [inqMessage, setInqMessage] = useState('');
-  const [inqErrors,  setInqErrors]  = useState({});
+  const [inqNameError,  setInqNameError]  = useState('');
+  const [inqEmailError, setInqEmailError] = useState('');
+  const [inqPhoneError, setInqPhoneError] = useState('');
   const [inqSuccess, setInqSuccess] = useState(false);
 
   useEffect(() => {
@@ -23,24 +26,30 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
   }, [showInquiry, currentUser]);
 
   const validateInquiry = () => {
-    const e = {};
-    if (!inqName.trim())  e.name  = 'Name is required';
+    let isValid = true;
+    
+    if (!inqName.trim()) { setInqNameError('Name is required'); isValid = false; }
+    
     if (!inqEmail.trim()) {
-      e.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inqEmail)) {
-      e.email = 'Enter a valid email';
+      setInqEmailError('Email is required'); isValid = false;
+    } else if (!isValidEmail(inqEmail)) {
+      setInqEmailError('Enter a valid email'); isValid = false;
     } else if (currentUser && inqEmail.trim().toLowerCase() !== currentUser.email.toLowerCase()) {
-      e.email = 'Email must match your account email';
+      setInqEmailError('Email must match your account email'); isValid = false;
     }
-    if (!inqPhone.trim()) e.phone = 'Phone is required';
-    return e;
+    
+    if (!isValidPhone(inqPhone)) { setInqPhoneError('Valid phone is required'); isValid = false; }
+    
+    return isValid;
   };
 
   const handleInquirySubmit = (e) => {
     e.preventDefault();
-    const errs = validateInquiry();
-    setInqErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+    setInqNameError('');
+    setInqEmailError('');
+    setInqPhoneError('');
+    
+    if (!validateInquiry()) return;
 
     const inquiry = {
       id:        Date.now().toString(),
@@ -67,7 +76,8 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
   const resetInquiry = () => {
     setInqName(''); setInqEmail(''); setInqPhone(''); setInqDate('');
     setInqSize(''); setInqEvent(''); setInqMessage('');
-    setInqErrors({}); setInqSuccess(false); setShowInquiry(false);
+    setInqNameError(''); setInqEmailError(''); setInqPhoneError('');
+    setInqSuccess(false); setShowInquiry(false);
   };
 
   if (!showInquiry) return null;
@@ -112,7 +122,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
           <>
             <div className="res-modal__hero">
               <img
-                src="/images/Reservations/private-dining-hero.webp"
+                src="/images/reservations/private-dining-hero.webp"
                 alt=""
                 className="res-modal__hero-img"
                 onError={e => { e.target.style.display = 'none'; }}
@@ -139,14 +149,14 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
                       Name <span className="res-req">*</span>
                     </label>
                     <input
-                      className={`res-input${inqErrors.name ? ' res-input--error' : ''}`}
+                      className={`res-input${inqNameError ? ' res-input--error' : ''}`}
                       placeholder="Your name"
                       value={inqName}
-                      onChange={e => setInqName(e.target.value)}
+                      onChange={e => { setInqName(e.target.value); setInqNameError(''); }}
                     />
-                    {inqErrors.name && (
+                    {inqNameError && (
                       <span className="res-error">
-                        <AlertCircle size={13} /> {inqErrors.name}
+                        <AlertCircle size={13} /> {inqNameError}
                       </span>
                     )}
                   </div>
@@ -156,14 +166,14 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
                     </label>
                     <input
                       type="email"
-                      className={`res-input${inqErrors.email ? ' res-input--error' : ''}`}
+                      className={`res-input${inqEmailError ? ' res-input--error' : ''}`}
                       placeholder="you@email.com"
                       value={inqEmail}
-                      onChange={e => setInqEmail(e.target.value)}
+                      onChange={e => { setInqEmail(e.target.value); setInqEmailError(''); }}
                     />
-                    {inqErrors.email && (
+                    {inqEmailError && (
                       <span className="res-error">
-                        <AlertCircle size={13} /> {inqErrors.email}
+                        <AlertCircle size={13} /> {inqEmailError}
                       </span>
                     )}
                   </div>
@@ -176,14 +186,14 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
                     </label>
                     <input
                       type="tel"
-                      className={`res-input${inqErrors.phone ? ' res-input--error' : ''}`}
+                      className={`res-input${inqPhoneError ? ' res-input--error' : ''}`}
                       placeholder="(555) 000-0000"
                       value={inqPhone}
-                      onChange={e => setInqPhone(e.target.value)}
+                      onChange={e => { setInqPhone(e.target.value); setInqPhoneError(''); }}
                     />
-                    {inqErrors.phone && (
+                    {inqPhoneError && (
                       <span className="res-error">
-                        <AlertCircle size={13} /> {inqErrors.phone}
+                        <AlertCircle size={13} /> {inqPhoneError}
                       </span>
                     )}
                   </div>

@@ -1,12 +1,12 @@
 import { UtensilsCrossed } from 'lucide-react'
-import authLeafLines from '../../../../assets/auth-leaf-lines.svg'
+import AuthLeafLines from '../../../../components/SvgAssets/AuthLeafLines';
 import './LoginPanel.css'
 
 export default function LoginPanel() {
   return (
     <div className="LoginPanel">
       <img src="/images/hero/food-hero.webp" alt="Savory Bistro signature dish" className="LoginPanel__image" />
-      <img src={authLeafLines} className="LoginPanel__leaf" alt="" aria-hidden="true" />
+      <AuthLeafLines className="LoginPanel__leaf" aria-hidden="true" />
       <div className="LoginPanel__overlay" />
       <div className="LoginPanel__brand">
         <UtensilsCrossed size={16} color="var(--color-primary)" />

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context';
+import { useState, useMemo } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context';;
 import { useReservations } from './hooks/useReservations';
 
 import ReservationHero     from './sections/ReservationHero/ReservationHero';
@@ -17,6 +17,7 @@ import './Reservations.css';
 function Reservations() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     formData, updateField, selectedDate, setSelectedDate,
@@ -27,8 +28,8 @@ function Reservations() {
   const [showInquiry, setShowInquiry] = useState(false);
   const [showReport, setShowReport] = useState(false);
 
-  // Derived state for time slots
-  const availableTimes = React.useMemo(() => {
+  // filter times based on existing bookings
+  const availableTimes = useMemo(() => {
     if (!selectedDate) return ALL_TIMES;
     const dateStr = selectedDate.toISOString().split('T')[0];
     const booked = RESERVED_TIMES[dateStr] || [];
@@ -39,7 +40,7 @@ function Reservations() {
     const result = await handleSubmit(e);
     if (result?.error === 'LOGIN_REQUIRED') {
       alert('Please log in to make a reservation.');
-      navigate('/login');
+      navigate('/login', { state: { from: location.pathname } });
     }
   };
 

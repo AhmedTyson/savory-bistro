@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
-import authBgCurve from '../../../../assets/auth-bg-curve.svg'
-import zigzag from '../../../../assets/zigzag.svg'
-import zigzagOrange from '../../../../assets/zigzag-orange.svg'
+import AuthBgCurve from '../../../../components/SvgAssets/AuthBgCurve';
+import ZigZagLightning from '../../../../components/SvgAssets/ZigZagLightning';
 import './LoginForm.css'
 
 export default function LoginForm({
@@ -14,11 +13,11 @@ export default function LoginForm({
 }) {
   return (
     <div className="LoginForm">
-      <img src={authBgCurve} className="LoginForm__curve" alt="" aria-hidden="true" />
-      <img src={zigzag}       className="LoginForm__zigzag LoginForm__zigzag--1" alt="" aria-hidden="true" />
-      <img src={zigzag}       className="LoginForm__zigzag LoginForm__zigzag--2" alt="" aria-hidden="true" />
-      <img src={zigzagOrange} className="LoginForm__zigzag LoginForm__zigzag--3" alt="" aria-hidden="true" />
-      <img src={zigzagOrange} className="LoginForm__zigzag LoginForm__zigzag--4" alt="" aria-hidden="true" />
+      <AuthBgCurve className="LoginForm__curve" aria-hidden="true" />
+      <ZigZagLightning className="LoginForm__zigzag LoginForm__zigzag--1" aria-hidden="true" />
+      <ZigZagLightning className="LoginForm__zigzag LoginForm__zigzag--2" aria-hidden="true" />
+      <ZigZagLightning className="LoginForm__zigzag LoginForm__zigzag--3" aria-hidden="true" style={{ stroke: 'var(--color-primary)' }} />
+      <ZigZagLightning className="LoginForm__zigzag LoginForm__zigzag--4" aria-hidden="true" style={{ stroke: 'var(--color-primary)' }} />
 
       <div className="LoginForm__form-area">
         <div className="LoginForm__form-inner">

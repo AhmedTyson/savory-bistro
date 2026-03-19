@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
   const [allUsers, setAllUsers]       = useState([])
   const [activeToast, setActiveToast] = useState(null)
 
-  // On mount, load users from our Backend API
+  // pulls users for login validation
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -55,9 +55,8 @@ export function AuthProvider({ children }) {
     })
   }, [])
 
-  // Register is now async!
   const registerUser = useCallback(async ({ firstName, lastName, email, password }) => {
-    // 1. Initial frontend duplicate check
+    // block duplicate emails early
     const duplicate = allUsers.find(
       u => u.email.toLowerCase() === email.trim().toLowerCase()
     )
@@ -65,7 +64,6 @@ export function AuthProvider({ children }) {
       return { success: false, error: 'An account with this email already exists.' }
     }
 
-    // 2. Build the secure payload
     const payload = {
       id:        allUsers.length + 1,
       firstName: firstName.trim(),
@@ -75,7 +73,6 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      // 3. Post to Node Backend
       const response = await fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -87,9 +84,9 @@ export function AuthProvider({ children }) {
         return { success: false, error: data.error || 'Failed to create account.' }
       }
 
-      // 4. Update the local list and log the user in safely (no password returning)
       setAllUsers(prev => [...prev, data.user])
       
+      // log in safely — don't store plain text password locally
       const safeUser = {
         id:        data.user.id,
         firstName: data.user.firstName,

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutChef.css";
 
@@ -35,7 +35,7 @@ const AboutChef = () => {
     >
       <div className="chef-image-box">
         <img
-          src="/images/AboutUs/about-chef-rossi.webp"
+          src="/images/about-us/about-chef-rossi.webp"
           alt="Chef Antonio Rossi"
         />
       </div>

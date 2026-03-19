@@ -5,8 +5,7 @@ import './SignatureDishes.css';
 export default function SignatureDishes({ dishes }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Calculate max index based on total dishes and visible count (roughly 3.5 cards)
-  // For simplicity, we slide by 1 card at a time
+  // handles card-based translate offsets for smooth sliding
   const maxIndex = Math.max(0, dishes.length - 1);
 
   const handlePrev = () => {
@@ -58,7 +57,7 @@ export default function SignatureDishes({ dishes }) {
                 <div className="SignatureDishes__card">
                   <div className="SignatureDishes__image-wrapper">
                     <img 
-                      src={`/images/HomePage/${dish.name.toLowerCase().replace(/ /g, '-')}.webp`} 
+                      src={`/images/home-page/${dish.name.toLowerCase().replace(/ /g, '-')}.webp`} 
                       alt={dish.name} 
                       loading="lazy"
                       className="SignatureDishes__image"

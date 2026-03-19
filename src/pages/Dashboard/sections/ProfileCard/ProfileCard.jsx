@@ -1,5 +1,5 @@
 import { UserCircle } from 'lucide-react';
-import { useAuth } from '../../../../context';
+import { useAuth } from '../../../../context';;
 import './ProfileCard.css';
 
 function ProfileCard() {

@@ -4,7 +4,7 @@ import "./Testimonials.css";
 export default function Testimonials({ reviews = [] }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Auto-play carousel
+  // auto-advance testimonials every 5s
   useEffect(() => {
     if (reviews.length <= 1) return;
     const timer = setInterval(() => {
@@ -17,7 +17,7 @@ export default function Testimonials({ reviews = [] }) {
     text: "The most incredible culinary experience I've had in years. The truffle pasta is to die for, and the service is impeccably warm.",
     author: "Sarah Jenkins",
     role: "FOOD CRITIC",
-    image: "/images/HomePage/Small_Avatar_Sara.webp",
+    image: "/images/home-page/avatar-sara-jenkins.webp",
   };
 
   return (

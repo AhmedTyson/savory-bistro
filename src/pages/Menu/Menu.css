@@ -9,7 +9,7 @@
   position: relative;
   height: 45vh;
   min-height: 350px;
-  background-image: url('/images/menu/menu-hero-pic.webp');
+  background-image: url("/images/menu/menu-hero-pic.webp");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -25,7 +25,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
 }
 
 .Menu__hero-content {
@@ -46,14 +50,14 @@
   font-weight: 700;
   letter-spacing: -1px;
   margin-bottom: var(--space-sm);
-  text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .Menu__hero-subtitle {
   font-family: var(--font-script);
   font-size: 28px;
   color: var(--color-bg-page);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Main Menu Section */
@@ -120,30 +124,35 @@
 }
 
 .Menu__tasting-card {
-  border: 1px solid rgba(201, 168, 76, 0.3);
-  padding: var(--space-3xl) var(--space-xl);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  padding: var(--space-3xl) var(--space-xl) var(--space-2xl);
   max-width: 800px;
   width: 100%;
   text-align: center;
   position: relative;
+  background-color: var(--color-bg-tasting);
 }
 
 .Menu__tasting-title {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-bg-tasting);
+  padding: 0 32px;
   font-family: var(--font-serif);
   color: var(--color-gold-accent);
-  font-size: 28px;
-  padding-bottom: var(--space-xl);
-  margin-bottom: var(--space-xl);
-  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
-  display: inline-block;
-  min-width: 300px;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .Menu__tasting-courses {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-2xl);
+  gap: 40px;
+  margin-bottom: var(--space-3xl);
 }
 
 .Menu__tasting-course {
@@ -154,8 +163,8 @@
 }
 
 .Menu__course-label {
-  font-size: 10px;
-  letter-spacing: 2px;
+  font-size: 11px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--color-gold-accent);
   opacity: 0.8;
@@ -164,21 +173,32 @@
 
 .Menu__course-dish {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 400;
+  color: var(--color-text-white);
 }
 
 .Menu__tasting-footer {
-  margin-top: var(--space-xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid rgba(201, 168, 76, 0.2);
+  padding-top: var(--space-2xl);
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
 }
 
 .Menu__tasting-price {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 28px;
   color: var(--color-gold-accent);
-  margin-bottom: var(--space-md);
+  margin: 0;
+}
+
+.Menu__tasting-btn {
+  border-radius: 2px !important;
+  font-size: 14px !important;
+  letter-spacing: 1px !important;
+  padding: 16px 40px !important;
 }
 
 /* Drinks Section */
@@ -243,4 +263,44 @@
   font-weight: 700;
   color: var(--color-primary);
   font-size: 14px;
+}
+
+.Menu__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xl);
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.Menu__pagination-btn {
+  padding: 8px 20px;
+  border: 1px solid var(--color-primary);
+  background-color: transparent;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.Menu__pagination-btn:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+}
+
+.Menu__pagination-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: var(--color-text-muted);
+  color: var(--color-text-muted);
+}
+
+.Menu__pagination-info {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  font-weight: 500;
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../../../context';
-import { Button } from '../../../../components';
+import { useAuth } from '../../../../context';;
+import Button from '../../../../components/Button/Button';;
 import './ChangeUsername.css';
 
 function ChangeUsername() {
@@ -15,7 +15,7 @@ function ChangeUsername() {
   const [success,        setSuccess]        = useState(false);
 
   async function handleSave() {
-    // Validate
+    // handle name constraints
     let valid = true;
     if (firstName.trim().length < 2) {
       setFirstNameError('First name must be at least 2 characters.');

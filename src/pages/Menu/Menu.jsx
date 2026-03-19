@@ -7,8 +7,10 @@ import "./Menu.css";
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  // Hardcode categories based on the design image
+  // matches Figma design image exactly
   const categories = [
     { id: "all", label: "All" },
     { id: "appetizers", label: "Appetizers" },
@@ -19,14 +21,24 @@ export default function Menu() {
     { id: "drinks", label: "Drinks" },
   ];
 
+  const handleCategoryChange = (catId) => {
+    setActiveCategory(catId);
+    setCurrentPage(1);
+  };
+
   const filteredMenu =
     activeCategory === "all"
       ? data.menu
       : data.menu.filter((item) => item.category === activeCategory);
 
+  const totalPages = Math.ceil(filteredMenu.length / itemsPerPage);
+  const paginatedMenu = filteredMenu.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <div className="Menu">
-      {/* Hero Section */}
       <section className="Menu__hero">
         <div className="Menu__hero-overlay"></div>
         <div className="Menu__hero-content container">
@@ -37,15 +49,13 @@ export default function Menu() {
         </div>
       </section>
 
-      {/* Main Menu Section */}
       <section className="Menu__main-section">
         <div className="container">
-          {/* Categories Filter */}
           <div className="Menu__filter-container">
             {categories.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
+                onClick={() => handleCategoryChange(cat.id)}
                 className={`Menu__filter-btn ${activeCategory === cat.id ? "Menu__filter-btn--active" : ""}`}
               >
                 {cat.label}
@@ -53,12 +63,11 @@ export default function Menu() {
             ))}
           </div>
 
-          {/* Dish Grid */}
           <div className="Menu__dish-grid">
-            {filteredMenu.map((dish) => (
+            {paginatedMenu.map((dish) => (
               <DishCard
                 key={dish.id}
-                image={dish.src || "/images/placeholder-dish.jpg"}
+                image={dish.src || "/images/placeholder-dish.webp"}
                 name={dish.name}
                 description={dish.description}
                 price={dish.price}
@@ -67,10 +76,31 @@ export default function Menu() {
               />
             ))}
           </div>
+
+          {totalPages > 1 && (
+            <div className="Menu__pagination">
+              <button
+                className="Menu__pagination-btn"
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span className="Menu__pagination-info">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                className="Menu__pagination-btn"
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Chef's Tasting Menu Section */}
       <section className="Menu__tasting-section">
         <div className="container Menu__tasting-container">
           <div className="Menu__tasting-card">
@@ -97,13 +127,11 @@ export default function Menu() {
         </div>
       </section>
 
-      {/* Artisan Beverages Section */}
       <section className="Menu__drinks-section">
         <div className="container">
-          <SectionHeader title="Artisan Beverages" align="center" />
+          <SectionHeader title="Drinks & Wine" align="center" className="Menu__drinks-header" />
 
           <div className="Menu__drinks-grid">
-            {/* Premium Selection */}
             <div className="Menu__drinks-category">
               <h3 className="Menu__drinks-title">Premium Selection</h3>
               <div className="Menu__drinks-list">
@@ -119,7 +147,6 @@ export default function Menu() {
               </div>
             </div>
 
-            {/* Artisan Mocktails */}
             <div className="Menu__drinks-category">
               <h3 className="Menu__drinks-title">Artisan Mocktails</h3>
               <div className="Menu__drinks-list">

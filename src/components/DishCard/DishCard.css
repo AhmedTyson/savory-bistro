@@ -44,3 +44,15 @@
 .DishCard__diet-icon--spicy {
   color: var(--color-diet-spicy);
 }
+
+.DishCard__diet-icon--drink {
+  color: #8b5cf6;
+}
+
+.DishCard__diet-icon--sweet {
+  color: #db2777;
+}
+
+.DishCard__diet-icon--signature {
+  color: #f59e0b;
+}

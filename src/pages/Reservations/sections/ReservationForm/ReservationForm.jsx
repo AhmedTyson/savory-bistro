@@ -1,4 +1,3 @@
-import React from 'react';
 import { AlertCircle } from 'lucide-react';
 import SelectionField from '../../../../components/SelectionField/SelectionField';
 import './ReservationForm.css';
@@ -17,7 +16,6 @@ const ReservationForm = ({
 
   return (
     <form className="res-form" onSubmit={handleSubmit} noValidate>
-      {/* Party Size & Occasion */}
       <div className="res-form__row">
         <SelectionField
           label="Party Size"
@@ -41,10 +39,8 @@ const ReservationForm = ({
         />
       </div>
 
-      {/* Children: Calendar and TimeSlots */}
       {children}
 
-      {/* Name & Phone */}
       <div className="res-form__row">
         <div className="res-form__field">
           <label className="res-label">
@@ -82,7 +78,6 @@ const ReservationForm = ({
         </div>
       </div>
 
-      {/* Email */}
       <div className="res-form__section">
         <label className="res-label">
           Email Address <span className="res-req">*</span>
@@ -101,7 +96,6 @@ const ReservationForm = ({
         )}
       </div>
 
-      {/* Special Requests */}
       <div className="res-form__section">
         <label className="res-label">Special Requests</label>
         <textarea
@@ -113,7 +107,6 @@ const ReservationForm = ({
         />
       </div>
 
-      {/* Submit Error Banner */}
       {submitError && (
         <div className="ReservationForm__submit-error">
           <AlertCircle size={16} />
@@ -121,7 +114,6 @@ const ReservationForm = ({
         </div>
       )}
 
-      {/* Submit */}
       <button 
         type="submit" 
         className="res-submit-btn"

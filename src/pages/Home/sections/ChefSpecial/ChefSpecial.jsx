@@ -6,7 +6,7 @@ export default function ChefSpecial() {
       <div 
         className="ChefSpecial__bg"
         style={{ 
-          backgroundImage: 'url("/images/HomePage/Wild_Caught_Halibut.webp")'
+          backgroundImage: 'url("/images/home-page/wild-caught-halibut.webp")'
         }}
       >
         <div className="ChefSpecial__overlay"></div>

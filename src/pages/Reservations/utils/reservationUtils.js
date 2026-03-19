@@ -1,4 +1,3 @@
-/* ─── CONSTANTS ─────────────────────────────────────── */
 export const RESERVED_DATES = [
   "2026-03-20", "2026-03-22", "2026-03-25", "2026-03-28",
   "2026-04-01", "2026-04-05", "2026-04-10", "2026-04-14",
@@ -32,7 +31,6 @@ export const MONTHS = [
   "July", "August", "September", "October", "November", "December",
 ];
 
-/* ─── HELPERS ───────────────────────────────────────── */
 export const pad = (n) => String(n).padStart(2, "0");
 export const toKey = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
 export const daysIn = (y, m) => new Date(y, m + 1, 0).getDate();

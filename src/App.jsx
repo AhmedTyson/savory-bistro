@@ -25,8 +25,9 @@ import { AuthContext, AuthProvider, useAuth } from "./context";
 import { TOAST_ANIM_MS } from './components/Toast/Toast';
 
 function ProtectedRoute({ children }) {
-  const { user } = useContext(AuthContext);
-  if (!user) return <Navigate to="/login" replace />;
+  const { user } = useAuth();
+  const location = useLocation();
+  if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   return children;
 }
 
@@ -57,7 +58,7 @@ function GlobalToast() {
   const [isExiting, setIsExiting] = useState(false);
   const lastHandledToastId = useRef(null);
 
-  // Buffer unmount for exit animation
+  // delay unmount so exit animation can finish
   useEffect(() => {
     if (activeToast) {
       setDisplayToast(activeToast);
@@ -69,11 +70,11 @@ function GlobalToast() {
     }
   }, [activeToast, displayToast, isExiting]);
 
-  // Handle cross-page notifications via location state
+  // catch nav-triggered toasts (redirects) via location key
   useEffect(() => {
+    window.scrollTo(0, 0);
     const s = location.state;
-    // We only process if there's a toast in state AND we haven't processed THIS location's toast yet
-    // React Router location objects are unique for each navigation event (.key)
+    
     if (s && s.toast && lastHandledToastId.current !== location.key) {
       lastHandledToastId.current = location.key;
       
@@ -82,7 +83,7 @@ function GlobalToast() {
         firstName: s.firstName,
         extra: s.toast === "reservation" ? { date: s.date, time: s.time } : null,
       });
-      // Clear the trigger state to prevent loops on re-renders
+      // clear router state to prevent repeat on refresh
       window.history.replaceState({}, document.title);
     }
   }, [location, showToast]);

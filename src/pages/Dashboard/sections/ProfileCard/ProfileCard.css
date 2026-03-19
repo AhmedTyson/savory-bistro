@@ -44,14 +44,19 @@
 }
 
 .ProfileCard__tag {
-  display: inline-block;
-  background: rgba(224, 123, 57, 0.08);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  background: rgba(224, 123, 57, 0.12);
   color: var(--color-primary);
   border-radius: var(--radius-pill);
-  padding: 3px 12px;
-  font-size: var(--font-size-xs);
-  font-weight: 700;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin-top: var(--space-sm);
+  line-height: 1;
 }
 
 @media (max-width: 480px) {

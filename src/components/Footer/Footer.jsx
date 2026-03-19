@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import { UtensilsCrossed, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
+import { isValidEmail } from '../../utils/validation';
 import './Footer.css';
 
 function Footer({ variant = 'full' }) {
   const [email, setEmail]     = useState('');
-  const [status, setStatus]   = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [status, setStatus]   = useState('idle'); // idle | loading | success | error
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
@@ -17,8 +18,7 @@ function Footer({ variant = 'full' }) {
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       setStatus('error');
       setMessage('Please enter a valid email.');
       return;
@@ -27,7 +27,6 @@ function Footer({ variant = 'full' }) {
     setStatus('loading');
     setMessage('');
 
-    // Simulate API call
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       setStatus('success');

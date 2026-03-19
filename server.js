@@ -151,6 +151,58 @@ app.post("/api/reservations", (req, res) => {
   }
 });
 
+// ─── MESSAGE ROUTES ────────────────────────────────────────
+
+const MESSAGES_FILE = path.join(__dirname, "messages-data.json");
+
+console.log("DEBUG: Registering /api/messages");
+app.get("/api/messages", (req, res) => {
+  try {
+    if (!fs.existsSync(MESSAGES_FILE)) {
+      return res.json({ messages: [] });
+    }
+    const data = fs.readFileSync(MESSAGES_FILE, "utf8");
+    res.json(JSON.parse(data));
+  } catch (error) {
+    console.error("Error reading messages data:", error);
+    res.status(500).json({ error: "Failed to read messages" });
+  }
+});
+
+app.post("/api/messages", (req, res) => {
+  try {
+    const body = req.body;
+
+    if (!body || !body.email || !body.name || !body.message) {
+      return res.status(400).json({ error: "Name, email, and message are required" });
+    }
+
+    let db = { messages: [] };
+    if (fs.existsSync(MESSAGES_FILE)) {
+      const data = fs.readFileSync(MESSAGES_FILE, "utf8");
+      db = JSON.parse(data);
+    }
+
+    const newMessage = {
+      id: Date.now().toString(),
+      name: body.name,
+      email: body.email,
+      subject: body.subject || "General Inquiry",
+      message: body.message,
+      submittedAt: new Date().toISOString(),
+      status: "unread"
+    };
+
+    db.messages.push(newMessage);
+    fs.writeFileSync(MESSAGES_FILE, JSON.stringify(db, null, 2), "utf8");
+
+    res.status(201).json({ success: true, message: newMessage });
+  } catch (error) {
+    console.error("Error writing to messages data:", error);
+    res.status(500).json({ error: "Failed to save message" });
+  }
+});
+
 // ─── START SERVER ──────────────────────────────────────────
 
 const PORT = 3001;

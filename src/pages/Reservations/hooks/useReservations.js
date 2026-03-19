@@ -1,13 +1,13 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../../context';
+import { isValidEmail, isValidPhone } from '../../../utils/validation';
 
 const API = 'http://localhost:3001/api';
 
 export function useReservations() {
   const { currentUser, showToast } = useAuth();
   
-  /* ── Form State ── */
   const [formData, setFormData] = useState({
     partySize: '',
     occasion: '',
@@ -20,13 +20,12 @@ export function useReservations() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   
-  /* ── UI State ── */
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
 
-  // Initialize form with user data
+  // sync initial data for auth'd users
   useEffect(() => {
     if (currentUser) {
       setFormData(prev => ({
@@ -42,7 +41,6 @@ export function useReservations() {
     if (errors[field]) setErrors(prev => ({ ...prev, [field]: null }));
   };
 
-  // Sync History logic from original Reservations.jsx
   const syncHistory = useCallback(async () => {
     if (!currentUser) {
       setHistory([]);
@@ -52,7 +50,7 @@ export function useReservations() {
     const userIdStr = String(currentUser.id);
     let allActivity = [];
 
-    // 1. Inquiries from LocalStorage
+    // inquiries pull from localstorage
     const inqStored = localStorage.getItem("sb_inquiries");
     if (inqStored) {
       try {
@@ -64,7 +62,7 @@ export function useReservations() {
       } catch (err) { console.error("Error parsing inquiries:", err); }
     }
 
-    // 2. Reservations (Local Cache first)
+    // reservations (local cache first)
     const resKey = `sb_last_reservation_${userIdStr}`;
     const resStored = localStorage.getItem(resKey);
     if (resStored) {
@@ -76,7 +74,7 @@ export function useReservations() {
       } catch {}
     }
 
-    // 3. Reservations from API
+    // reservations from API
     try {
       const { data } = await axios.get(`${API}/reservations?userId=${userIdStr}`);
       const apiRes = data.reservations || [];
@@ -107,10 +105,10 @@ export function useReservations() {
     if (!selectedTime) e.time = "Please select a time";
     if (!formData.fullName.trim()) e.fullName = "Full name is required";
     if (!formData.phone.trim()) e.phone = "Phone number is required";
-    else if (!/^[\d\s\-\+\(\)]{7,}$/.test(formData.phone.trim())) e.phone = "Invalid phone number";
+    else if (!isValidPhone(formData.phone)) e.phone = "Invalid phone number";
     
     if (!formData.email.trim()) e.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) e.email = "Invalid email";
+    else if (!isValidEmail(formData.email)) e.email = "Invalid email";
     
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -155,7 +153,7 @@ export function useReservations() {
         extra: { date: selectedDate, time: selectedTime } 
       });
       
-      // Reset non-user fields
+      // clean up fields but keep identity data
       setFormData(prev => ({ ...prev, partySize: '', occasion: '', specialReqs: '' }));
       setSelectedTime('');
       return { success: true };

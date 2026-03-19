@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { CalendarX, Calendar, Tag, Clock, Users, Info, ChevronRight, CheckCircle } from 'lucide-react';
-import { useAuth } from '../../../../context';
+import { useAuth } from '../../../../context';;
 import './ReservationHistory.css';
 
 const API = 'http://localhost:3001/api';
@@ -19,7 +19,7 @@ function ReservationHistory() {
     const userIdStr = String(currentUser.id);
     let allActivity = [];
 
-    // 1. Inquiries from LocalStorage
+    // inquiries pull from localstorage, reservations pull from DB
     const inqStored = localStorage.getItem("sb_inquiries");
     if (inqStored) {
       try {
@@ -37,7 +37,6 @@ function ReservationHistory() {
       } catch (err) { console.error("Error parsing inquiries:", err); }
     }
 
-    // 2. Reservations from API
     try {
       const { data } = await axios.get(`${API}/reservations?userId=${userIdStr}`);
       const apiRes = data.reservations || [];
@@ -49,14 +48,13 @@ function ReservationHistory() {
         mainInfo: r.time
       }));
       
-      // Merge: Preference to API data if IDs match, but here they should be distinct enough
+      // merge disparate sources — priority to local ids
       const existingIds = new Set(allActivity.map(a => a.id));
       formattedRes.forEach(r => {
         if (!existingIds.has(r.id)) allActivity.push(r);
       });
     } catch (err) { console.error("Failed to fetch reservations:", err); }
 
-    // Sort: Newest first
     allActivity.sort((a, b) => b.timestamp - a.timestamp);
     setHistory(allActivity);
     setLoading(false);

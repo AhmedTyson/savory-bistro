@@ -6,18 +6,16 @@ import './Hero.css';
 export default function Hero() {
   return (
     <div className="Hero">
-      {/* Background Image with Overlay */}
       <div 
         className="Hero__bg"
         style={{ 
-          backgroundImage: 'url("/images/HomePage/burger-hero.webp")',
+          backgroundImage: 'url("/images/home-page/burger-hero.webp")',
           backgroundColor: 'var(--color-bg-hero)'
         }}
       >
         <div className="Hero__overlay"></div>
       </div>
  
-      {/* Hero Content Area */}
       <div className="Hero__content">
         <div className="Hero__container">
           <h1 className="Hero__title">
@@ -43,7 +41,6 @@ export default function Hero() {
         </div>
       </div>
  
-      {/* Scroll Down Indicator */}
       <div className="Hero__scroll-indicator">
         <ChevronsDown size={32} strokeWidth={1.5} />
       </div>

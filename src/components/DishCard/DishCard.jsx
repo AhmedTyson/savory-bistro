@@ -1,4 +1,4 @@
-import { Leaf, Fish, Flame } from 'lucide-react';
+import { Leaf, Fish, Flame, Wine, Cookie, ChefHat } from 'lucide-react';
 import './DishCard.css';
 
 function DishCard({ image, name, description, price, badge, dietIcon }) {
@@ -19,6 +19,9 @@ function DishCard({ image, name, description, price, badge, dietIcon }) {
             {dietIcon === 'vegetarian' && <Leaf size={14} />}
             {dietIcon === 'seafood' && <Fish size={14} />}
             {dietIcon === 'spicy' && <Flame size={14} />}
+            {dietIcon === 'drink' && <Wine size={14} />}
+            {dietIcon === 'sweet' && <Cookie size={14} />}
+            {dietIcon === 'signature' && <ChefHat size={14} />}
           </div>
         )}
       </div>

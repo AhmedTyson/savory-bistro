@@ -1,4 +1,3 @@
-import React from "react";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutHero.css";
 
@@ -65,19 +64,19 @@ const AboutHero = () => {
       <div className="about-hero-images">
         <div
           className="img-block img-tall"
-          style={{ backgroundImage: "url('/images/AboutUs/about-hero-tall.webp')" }}
+          style={{ backgroundImage: "url('/images/about-us/about-hero-tall.webp')" }}
         ></div>
         <div
           className="img-block img-menu"
-          style={{ backgroundImage: "url('/images/AboutUs/about-hero-service.webp')" }}
+          style={{ backgroundImage: "url('/images/about-us/about-hero-service.webp')" }}
         ></div>
         <div
           className="img-block img-team"
-          style={{ backgroundImage: "url('/images/AboutUs/about-team-all.webp')" }}
+          style={{ backgroundImage: "url('/images/about-us/about-team-all.webp')" }}
         ></div>
         <div
           className="img-block img-store"
-          style={{ backgroundImage: "url('/images/AboutUs/about-interior-storefront.webp')" }}
+          style={{ backgroundImage: "url('/images/about-us/about-interior-storefront.webp')" }}
         ></div>
       </div>
     </AboutSection>
