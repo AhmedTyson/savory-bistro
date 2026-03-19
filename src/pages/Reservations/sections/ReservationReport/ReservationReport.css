@@ -1,0 +1,152 @@
+/* Reservation Report — Dashboard Timeline Style Re-integration */
+
+.ReservationReport {
+  margin-top: 15px;
+}
+
+.res-report-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  padding: 0 18px;
+  background: #2D1B0E;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+  box-shadow: 0 4px 15px rgba(45,27,14,0.15);
+}
+.res-report-btn:hover { background: #3d2514; transform: translateY(-1px); }
+.res-report-btn.active { border-radius: 12px 12px 0 0; }
+.res-report-btn .chevron { margin-left: auto; transition: transform .3s; }
+.res-report-btn.active .chevron { transform: rotate(180deg); }
+
+.res-report-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all .4s cubic-bezier(.4,0,.2,1);
+}
+.res-report-panel.active { 
+  max-height: 500px; 
+  opacity: 1; 
+  padding-top: 0px; 
+}
+
+/* Card Overrides for Report Component */
+.res-card-override {
+  border-top: none !important;
+  border-radius: 0 0 16px 16px !important;
+  border-color: #2D1B0E !important;
+  cursor: default !important;
+}
+
+/* Shared Styles from Dashboard (Duplicate here for component isolation) */
+.ReservationHistory__card {
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid #E6E1DC;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all .3s ease;
+  position: relative;
+}
+.ReservationHistory__card-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.ReservationHistory__icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ReservationHistory__icon-box.reservation { background: #FDF5EF; color: #E07B39; }
+.ReservationHistory__icon-box.inquiry { background: #F2F5F8; color: #2D1B0E; }
+
+.ReservationHistory__line {
+  flex: 1;
+  width: 1px;
+  background: #EEEBE8;
+}
+
+.ReservationHistory__card-main { flex: 1; }
+.ReservationHistory__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.ReservationHistory__type-info { display: flex; align-items: center; gap: 10px; }
+.ReservationHistory__badge {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.ReservationHistory__badge.reservation { background: #FEEBD7; color: #B35412; }
+.ReservationHistory__badge.inquiry { background: #E8EAF6; color: #1A237E; }
+.ReservationHistory__id { font-size: 11px; color: #B2A292; font-weight: 500; }
+.ReservationHistory__status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1B5E20;
+}
+.ReservationHistory__card-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #2D1B0E;
+  margin-bottom: 15px;
+}
+.ReservationHistory__card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+.ReservationHistory__grid-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: #6D635B;
+  font-weight: 500;
+}
+.ReservationHistory__grid-item svg { color: #E07B39; opacity: 0.6; }
+
+.ReservationHistory__notes {
+  background: #FAF8F5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 5px;
+}
+.ReservationHistory__notes p {
+  font-size: 13px;
+  font-style: italic;
+  color: #8C6F4F;
+  line-height: 1.5;
+  margin: 0;
+}
+.ReservationHistory__arrow { align-self: center; color: #D4CDC5; }
+
+@media (max-width: 600px) {
+  .ReservationHistory__card-sidebar { display: none; }
+}

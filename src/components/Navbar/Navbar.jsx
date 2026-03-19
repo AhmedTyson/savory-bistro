@@ -9,8 +9,8 @@ const navLinks = [
   { label: 'Menu',         path: '/menu',          end: false },
   { label: 'Reservations', path: '/reservations',  end: false },
   { label: 'Gallery',      path: '/gallery',       end: false },
-  { label: 'Contact',      path: '/contact',       end: false },
-  { label: 'About Us',     path: '/about',         end: false }
+  { label: 'ContactUs',   path: '/contact',       end: false },
+  { label: 'AboutUs',     path: '/about',         end: false }
 ];
 
 function Navbar() {

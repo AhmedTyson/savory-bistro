@@ -44,7 +44,7 @@
       "id": 5,
       "src": "/images/menu/meat lamp (4).webp",
       "name": "Lamb Shank",
-      "description": "Slow-braised lamb, creamy polenta, red wine reduction, rosemary.",
+      "description": "Slow-braised lamb, creamy polenta, pomegranate reduction, rosemary.",
       "price": 38,
       "category": "mainCourses",
       "badge": "POPULAR",
@@ -65,7 +65,7 @@
     {
       "course": "I",
       "label": "AMUSE-BOUCHE",
-      "dish": "Chilled Oyster with Champagne Foam"
+      "dish": "Chilled Oyster with Sparkling White Grape Foam"
     },
     {
       "course": "II",
@@ -88,42 +88,42 @@
       "dish": "Dark Chocolate Soufflé with Gold Leaf"
     }
   ],
-  "wines": [
+  "beverages": [
     {
       "id": 1,
-      "name": "Château Margaux 2015",
-      "origin": "Bordeaux, France",
-      "price": "$120/Glass"
+      "name": "Premium Sparkling Grape",
+      "origin": "Loire Valley, France",
+      "price": "$18/Glass"
     },
     {
       "id": 2,
-      "name": "Dom Pérignon P2",
-      "origin": "Champagne, France",
-      "price": "$85/Glass"
+      "name": "Artisan Pomegranate Nectar",
+      "origin": "Anatolia, Turkey",
+      "price": "$15/Glass"
     },
     {
       "id": 3,
-      "name": "Silver Oak Cabernet",
-      "origin": "Napa Valley, USA",
-      "price": "$210/Bottle"
+      "name": "Sparkling Apple Cider",
+      "origin": "Normandy, France",
+      "price": "$45/Bottle"
     }
   ],
-  "cocktails": [
+  "mocktails": [
     {
       "id": 1,
-      "name": "Smoked Old Fashioned",
-      "description": "Bourbon, maple, walnut bitters, applewood smoke.",
-      "price": 18
+      "name": "Smoked Hibiscus Fizz",
+      "description": "Hibiscus tea, maple, walnut bitters, applewood smoke.",
+      "price": 14
     },
     {
       "id": 2,
-      "name": "Lavender Gin Fizz",
-      "description": "Botanical gin, fresh lavender, lemon, egg white.",
-      "price": 16
+      "name": "Lavender Harmony",
+      "description": "Botanical essences, fresh lavender, lemon, egg white.",
+      "price": 12
     },
     {
       "id": 3,
-      "name": "Cucumber Cooler (Non-Alc)",
+      "name": "Cucumber Cooler",
       "description": "Muddled cucumber, lime, agave, mint soda.",
       "price": 12
     }
@@ -146,7 +146,7 @@
     {
       "id": 3,
       "name": "Prime Ribeye",
-      "description": "60-day dry-aged beef, roasted garlic mash, red wine reduction.",
+      "description": "60-day dry-aged beef, roasted garlic mash, balsamic reduction.",
       "price": 95,
       "badge": "POPULAR"
     },
@@ -162,7 +162,7 @@
     { "id": 1, "src": "/images/gallery/salmon.webp", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
     { "id": 2, "src": "/images/gallery/chocolate cake (3).webp", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
     { "id": 3, "src": "/images/gallery/pizza (5).webp", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
-    { "id": 4, "src": "/images/gallery/chef (1).webp", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium" },
+    { "id": 4, "src": "/images/gallery/chef (1).webp", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium", "videoSrc": "/images/gallery/Chef_Video_Intro_for_Savory_Bistro.mp4" },
     { "id": 5, "src": "/images/gallery/drink (4).webp", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
     { "id": 6, "src": "/images/gallery/interior (6).webp", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
     { "id": 7, "src": "/images/gallery/table(2).webp", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
@@ -193,6 +193,65 @@
       "bio": "The master of operations, Marcus keeps our kitchen running like a well-oiled machine."
     }
   ],
+  "aboutTeam": [
+    {
+      "id": 1,
+      "name": "Ahmed Tyson",
+      "role": "Home, Login and Register Pages",
+      "image": "/images/AboutUs/Avatar 1.jpeg",
+      "bio": "Ahmed leads our core frontend development. Bro cooked so hard! 😉",
+      "linkedin": "https://www.linkedin.com/in/ahmed-tyson"
+    },
+    {
+      "id": 2,
+      "name": "Hagar Ashraf",
+      "role": "Gallery and Menu Pages",
+      "image": "/images/AboutUs/Avatar 2.jpeg",
+      "bio": "Hagar designs our Gallery and Menu experiences with sophisticated detail.",
+      "linkedin": "https://www.linkedin.com/in/hagar-ashraf"
+    },
+    {
+      "id": 3,
+      "name": "Bassant Hesham",
+      "role": "Reservation Page",
+      "image": "/images/AboutUs/Avatar 3.jpeg",
+      "bio": "Bassant specializes in streamlining our reservation systems.",
+      "linkedin": "https://www.linkedin.com/in/bassant-hesham"
+    },
+    {
+      "id": 4,
+      "name": "Youssef Elsherif",
+      "role": "ContactUs Page",
+      "image": "/images/AboutUs/Avatar 4.jpeg",
+      "bio": "Youssef manages our contact systems with operational excellence.",
+      "linkedin": "https://www.linkedin.com/in/youssef-elsherif"
+    },
+    {
+      "id": 5,
+      "name": "Ahmed Sorour",
+      "role": "AboutUs Page",
+      "image": "/images/AboutUs/Avatar 5.jpeg",
+      "bio": "Sorour architectures our brand story through modern web development.",
+      "linkedin": "https://www.linkedin.com/in/ahmed-sorour"
+    }
+  ],
+  "aboutReviews": [
+    {
+      "id": 1,
+      "quote": "Savory Bistro manages to balance high-end culinary expertise with a warmth that makes you want to stay for hours. A rare gem in the city.",
+      "author": "Culinary Review Monthly"
+    },
+    {
+      "id": 2,
+      "quote": "The attention to detail in every dish, from the plating to the flavor profile, is simply unmatched. A true testament to Chef Antonio's vision.",
+      "author": "Gourmet Magazine"
+    },
+    {
+      "id": 3,
+      "quote": "An atmosphere that feels both exclusive and welcoming. The zero-waste philosophy isn't just a label; you can taste the freshness in every bite.",
+      "author": "The Daily Plate"
+    }
+  ],
   "faqs": [
     {
       "id": 1,
@@ -211,8 +270,8 @@
     },
     {
       "id": 4,
-      "question": "Can I bring my own wine?",
-      "answer": "We allow guests to bring their own wine bottles. A corkage fee of $25 per 750ml bottle applies, with a maximum of two bottles per party. Please note this only applies to wine not already on our curated list."
+      "question": "Do you offer private dining?",
+      "answer": "Yes, we have exclusive private suites available for intimate gatherings and corporate events. Please contact our events team for more information on tailored menus and arrangements."
     },
     {
       "id": 5,

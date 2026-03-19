@@ -1,0 +1,158 @@
+.about-chef-section {
+  position: relative;
+  background-color: #f8f7f6;
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+.chef-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 56px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateX(150px);
+  will-change: transform, opacity;
+}
+
+.chef-container--visible {
+  animation: chefSlideIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes chefSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 900px) {
+  .chef-container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .chef-image-box {
+    flex: 0 0 42%;
+  }
+
+  .chef-content {
+    flex: 0 0 55%;
+  }
+}
+
+.chef-image-box {
+  max-width: 420px;
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-border-light);
+}
+
+.chef-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.chef-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.chef-content-inner {
+  position: relative;
+  z-index: 3;
+  padding: 40px 0;
+  width: 100%;
+}
+
+.chef-window-bg {
+  position: absolute;
+  top: 0;
+  left: -56px;
+  right: -2000px;
+  bottom: 0;
+  background-color: #eef2f6;
+  z-index: 1;
+  width: 3000px;
+}
+
+.chef-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin: 0 0 6px;
+}
+
+.chef-role {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin: 0 0 20px;
+}
+
+.chef-desc {
+  font-size: 0.88rem;
+  color: var(--color-text-body);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.chef-quote-box {
+  border-left: 3px solid var(--color-border-quote);
+  padding-left: 18px;
+  margin-bottom: 32px;
+}
+
+.chef-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-text-body);
+  margin: 0;
+  line-height: 1.7;
+}
+
+.signature-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text-heading);
+  margin: 0 0 12px;
+}
+
+.signature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.signature-list li {
+  font-size: 0.88rem;
+  color: var(--color-text-body);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.signature-list li::before {
+  content: "•";
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}

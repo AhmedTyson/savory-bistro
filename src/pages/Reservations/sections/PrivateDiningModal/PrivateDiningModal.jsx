@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../../../context';
 import { CheckCircle, X, AlertCircle, ChevronDown } from 'lucide-react';
+import './PrivateDiningModal.css';
 
-function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
+function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
   const { currentUser } = useAuth();
   const [inqName,    setInqName]    = useState('');
   const [inqEmail,   setInqEmail]   = useState('');
@@ -14,7 +15,6 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
   const [inqErrors,  setInqErrors]  = useState({});
   const [inqSuccess, setInqSuccess] = useState(false);
 
-  // Pre-fill fields when modal opens/user changes
   useEffect(() => {
     if (showInquiry && currentUser) {
       setInqName(`${currentUser.firstName} ${currentUser.lastName || ""}`.trim());
@@ -43,7 +43,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
     if (Object.keys(errs).length > 0) return;
 
     const inquiry = {
-      id:        Date.now(),
+      id:        Date.now().toString(),
       userId:    currentUser?.id || 'guest',
       name:      inqName.trim(),
       email:     inqEmail.trim(),
@@ -58,7 +58,8 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
     const stored = JSON.parse(localStorage.getItem('sb_inquiries') || '[]');
     stored.push(inquiry);
     localStorage.setItem('sb_inquiries', JSON.stringify(stored));
-    setLastInquiry(inquiry);
+    
+    if (typeof onSuccess === 'function') onSuccess();
     setInqSuccess(true);
   };
 
@@ -79,7 +80,6 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
         aria-modal="true"
         aria-label="Private Dining Inquiry"
       >
-        {/* drag pill — visible on mobile only via CSS */}
         <div className="res-modal-drag" />
 
         <button
@@ -91,27 +91,24 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
         </button>
 
         {inqSuccess ? (
-          /* ── SUCCESS ── */
-          <div className="res-modal__success">
-            <div className="res-modal__success-icon">
-              <CheckCircle size={36} />
+          <div className="res-modal__success" style={{ padding: '60px 40px', textAlign: 'center' }}>
+            <div className="res-modal__success-icon" style={{ color: 'var(--color-green-sustain)', marginBottom: 20 }}>
+              <CheckCircle size={48} style={{ margin: '0 auto' }} />
             </div>
-            <h2 className="res-modal__title">Inquiry Submitted</h2>
-            <p className="res-modal__subtitle">
+            <h2 className="res-modal__title" style={{ fontFamily: 'var(--font-serif)', fontSize: 28, marginBottom: 12 }}>Inquiry Submitted</h2>
+            <p className="res-modal__subtitle" style={{ fontSize: 14, color: 'var(--color-text-muted)', marginBottom: 30 }}>
               Our events team will reach out within 24 hours to discuss your special occasion.
             </p>
             <button
               className="res-submit-btn"
-              style={{ maxWidth: 240, marginBottom: 0 }}
+              style={{ maxWidth: 200, margin: '0 auto' }}
               onClick={resetInquiry}
             >
               Done
             </button>
           </div>
         ) : (
-          /* ── FORM ── */
           <>
-            {/* Hero strip */}
             <div className="res-modal__hero">
               <img
                 src="/images/Reservations/Private_Dining.webp"
@@ -129,9 +126,8 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
               </div>
             </div>
 
-            {/* Scrollable form body */}
             <div className="res-modal__body">
-              <p className="res-modal__lead">
+              <p className="res-modal__lead" style={{ fontSize: 14, color: 'var(--color-text-muted)', marginBottom: 24, lineHeight: 1.6 }}>
                 Tell us about your event and we'll craft a personalised experience just for you.
               </p>
 
@@ -215,7 +211,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
                   </div>
                   <div className="res-form__field">
                     <label className="res-label">Event Type</label>
-                    <div className="res-select-wrapper">
+                    <div className="res-select-wrapper" style={{ position: 'relative' }}>
                       <select
                         className="res-select"
                         value={inqEvent}
@@ -228,7 +224,10 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, setLastInquiry }) {
                         <option>Social Gathering</option>
                         <option>Other Event</option>
                       </select>
-                      <ChevronDown className="res-select-icon" size={14} />
+                      <ChevronDown 
+                        style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#9E9184' }} 
+                        size={16} 
+                      />
                     </div>
                   </div>
                 </div>

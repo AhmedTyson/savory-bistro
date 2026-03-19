@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { AlertCircle, ChevronDown } from 'lucide-react';
+import './ReservationForm.css';
+
 
 function ReservationForm({
   handleSubmit,
@@ -17,6 +19,7 @@ function ReservationForm({
   setSpecialReqs,
   errors,
   submitError,
+  loading,
   OCCASIONS,
   children // This will be Calendar and TimeSlots
 }) {
@@ -189,8 +192,12 @@ function ReservationForm({
       )}
 
       {/* Submit */}
-      <button type="submit" className="res-submit-btn">
-        Confirm Reservation
+      <button 
+        type="submit" 
+        className="res-submit-btn"
+        disabled={loading}
+      >
+        {loading ? "Confirming..." : "Confirm Reservation"}
       </button>
       {errors.submit && (
         <p className="res-error res-error--center">{errors.submit}</p>

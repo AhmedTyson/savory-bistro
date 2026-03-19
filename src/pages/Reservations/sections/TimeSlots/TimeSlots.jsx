@@ -1,4 +1,6 @@
 import { AlertCircle } from "lucide-react";
+import "./TimeSlots.css";
+
 
 function TimeSlots({
   availableTimes,

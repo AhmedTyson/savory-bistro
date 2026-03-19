@@ -97,33 +97,33 @@ export default function Menu() {
         </div>
       </section>
 
-      {/* Drinks & Wine Section */}
+      {/* Artisan Beverages Section */}
       <section className="Menu__drinks-section">
         <div className="container">
-          <SectionHeader title="Drinks & Wine" align="center" />
+          <SectionHeader title="Artisan Beverages" align="center" />
 
           <div className="Menu__drinks-grid">
-            {/* Vintage Cellar */}
+            {/* Premium Selection */}
             <div className="Menu__drinks-category">
-              <h3 className="Menu__drinks-title">Vintage Cellar</h3>
+              <h3 className="Menu__drinks-title">Premium Selection</h3>
               <div className="Menu__drinks-list">
-                {data.wines.map((wine) => (
-                  <div key={wine.id} className="Menu__drink-item">
+                {data.beverages.map((drink) => (
+                  <div key={drink.id} className="Menu__drink-item">
                     <div className="Menu__drink-info">
-                      <h4 className="Menu__drink-name">{wine.name}</h4>
-                      <span className="Menu__drink-origin">{wine.origin}</span>
+                      <h4 className="Menu__drink-name">{drink.name}</h4>
+                      <span className="Menu__drink-origin">{drink.origin}</span>
                     </div>
-                    <div className="Menu__drink-price">{wine.price}</div>
+                    <div className="Menu__drink-price">{drink.price}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Craft Cocktails */}
+            {/* Artisan Mocktails */}
             <div className="Menu__drinks-category">
-              <h3 className="Menu__drinks-title">Craft Cocktails</h3>
+              <h3 className="Menu__drinks-title">Artisan Mocktails</h3>
               <div className="Menu__drinks-list">
-                {data.cocktails.map((cocktail) => (
+                {data.mocktails.map((cocktail) => (
                   <div key={cocktail.id} className="Menu__drink-item">
                     <div className="Menu__drink-info">
                       <h4 className="Menu__drink-name">{cocktail.name}</h4>

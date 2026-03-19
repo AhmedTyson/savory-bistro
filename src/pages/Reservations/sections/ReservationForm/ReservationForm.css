@@ -1,12 +1,180 @@
-.ReservationForm__submit-error {
-  background: rgba(229, 57, 53, 0.08);
-  border: 1px solid var(--color-border-error);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  color: var(--color-border-error);
-  font-size: 13px;
-  margin-bottom: var(--space-sm);
+/* ReservationForm.css */
+.res-form { display: flex; flex-direction: column; }
+
+.res-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+@media (max-width: 599px) {
+  .res-form__row { grid-template-columns: 1fr; gap: 16px; }
+}
+
+.res-form__field  { display: flex; flex-direction: column; }
+.res-form__section { margin-bottom: 22px; }
+
+.res-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: #8C7F6F;
+  margin-bottom: 9px;
+}
+.res-req { color: var(--color-primary); }
+
+.res-input,
+.res-select,
+.res-textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1.5px solid #E4DDD4;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: var(--font-sans);
+  color: var(--color-text-heading);
+  background: #FCFAF7;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.res-select { appearance: none; -webkit-appearance: none; padding-right: 38px; }
+.res-textarea { resize: vertical; }
+
+.res-input:focus,
+.res-select:focus,
+.res-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(224,123,57,.1);
+}
+.res-input::placeholder,
+.res-textarea::placeholder { color: #C0B5A8; }
+.res-input--error { border-color: var(--color-border-error) !important; }
+
+.res-error {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--color-border-error);
+  margin-top: 5px;
+}
+.res-error--center { justify-content: center; }
+
+/* Custom Dropdown */
+.ContactForm__custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.ContactForm__select-trigger {
+  padding: 13px 15px;
+  background: #FCFAF7;
+  border: 1.5px solid #E4DDD4;
+  border-radius: 10px;
+  font-size: 15px;
+  color: var(--color-text-body);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all .15s;
+  user-select: none;
+}
+
+.ContactForm__select-trigger:hover {
+  border-color: var(--color-primary);
+}
+
+.ContactForm__select-trigger--active {
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(224,123,57,0.1);
+}
+
+.ContactForm__select-icon {
+  color: #9E9184;
+  transition: transform .2s ease;
+}
+
+.ContactForm__select-icon--rotated {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+.ContactForm__select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #E4DDD4;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-y: auto;
+  max-height: 240px;
+}
+
+.ContactForm__select-menu::-webkit-scrollbar { width: 6px; }
+.ContactForm__select-menu::-webkit-scrollbar-thumb {
+  background: #E4DDD4;
+  border-radius: 10px;
+}
+
+.ContactForm__select-item {
+  padding: 11px 15px;
+  font-size: 14px;
+  color: var(--color-text-body);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.ContactForm__select-item:hover {
+  background: #fdf2f0;
+  color: var(--color-primary);
+}
+
+.ContactForm__select-item--selected {
+  background: #fff5eb;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.res-submit-btn {
+  width: 100%;
+  padding: 17px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: background .15s, transform .12s, box-shadow .15s;
+  box-shadow: 0 5px 18px rgba(224,123,57,.28);
+  margin-bottom: 14px;
+}
+.res-submit-btn:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(224,123,57,.35);
+}
+.res-submit-btn:active { transform: translateY(0); }
+
+.ReservationForm__submit-error {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  background: rgba(229,57,53,.07);
+  border: 1px solid var(--color-border-error);
+  border-radius: var(--radius-md);
+  color: var(--color-border-error);
+  font-size: 13px;
+  margin-bottom: 12px;
 }

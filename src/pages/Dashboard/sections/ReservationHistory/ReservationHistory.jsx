@@ -1,99 +1,167 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { CalendarX } from 'lucide-react';
+import { CalendarX, Calendar, Tag, Clock, Users, Info, ChevronRight, CheckCircle } from 'lucide-react';
 import { useAuth } from '../../../../context';
 import './ReservationHistory.css';
 
+const API = 'http://localhost:3001/api';
+
 function ReservationHistory() {
   const { currentUser } = useAuth();
-  const [reservations, setReservations] = useState([]);
-  const [loading,      setLoading]      = useState(true);
+  const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchHistory = async () => {
+    if (!currentUser) return;
+    setLoading(true);
+
+    const userIdStr = String(currentUser.id);
+    let allActivity = [];
+
+    // 1. Inquiries from LocalStorage
+    const inqStored = localStorage.getItem("sb_inquiries");
+    if (inqStored) {
+      try {
+        const inquiries = JSON.parse(inqStored);
+        const userInquiries = inquiries
+          .filter(i => String(i.userId) === userIdStr)
+          .map(i => ({ 
+            ...i, 
+            type: 'inquiry', 
+            timestamp: new Date(i.createdAt).getTime(),
+            dateLabel: i.eventDate,
+            mainInfo: i.eventType
+          }));
+        allActivity = [...allActivity, ...userInquiries];
+      } catch (err) { console.error("Error parsing inquiries:", err); }
+    }
+
+    // 2. Reservations from API
+    try {
+      const { data } = await axios.get(`${API}/reservations?userId=${userIdStr}`);
+      const apiRes = data.reservations || [];
+      const formattedRes = apiRes.map(r => ({ 
+        ...r, 
+        type: 'reservation', 
+        timestamp: new Date(r.submittedAt).getTime(),
+        dateLabel: r.date,
+        mainInfo: r.time
+      }));
+      
+      // Merge: Preference to API data if IDs match, but here they should be distinct enough
+      const existingIds = new Set(allActivity.map(a => a.id));
+      formattedRes.forEach(r => {
+        if (!existingIds.has(r.id)) allActivity.push(r);
+      });
+    } catch (err) { console.error("Failed to fetch reservations:", err); }
+
+    // Sort: Newest first
+    allActivity.sort((a, b) => b.timestamp - a.timestamp);
+    setHistory(allActivity);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    async function fetchReservations() {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:3001/api/reservations?userId=${currentUser.id}`
-        );
-        setReservations(data.reservations || []);
-      } catch (err) {
-        console.error('Failed to load reservations:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchReservations();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    fetchHistory();
+  }, [currentUser]);
 
-  const sorted = [...reservations].sort(
-    (a, b) => new Date(b.submittedAt) - new Date(a.submittedAt)
-  );
+  const formatDate = (dateValue) => {
+    if (!dateValue || dateValue === 'Not specified') return '—';
+    try {
+      return new Date(dateValue).toLocaleDateString('en-US', {
+        weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
+      });
+    } catch { return dateValue; }
+  };
 
   return (
     <div className="ReservationHistory">
+      <div className="ReservationHistory__header">
+        <h2 className="ReservationHistory__title">Activity & Reservations</h2>
+        <p className="ReservationHistory__subtitle">Your dining journey at Savory Bistro</p>
+      </div>
+
       {loading ? (
-        <p className="ReservationHistory__loading">Loading your reservations…</p>
-      ) : sorted.length === 0 ? (
+        <div className="ReservationHistory__loading">
+          <div className="res-spinner" />
+          <p>Gathering your history…</p>
+        </div>
+      ) : history.length === 0 ? (
         <div className="ReservationHistory__empty">
-          <CalendarX size={40} className="ReservationHistory__empty-icon" />
+          <CalendarX size={44} className="ReservationHistory__empty-icon" />
           <p className="ReservationHistory__empty-text">
-            You haven't made any reservations yet.
+            You haven't made any reservations or inquiries yet.
           </p>
           <Link to="/reservations" className="ReservationHistory__book-link">
-            Book your first table →
+            Book a Table →
           </Link>
         </div>
       ) : (
-        <>
-          <h2 className="ReservationHistory__title">Reservation History</h2>
-          <div className="ReservationHistory__list">
-            {sorted.map((r) => {
-              const dateLabel = (() => {
-                try {
-                  return new Date(r.date).toLocaleDateString('en-US', {
-                    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
-                  });
-                } catch { return r.date; }
-              })();
-
-              return (
-                <div key={r.id} className="ReservationHistory__card">
-                  <div className="ReservationHistory__card-header">
-                    <span className="ReservationHistory__card-date">{dateLabel}</span>
-                    <span className="ReservationHistory__card-badge">Confirmed</span>
+        <div className="ReservationHistory__list">
+          {history.map((item) => {
+            const isRes = item.type === 'reservation';
+            return (
+              <div key={item.id} className={`ReservationHistory__card ${item.type}`}>
+                <div className="ReservationHistory__card-sidebar">
+                  <div className={`ReservationHistory__icon-box ${item.type}`}>
+                    {isRes ? <Calendar size={18} /> : <Tag size={18} />}
                   </div>
+                  <div className="ReservationHistory__line" />
+                </div>
 
-                  <div className="ReservationHistory__card-details">
-                    <div className="ReservationHistory__detail">
-                      <span className="ReservationHistory__detail-label">Time</span>
-                      <span className="ReservationHistory__detail-value">{r.time || '—'}</span>
-                    </div>
-                    <div className="ReservationHistory__detail">
-                      <span className="ReservationHistory__detail-label">Party Size</span>
-                      <span className="ReservationHistory__detail-value">
-                        {r.partySize ? `${r.partySize} ${parseInt(r.partySize) === 1 ? 'Guest' : 'Guests'}` : '—'}
+                <div className="ReservationHistory__card-main">
+                  <div className="ReservationHistory__card-top">
+                    <div className="ReservationHistory__type-info">
+                      <span className={`ReservationHistory__badge ${item.type}`}>
+                        {isRes ? 'Table Booking' : 'Private Dining'}
                       </span>
+                      <span className="ReservationHistory__id">#{String(item.id).slice(-6)}</span>
                     </div>
-                    <div className="ReservationHistory__detail">
-                      <span className="ReservationHistory__detail-label">Occasion</span>
-                      <span className="ReservationHistory__detail-value">
-                        {r.occasion && r.occasion !== 'None' ? r.occasion : '—'}
-                      </span>
+                    <div className="ReservationHistory__status">
+                      <CheckCircle size={12} />
+                      {isRes ? 'Confirmed' : 'Inquiry Sent'}
                     </div>
                   </div>
 
-                  {r.specialRequests && r.specialRequests !== 'None' && (
-                    <div className="ReservationHistory__card-footer">
-                      <span className="ReservationHistory__requests-label">Special Requests</span>
-                      <span className="ReservationHistory__requests-value">{r.specialRequests}</span>
+                  <h3 className="ReservationHistory__card-title">
+                    {formatDate(item.dateLabel)}
+                  </h3>
+
+                  <div className="ReservationHistory__card-grid">
+                    <div className="ReservationHistory__grid-item">
+                      <Clock size={14} />
+                      <span>{item.mainInfo}</span>
+                    </div>
+                    <div className="ReservationHistory__grid-item">
+                      <Users size={14} />
+                      <span>{item.partySize} {parseInt(item.partySize) === 1 ? 'Guest' : 'Guests'}</span>
+                    </div>
+                    {isRes ? (
+                       <div className="ReservationHistory__grid-item">
+                         <Info size={14} />
+                         <span>{item.occasion && item.occasion !== 'None' ? item.occasion : 'Standard Visit'}</span>
+                       </div>
+                    ) : (
+                      <div className="ReservationHistory__grid-item">
+                         <Tag size={14} />
+                         <span>Private Event</span>
+                       </div>
+                    )}
+                  </div>
+
+                  {(item.specialRequests || item.message) && (
+                    <div className="ReservationHistory__notes">
+                      <p>"{item.specialRequests || item.message}"</p>
                     </div>
                   )}
                 </div>
-              );
-            })}
-          </div>
-        </>
+                
+                <ChevronRight size={20} className="ReservationHistory__arrow" />
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );

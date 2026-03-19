@@ -1,0 +1,145 @@
+/* ReservationSidebar.css */
+.res-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 84px;
+}
+
+.res-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(26,18,8,.07), 0 1px 3px rgba(26,18,8,.04);
+}
+
+.res-card__title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  font-family: var(--font-sans);
+  padding: 17px 18px 10px;
+}
+.res-card__icon--primary { color: var(--color-primary); flex-shrink: 0; }
+.res-card__padded { padding: 0 18px 17px; }
+
+/* hours */
+.res-hours { margin-bottom: 8px; }
+.res-hours__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 13.5px;
+  border-bottom: 1px solid #F0EBE3;
+}
+.res-hours__row:last-child { border-bottom: none; }
+.res-hours__row span:first-child { color: var(--color-text-muted); }
+.res-hours__row span:last-child  { font-weight: 700; color: var(--color-text-heading); }
+.res-card__note {
+  font-size: 11.5px;
+  font-style: italic;
+  color: #A89C8E;
+  line-height: 1.6;
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid #F0EBE3;
+  margin-top: 8px;
+}
+
+/* contact */
+.res-card--beige { background: #F9F6F1; }
+.res-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text-heading);
+  padding: 5px 0;
+}
+.res-contact-item svg { color: var(--color-text-muted); flex-shrink: 0; }
+.res-card__large-note {
+  margin-top: 14px;
+  padding: 12px 13px;
+  background: rgba(224,123,57,.07);
+  border-radius: 9px;
+}
+.res-card__large-note strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+.res-card__large-note p { font-size: 12px; color: var(--color-text-body); line-height: 1.65; margin: 0; }
+
+/* private dining */
+.res-card--dining { padding: 0; }
+.res-card__hero {
+  position: relative;
+  height: 150px;
+  background: linear-gradient(150deg,#2A1508 0%,#150A03 100%);
+  overflow: hidden;
+}
+.res-card__img { width: 100%; height: 100%; object-fit: cover; opacity: .8; transition: transform .5s ease; }
+.res-card--dining:hover .res-card__img { transform: scale(1.04); }
+.res-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 55%);
+}
+.res-card__overlay-title {
+  position: absolute;
+  bottom: 13px;
+  left: 16px;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+  line-height: 1.2;
+}
+.res-card__body { padding: 15px 18px 18px; }
+.res-card__text { font-size: 13px; color: var(--color-text-body); line-height: 1.65; margin-bottom: 14px; }
+
+.res-inquire-btn {
+  display: block;
+  width: 100%;
+  height: 42px;
+  background: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+  border-radius: 9px;
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background .14s, color .14s;
+  letter-spacing: .02em;
+}
+.res-inquire-btn:hover { background: var(--color-primary); color: #fff; }
+
+/* map */
+.res-card--map { padding: 0; }
+.res-map-container { 
+  width: 100%; 
+  height: 155px; 
+  overflow: hidden; 
+  background: #C8D9CE; 
+}
+.res-map-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px 14px;
+}
+.res-map-info { display: flex; flex-direction: column; gap: 1px; }
+.res-map-info strong { font-size: 13px; font-weight: 700; color: var(--color-text-heading); }
+.res-map-info span   { font-size: 11.5px; color: var(--color-text-muted); }
+.res-map-link { font-size: 12.5px; font-weight: 700; color: var(--color-primary); text-decoration: none; white-space: nowrap; }
+.res-map-link:hover { text-decoration: underline; }

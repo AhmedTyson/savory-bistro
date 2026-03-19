@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { X, Play } from 'lucide-react';
 import SectionHeader from '../../components/SectionHeader/SectionHeader';
 import Button from '../../components/Button/Button';
 import data from '../../../mock-data.json';
 import './Gallery.css';
 
 export default function Gallery() {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('all');
+  const [activeVideo, setActiveVideo] = useState(null);
 
   const categories = [
     { id: 'all', label: 'All' },
@@ -50,17 +54,17 @@ export default function Gallery() {
               
               <div className="Gallery__overlay">
                 {item.type === 'video' && (
-                  <div className="Gallery__video-content">
+                  <div className="Gallery__video-content" onClick={() => setActiveVideo(item.videoSrc)}>
                     <span className="Gallery__video-tag">VIDEO</span>
                     <div className="Gallery__play-btn">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                      <Play fill="currentColor" size={24} />
                     </div>
                     <span className="Gallery__video-label">{item.alt}</span>
                   </div>
                 )}
                 {item.hasReservation && (
                   <div className="Gallery__reservation-content">
-                    <Button variant="primary" className="Gallery__reserve-btn">
+                    <Button variant="primary" className="Gallery__reserve-btn" onClick={() => navigate('/reservations')}>
                       <svg className="Gallery__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                       Reserve a Table
                     </Button>
@@ -96,6 +100,23 @@ export default function Gallery() {
           </div>
         </div>
       </div>
+
+      {/* Video Modal Popup */}
+      {activeVideo && (
+        <div className="Gallery__video-modal" onClick={() => setActiveVideo(null)}>
+          <div className="Gallery__modal-content" onClick={e => e.stopPropagation()}>
+            <button className="Gallery__modal-close" onClick={() => setActiveVideo(null)}>
+              <X size={24} />
+            </button>
+            <video 
+              src={activeVideo} 
+              className="Gallery__video-player" 
+              controls 
+              autoPlay
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
