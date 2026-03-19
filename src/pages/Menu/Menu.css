@@ -7,10 +7,16 @@
 /* Hero Section */
 .Menu__hero {
   position: relative;
-  height: 480px;
-  background-image: url('/images/menu/hero-pic.webp');
+  height: 45vh;
+  min-height: 350px;
+  background-image: url('/images/menu/menu-hero-pic.webp');
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
 }
 
 .Menu__hero-overlay {

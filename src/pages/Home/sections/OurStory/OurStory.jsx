@@ -61,7 +61,7 @@ export default function OurStory() {
             <div className="OurStory__chef-frame">
               <div className="OurStory__chef-card">
                 <img
-                  src="/images/HomePage/The_Chef.webp"
+                  src="/images/HomePage/about-chef-rossi-home.webp"
                   alt="Our Head Chef"
                   loading="lazy"
                   className="OurStory__chef-image"

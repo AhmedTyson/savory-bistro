@@ -65,19 +65,19 @@ const AboutHero = () => {
       <div className="about-hero-images">
         <div
           className="img-block img-tall"
-          style={{ backgroundImage: "url('/images/AboutUs/About us 5.webp')" }}
+          style={{ backgroundImage: "url('/images/AboutUs/about-hero-tall.webp')" }}
         ></div>
         <div
           className="img-block img-menu"
-          style={{ backgroundImage: "url('/images/AboutUs/About us 2.webp')" }}
+          style={{ backgroundImage: "url('/images/AboutUs/about-hero-service.webp')" }}
         ></div>
         <div
           className="img-block img-team"
-          style={{ backgroundImage: "url('/images/AboutUs/About us 1.webp')" }}
+          style={{ backgroundImage: "url('/images/AboutUs/about-team-all.webp')" }}
         ></div>
         <div
           className="img-block img-store"
-          style={{ backgroundImage: "url('/images/AboutUs/About us 3.webp')" }}
+          style={{ backgroundImage: "url('/images/AboutUs/about-interior-storefront.webp')" }}
         ></div>
       </div>
     </AboutSection>

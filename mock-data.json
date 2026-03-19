@@ -2,7 +2,7 @@
   "menu": [
     {
       "id": 1,
-      "src": "/images/menu/salad (6).webp",
+      "src": "/images/menu/menu-avocado-salad.webp",
       "name": "Avocado Salad",
       "description": "Avocado, tomato, cucumber, olive oil, lemon juice.",
       "price": 28,
@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "src": "/images/menu/small salmon (1).webp",
+      "src": "/images/menu/menu-pan-seared-salmon.webp",
       "name": "Pan-Seared Salmon",
       "description": "Atlantic salmon, asparagus, lemon-butter sauce, baby potatoes.",
       "price": 34,
@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "src": "/images/menu/meat (2).webp",
+      "src": "/images/menu/menu-ribeye-steak.webp",
       "name": "Ribeye Steak",
       "description": "12oz Prime ribeye, garlic herb butter, roasted root vegetables.",
       "price": 42,
@@ -32,7 +32,7 @@
     },
     {
       "id": 4,
-      "src": "/images/menu/pasta (3).webp",
+      "src": "/images/menu/menu-harvest-pasta.webp",
       "name": "Harvest Pasta",
       "description": "Fresh fettuccine, seasonal vegetables, garlic, olive oil, vegan parmesan.",
       "price": 24,
@@ -42,7 +42,7 @@
     },
     {
       "id": 5,
-      "src": "/images/menu/meat lamp (4).webp",
+      "src": "/images/menu/menu-lamb-shank.webp",
       "name": "Lamb Shank",
       "description": "Slow-braised lamb, creamy polenta, pomegranate reduction, rosemary.",
       "price": 38,
@@ -52,7 +52,7 @@
     },
     {
       "id": 6,
-      "src": "/images/menu/fish (5).webp",
+      "src": "/images/menu/menu-chilean-sea-bass.webp",
       "name": "Chilean Sea Bass",
       "description": "Pan-seared sea bass, miso glaze, bok choy, ginger-soy broth.",
       "price": 45,
@@ -159,13 +159,13 @@
     }
   ],
   "gallery": [
-    { "id": 1, "src": "/images/gallery/salmon.webp", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 2, "src": "/images/gallery/chocolate cake (3).webp", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 3, "src": "/images/gallery/pizza (5).webp", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
-    { "id": 4, "src": "/images/gallery/chef (1).webp", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium", "videoSrc": "/images/gallery/Chef_Video_Intro_for_Savory_Bistro.mp4" },
-    { "id": 5, "src": "/images/gallery/drink (4).webp", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
-    { "id": 6, "src": "/images/gallery/interior (6).webp", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
-    { "id": 7, "src": "/images/gallery/table(2).webp", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
+    { "id": 1, "src": "/images/gallery/gallery-grilled-salmon.webp", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 2, "src": "/images/gallery/gallery-chocolate-cake.webp", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 3, "src": "/images/gallery/gallery-wood-fired-pizza.webp", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
+    { "id": 4, "src": "/images/gallery/gallery-chef-cooking.webp", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium", "videoSrc": "/images/gallery/chef-intro-video.mp4" },
+    { "id": 5, "src": "/images/gallery/gallery-cocktail-close-up.webp", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
+    { "id": 6, "src": "/images/gallery/gallery-dining-interior.webp", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
+    { "id": 7, "src": "/images/gallery/gallery-table-setting.webp", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
   ],
   "team": [
     {
@@ -198,7 +198,7 @@
       "id": 1,
       "name": "Ahmed Tyson",
       "role": "Home, Login and Register Pages",
-      "image": "/images/AboutUs/Avatar 1.jpeg",
+      "image": "/images/AboutUs/avatar-ahmed-tyson.jpg",
       "bio": "Ahmed leads our core frontend development. Bro cooked so hard! 😉",
       "linkedin": "https://www.linkedin.com/in/ahmed-elsayed-8b9bba28a"
     },
@@ -206,7 +206,7 @@
       "id": 2,
       "name": "Hagar Ashraf",
       "role": "Gallery and Menu Pages",
-      "image": "/images/AboutUs/Avatar 2.jpeg",
+      "image": "/images/AboutUs/avatar-hagar-ashraf.jpg",
       "bio": "Hagar designs our Gallery and Menu experiences with sophisticated detail.",
       "linkedin": "https://www.linkedin.com/in/hagar-ashraf-4550ba307"
     },
@@ -214,7 +214,7 @@
       "id": 3,
       "name": "Bassant Hesham",
       "role": "Reservation Page",
-      "image": "/images/AboutUs/Avatar 3.jpeg",
+      "image": "/images/AboutUs/avatar-bassant-hesham.jpg",
       "bio": "Bassant specializes in streamlining our reservation systems.",
       "linkedin": "https://www.linkedin.com/in/bassant-hesham-221353378"
     },
@@ -222,7 +222,7 @@
       "id": 4,
       "name": "Youssef Elsherif",
       "role": "ContactUs Page",
-      "image": "/images/AboutUs/Avatar 4.jpeg",
+      "image": "/images/AboutUs/avatar-youssef-elsherif.jpg",
       "bio": "Youssef manages our contact systems with operational excellence.",
       "linkedin": "https://www.linkedin.com/in/yousef-sherif-41a736328"
     },
@@ -230,7 +230,7 @@
       "id": 5,
       "name": "Ahmed Sorour",
       "role": "AboutUs Page",
-      "image": "/images/AboutUs/Avatar 5.jpeg",
+      "image": "/images/AboutUs/avatar-ahmed-sorour.jpg",
       "bio": "Sorour architectures our brand story through modern web development.",
       "linkedin": "https://www.linkedin.com/in/ahmed-sorour-a41269368"
     }
@@ -301,21 +301,21 @@
       "text": "The most incredible culinary experience I've had in years. The truffle pasta is to die for, and the service is impeccably warm.",
       "author": "Sarah Jenkins",
       "role": "FOOD CRITIC",
-      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+      "image": "/images/HomePage/avatar-sara-jenkins.webp"
     },
     {
       "id": 2,
       "text": "A masterclass in flavor and presentation. Each course told a unique story of local ingredients meeting world-class technique.",
       "author": "Michael Chen",
       "role": "LIFESTYLE BLOGGER",
-      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+      "image": "/images/HomePage/avatar-sara-jenkins.webp"
     },
     {
       "id": 3,
       "text": "Authentic, vibrant, and unforgettable. Savory Bistro has set a new standard for fine dining in the city.",
       "author": "Elena Rodriguez",
       "role": "GASTRONOMY EXPERT",
-      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+      "image": "/images/HomePage/avatar-sara-jenkins.webp"
     }
   ]
 }

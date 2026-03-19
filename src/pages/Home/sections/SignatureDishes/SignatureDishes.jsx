@@ -58,7 +58,7 @@ export default function SignatureDishes({ dishes }) {
                 <div className="SignatureDishes__card">
                   <div className="SignatureDishes__image-wrapper">
                     <img 
-                      src={`/images/HomePage/${dish.name.replace(/ /g, '_')}.webp`} 
+                      src={`/images/HomePage/${dish.name.toLowerCase().replace(/ /g, '-')}.webp`} 
                       alt={dish.name} 
                       loading="lazy"
                       className="SignatureDishes__image"

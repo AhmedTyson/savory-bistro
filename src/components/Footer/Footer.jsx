@@ -4,7 +4,48 @@ import { useState } from 'react';
 import './Footer.css';
 
 function Footer({ variant = 'full' }) {
-  const [email, setEmail] = useState('');
+  const [email, setEmail]     = useState('');
+  const [status, setStatus]   = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      setStatus('error');
+      setMessage('Please enter your email.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setStatus('error');
+      setMessage('Please enter a valid email.');
+      return;
+    }
+
+    setStatus('loading');
+    setMessage('');
+
+    // Simulate API call
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setStatus('success');
+      setMessage('Thank you for subscribing!');
+      setEmail('');
+    } catch (err) {
+      setStatus('error');
+      setMessage('Something went wrong. Please try again.');
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+    if (status !== 'idle') {
+      setStatus('idle');
+      setMessage('');
+    }
+  };
 
   return (
     <footer className="Footer">
@@ -46,18 +87,35 @@ function Footer({ variant = 'full' }) {
           <div className="Footer__column">
             <h4 className="Footer__column-title">Newsletter</h4>
             <p className="Footer__text mb-4">Get exclusive offers and recipes delivered to your inbox.</p>
-            <div className="Footer__newsletter">
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="Footer__newsletter-input"
-              />
-              <button className="Footer__newsletter-btn" aria-label="Subscribe">
-                <ArrowRight size={16} />
-              </button>
-            </div>
+            <form className="Footer__newsletter-form" onSubmit={handleSubmit}>
+              <div className="Footer__newsletter">
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={email}
+                  onChange={handleInputChange}
+                  className={`Footer__newsletter-input ${status === 'error' ? 'Footer__newsletter-input--error' : ''}`}
+                  disabled={status === 'loading'}
+                />
+                <button 
+                  type="submit"
+                  className={`Footer__newsletter-btn ${status === 'loading' ? 'Footer__newsletter-btn--loading' : ''}`} 
+                  aria-label="Subscribe"
+                  disabled={status === 'loading'}
+                >
+                  {status === 'loading' ? (
+                    <div className="Footer__newsletter-spinner"></div>
+                  ) : (
+                    <ArrowRight size={16} />
+                  )}
+                </button>
+              </div>
+              {message && (
+                <p className={`Footer__newsletter-msg Footer__newsletter-msg--${status}`}>
+                  {message}
+                </p>
+              )}
+            </form>
           </div>
 
         </div>

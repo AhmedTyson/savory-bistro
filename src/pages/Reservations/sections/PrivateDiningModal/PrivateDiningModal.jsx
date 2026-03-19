@@ -112,7 +112,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
           <>
             <div className="res-modal__hero">
               <img
-                src="/images/Reservations/Private_Dining.webp"
+                src="/images/Reservations/private-dining-hero.webp"
                 alt=""
                 className="res-modal__hero-img"
                 onError={e => { e.target.style.display = 'none'; }}

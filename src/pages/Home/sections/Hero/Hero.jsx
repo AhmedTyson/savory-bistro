@@ -10,7 +10,7 @@ export default function Hero() {
       <div 
         className="Hero__bg"
         style={{ 
-          backgroundImage: 'url("/images/HomePage/Burger_index_hero_section.webp")',
+          backgroundImage: 'url("/images/HomePage/burger-hero.webp")',
           backgroundColor: 'var(--color-bg-hero)'
         }}
       >
