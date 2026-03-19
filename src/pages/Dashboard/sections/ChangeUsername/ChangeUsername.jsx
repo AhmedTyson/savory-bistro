@@ -5,7 +5,7 @@ import { Button } from '../../../../components';
 import './ChangeUsername.css';
 
 function ChangeUsername() {
-  const { currentUser, updateUser } = useAuth();
+  const { currentUser, updateUser, showToast } = useAuth();
 
   const [firstName,      setFirstName]      = useState(currentUser?.firstName || '');
   const [lastName,       setLastName]       = useState(currentUser?.lastName  || '');
@@ -38,6 +38,7 @@ function ChangeUsername() {
         lastName:  lastName.trim(),
       });
       updateUser({ firstName: firstName.trim(), lastName: lastName.trim() });
+      showToast({ type: 'nameUpdate', firstName: firstName.trim() });
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 
 export const AuthContext = createContext(null);
 
@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
     return saved ? JSON.parse(saved) : null;
   })
   const [allUsers, setAllUsers]       = useState([])
-  const [pendingToast, setPendingToast] = useState(null)
+  const [activeToast, setActiveToast] = useState(null)
 
   // On mount, load users from our Backend API
   useEffect(() => {
@@ -27,30 +27,36 @@ export function AuthProvider({ children }) {
     fetchUsers()
   }, [])
 
-  function login(user) {
+  const login = useCallback((user) => {
     localStorage.setItem('savory_user', JSON.stringify(user))
     setCurrentUser(user)
-  }
+  }, [])
 
-  function logout() {
+  const logout = useCallback(() => {
     const name = currentUser?.firstName || ''
     localStorage.removeItem('savory_user')
     setCurrentUser(null)
-    setPendingToast({ type: 'logout', firstName: name })
-  }
+    setActiveToast({ type: 'logout', firstName: name, id: Date.now() })
+  }, [currentUser])
 
-  function clearPendingToast() {
-    setPendingToast(null)
-  }
+  const showToast = useCallback((toastData) => {
+    setActiveToast({ ...toastData, id: Date.now() });
+  }, []);
 
-  function updateUser(updatedFields) {
-    const newUser = { ...currentUser, ...updatedFields }
-    localStorage.setItem('savory_user', JSON.stringify(newUser))
-    setCurrentUser(newUser)
-  }
+  const clearToast = useCallback(() => {
+    setActiveToast(null)
+  }, [])
+
+  const updateUser = useCallback((updatedFields) => {
+    setCurrentUser(prev => {
+      const newUser = { ...prev, ...updatedFields }
+      localStorage.setItem('savory_user', JSON.stringify(newUser))
+      return newUser
+    })
+  }, [])
 
   // Register is now async!
-  async function registerUser({ firstName, lastName, email, password }) {
+  const registerUser = useCallback(async ({ firstName, lastName, email, password }) => {
     // 1. Initial frontend duplicate check
     const duplicate = allUsers.find(
       u => u.email.toLowerCase() === email.trim().toLowerCase()
@@ -99,9 +105,9 @@ export function AuthProvider({ children }) {
       console.error('Registration failed:', err)
       return { success: false, error: 'Could not connect to the server.' }
     }
-  }
+  }, [allUsers]);
 
-  function validateLogin(email, password) {
+  const validateLogin = useCallback((email, password) => {
     const found = allUsers.find(
       u => u.email.toLowerCase() === email.trim().toLowerCase()
         && u.password === password
@@ -113,20 +119,23 @@ export function AuthProvider({ children }) {
       lastName:  found.lastName,
       email:     found.email,
     }
-  }
+  }, [allUsers]);
+
+  const value = useMemo(() => ({
+    currentUser,
+    user: currentUser,
+    login,
+    logout,
+    registerUser,
+    validateLogin,
+    updateUser,
+    activeToast,
+    showToast,
+    clearToast,
+  }), [currentUser, activeToast, login, logout, registerUser, validateLogin, updateUser, showToast, clearToast]);
 
   return (
-    <AuthContext.Provider value={{
-      currentUser,
-      user: currentUser, // Alias for requested logic
-      login,
-      logout,
-      registerUser,
-      validateLogin,
-      updateUser,
-      pendingToast,
-      clearPendingToast,
-    }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )

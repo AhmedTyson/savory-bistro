@@ -1,65 +1,118 @@
-import { useEffect, useState } from 'react'
-import { CheckCircle, X } from 'lucide-react'
-import './Toast.css'
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { CheckCircle, X, Info, AlertTriangle, LogOut, Calendar } from "lucide-react";
+import "./Toast.css";
 
-// Props:
-//   type       — 'signup' | 'login'
-//   firstName  — string, the user's first name
-//   onDismiss  — callback to clear the toast from parent state
+// Unified Timeout Constants
+export const TOAST_VISIBLE_MS = 4000;
+export const TOAST_ANIM_MS    = 500;
 
-const MESSAGES = {
+// Premium Message Configurations
+const TOAST_CONFIGS = {
   signup: (name) => ({
-    title:    `Welcome to Savory Bistro, ${name}!`,
-    subtitle: 'Your account has been created. Enjoy your experience.',
+    title: `Welcome, ${name}!`,
+    subtitle: "Your journey with Savory Bistro begins now.",
+    icon: <CheckCircle size={22} />,
   }),
   login: (name) => ({
-    title:    `Welcome back, ${name}!`,
-    subtitle: 'Great to have you with us again.',
+    title: `Welcome back, ${name}!`,
+    subtitle: "It is wonderful to have you with us again.",
+    icon: <CheckCircle size={22} />,
   }),
   logout: (name) => ({
-    title:    `See you soon, ${name}!`,
-    subtitle: 'You have been signed out successfully.',
+    title: `See you soon, ${name}!`,
+    subtitle: "You have been signed out successfully.",
+    icon: <LogOut size={22} />,
   }),
   reservation: (name, extra) => ({
-    title: `Table Confirmed, ${name}!`,
-    subtitle: `We'll see you on ${extra?.date} at ${extra?.time}. See you then!`,
+    title: "Table Confirmed!",
+    subtitle: `We'll see you on ${extra?.date} at ${extra?.time}.`,
+    icon: <Calendar size={22} />,
   }),
-}
+  inquiry: (name) => ({
+    title: "Inquiry Received",
+    subtitle: "We will contact you shortly about your event.",
+    icon: <Info size={22} />,
+  }),
+  nameUpdate: (name) => ({
+    title: "Profile Updated",
+    subtitle: "Your information has been saved successfully.",
+    icon: <CheckCircle size={22} />,
+  }),
+  passwordUpdate: () => ({
+    title: "Security Updated",
+    subtitle: "Your password has been successfully changed.",
+    icon: <CheckCircle size={22} />,
+  }),
+  error: () => ({
+    title: "Something went wrong",
+    subtitle: "Please try again in a moment.",
+    icon: <AlertTriangle size={22} />,
+  }),
+};
 
-export default function Toast({ type, firstName, extra, onDismiss }) {
-  const [exiting, setExiting] = useState(false)
+/**
+ * Toast V2 - Re-engineered for stability and "Wow" factor.
+ * Uses React Portal and sophisticated glassmorphism.
+ */
+export default function Toast({
+  type,
+  firstName,
+  extra,
+  onDismiss,
+  isExiting,
+}) {
+  const [localExiting, setLocalExiting] = useState(false);
 
-  const { title, subtitle } = MESSAGES[type]?.(firstName, extra) ?? {
-    title: 'Welcome!', subtitle: ''
-  }
+  // Use either parent-controlled exit or local automatic exit
+  const exiting = isExiting || localExiting;
+
+  const config =
+    TOAST_CONFIGS[type]?.(firstName, extra) || TOAST_CONFIGS.error();
 
   useEffect(() => {
-    // Start exit animation after 3.8s, then call onDismiss at 4.3s
-    const exitTimer = setTimeout(() => setExiting(true), 3800)
-    const doneTimer = setTimeout(() => onDismiss(), 4300)
-    return () => { clearTimeout(exitTimer); clearTimeout(doneTimer) }
-  }, [onDismiss])
+    // Reset state for new toast
+    setLocalExiting(false);
 
-  function handleClose() {
-    setExiting(true)
-    setTimeout(() => onDismiss(), 500)
-  }
+    // Automatic dismissal sequence: 
+    // Wait for the visible duration, then toggle exit animation state, then call onDismiss
+    const exitTimer = setTimeout(() => setLocalExiting(true), TOAST_VISIBLE_MS);
+    const doneTimer = setTimeout(() => onDismiss(), TOAST_VISIBLE_MS + TOAST_ANIM_MS);
 
-  return (
-    <div className={`Toast ${exiting ? 'Toast--exit' : 'Toast--enter'}`}
-         role="status" aria-live="polite">
-      <div className="Toast__icon">
-        <CheckCircle size={22} />
+    return () => {
+      clearTimeout(exitTimer);
+      clearTimeout(doneTimer);
+    };
+  }, [type, firstName, onDismiss]);
+
+  const handleManualClose = () => {
+    setLocalExiting(true);
+    setTimeout(() => onDismiss(), TOAST_ANIM_MS);
+  };
+
+  // Portal target ensure it sits on top of everything
+  return createPortal(
+    <div
+      className={`Toast ${exiting ? "Toast--exit" : "Toast--enter"}`}
+      role="status"
+    >
+      <div className="Toast__icon-wrap">{config.icon}</div>
+
+      <div className="Toast__content">
+        <h4 className="Toast__title">{config.title}</h4>
+        <p className="Toast__subtitle">{config.subtitle}</p>
       </div>
-      <div className="Toast__body">
-        <p className="Toast__title">{title}</p>
-        <p className="Toast__subtitle">{subtitle}</p>
-      </div>
-      <button className="Toast__close" onClick={handleClose} aria-label="Dismiss">
-        <X size={16} />
+
+      <button
+        className="Toast__close"
+        onClick={handleManualClose}
+        aria-label="Dismiss"
+      >
+        <X size={18} />
       </button>
-      {/* Progress bar that drains over 4 seconds */}
+
       <div className="Toast__progress" />
-    </div>
-  )
+    </div>,
+    document.body,
+  );
 }

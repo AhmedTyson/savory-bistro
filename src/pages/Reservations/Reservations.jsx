@@ -21,7 +21,7 @@ import './Reservations.css';
 const API = 'http://localhost:3001/api';
 
 function Reservations() {
-  const { currentUser } = useAuth();
+  const { currentUser, showToast } = useAuth();
   const navigate        = useNavigate();
 
   /* ── Form State ── */
@@ -164,7 +164,8 @@ function Reservations() {
       const saved = data.reservation || data;
       localStorage.setItem(`sb_last_reservation_${currentUser?.id}`, JSON.stringify(saved));
       await syncHistory();
-      navigate("/", { replace: true, state: { toast: "reservation", firstName: currentUser?.firstName, date: selectedDate, time: selectedTime } });
+      showToast({ type: 'reservation', firstName: currentUser?.firstName, extra: { date: selectedDate, time: selectedTime } });
+      // navigate("/", { replace: true, state: { toast: "reservation", firstName: currentUser?.firstName, date: selectedDate, time: selectedTime } });
     } catch { setSubmitError("Failed to book. Try again."); }
     finally { setLoading(false); }
   };

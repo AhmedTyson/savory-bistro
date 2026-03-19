@@ -15,48 +15,8 @@ import Testimonials from "./sections/Testimonials/Testimonials";
 import "./Home.css";
 
 function Home() {
-  const location = useLocation();
-  const { pendingToast, clearPendingToast } = useAuth();
-
-  const [toast, setToast] = useState(() => {
-    const s = location.state;
-    if (!s || !s.toast) return null;
-    if (s.toast === 'reservation') {
-      return {
-        type: 'reservation',
-        firstName: s.firstName,
-        extra: { date: s.date, time: s.time }
-      };
-    }
-    return { type: s.toast, firstName: s.firstName };
-  });
-
-  useEffect(() => {
-    // 1. Handle pending toasts from Context (e.g. Logout)
-    if (pendingToast) {
-      setToast(pendingToast);
-      clearPendingToast();
-    }
-
-    // 2. Clear location state to prevent toast repeating on refresh
-    if (location.state?.toast) {
-      window.history.replaceState({}, document.title);
-    }
-  }, [pendingToast, clearPendingToast, location.state]);
-
-  const dismissToast = useCallback(() => setToast(null), []);
-
   return (
     <div className="home-page overflow-x-hidden">
-      {toast && (
-        <Toast
-          type={toast.type}
-          firstName={toast.firstName}
-          extra={toast.extra}
-          onDismiss={dismissToast}
-        />
-      )}
-
       <Hero />
       <InfoBar />
       <OurStory />

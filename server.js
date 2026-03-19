@@ -62,6 +62,34 @@ app.post("/api/users", (req, res) => {
   }
 });
 
+app.patch("/api/users/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+    console.log(`PATCH /api/users/${id} called with:`, updates);
+
+    const data = fs.readFileSync(USERS_FILE, "utf8");
+    const db = JSON.parse(data);
+
+    const index = db.users.findIndex((u) => String(u.id) === String(id));
+    if (index === -1) {
+      console.log(`User ${id} not found in DB`);
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Merge updates
+    db.users[index] = { ...db.users[index], ...updates };
+
+    fs.writeFileSync(USERS_FILE, JSON.stringify(db, null, 2), "utf8");
+    console.log(`User ${id} updated successfully and saved to ${USERS_FILE}`);
+
+    res.json({ success: true, user: db.users[index] });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Failed to update user" });
+  }
+});
+
 // ─── RESERVATION ROUTES ────────────────────────────────────
 
 app.get("/api/reservations", (req, res) => {

@@ -4,7 +4,7 @@ import { CheckCircle, X, AlertCircle, ChevronDown } from 'lucide-react';
 import './PrivateDiningModal.css';
 
 function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
-  const { currentUser } = useAuth();
+  const { currentUser, showToast } = useAuth();
   const [inqName,    setInqName]    = useState('');
   const [inqEmail,   setInqEmail]   = useState('');
   const [inqPhone,   setInqPhone]   = useState('');
@@ -60,6 +60,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
     localStorage.setItem('sb_inquiries', JSON.stringify(stored));
     
     if (typeof onSuccess === 'function') onSuccess();
+    showToast({ type: 'inquiry', firstName: currentUser?.firstName || inqName.split(' ')[0] });
     setInqSuccess(true);
   };
 

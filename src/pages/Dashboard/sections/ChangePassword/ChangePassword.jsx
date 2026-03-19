@@ -6,7 +6,7 @@ import { Button } from '../../../../components';
 import './ChangePassword.css';
 
 function ChangePassword() {
-  const { currentUser } = useAuth();
+  const { currentUser, showToast } = useAuth();
 
   const [currentPw,  setCurrentPw]  = useState('');
   const [newPw,      setNewPw]      = useState('');
@@ -79,6 +79,7 @@ function ChangePassword() {
 
       // 6. Clear fields, show success
       setCurrentPw(''); setNewPw(''); setConfirmPw('');
+      showToast({ type: 'passwordUpdate', firstName: currentUser.firstName });
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
