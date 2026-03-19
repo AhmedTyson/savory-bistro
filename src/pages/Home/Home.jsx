@@ -20,9 +20,15 @@ function Home() {
 
   const [toast, setToast] = useState(() => {
     const s = location.state;
-    if (s?.toast && s?.firstName)
-      return { type: s.toast, firstName: s.firstName };
-    return null;
+    if (!s || !s.toast) return null;
+    if (s.toast === 'reservation') {
+      return {
+        type: 'reservation',
+        firstName: s.firstName,
+        extra: { date: s.date, time: s.time }
+      };
+    }
+    return { type: s.toast, firstName: s.firstName };
   });
 
   useEffect(() => {
@@ -46,6 +52,7 @@ function Home() {
         <Toast
           type={toast.type}
           firstName={toast.firstName}
+          extra={toast.extra}
           onDismiss={dismissToast}
         />
       )}

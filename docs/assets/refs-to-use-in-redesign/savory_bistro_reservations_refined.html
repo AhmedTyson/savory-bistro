@@ -1,0 +1,538 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --or:#E07B39;--or-h:#C96B2A;--or-bg:rgba(224,123,57,0.09);
+  --page:#F5F0EB;--white:#fff;
+  --h:#1A1A1A;--b:#555;--mu:#888;
+  --bd:#E8E2D9;--ib:#D5CFC8;
+  --gr:#5A8A5A;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter','Segoe UI',system-ui,sans-serif;
+  --r4:4px;--r8:8px;--r12:12px;--r16:16px;--rpill:100px;
+}
+body{font-family:var(--sans);background:var(--page);color:var(--b);-webkit-font-smoothing:antialiased}
+
+/* ── PAGE ── */
+.pg{max-width:1080px;margin:0 auto;padding:32px 20px 80px}
+.bc{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--mu);margin-bottom:28px;flex-wrap:wrap}
+.bc a{color:var(--mu);text-decoration:none;transition:color .15s}.bc a:hover{color:var(--or)}
+.bc-sep{font-size:10px;opacity:.6}
+.bc-cur{color:var(--h);font-weight:500}
+
+/* ── TWO-COL GRID ── */
+.wrap{display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:start}
+
+/* ── FORM SIDE ── */
+.h1{font-family:var(--serif);font-size:clamp(32px,5.5vw,46px);font-weight:700;color:var(--h);line-height:1.05;margin-bottom:9px}
+.sub{font-size:14px;color:var(--mu);margin-bottom:30px}
+
+.lbl{display:block;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--mu);margin-bottom:8px}
+.fg{margin-bottom:18px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+
+/* selects */
+.sw{position:relative}
+.sw select{width:100%;appearance:none;-webkit-appearance:none;background:var(--white);border:1.5px solid var(--ib);border-radius:var(--r8);padding:0 38px 0 14px;height:46px;font-size:14px;font-family:var(--sans);color:var(--h);cursor:pointer;outline:none;transition:border-color .18s}
+.sw select:focus{border-color:var(--or)}
+.sw-arr{position:absolute;right:13px;top:50%;transform:translateY(-50%);pointer-events:none;display:flex}
+.sw-arr svg{width:13px;height:13px;stroke:var(--mu);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* inputs */
+.inp{display:block;width:100%;height:46px;padding:0 14px;border:1.5px solid var(--ib);border-radius:var(--r8);font-size:14px;font-family:var(--sans);color:var(--h);background:var(--white);outline:none;transition:border-color .18s}
+.inp:focus{border-color:var(--or)}
+.inp::placeholder{color:#ABABAB}
+.ta{display:block;width:100%;min-height:114px;padding:13px 14px;border:1.5px solid var(--ib);border-radius:var(--r8);font-size:14px;font-family:var(--sans);color:var(--h);background:var(--white);outline:none;resize:vertical;transition:border-color .18s;line-height:1.55}
+.ta:focus{border-color:var(--or)}
+.ta::placeholder{color:#ABABAB}
+
+/* ── CALENDAR ── */
+.cal-wrap{background:var(--white);border:1.5px solid var(--bd);border-radius:var(--r12);padding:16px 18px 18px;margin-bottom:22px}
+.cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cal-mo{font-size:14.5px;font-weight:600;color:var(--h)}
+.cn{background:none;border:none;cursor:pointer;color:var(--mu);width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--r8);transition:background .15s,color .15s;font-size:18px;line-height:1}
+.cn:hover{background:var(--or-bg);color:var(--or)}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cdh{font-size:11px;font-weight:600;color:var(--mu);text-align:center;padding:5px 0;letter-spacing:.04em}
+.cd{font-size:13px;color:var(--h);width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:background .14s,color .14s;font-weight:400;min-height:34px}
+.cd:hover:not(.cpast):not(.cempty){background:var(--or-bg);color:var(--or)}
+.cd.ctoday{background:var(--or);color:var(--white);font-weight:600}
+.cd.csel{background:var(--or);color:var(--white);font-weight:600}
+.cd.cpast{color:#C5BFB8;cursor:not-allowed;pointer-events:none}
+.cd.cempty{pointer-events:none}
+
+/* ── TIME SLOTS ── */
+.tg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.tb{background:var(--white);border:1.5px solid var(--ib);border-radius:var(--r8);padding:0 18px;height:44px;font-size:13px;font-weight:600;color:var(--h);cursor:pointer;transition:all .15s;font-family:var(--sans);white-space:nowrap}
+.tb:hover{border-color:var(--or);color:var(--or)}
+.tb.ton{background:var(--or);border-color:var(--or);color:var(--white)}
+
+/* ── BUTTONS ── */
+.btn-cf{display:block;width:100%;height:54px;background:var(--or);color:var(--white);border:none;border-radius:var(--r8);font-size:15px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:background .18s,transform .1s;letter-spacing:.025em;margin-bottom:10px}
+.btn-cf:hover{background:var(--or-h)}
+.btn-cf:active{transform:scale(.99)}
+
+.btn-rpt{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:46px;background:transparent;color:var(--or);border:1.5px solid var(--or);border-radius:var(--r8);font-size:13.5px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:all .18s;margin-bottom:0}
+.btn-rpt:hover{background:var(--or-bg)}
+.btn-rpt svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .2s}
+.btn-rpt.open svg.chevron{transform:rotate(180deg)}
+
+/* ── REPORT PANEL ── */
+.rp{overflow:hidden;max-height:0;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s;opacity:0}
+.rp.open{max-height:600px;opacity:1}
+.rp-inner{margin-top:12px;background:var(--white);border:1.5px solid var(--bd);border-radius:var(--r12);border-left:4px solid var(--or);overflow:hidden}
+.rp-hd{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--bd);flex-wrap:wrap;gap:8px}
+.rp-id{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or)}
+.rp-ok{background:rgba(90,138,90,.11);color:var(--gr);border-radius:var(--rpill);padding:4px 13px;font-size:11px;font-weight:700;white-space:nowrap}
+.rp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;padding:16px 18px}
+.rp-fl{font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--mu);margin-bottom:3px}
+.rp-fv{font-size:13px;font-weight:600;color:var(--h)}
+.rp-foot{padding:0 18px 16px;margin-top:-2px}
+.rp-foot-divider{border-top:1px solid var(--bd);margin-bottom:12px}
+
+/* ── SIDEBAR ── */
+.sb{display:flex;flex-direction:column;gap:16px;position:sticky;top:24px}
+.sc{background:var(--white);border:1.5px solid var(--bd);border-radius:var(--r16);overflow:hidden;box-shadow:0 1px 6px rgba(26,18,8,.05)}
+
+/* hours card */
+.sc-hd{display:flex;align-items:center;gap:10px;padding:16px 18px 10px}
+.sc-ico{width:30px;height:30px;border-radius:50%;background:var(--or-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sc-ico svg{width:14px;height:14px;stroke:var(--or);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sc-ttl{font-size:15px;font-weight:700;color:var(--h)}
+.sc-bd{padding:0 18px 16px}
+.hr{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:3px 0}
+.hr-l{color:var(--mu)}
+.hr-r{font-weight:600;color:var(--h)}
+.hr-note{font-size:11.5px;font-style:italic;color:var(--mu);line-height:1.55;margin-top:12px;padding-top:12px;border-top:1px solid var(--bd);text-align:center}
+
+/* contact card */
+.ct-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--h);padding:3px 0}
+.ct-row svg{width:15px;height:15px;stroke:var(--mu);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.lp-box{background:rgba(224,123,57,.055);border-radius:var(--r8);padding:11px 13px;margin-top:13px}
+.lp-ttl{font-size:12px;font-weight:700;color:var(--or);margin-bottom:5px}
+.lp-txt{font-size:12px;color:var(--b);line-height:1.6}
+
+/* private dining card */
+.pd-img{position:relative;height:148px;background:linear-gradient(155deg,#3A1E0B 0%,#1C0D04 100%)}
+.pd-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.1) 60%)}
+.pd-lbl{position:absolute;bottom:13px;left:16px;font-family:var(--serif);font-size:18px;font-weight:700;color:var(--white);line-height:1.2}
+/* warm light dots to simulate restaurant ambiance */
+.pd-img::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 30% 40%,rgba(200,140,60,.18),transparent),radial-gradient(ellipse 40% 60% at 70% 30%,rgba(180,120,40,.12),transparent)}
+.pd-bd{padding:13px 18px 16px}
+.pd-txt{font-size:12.5px;color:var(--b);line-height:1.6;margin-bottom:13px}
+.btn-inq{display:block;width:100%;height:40px;background:transparent;color:var(--or);border:1.5px solid var(--or);border-radius:var(--r8);font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:background .15s}
+.btn-inq:hover{background:var(--or-bg)}
+
+/* map card */
+.mp-img{position:relative;height:148px;overflow:hidden}
+.mp-bg{width:100%;height:100%;background:linear-gradient(145deg,#C2D9CC 0%,#B8D0C2 50%,#AEC8BA 100%);position:relative}
+/* SVG road grid drawn inline */
+.mp-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-62%)}
+.mp-pin-c{width:40px;height:40px;background:var(--or);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(224,123,57,.4)}
+.mp-pin-c svg{width:18px;height:18px;fill:none;stroke:white;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mp-ft{display:flex;justify-content:space-between;align-items:center;padding:11px 16px 13px}
+.mp-adr{font-size:13px;font-weight:700;color:var(--h)}
+.mp-city{font-size:11.5px;color:var(--mu);margin-top:1px}
+.mp-dir{display:flex;align-items:center;gap:3px;font-size:12px;font-weight:700;color:var(--or);text-decoration:none;white-space:nowrap}
+.mp-dir:hover{text-decoration:underline}
+.mp-dir svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── TOAST ── */
+.toast{position:fixed;top:20px;right:20px;z-index:9999;background:var(--white);border-radius:var(--r16);padding:14px 16px 14px 14px;width:320px;border-left:4px solid var(--or);display:flex;align-items:flex-start;gap:11px;box-shadow:0 8px 28px rgba(0,0,0,.12);transform:translateX(calc(100% + 40px));transition:transform .42s cubic-bezier(.34,1.56,.64,1);overflow:hidden}
+.toast.in{transform:translateX(0)}
+.ti svg{width:19px;height:19px;stroke:var(--or);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:2px;flex-shrink:0}
+.tt{font-size:13.5px;font-weight:600;color:var(--h);margin-bottom:2px}
+.ts{font-size:12px;color:var(--mu);line-height:1.5}
+.t-bar{position:absolute;bottom:0;left:0;height:3px;background:var(--or);transform-origin:left;border-radius:0 0 0 2px}
+.t-bar.run{animation:tdrain 4.2s linear forwards}
+@keyframes tdrain{to{transform:scaleX(0)}}
+
+/* ── ERROR ── */
+.err-msg{font-size:11px;color:#E53935;margin-top:5px;display:none}
+.err-msg.show{display:block}
+.inp.err,.ta.err{border-color:#E53935}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  .sb{position:static;margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+}
+@media(max-width:560px){
+  .pg{padding:20px 16px 60px}
+  .bc{margin-bottom:20px}
+  .sb{grid-template-columns:1fr}
+  .r2{grid-template-columns:1fr}
+  .tb{flex:1 1 calc(33.33% - 6px);justify-content:center;display:flex;align-items:center}
+  .tg{gap:7px}
+  .cal-wrap{padding:14px 14px 16px}
+  .cd{min-height:38px;font-size:12px}
+  .rp-grid{grid-template-columns:1fr 1fr}
+  .btn-cf,.btn-rpt{height:52px;font-size:15px}
+  .h1{margin-bottom:7px}
+  .sub{margin-bottom:22px;font-size:13px}
+}
+@media(max-width:360px){
+  .r2.name-phone{grid-template-columns:1fr}
+  .tb{flex:1 1 calc(50% - 4px)}
+  .rp-grid{grid-template-columns:1fr}
+}
+</style>
+
+<div class="toast" id="toast">
+  <div class="ti"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+  <div>
+    <p class="tt" id="t-ttl">Table Confirmed!</p>
+    <p class="ts" id="t-sub">Your reservation is all set.</p>
+  </div>
+  <div class="t-bar" id="t-bar"></div>
+</div>
+
+<div class="pg">
+  <nav class="bc">
+    <a href="#">Home</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-cur">Reservations</span>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- ══ LEFT FORM ══ -->
+    <div>
+      <h1 class="h1">Book Your Table</h1>
+      <p class="sub">We can't wait to host you at Savory Bistro.</p>
+
+      <div class="r2">
+        <div class="fg" style="margin-bottom:0">
+          <label class="lbl">Party Size</label>
+          <div class="sw">
+            <select id="ps">
+              <option>1 Guest</option>
+              <option selected>2 Guests</option>
+              <option>3 Guests</option>
+              <option>4 Guests</option>
+              <option>5 Guests</option>
+              <option>6 Guests</option>
+              <option>7 Guests</option>
+              <option>8 Guests</option>
+              <option>9 Guests</option>
+              <option>10 Guests</option>
+            </select>
+            <span class="sw-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </div>
+        </div>
+        <div class="fg" style="margin-bottom:0">
+          <label class="lbl">Occasion</label>
+          <div class="sw">
+            <select id="oc">
+              <option value="">Select occasion (optional)</option>
+              <option>Birthday</option>
+              <option>Anniversary</option>
+              <option>Business Dinner</option>
+              <option>Date Night</option>
+              <option>Family Gathering</option>
+              <option>Other</option>
+            </select>
+            <span class="sw-arr"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="lbl">Select Date</label>
+        <div class="cal-wrap">
+          <div class="cal-hd">
+            <button class="cn" id="prev" aria-label="Previous month">&#8249;</button>
+            <span class="cal-mo" id="mo-lbl"></span>
+            <button class="cn" id="next" aria-label="Next month">&#8250;</button>
+          </div>
+          <div class="cg" id="cg">
+            <div class="cdh">S</div><div class="cdh">M</div><div class="cdh">T</div>
+            <div class="cdh">W</div><div class="cdh">T</div><div class="cdh">F</div>
+            <div class="cdh">S</div>
+          </div>
+        </div>
+        <span class="err-msg" id="err-dt">Please select a date</span>
+      </div>
+
+      <div class="fg">
+        <label class="lbl">Available Times</label>
+        <div class="tg" id="tg">
+          <button class="tb" data-t="17:00">17:00</button>
+          <button class="tb" data-t="17:30">17:30</button>
+          <button class="tb ton" data-t="18:00">18:00</button>
+          <button class="tb" data-t="18:30">18:30</button>
+          <button class="tb" data-t="19:00">19:00</button>
+          <button class="tb" data-t="19:30">19:30</button>
+          <button class="tb" data-t="20:00">20:00</button>
+          <button class="tb" data-t="20:30">20:30</button>
+        </div>
+        <span class="err-msg" id="err-tm">Please select a time</span>
+      </div>
+
+      <div class="r2 name-phone">
+        <div class="fg" style="margin-bottom:0">
+          <label class="lbl">Full Name</label>
+          <input class="inp" type="text" id="fn" placeholder="John Doe">
+          <span class="err-msg" id="err-fn">Full name is required</span>
+        </div>
+        <div class="fg" style="margin-bottom:0">
+          <label class="lbl">Phone Number</label>
+          <input class="inp" type="tel" id="ph" placeholder="(555) 000-0000">
+          <span class="err-msg" id="err-ph">Enter a valid phone number</span>
+        </div>
+      </div>
+
+      <div class="fg" style="margin-top:18px">
+        <label class="lbl">Email Address</label>
+        <input class="inp" type="email" id="em" placeholder="john@example.com">
+        <span class="err-msg" id="err-em">Enter a valid email address</span>
+      </div>
+
+      <div class="fg">
+        <label class="lbl">Special Requests</label>
+        <textarea class="ta" id="sr" placeholder="Dietary restrictions, seating preferences..."></textarea>
+      </div>
+
+      <button class="btn-cf" id="cfBtn">Confirm Reservation</button>
+
+      <button class="btn-rpt" id="rptBtn">
+        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg>
+        View Last Reservation Report
+        <svg class="chevron" viewBox="0 0 24 24" style="margin-left:auto"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="rp" id="rp">
+        <div class="rp-inner">
+          <div class="rp-hd">
+            <span class="rp-id" id="rp-id">Confirmation #—</span>
+            <span class="rp-ok">Confirmed</span>
+          </div>
+          <div class="rp-grid" id="rp-grid">
+            <div><div class="rp-fl">Date</div><div class="rp-fv" id="r-date">—</div></div>
+            <div><div class="rp-fl">Time</div><div class="rp-fv" id="r-time">—</div></div>
+            <div><div class="rp-fl">Party Size</div><div class="rp-fv" id="r-party">—</div></div>
+            <div><div class="rp-fl">Occasion</div><div class="rp-fv" id="r-occ">—</div></div>
+            <div><div class="rp-fl">Name</div><div class="rp-fv" id="r-name">—</div></div>
+            <div><div class="rp-fl">Email</div><div class="rp-fv" id="r-email" style="word-break:break-all">—</div></div>
+          </div>
+          <div class="rp-foot" id="rp-sr" style="display:none">
+            <div class="rp-foot-divider"></div>
+            <div class="rp-fl">Special Requests</div>
+            <div class="rp-fv" id="r-sr" style="font-weight:400;color:var(--b);margin-top:3px;font-size:13px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SIDEBAR ══ -->
+    <aside class="sb">
+
+      <!-- Today's Hours -->
+      <div class="sc">
+        <div class="sc-hd">
+          <div class="sc-ico">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="sc-ttl">Today's Hours</span>
+        </div>
+        <div class="sc-bd">
+          <div class="hr"><span class="hr-l">Lunch</span><span class="hr-r">11:30 AM – 2:30 PM</span></div>
+          <div class="hr"><span class="hr-l">Dinner</span><span class="hr-r">5:00 PM – 10:00 PM</span></div>
+          <p class="hr-note">Kitchen closes 30 minutes before end of service.</p>
+        </div>
+      </div>
+
+      <!-- Contact Us -->
+      <div class="sc">
+        <div class="sc-hd">
+          <div class="sc-ico">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="12" cy="10" r="1" fill="var(--or)" stroke="none"/><circle cx="8" cy="10" r="1" fill="var(--or)" stroke="none"/><circle cx="16" cy="10" r="1" fill="var(--or)" stroke="none"/></svg>
+          </div>
+          <span class="sc-ttl">Contact Us</span>
+        </div>
+        <div class="sc-bd">
+          <div class="ct-row">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (555) 123-4567
+          </div>
+          <div class="ct-row" style="margin-top:4px">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            hello@savorybistro.com
+          </div>
+          <div class="lp-box">
+            <div class="lp-ttl">Large Parties</div>
+            <div class="lp-txt">For parties of 11 or more, please call us directly to discuss our set menu options.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Private Dining -->
+      <div class="sc">
+        <div class="pd-img">
+          <div class="pd-ov"></div>
+          <span class="pd-lbl">Private Dining</span>
+        </div>
+        <div class="pd-bd">
+          <p class="pd-txt">Host your special event in our exclusive vault room or garden terrace.</p>
+          <button class="btn-inq">Inquire Now</button>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="sc">
+        <div class="mp-img">
+          <div class="mp-bg">
+            <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.3" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice">
+              <line x1="0" y1="75" x2="300" y2="75" stroke="#4A7A5A" stroke-width="14" opacity=".5"/>
+              <line x1="150" y1="0" x2="150" y2="150" stroke="#4A7A5A" stroke-width="8" opacity=".35"/>
+              <line x1="0" y1="40" x2="300" y2="40" stroke="#4A7A5A" stroke-width="4" opacity=".2"/>
+              <line x1="0" y1="112" x2="300" y2="112" stroke="#4A7A5A" stroke-width="4" opacity=".2"/>
+              <line x1="80" y1="0" x2="80" y2="150" stroke="#4A7A5A" stroke-width="3" opacity=".2"/>
+              <line x1="220" y1="0" x2="220" y2="150" stroke="#4A7A5A" stroke-width="3" opacity=".2"/>
+              <rect x="18" y="18" width="48" height="30" rx="3" fill="#9BBBA8" opacity=".55"/>
+              <rect x="172" y="82" width="56" height="34" rx="3" fill="#9BBBA8" opacity=".5"/>
+              <rect x="90" y="8" width="38" height="22" rx="3" fill="#9BBBA8" opacity=".4"/>
+              <rect x="30" y="95" width="36" height="20" rx="3" fill="#9BBBA8" opacity=".35"/>
+            </svg>
+            <div class="mp-pin">
+              <div class="mp-pin-c">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="white" stroke="none"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mp-ft">
+          <div>
+            <div class="mp-adr">123 Culinary Way</div>
+            <div class="mp-city">Downtown Chicago, IL</div>
+          </div>
+          <a href="#" class="mp-dir">
+            Get Directions
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<script>
+const MO=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+let cM=TODAY.getMonth(),cY=TODAY.getFullYear(),selD=null,selT='18:00';
+let lastRes=null;
+
+function buildCal(){
+  const cg=document.getElementById('cg');
+  document.getElementById('mo-lbl').textContent=MO[cM]+' '+cY;
+  [...cg.querySelectorAll('.cd,.ce')].forEach(e=>e.remove());
+  const fd=new Date(cY,cM,1).getDay();
+  const dm=new Date(cY,cM+1,0).getDate();
+  for(let i=0;i<fd;i++){const e=document.createElement('div');e.className='cd cempty';cg.appendChild(e);}
+  for(let d=1;d<=dm;d++){
+    const e=document.createElement('div');e.className='cd';e.textContent=d;
+    const dt=new Date(cY,cM,d);
+    if(dt<TODAY){e.classList.add('cpast');}
+    else{e.addEventListener('click',()=>{
+      cg.querySelectorAll('.cd.csel,.cd.ctoday').forEach(x=>{x.classList.remove('csel');if(!(new Date(cY,cM,parseInt(x.textContent)).getTime()===TODAY.getTime()))x.classList.remove('ctoday');});
+      e.classList.add('csel');selD=new Date(cY,cM,d);
+      document.getElementById('err-dt').classList.remove('show');
+    });}
+    if(dt.getTime()===TODAY.getTime()){e.classList.add('ctoday');}
+    cg.appendChild(e);
+  }
+}
+
+document.getElementById('prev').addEventListener('click',()=>{cM--;if(cM<0){cM=11;cY--;}selD=null;buildCal();});
+document.getElementById('next').addEventListener('click',()=>{cM++;if(cM>11){cM=0;cY++;}selD=null;buildCal();});
+
+document.getElementById('tg').addEventListener('click',e=>{
+  if(!e.target.classList.contains('tb'))return;
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('ton'));
+  e.target.classList.add('ton');
+  selT=e.target.dataset.t;
+  document.getElementById('err-tm').classList.remove('show');
+});
+
+function showToast(name,date,time){
+  const t=document.getElementById('toast');
+  const bar=document.getElementById('t-bar');
+  document.getElementById('t-ttl').textContent='Table Confirmed, '+name.split(' ')[0]+'!';
+  document.getElementById('t-sub').textContent='Booked for '+date+' at '+time+'. See you then!';
+  t.classList.add('in');
+  bar.classList.remove('run');void bar.offsetWidth;bar.classList.add('run');
+  setTimeout(()=>t.classList.remove('in'),5000);
+}
+
+function clearErr(inp,err){inp.classList.remove('err');document.getElementById(err).classList.remove('show');}
+function setErr(inp,err){inp.classList.add('err');document.getElementById(err).classList.add('show');}
+
+document.getElementById('fn').addEventListener('input',()=>clearErr(document.getElementById('fn'),'err-fn'));
+document.getElementById('ph').addEventListener('input',()=>clearErr(document.getElementById('ph'),'err-ph'));
+document.getElementById('em').addEventListener('input',()=>clearErr(document.getElementById('em'),'err-em'));
+
+document.getElementById('cfBtn').addEventListener('click',()=>{
+  const fn=document.getElementById('fn').value.trim();
+  const ph=document.getElementById('ph').value.trim();
+  const em=document.getElementById('em').value.trim();
+  const sr=document.getElementById('sr').value.trim();
+  const ps=document.getElementById('ps').value;
+  const oc=document.getElementById('oc').value;
+  let ok=true;
+  if(!fn||fn.length<2){setErr(document.getElementById('fn'),'err-fn');ok=false;}
+  if(!ph||!/^[\d\s\-\+\(\)]{7,}$/.test(ph)){setErr(document.getElementById('ph'),'err-ph');ok=false;}
+  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){setErr(document.getElementById('em'),'err-em');ok=false;}
+  if(!selD){document.getElementById('err-dt').classList.add('show');ok=false;}
+  if(!selT){document.getElementById('err-tm').classList.add('show');ok=false;}
+  if(!ok)return;
+  const id=Date.now().toString();
+  const fmtDate=selD.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  lastRes={id,name:fn,email:em,phone:ph,partySize:ps,occasion:oc||'—',date:fmtDate,time:selT,special:sr};
+  try{localStorage.setItem('sb_last_res',JSON.stringify(lastRes));}catch(e){}
+  showToast(fn,fmtDate,selT);
+  populateReport(lastRes);
+});
+
+function populateReport(r){
+  if(!r)return;
+  document.getElementById('rp-id').textContent='Confirmation #'+r.id;
+  document.getElementById('r-date').textContent=r.date;
+  document.getElementById('r-time').textContent=r.time;
+  document.getElementById('r-party').textContent=r.partySize;
+  document.getElementById('r-occ').textContent=r.occasion;
+  document.getElementById('r-name').textContent=r.name;
+  document.getElementById('r-email').textContent=r.email;
+  const foot=document.getElementById('rp-sr');
+  if(r.special){document.getElementById('r-sr').textContent=r.special;foot.style.display='block';}
+  else{foot.style.display='none';}
+}
+
+document.getElementById('rptBtn').addEventListener('click',()=>{
+  const rp=document.getElementById('rp');
+  const btn=document.getElementById('rptBtn');
+  const open=rp.classList.contains('open');
+  rp.classList.toggle('open');
+  btn.classList.toggle('open');
+  const txt=btn.childNodes[1];
+  if(txt&&txt.nodeType===3)txt.textContent=open?' View Last Reservation Report ':' Hide Last Reservation Report ';
+  if(!open){
+    let stored=lastRes;
+    if(!stored){try{const s=localStorage.getItem('sb_last_res');if(s)stored=JSON.parse(s);}catch(e){}}
+    if(stored)populateReport(stored);
+    else{
+      document.getElementById('rp-id').textContent='No reservation found';
+      document.getElementById('r-date').textContent='—';
+      document.getElementById('r-time').textContent='—';
+      document.getElementById('r-party').textContent='—';
+      document.getElementById('r-occ').textContent='—';
+      document.getElementById('r-name').textContent='—';
+      document.getElementById('r-email').textContent='—';
+      document.getElementById('rp-sr').style.display='none';
+    }
+  }
+});
+
+buildCal();
+</script>

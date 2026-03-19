@@ -20,12 +20,16 @@ const MESSAGES = {
     title:    `See you soon, ${name}!`,
     subtitle: 'You have been signed out successfully.',
   }),
+  reservation: (name, extra) => ({
+    title: `Table Confirmed, ${name}!`,
+    subtitle: `We'll see you on ${extra?.date} at ${extra?.time}. See you then!`,
+  }),
 }
 
-export default function Toast({ type, firstName, onDismiss }) {
+export default function Toast({ type, firstName, extra, onDismiss }) {
   const [exiting, setExiting] = useState(false)
 
-  const { title, subtitle } = MESSAGES[type]?.(firstName) ?? {
+  const { title, subtitle } = MESSAGES[type]?.(firstName, extra) ?? {
     title: 'Welcome!', subtitle: ''
   }
 

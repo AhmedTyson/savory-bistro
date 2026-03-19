@@ -1,0 +1,12 @@
+.ReservationForm__submit-error {
+  background: rgba(229, 57, 53, 0.08);
+  border: 1px solid var(--color-border-error);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  color: var(--color-border-error);
+  font-size: 13px;
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

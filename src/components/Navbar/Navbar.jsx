@@ -15,9 +15,10 @@ const navLinks = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const closeMenu = () => setMenuOpen(false);
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+
+  const closeMenu = () => setMenuOpen(false);
 
   function handleLogout() {
     logout();      // sets pendingToast in AuthContext
