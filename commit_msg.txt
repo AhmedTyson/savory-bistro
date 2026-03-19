@@ -1,0 +1,4 @@
+Merged Hagar's content & Youssef's additions: Integrated local images, refined menu/gallery data, and preserved BEM architecture.
+
+Co-authored-by: Hagar Ashraf <h02680913@gmail.com>
+Co-authored-by: yousefsherifchifo-pixel <youssefsherif1994@email.com>

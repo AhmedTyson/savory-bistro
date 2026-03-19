@@ -1,1 +1,5 @@
-/* Contact page styles */
+/* Main Contact Page Container */
+.Contact {
+  background-color: var(--color-bg-light);
+  min-height: 100vh;
+}

@@ -1,65 +1,69 @@
-import { Link } from 'react-router-dom';
-import { ChevronsDown } from 'lucide-react';
-import Button from '../../components/Button/Button';
-import './Home.css';
+import { useState, useCallback, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useAuth } from "../../context";
+import Toast from "../../components/Toast/Toast";
+import mockData from "../../../mock-data.json";
+
+// Sections
+import Hero from "./sections/Hero/Hero";
+import InfoBar from "./sections/InfoBar/InfoBar";
+import OurStory from "./sections/OurStory/OurStory";
+import SignatureDishes from "./sections/SignatureDishes/SignatureDishes";
+import ChefSpecial from "./sections/ChefSpecial/ChefSpecial";
+import Testimonials from "./sections/Testimonials/Testimonials";
+
+import "./Home.css";
 
 function Home() {
+  const location = useLocation();
+  const { pendingToast, clearPendingToast } = useAuth();
+
+  const [toast, setToast] = useState(() => {
+    const s = location.state;
+    if (!s || !s.toast) return null;
+    if (s.toast === 'reservation') {
+      return {
+        type: 'reservation',
+        firstName: s.firstName,
+        extra: { date: s.date, time: s.time }
+      };
+    }
+    return { type: s.toast, firstName: s.firstName };
+  });
+
+  useEffect(() => {
+    // 1. Handle pending toasts from Context (e.g. Logout)
+    if (pendingToast) {
+      setToast(pendingToast);
+      clearPendingToast();
+    }
+
+    // 2. Clear location state to prevent toast repeating on refresh
+    if (location.state?.toast) {
+      window.history.replaceState({}, document.title);
+    }
+  }, [pendingToast, clearPendingToast, location.state]);
+
+  const dismissToast = useCallback(() => setToast(null), []);
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ 
-          backgroundImage: 'url("../../public/images/HomePage/Burger_index_hero_section.webp")',
-          backgroundColor: 'var(--color-bg-hero)'
-        }}
-      >
-        {/* Darkening overlay as seen in the image */}
-        <div className="absolute inset-0 bg-black/60"></div>
-      </div>
+    <div className="home-page overflow-x-hidden">
+      {toast && (
+        <Toast
+          type={toast.type}
+          firstName={toast.firstName}
+          extra={toast.extra}
+          onDismiss={dismissToast}
+        />
+      )}
 
-      {/* Hero Content Area */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
-          
-          {/* Main Title: Savory Bistro */}
-          <h1 
-            className="text-6xl md:text-8xl lg:text-[120px] font-bold text-white mb-2 tracking-tight"
-            style={{ fontFamily: 'var(--font-serif)' }}
-          >
-            Savory Bistro
-          </h1>
-
-          {/* Script Subtitle: Authentic Flavors, Unforgettable Moments */}
-          <p 
-            className="text-xl md:text-3xl lg:text-4xl text-[var(--color-gold-accent)] mb-10"
-            style={{ fontFamily: 'var(--font-script)' }}
-          >
-            Authentic Flavors, Unforgettable Moments
-          </p>
-
-          {/* Button Group */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-            <Link to="/menu" className="w-full sm:w-auto">
-              <Button variant="primary" className="min-w-[180px]">
-                View Menu
-              </Button>
-            </Link>
-            <Link to="/reservations" className="w-full sm:w-auto">
-              <Button variant="outlined" className="min-w-[180px]">
-                Reserve a Table
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 animate-bounce">
-        <ChevronsDown size={32} strokeWidth={1.5} />
-      </div>
+      <Hero />
+      <InfoBar />
+      <OurStory />
+      <SignatureDishes dishes={mockData.signatureDishes} />
+      <ChefSpecial />
+      <Testimonials reviews={mockData.testimonials} />
     </div>
   );
 }
-
 export default Home;

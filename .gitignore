@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Data files (contain user credentials / reservation data)
+users-data.json
+reservations-data.json

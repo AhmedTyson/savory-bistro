@@ -1,48 +1,39 @@
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import './styles/variables.css';
+import './index.css';
 
-import { AuthProvider, useAuth } from './context/AuthContext';
-import Navbar             from './components/Navbar/Navbar';
-import Footer             from './components/Footer/Footer';
-import FloatingReserveBtn from './components/FloatingReserveBtn/FloatingReserveBtn';
-import LoginModal         from './components/LoginModal/LoginModal';
+import { Navbar, Footer, FloatingReserveBtn } from './components';
+import { Home, Menu, Reservations, Gallery, Contact, AboutUs, Login, Signup } from './pages';
+import { AuthContext, AuthProvider } from './context';
 
-import Home         from './pages/Home/Home';
-import Menu         from './pages/Menu/Menu';
-import Reservations from './pages/Reservations/Reservations';
-import Gallery      from './pages/Gallery/Gallery';
-import Contact      from './pages/Contact/Contact';
-import AboutUs      from './pages/AboutUs/AboutUs';
+function ProtectedRoute({ children }) {
+  const { user } = useContext(AuthContext);
+  if (!user) return <Navigate to="/login" replace />;
+  return children;
+}
 
-function Layout({ children }) {
+function Layout({ children, footerVariant = 'full' }) {
   return (
     <>
       <Navbar />
       <main>{children}</main>
       <FloatingReserveBtn />
-      <Footer />
-      <LoginModal />
+      <Footer variant={footerVariant} />
     </>
   );
 }
 
-function ProtectedRoute({ children }) {
-  const { isAuthenticated, setShowLogin, setPendingRedirect } = useAuth();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      setPendingRedirect('/reservations');
-      setShowLogin(true);
-    }
-  }, [isAuthenticated, setShowLogin, setPendingRedirect]);
-
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
-  return children;
+function AuthLayout({ children }) {
+  return (
+    <>
+      <Navbar />
+      <main>{children}</main>
+    </>
+  );
 }
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -50,17 +41,17 @@ function App() {
           <Route path="/"             element={<Layout><Home /></Layout>} />
           <Route path="/menu"         element={<Layout><Menu /></Layout>} />
           <Route path="/reservations" element={
-            <Layout>
-              <ProtectedRoute><Reservations /></ProtectedRoute>
-            </Layout>
+            <ProtectedRoute>
+              <Layout><Reservations /></Layout>
+            </ProtectedRoute>
           } />
-          <Route path="/gallery"      element={<Layout><Gallery /></Layout>} />
+          <Route path="/gallery"      element={<Layout footerVariant="light"><Gallery /></Layout>} />
           <Route path="/contact"      element={<Layout><Contact /></Layout>} />
           <Route path="/about"        element={<Layout><AboutUs /></Layout>} />
+          <Route path="/login"        element={<AuthLayout><Login /></AuthLayout>} />
+          <Route path="/signup"       element={<AuthLayout><Signup /></AuthLayout>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
   );
 }
-
-export default App;

@@ -1,0 +1,208 @@
+/* RIGHT PANEL */
+.LoginForm {
+  flex: 1; position: relative; overflow: hidden;
+  background: var(--color-primary);
+}
+.LoginForm__curve {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: fill; pointer-events: none; z-index: 0;
+  transform: scaleX(-1);
+  animation: LoginForm__curvePulse 6s ease-in-out infinite both;
+  transform-origin: 50% 50%;
+}
+
+@keyframes LoginForm__curvePulse {
+  0%,100% { transform: scaleX(-1)    scaleY(1); }
+  50%      { transform: scaleX(-1.01) scaleY(1.02); }
+}
+.LoginForm__zigzag { position: absolute; z-index: 1; pointer-events: none; }
+.LoginForm__zigzag--1 { top: 16px; right: 60px; width: 22px; opacity: 0.82; animation: LoginForm__zzFloat1 3.2s ease-in-out infinite both; }
+.LoginForm__zigzag--2 { top: 40px; right: 34px; width: 15px; opacity: 0.35; transform: rotate(10deg); animation: LoginForm__zzFloat2 4.0s ease-in-out infinite 0.6s both; }
+.LoginForm__zigzag--3 { bottom: 32px; left: 20px; width: 22px; opacity: 0.7; animation: LoginForm__zzFloat3 3.6s ease-in-out infinite 0.3s both; }
+.LoginForm__zigzag--4 { bottom: 70px; right: 16px; width: 18px; opacity: 0.42; transform: rotate(8deg); animation: LoginForm__zzFloat4 4.4s ease-in-out infinite 1.0s both; }
+
+@keyframes LoginForm__zzFloat1 {
+  0%,100% { transform: translateY(0px) rotate(0deg); }
+  50%      { transform: translateY(-8px) rotate(4deg); }
+}
+@keyframes LoginForm__zzFloat2 {
+  0%,100% { transform: translateY(0px) rotate(10deg); }
+  50%      { transform: translateY(-6px) rotate(14deg); }
+}
+@keyframes LoginForm__zzFloat3 {
+  0%,100% { transform: translateY(0px) rotate(0deg); }
+  50%      { transform: translateY(7px) rotate(-5deg); }
+}
+@keyframes LoginForm__zzFloat4 {
+  0%,100% { transform: translateY(0px) rotate(8deg); }
+  50%      { transform: translateY(6px) rotate(3deg); }
+}
+
+/* Glassmorphism form card */
+.LoginForm__form-area {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px 40px;
+}
+.LoginForm__form-inner {
+  width: 100%; max-width: 400px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.08),
+    0 1px 0 rgba(255,255,255,0.6) inset;
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Typography */
+.LoginForm__pill {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; color: var(--color-primary);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.LoginForm__title {
+  font-family: var(--font-serif); font-size: 1.7rem;
+  font-weight: 700; color: var(--color-text-heading);
+  margin-bottom: 4px; line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.LoginForm__subtitle {
+  font-family: var(--font-script); color: var(--color-primary);
+  font-size: 0.95rem; margin-bottom: 16px; display: block;
+}
+.LoginForm__divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(26,26,26,0.12), transparent);
+  margin-bottom: 18px;
+}
+
+/* Form fields */
+.LoginForm__row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.LoginForm__field-group { margin-bottom: 16px; }
+.LoginForm__label {
+  display: block; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--color-text-muted); margin-bottom: 6px;
+}
+.LoginForm__input-wrapper { position: relative; }
+.LoginForm__input-icon {
+  position: absolute; left: 13px; top: 50%;
+  transform: translateY(-50%); color: var(--color-text-placeholder); pointer-events: none; display: flex;
+  transition: color var(--transition-fast);
+}
+/* Highlight icon on input focus */
+.LoginForm__input-wrapper:focus-within .LoginForm__input-icon {
+  color: var(--color-primary);
+}
+.LoginForm__input {
+  width: 100%; height: 44px; padding: 0 42px 0 40px;
+  border: 1.5px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans); font-size: 0.85rem;
+  color: var(--color-text-heading);
+  background: rgba(255,255,255,0.7);
+  outline: none;
+  transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+}
+.LoginForm__input:focus {
+  border-color: var(--color-primary);
+  background: var(--color-bg-white);
+  box-shadow: 0 0 0 3px rgba(224,123,57,0.12);
+}
+.LoginForm__input--error { border-color: var(--color-border-error); }
+.LoginForm__input--error:focus { box-shadow: 0 0 0 3px rgba(229,57,53,0.12); }
+.LoginForm__input::placeholder { color: var(--color-text-placeholder); font-size: 0.82rem; }
+.LoginForm__error-msg { font-size: 11px; color: var(--color-border-error); margin-top: 4px; display: block; }
+.LoginForm__toggle-pw {
+  position: absolute; right: 13px; top: 50%;
+  transform: translateY(-50%); background: none;
+  border: none; cursor: pointer; color: var(--color-text-placeholder);
+  display: flex; padding: 0; min-height: 44px; align-items: center;
+  transition: color var(--transition-fast);
+}
+.LoginForm__toggle-pw:hover { color: var(--color-primary); }
+.LoginForm__forgot {
+  text-align: right; font-size: 0.78rem;
+  color: var(--color-primary); margin-bottom: 18px; cursor: pointer;
+  transition: color var(--transition-fast);
+}
+.LoginForm__forgot:hover { text-decoration: underline; color: var(--color-primary-hover); }
+
+/* Banners */
+.LoginForm__success-banner {
+  background: #F0FBF0; border: 1.5px solid #5A8A5A;
+  border-radius: var(--radius-md); padding: 11px 16px;
+  font-size: 0.83rem; color: #3A6A3A;
+  margin-bottom: 16px; text-align: center; font-weight: 500;
+}
+.LoginForm__error-banner {
+  background: #FFF0F0; border: 1.5px solid var(--color-border-error);
+  border-radius: var(--radius-md); padding: 11px 16px;
+  font-size: 0.83rem; color: var(--color-border-error);
+  margin-bottom: 16px; text-align: center;
+}
+
+/* Button — gradient with shadow */
+.LoginForm__submit-btn {
+  width: 100%; height: 48px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+  color: var(--color-text-white); border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-sans); font-size: 0.95rem;
+  font-weight: 700; cursor: pointer;
+  transition: all var(--transition-slow);
+  letter-spacing: 0.03em; margin-top: 4px;
+  box-shadow: 0 4px 16px rgba(224,123,57,0.3);
+}
+.LoginForm__submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(224,123,57,0.4);
+}
+.LoginForm__submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(224,123,57,0.3);
+}
+
+/* Footer text */
+.LoginForm__terms {
+  text-align: center; font-size: 11px;
+  color: var(--color-text-muted); margin-top: 14px; line-height: 1.5;
+}
+.LoginForm__terms a, .LoginForm__terms span { color: var(--color-primary); cursor: pointer; text-decoration: none; }
+.LoginForm__terms a:hover, .LoginForm__terms span:hover { text-decoration: underline; }
+.LoginForm__switch {
+  text-align: center; margin-top: 16px;
+  font-size: 0.85rem; color: var(--color-text-muted);
+}
+.LoginForm__switch a, .LoginForm__switch span { color: var(--color-primary); font-weight: 600; cursor: pointer; text-decoration: none; }
+.LoginForm__switch a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .LoginForm { width: 100%; }
+  .LoginForm__form-area { padding: 32px 20px; }
+  .LoginForm__form-inner { padding: 28px 24px; }
+}
+@media (max-width: 480px) {
+  .LoginForm__form-inner { max-width: 100%; border-radius: var(--radius-lg); }
+  .LoginForm__row2 { grid-template-columns: 1fr; }
+}
+
+/* Hover effect for zigzags */
+.LoginForm__zigzag { transition: opacity var(--transition-normal); }
+.LoginForm__zigzag:hover { opacity: 1; filter: drop-shadow(0 0 8px rgba(255,255,255,0.4)); }
+
+/* ─── DISABLED BUTTON ──────────────────────────── */
+.LoginForm__submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(224,123,57,0.15);
+}
+.LoginForm__submit-btn:disabled:hover {
+  transform: none;
+  box-shadow: 0 2px 8px rgba(224,123,57,0.15);
+}

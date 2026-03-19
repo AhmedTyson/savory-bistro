@@ -1,122 +1,262 @@
 {
   "menu": [
-    { "id": 1, "name": "Truffle Risotto",    "description": "Arborio rice, wild mushrooms, black truffle oil, parmesan, chives.",        "price": 28, "category": "mainCourses", "badge": "POPULAR", "dietIcon": "vegetarian" },
-    { "id": 2, "name": "Pan-Seared Salmon",  "description": "Atlantic salmon, asparagus, lemon-butter sauce, baby potatoes.",            "price": 34, "category": "seafood",     "badge": null,      "dietIcon": "seafood"    },
-    { "id": 3, "name": "Ribeye Steak",       "description": "12oz Prime ribeye, garlic herb butter, roasted root vegetables.",           "price": 42, "category": "mainCourses", "badge": null,      "dietIcon": "spicy"      },
-    { "id": 4, "name": "Harvest Pasta",      "description": "Fresh fettuccine, seasonal vegetables, garlic, olive oil, vegan parmesan.", "price": 24, "category": "vegetarian",  "badge": null,      "dietIcon": "vegetarian" },
-    { "id": 5, "name": "Lamb Shank",         "description": "Slow-braised lamb, creamy polenta, red wine reduction, rosemary.",          "price": 38, "category": "mainCourses", "badge": "POPULAR", "dietIcon": null         },
-    { "id": 6, "name": "Chilean Sea Bass",   "description": "Pan-seared sea bass, miso glaze, bok choy, ginger-soy broth.",              "price": 45, "category": "seafood",     "badge": null,      "dietIcon": "seafood"    }
-  ],
-  "tastingMenu": [
-    { "course": "I",   "label": "AMUSE-BOUCHE",   "dish": "Chilled Oyster with Champagne Foam"    },
-    { "course": "II",  "label": "APPETIZER",       "dish": "Foie Gras Torchon with Fig Jam"        },
-    { "course": "III", "label": "PALATE CLEANSER", "dish": "Lemon & Mint Granita"                  },
-    { "course": "IV",  "label": "MAIN COURSE",     "dish": "A5 Wagyu Beef with Truffle Jus"        },
-    { "course": "V",   "label": "DESSERT",         "dish": "Dark Chocolate Soufflé with Gold Leaf" }
-  ],
-  "wines": [
-    { "id": 1, "name": "Château Margaux 2015", "origin": "Bordeaux, France",  "price": "$120/Glass"  },
-    { "id": 2, "name": "Dom Pérignon P2",      "origin": "Champagne, France", "price": "$85/Glass"   },
-    { "id": 3, "name": "Silver Oak Cabernet",  "origin": "Napa Valley, USA",  "price": "$210/Bottle" }
-  ],
-  "cocktails": [
-    { "id": 1, "name": "Smoked Old Fashioned",     "description": "Bourbon, maple, walnut bitters, applewood smoke.", "price": 18 },
-    { "id": 2, "name": "Lavender Gin Fizz",         "description": "Botanical gin, fresh lavender, lemon, egg white.", "price": 16 },
-    { "id": 3, "name": "Cucumber Cooler (Non-Alc)", "description": "Muddled cucumber, lime, agave, mint soda.",        "price": 12 }
-  ],
-  "signatureDishes": [
-    { "id": 1, "name": "Truffle Pappardelle", "description": "Hand-rolled pasta, wild mushroom ragu, fresh shaved black truffle.", "price": 29, "badge": "POPULAR" },
-    { "id": 2, "name": "Atlantic Scallops",   "description": "Pan-seared scallops, green pea puree, crispy prosciutto, lemon oil.", "price": 39, "badge": null     },
-    { "id": 3, "name": "Prime Ribeye",        "description": "60-day dry-aged beef, roasted garlic mash, red wine reduction.",      "price": 95, "badge": "POPULAR" }
-  ],
-  "gallery": [
-    { "id": 1, "src": "/images/gallery/salmon-dish.jpg",    "alt": "Pan-seared salmon dish",     "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 2, "src": "/images/gallery/chocolate-cake.jpg", "alt": "Chocolate dessert",           "category": "food",           "type": "photo", "size": "medium" },
-    { "id": 3, "src": "/images/gallery/pizza.jpg",          "alt": "Wood-fired pizza",            "category": "chefsCreations", "type": "photo", "size": "medium" },
-    { "id": 4, "src": "/images/gallery/chef-prep.jpg",      "alt": "Chef preparing food",         "category": "events",         "type": "video", "size": "medium" },
-    { "id": 5, "src": "/images/gallery/cocktail.jpg",       "alt": "Craft cocktail",              "category": "food",           "type": "photo", "size": "tall"   },
-    { "id": 6, "src": "/images/gallery/dining-room.jpg",    "alt": "Bright dining room interior", "category": "interior",       "type": "photo", "size": "medium" },
-    { "id": 7, "src": "/images/gallery/bar-interior.jpg",   "alt": "Warm bar interior",           "category": "interior",       "type": "photo", "size": "tall"   }
-  ],
-  "team": [
-    { "id": 1, "name": "Maria Garcia",  "role": "General Manager", "bio": "Maria ensures every guest feels at home with her meticulous attention to hospitality." },
-    { "id": 2, "name": "Julian Smith",  "role": "Head Sommelier",  "bio": "Julian's wine pairings are legendary, curated from the finest vineyards worldwide."   },
-    { "id": 3, "name": "Sarah Chen",    "role": "Pastry Chef",     "bio": "Award-winning desserts that are as beautiful as they are delicious."                   },
-    { "id": 4, "name": "Marcus Thorne", "role": "Sous Chef",       "bio": "The master of operations, Marcus keeps our kitchen running like a well-oiled machine."  }
-  ],
-  "faqs": [
-    { "id": 1, "question": "Do you accommodate dietary restrictions?", "answer": "Yes, we offer vegetarian, vegan, gluten-free, and allergen-aware options. Please inform us when booking." },
-    { "id": 2, "question": "Is there parking available?",              "answer": "Yes, complimentary valet parking is available on weekends. Street parking is available on weekdays."      },
-    { "id": 3, "question": "Do you accept walk-ins?",                  "answer": "We welcome walk-ins based on availability. Reservations are strongly recommended on weekends."            },
-    { "id": 4, "question": "Can I bring my own wine?",                 "answer": "Corkage is available at $25 per bottle for special occasions."                                            },
-    { "id": 5, "question": "Do you offer gift certificates?",          "answer": "Yes, available in any denomination at the restaurant or online."                                          }
-  ],
-  "users": [
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john@example.com",
-      "password": "password123"
+      "src": "/images/menu/salad (6).webp",
+      "name": "Avocado Salad",
+      "description": "Avocado, tomato, cucumber, olive oil, lemon juice.",
+      "price": 28,
+      "category": "mainCourses",
+      "badge": "POPULAR",
+      "dietIcon": "vegetarian"
     },
     {
       "id": 2,
-      "firstName": "Sarah",
-      "lastName": "Ahmed",
-      "email": "sarah@example.com",
-      "password": "password456"
+      "src": "/images/menu/small salmon (1).webp",
+      "name": "Pan-Seared Salmon",
+      "description": "Atlantic salmon, asparagus, lemon-butter sauce, baby potatoes.",
+      "price": 34,
+      "category": "seafood",
+      "badge": null,
+      "dietIcon": "seafood"
     },
     {
       "id": 3,
-      "firstName": "Ahmed",
-      "lastName": "Tyson",
-      "email": "ahmedm2580@gmail.com",
-      "password": "user1234"
+      "src": "/images/menu/meat (2).webp",
+      "name": "Ribeye Steak",
+      "description": "12oz Prime ribeye, garlic herb butter, roasted root vegetables.",
+      "price": 42,
+      "category": "mainCourses",
+      "badge": null,
+      "dietIcon": "spicy"
     },
-     {
+    {
       "id": 4,
-      "firstName": "Ahmed",
-      "lastName": "Mido",
-      "email": "ahmedkk3@gmail.com",
-      "password": "user1234"
+      "src": "/images/menu/pasta (3).webp",
+      "name": "Harvest Pasta",
+      "description": "Fresh fettuccine, seasonal vegetables, garlic, olive oil, vegan parmesan.",
+      "price": 24,
+      "category": "vegetarian",
+      "badge": null,
+      "dietIcon": "vegetarian"
     },
     {
       "id": 5,
-      "firstName": "Ahmed",
-      "lastName": "Tyson",
-      "email": "ahmed80@gmail.com",
-      "password": "user1234"
+      "src": "/images/menu/meat lamp (4).webp",
+      "name": "Lamb Shank",
+      "description": "Slow-braised lamb, creamy polenta, red wine reduction, rosemary.",
+      "price": 38,
+      "category": "mainCourses",
+      "badge": "POPULAR",
+      "dietIcon": null
     },
     {
       "id": 6,
-      "firstName": "Ahmed",
-      "lastName": "Tyson",
-      "email": "ahmedgg2580@gmail.com",
-      "password": "user1234"
-    },
-    {
-      "id": 7,
-      "firstName": "Vince",
-      "lastName": "Test",
-      "email": "vince@example.com",
-      "password": "password123"
-    },
-    {
-      "id": 8,
-      "firstName": "Tester",
-      "lastName": "User",
-      "email": "tester@example.com",
-      "password": "Password123"
-    },
-    {
-      "id": 9,
-      "firstName": "Ahmed",
-      "lastName": "Gamer",
-      "email": "ahmed05@gmail.com",
-      "password": "user123"
+      "src": "/images/menu/fish (5).webp",
+      "name": "Chilean Sea Bass",
+      "description": "Pan-seared sea bass, miso glaze, bok choy, ginger-soy broth.",
+      "price": 45,
+      "category": "seafood",
+      "badge": null,
+      "dietIcon": "seafood"
     }
   ],
-  "reservations": [],
-  "privateDiningInquiries": []
+  "tastingMenu": [
+    {
+      "course": "I",
+      "label": "AMUSE-BOUCHE",
+      "dish": "Chilled Oyster with Champagne Foam"
+    },
+    {
+      "course": "II",
+      "label": "APPETIZER",
+      "dish": "Foie Gras Torchon with Fig Jam"
+    },
+    {
+      "course": "III",
+      "label": "PALATE CLEANSER",
+      "dish": "Lemon & Mint Granita"
+    },
+    {
+      "course": "IV",
+      "label": "MAIN COURSE",
+      "dish": "A5 Wagyu Beef with Truffle Jus"
+    },
+    {
+      "course": "V",
+      "label": "DESSERT",
+      "dish": "Dark Chocolate Soufflé with Gold Leaf"
+    }
+  ],
+  "wines": [
+    {
+      "id": 1,
+      "name": "Château Margaux 2015",
+      "origin": "Bordeaux, France",
+      "price": "$120/Glass"
+    },
+    {
+      "id": 2,
+      "name": "Dom Pérignon P2",
+      "origin": "Champagne, France",
+      "price": "$85/Glass"
+    },
+    {
+      "id": 3,
+      "name": "Silver Oak Cabernet",
+      "origin": "Napa Valley, USA",
+      "price": "$210/Bottle"
+    }
+  ],
+  "cocktails": [
+    {
+      "id": 1,
+      "name": "Smoked Old Fashioned",
+      "description": "Bourbon, maple, walnut bitters, applewood smoke.",
+      "price": 18
+    },
+    {
+      "id": 2,
+      "name": "Lavender Gin Fizz",
+      "description": "Botanical gin, fresh lavender, lemon, egg white.",
+      "price": 16
+    },
+    {
+      "id": 3,
+      "name": "Cucumber Cooler (Non-Alc)",
+      "description": "Muddled cucumber, lime, agave, mint soda.",
+      "price": 12
+    }
+  ],
+  "signatureDishes": [
+    {
+      "id": 1,
+      "name": "Truffle Pappardelle",
+      "description": "Hand-rolled pasta, wild mushroom ragu, fresh shaved black truffle.",
+      "price": 29,
+      "badge": "POPULAR"
+    },
+    {
+      "id": 2,
+      "name": "Atlantic Scallops",
+      "description": "Pan-seared scallops, green pea puree, crispy prosciutto, lemon oil.",
+      "price": 39,
+      "badge": null
+    },
+    {
+      "id": 3,
+      "name": "Prime Ribeye",
+      "description": "60-day dry-aged beef, roasted garlic mash, red wine reduction.",
+      "price": 95,
+      "badge": "POPULAR"
+    },
+    {
+      "id": 4,
+      "name": "Heirloom Tomato Salad",
+      "description": "Organic heirloom tomatoes, buffalo mozzarella, balsamic glaze, fresh basil.",
+      "price": 24,
+      "badge": null
+    }
+  ],
+  "gallery": [
+    { "id": 1, "src": "/images/gallery/salmon.webp", "alt": "Gourmet Salmon Dish",            "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 2, "src": "/images/gallery/chocolate cake (3).webp", "alt": "Chocolate Dessert",           "category": "food",           "type": "photo", "size": "medium" },
+    { "id": 3, "src": "/images/gallery/pizza (5).webp", "alt": "Wood-fired Pizza",           "category": "chefsCreations", "type": "photo", "size": "medium" },
+    { "id": 4, "src": "/images/gallery/chef (1).webp", "alt": "Chef at Work",                "category": "events",         "type": "video", "size": "medium" },
+    { "id": 5, "src": "/images/gallery/drink (4).webp", "alt": "Craft Cocktail",             "category": "food",           "type": "photo", "size": "tall"   },
+    { "id": 6, "src": "/images/gallery/interior (6).webp", "alt": "Elegant Dining Room",        "category": "interior",       "type": "photo", "size": "medium" },
+    { "id": 7, "src": "/images/gallery/table(2).webp", "alt": "Warm Bar Interior",          "category": "interior",       "type": "photo", "size": "tall", "hasReservation": true }
+  ],
+  "team": [
+    {
+      "id": 1,
+      "name": "Maria Garcia",
+      "role": "General Manager",
+      "bio": "Maria ensures every guest feels at home with her meticulous attention to hospitality."
+    },
+    {
+      "id": 2,
+      "name": "Julian Smith",
+      "role": "Head Sommelier",
+      "bio": "Julian's wine pairings are legendary, curated from the finest vineyards worldwide."
+    },
+    {
+      "id": 3,
+      "name": "Sarah Chen",
+      "role": "Pastry Chef",
+      "bio": "Award-winning desserts that are as beautiful as they are delicious."
+    },
+    {
+      "id": 4,
+      "name": "Marcus Thorne",
+      "role": "Sous Chef",
+      "bio": "The master of operations, Marcus keeps our kitchen running like a well-oiled machine."
+    }
+  ],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "Do you accommodate dietary restrictions?",
+      "answer": "Absolutely. We offer a variety of gluten-free, vegetarian, and vegan options. Please inform your server of any allergies so our culinary team can take extra care in preparing your meal."
+    },
+    {
+      "id": 2,
+      "question": "Is there parking available?",
+      "answer": "Yes, we offer complimentary valet parking for all our guests. There is also ample street parking and a public parking garage located just one block east of the restaurant."
+    },
+    {
+      "id": 3,
+      "question": "Do you accept walk-ins?",
+      "answer": "While we do accept walk-ins based on availability, we highly recommend making a reservation, especially on weekends and during peak dining hours, to ensure your table is ready upon arrival."
+    },
+    {
+      "id": 4,
+      "question": "Can I bring my own wine?",
+      "answer": "We allow guests to bring their own wine bottles. A corkage fee of $25 per 750ml bottle applies, with a maximum of two bottles per party. Please note this only applies to wine not already on our curated list."
+    },
+    {
+      "id": 5,
+      "question": "Do you offer gift certificates?",
+      "answer": "Yes, gift certificates are available for purchase both in-person at the restaurant and through our website. They can be loaded with any amount and never expire."
+    }
+  ],
+  "contactInfo": {
+    "address": {
+      "title": "Address",
+      "lines": ["123 Culinary Avenue", "Foodville, CA 90210"],
+      "action": { "label": "Get Directions", "href": "#" }
+    },
+    "hours": {
+      "title": "Hours",
+      "lines": ["Mon - Thu: 11am - 10pm", "Fri - Sat: 11am - 11pm", "Sunday: 10am - 9pm"]
+    },
+    "contact": {
+      "title": "Contact",
+      "lines": ["(555) 123-4567", "hello@savorybistro.com"],
+      "socials": ["web", "insta", "share"]
+    }
+  },
+  "testimonials": [
+    {
+      "id": 1,
+      "text": "The most incredible culinary experience I've had in years. The truffle pasta is to die for, and the service is impeccably warm.",
+      "author": "Sarah Jenkins",
+      "role": "FOOD CRITIC",
+      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+    },
+    {
+      "id": 2,
+      "text": "A masterclass in flavor and presentation. Each course told a unique story of local ingredients meeting world-class technique.",
+      "author": "Michael Chen",
+      "role": "LIFESTYLE BLOGGER",
+      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+    },
+    {
+      "id": 3,
+      "text": "Authentic, vibrant, and unforgettable. Savory Bistro has set a new standard for fine dining in the city.",
+      "author": "Elena Rodriguez",
+      "role": "GASTRONOMY EXPERT",
+      "image": "/images/HomePage/Small_Avatar_Sara.webp"
+    }
+  ]
 }
-

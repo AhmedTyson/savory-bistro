@@ -1,77 +1,104 @@
 :root {
-
   /* ─── PRIMARY BRAND COLORS ──────────────────────────────────── */
-  --color-primary:          #E07B39;
-  --color-primary-hover:    #C96B2A;
-  --color-chef-badge:       #C8973A;
-  --color-gold-accent:      #C9A84C;
-  --color-green-sustain:    #5A8A5A;
+  --color-primary: #E07B39;
+  --color-primary-hover: #C96B2A;
+  --color-chef-badge: #C8973A;
+  --color-gold: #C9A84C;
+  --color-gold-accent: #C9A84C;
+  --color-green-sustain: #5A8A5A;
 
   /* ─── BACKGROUNDS ───────────────────────────────────────────── */
-  --color-bg-page:          #F5F0EB;
-  --color-bg-white:         #FFFFFF;
-  --color-bg-hero:          #111111;
-  --color-bg-chef-special:  #2B3A42;
-  --color-bg-testimonial:   #1A1A1A;
-  --color-bg-footer:        #1C1C1C;
-  --color-bg-tasting-menu:  #1A1200;
-  --color-bg-sustainability: #F0EFEA;
-  --color-bg-map:           #B8D4C8;
+  --color-bg-page: #F5F0EB;
+  --color-bg-white: #FFFFFF;
+  --color-bg-hero: #111111;
+  --color-bg-chef-special: #2B3A42;
+  --color-bg-testimonial: #1A1A1A;
+  --color-bg-footer: #1C1C1C;
+  --color-bg-tasting: #1A1200;
+  --color-bg-sustain: #F0EFEA;
+  --color-bg-map: #B8D4C8;
+  --color-bg-contact-hero: #3D2B1A;
+  --color-bg-light: #FFFFFF;
+  --color-bg-infobar: #f1f5f9;
+  --color-bg-hero-overlay: rgba(0, 0, 0, 0.6);
+  --color-bg-chef-special-overlay: rgba(17, 24, 39, 0.5);
+  --color-bg-testimonial-overlay: rgba(0, 0, 0, 0.7);
+  --color-bg-hero-gradient: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
 
   /* ─── TEXT COLORS ───────────────────────────────────────────── */
-  --color-text-heading:     #1A1A1A;
-  --color-text-body:        #555555;
-  --color-text-muted:       #888888;
+  --color-text-heading: #1A1A1A;
+  --color-text-body: #555555;
+  --color-text-muted: #888888;
   --color-text-placeholder: #AAAAAA;
-  --color-text-white:       #FFFFFF;
+  --color-text-white: #FFFFFF;
   --color-text-nav-default: #2D2D2D;
-  --color-text-nav-active:  #E07B39;
-  --color-text-price:       #E07B39;
-  --color-text-gold-price:  #C9A84C;
+  --color-text-nav-active: #E07B39;
+  --color-text-price: #E07B39;
+  --color-text-gold-price: #C9A84C;
   --color-text-hero-script: #E8C99A;
+  --color-text-hero-overlay: rgba(255, 255, 255, 0.9);
+  --color-text-dark: #1A1A1A;
 
   /* ─── BORDERS ───────────────────────────────────────────────── */
-  --color-border-light:     #E8E2D9;
-  --color-border-input:     #D5CFC8;
-  --color-border-gold:      #C9A84C;
-  --color-border-quote:     #E07B39;
-  --color-border-error:     #E53935;
+  --color-border-card: #E8E2D9;
+  --color-border-input: #D5CFC8;
+  --color-border-gold: #C9A84C;
+  --color-border-quote: #E07B39;
+  --color-border-error: #E53935;
+  --color-border-light: #E8E2D9;
 
   /* ─── DIET ICON DOTS (Menu page) ────────────────────────────── */
-  --color-diet-vegetarian:  #4CAF50;
-  --color-diet-seafood:     #2196F3;
-  --color-diet-spicy:       #F44336;
+  --color-diet-vegetarian: #4CAF50;
+  --color-diet-seafood: #2196F3;
+  --color-diet-spicy: #F44336;
 
   /* ─── SPACING ───────────────────────────────────────────────── */
-  --space-xs:      4px;
-  --space-sm:      8px;
-  --space-md:      16px;
-  --space-lg:      24px;
-  --space-xl:      40px;
-  --space-2xl:     64px;
-  --space-3xl:     96px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
   --space-section: 100px;
 
   /* ─── BORDER RADIUS ─────────────────────────────────────────── */
-  --radius-sm:     4px;
-  --radius-md:     8px;
-  --radius-lg:     12px;
-  --radius-pill:   999px;
-  --radius-circle: 50%;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-pill: 100px;
 
   /* ─── TYPOGRAPHY ────────────────────────────────────────────── */
-  --font-serif:  'Playfair Display', Georgia, serif;
-  --font-sans:   'Inter', 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', 'Segoe UI', sans-serif;
   --font-script: 'Dancing Script', cursive;
+
+  --font-size-xs:   12px;
+  --font-size-sm:   13px;
+  --font-size-base: 15px;
+  --font-size-md:   18px;
+  --font-size-lg:   22px;
+  --font-size-xl:   28px;
+  --font-size-2xl:  36px;
+  --font-size-3xl:  40px;
+  --font-size-4xl:  48px;
+  --font-size-hero: clamp(3.5rem, 10vw, 7.5rem);
 
   /* ─── LAYOUT ────────────────────────────────────────────────── */
   --container-max: 1200px;
 
   /* ─── SHADOWS ───────────────────────────────────────────────── */
-  --shadow-card:   0 2px 12px rgba(0, 0, 0, 0.08);
-  --shadow-button: 0 4px 12px rgba(224, 123, 57, 0.30);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-button: 0 4px 12px rgba(224, 123, 57, 0.3);
 
   /* ─── TRANSITIONS ───────────────────────────────────────────── */
-  --transition-fast: 0.2s ease;
-  --transition-med:  0.3s ease;
+  --z-navbar: 10000;
+  --z-floating: 10100;
+  --z-toast: 10200;
+  --z-modal: 10300;
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
 }
+
