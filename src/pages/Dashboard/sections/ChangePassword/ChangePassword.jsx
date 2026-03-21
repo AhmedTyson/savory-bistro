@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '../../../../context';;
-import Button from '../../../../components/Button/Button';;
+import { useAuth } from '../../../../context';
+import { validatePasswordStrength, validatePasswordMatch, validateRequired } from '../../../../utils/validation';
+import Button from '../../../../components/Button/Button';
+import DashboardCard from '../../components/DashboardCard/DashboardCard';
 import './ChangePassword.css';
 
 function ChangePassword() {
@@ -24,36 +26,27 @@ function ChangePassword() {
     let valid = true;
 
     // validate current password not empty
-    if (!currentPw.trim()) {
-      setCurrentPwError('Current password is required.');
+    const currentErr = validateRequired(currentPw, 'Current password')
+    if (currentErr) {
+      setCurrentPwError(currentErr);
       valid = false;
     } else {
       setCurrentPwError('');
     }
-
+ 
     // validate new password strength
-    const hasMinLength = newPw.length >= 8;
-    const hasUppercase = /[A-Z]/.test(newPw);
-    const hasLowercase = /[a-z]/.test(newPw);
-    const hasNumber    = /[0-9]/.test(newPw);
-    const hasSpecial   = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(newPw);
-
-    if (!hasMinLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecial) {
-      const missing = [];
-      if (!hasMinLength) missing.push('at least 8 characters');
-      if (!hasUppercase) missing.push('an uppercase letter');
-      if (!hasLowercase) missing.push('a lowercase letter');
-      if (!hasNumber)    missing.push('a number');
-      if (!hasSpecial)   missing.push('a special character');
-      setNewPwError(`Password must include: ${missing.join(', ')}.`);
+    const newPwErr = validatePasswordStrength(newPw)
+    if (newPwErr) {
+      setNewPwError(newPwErr);
       valid = false;
     } else {
       setNewPwError('');
     }
-
+ 
     // validate confirm matches
-    if (confirmPw !== newPw) {
-      setConfirmPwError('Passwords do not match.');
+    const confirmErr = validatePasswordMatch(newPw, confirmPw)
+    if (confirmErr) {
+      setConfirmPwError(confirmErr);
       valid = false;
     } else {
       setConfirmPwError('');
@@ -90,9 +83,11 @@ function ChangePassword() {
   }
 
   return (
-    <div className="ChangePassword">
-      <h2 className="ChangePassword__title">Change Password</h2>
-
+    <DashboardCard 
+      title="Change Password" 
+      subtitle="Keep your account secure with a strong, unique password."
+      className="ChangePassword"
+    >
       <div className="ChangePassword__group ChangePassword__email-group">
         <label className="ChangePassword__label">Email Address</label>
         <input
@@ -176,9 +171,11 @@ function ChangePassword() {
       </div>
 
       <div className="ChangePassword__footer">
-        {success && (
-          <span className="ChangePassword__success">✓ Password changed successfully</span>
-        )}
+        <div className="ChangePassword__status">
+          {success && (
+            <span className="ChangePassword__success">✓ Password changed successfully</span>
+          )}
+        </div>
         <Button
           variant="primary"
           type="button"
@@ -188,7 +185,7 @@ function ChangePassword() {
           {saving ? 'Saving...' : 'Save Changes'}
         </Button>
       </div>
-    </div>
+    </DashboardCard>
   );
 }
 

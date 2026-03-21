@@ -2,12 +2,15 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context'
 import mockData from '../../../mock-data.json'
+import { 
+  validateEmail, 
+  validateMinLength, 
+  validatePasswordStrength, 
+  validatePasswordMatch 
+} from '../../utils/validation'
 import SignupPanel from './sections/SignupPanel/SignupPanel'
 import SignupForm  from './sections/SignupForm/SignupForm'
 import './Signup.css'
-
-/* RFC 5322 email regex with TLD ≥ 2 chars */
-const emailRx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/
 
 export default function Signup() {
   const { registerUser, currentUser } = useAuth()
@@ -23,18 +26,17 @@ export default function Signup() {
   }, []) // empty array — mount only
 
   // Form state
-  const [firstName, setFirstName]                         = useState('')
-  const [firstNameError, setFirstNameError]               = useState('')
-  const [lastName, setLastName]                           = useState('')
-  const [lastNameError, setLastNameError]                 = useState('')
-  const [email, setEmail]                                 = useState('')
-  const [emailError, setEmailError]                       = useState('')
-  const [password, setPassword]                           = useState('')
-  const [passwordError, setPasswordError]                 = useState('')
-  const [confirmPassword, setConfirmPassword]             = useState('')
-  const [confirmPasswordError, setConfirmPasswordError]   = useState('')
-  const [showPassword, setShowPassword]                   = useState(false)
-  const [showConfirm, setShowConfirm]                     = useState(false)
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+  const [errors, setErrors] = useState({})
+  
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirm, setShowConfirm]   = useState(false)
 
   // Rate-limiting state
   const [cooldownSeconds, setCooldownSeconds] = useState(0)
@@ -83,75 +85,53 @@ export default function Signup() {
     if (cooldownRef.current) clearInterval(cooldownRef.current)
   }
 
+  const updateField = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+    if (errors[field]) setErrors(prev => ({ ...prev, [field]: null }))
+  }
+
   async function handleSubmit(e) {
     if (e) e.preventDefault()
-    let hasError = false
+    const newErrors = {}
 
     // Rate limit check
     if (cooldownSeconds > 0) return
 
     // First name
-    if (!firstName.trim() || firstName.trim().length < 2) {
-      setFirstNameError('Please enter your first name.')
-      hasError = true
-    }
+    const fNameError = validateMinLength(formData.firstName, 2, 'First name')
+    if (fNameError) newErrors.firstName = fNameError
+
     // Last name
-    if (!lastName.trim() || lastName.trim().length < 2) {
-      setLastNameError('Please enter your last name.')
-      hasError = true
-    }
+    const lNameError = validateMinLength(formData.lastName, 2, 'Last name')
+    if (lNameError) newErrors.lastName = lNameError
 
-    // Email — trim, length, RFC 5322
-    const trimmedEmail = email.trim()
-    if (!trimmedEmail) {
-      setEmailError('Email address is required.')
-      hasError = true
-    } else if (trimmedEmail.length > 254) {
-      setEmailError('Email address is too long (max 254 characters).')
-      hasError = true
-    } else if (!emailRx.test(trimmedEmail)) {
-      setEmailError('Please enter a valid email address.')
-      hasError = true
-    }
+    // Email
+    const emailErr = validateEmail(formData.email)
+    if (emailErr) newErrors.email = emailErr
 
-    // Password — 5 rules
-    const hasMinLength = password.length >= 8
-    const hasUppercase = /[A-Z]/.test(password)
-    const hasLowercase = /[a-z]/.test(password)
-    const hasNumber    = /[0-9]/.test(password)
-    const hasSpecial   = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
-
-    if (!password.trim()) {
-      setPasswordError('Please choose a password.')
-      hasError = true
-    } else if (!hasMinLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecial) {
-      const missing = []
-      if (!hasMinLength) missing.push('at least 8 characters')
-      if (!hasUppercase) missing.push('an uppercase letter')
-      if (!hasLowercase) missing.push('a lowercase letter')
-      if (!hasNumber)    missing.push('a number')
-      if (!hasSpecial)   missing.push('a special character')
-      setPasswordError('Password must contain: ' + missing.join(', ') + '.')
-      hasError = true
-    }
+    // Password
+    const pwErr = validatePasswordStrength(formData.password)
+    if (pwErr) newErrors.password = pwErr
 
     // Confirm password
-    if (!confirmPassword.trim()) {
-      setConfirmPasswordError('Please confirm your password.')
-      hasError = true
-    } else if (confirmPassword !== password) {
-      setConfirmPasswordError('Passwords do not match.')
-      hasError = true
-    }
+    const confirmErr = validatePasswordMatch(formData.password, formData.confirmPassword)
+    if (confirmErr) newErrors.confirmPassword = confirmErr
 
-    if (hasError) {
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
       if (!checkRateLimit()) return
       return
     }
 
-    const result = await registerUser({ firstName, lastName, email: trimmedEmail, password })
+    const result = await registerUser({ 
+      firstName: formData.firstName, 
+      lastName: formData.lastName, 
+      email: formData.email.trim(), 
+      password: formData.password 
+    })
+    
     if (!result.success) {
-      setEmailError(result.error)
+      setErrors({ email: result.error })
       checkRateLimit()
       return
     }
@@ -173,19 +153,13 @@ export default function Signup() {
     <div className="auth-page">
       <SignupPanel dishes={dishes} />
       <SignupForm
-        firstName={firstName}               onFirstNameChange={setFirstName}
-        firstNameError={firstNameError}     onFirstNameErrorClear={() => setFirstNameError('')}
-        lastName={lastName}                 onLastNameChange={setLastName}
-        lastNameError={lastNameError}       onLastNameErrorClear={() => setLastNameError('')}
-        email={email}                       onEmailChange={setEmail}
-        emailError={emailError}             onEmailErrorClear={() => setEmailError('')}
-        password={password}                 onPasswordChange={setPassword}
-        passwordError={passwordError}       onPasswordErrorClear={() => setPasswordError('')}
-        confirmPassword={confirmPassword}   onConfirmPasswordChange={setConfirmPassword}
-        confirmPasswordError={confirmPasswordError}
-        onConfirmPasswordErrorClear={() => setConfirmPasswordError('')}
-        showPassword={showPassword}         onTogglePassword={() => setShowPassword(p => !p)}
-        showConfirm={showConfirm}           onToggleConfirm={() => setShowConfirm(p => !p)}
+        formData={formData}
+        updateField={updateField}
+        errors={errors}
+        showPassword={showPassword}
+        onTogglePassword={() => setShowPassword(p => !p)}
+        showConfirm={showConfirm}
+        onToggleConfirm={() => setShowConfirm(p => !p)}
         cooldownSeconds={cooldownSeconds}
         onSubmit={handleSubmit}
       />

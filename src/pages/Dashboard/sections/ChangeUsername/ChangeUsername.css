@@ -2,18 +2,8 @@
    CHANGEUSERNAME — sections/ChangeUsername/ChangeUsername.css
    ═══════════════════════════════════════════════════════ */
 
-.ChangeUsername {
-  background: var(--color-bg-white);
-  border: 1px solid var(--color-border-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-}
-
-.ChangeUsername__title {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-xl);
-  color: var(--color-text-heading);
-  margin-bottom: var(--space-lg);
+.ChangeUsername .DashboardCard__body {
+  padding: 0;
 }
 
 .ChangeUsername__grid {
@@ -74,6 +64,13 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--space-md);
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--color-border-card);
+  padding-top: var(--space-md);
+}
+
+.ChangeUsername__status {
+  flex: 1;
 }
 
 .ChangeUsername__success {

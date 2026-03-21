@@ -53,36 +53,36 @@ function CalendarPicker({
   };
 
   return (
-    <div className="res-form__section">
-      <label className="res-label">
-        Select Date <span className="res-req">*</span>
+    <div className="ReservationForm__section">
+      <label className="ReservationForm__label">
+        Select Date <span className="ReservationForm__req">*</span>
       </label>
       {errors?.date && (
-        <span className="res-error">
+        <span className="ReservationForm__error" style={{ marginBottom: 12 }}>
           <AlertCircle size={13} /> {errors.date}
         </span>
       )}
 
-      <div className="res-calendar">
-        <div className="res-calendar__header">
-          <button type="button" className="res-calendar__arrow" onClick={prevMonth} aria-label="Previous month">
+      <div className="CalendarPicker">
+        <div className="CalendarPicker__header">
+          <button type="button" className="CalendarPicker__arrow" onClick={prevMonth} aria-label="Previous month">
             <ChevronLeft size={18} />
           </button>
-          <span className="res-calendar__month">{MONTHS[calMonth]} {calYear}</span>
-          <button type="button" className="res-calendar__arrow" onClick={nextMonth} aria-label="Next month">
+          <span className="CalendarPicker__month">{MONTHS[calMonth]} {calYear}</span>
+          <button type="button" className="CalendarPicker__arrow" onClick={nextMonth} aria-label="Next month">
             <ChevronRight size={18} />
           </button>
         </div>
 
-        <div className="res-calendar__days">
+        <div className="CalendarPicker__days">
           {DAYS.map((d, i) => (
-            <span key={i} className="res-calendar__day-label">{d}</span>
+            <span key={i} className="CalendarPicker__day-label">{d}</span>
           ))}
         </div>
 
-        <div className="res-calendar__grid">
+        <div className="CalendarPicker__grid">
           {calendarDays.map((d, i) => {
-            if (d === null) return <span key={`e${i}`} className="res-calendar__empty" />;
+            if (d === null) return <span key={`e${i}`} className="CalendarPicker__empty" />;
             
             const reserved = isDateReserved(d);
             const past = isDatePast(d);
@@ -96,10 +96,10 @@ function CalendarPicker({
                 type="button"
                 disabled={disabled}
                 className={[
-                  'res-calendar__cell',
-                  active && 'res-calendar__cell--active',
-                  isToday && 'res-calendar__cell--today',
-                  disabled && 'res-calendar__cell--disabled',
+                  'CalendarPicker__cell',
+                  active && 'CalendarPicker__cell--active',
+                  isToday && 'CalendarPicker__cell--today',
+                  disabled && 'CalendarPicker__cell--disabled',
                 ].filter(Boolean).join(' ')}
                 onClick={() => {
                   const newDt = new Date(calYear, calMonth, d);
@@ -113,12 +113,12 @@ function CalendarPicker({
           })}
         </div>
 
-        <div className="res-calendar__legend">
-          <span className="res-calendar__legend-item">
-            <span className="res-calendar__dot res-calendar__dot--available" /> Available
+        <div className="CalendarPicker__legend">
+          <span className="CalendarPicker__legend-item">
+            <span className="CalendarPicker__dot CalendarPicker__dot--available" /> Available
           </span>
-          <span className="res-calendar__legend-item">
-            <span className="res-calendar__dot res-calendar__dot--reserved" /> Reserved
+          <span className="CalendarPicker__legend-item">
+            <span className="CalendarPicker__dot CalendarPicker__dot--reserved" /> Reserved
           </span>
         </div>
       </div>

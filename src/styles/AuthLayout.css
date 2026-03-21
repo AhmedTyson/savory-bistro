@@ -1,0 +1,22 @@
+.AuthLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.AuthLayout__main {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* On mobile, we let the page grow and scroll normally */
+@media (max-width: 768px) {
+  .AuthLayout {
+    height: auto;
+    overflow: visible;
+  }
+  .AuthLayout__main {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,33 @@
+.DashboardCard {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* DashboardCard is now static per user preference */
+
+.DashboardCard__header {
+  margin-bottom: var(--space-lg);
+}
+
+.DashboardCard__title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-xs);
+}
+
+.DashboardCard__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .DashboardCard {
+    padding: var(--space-md);
+  }
+}

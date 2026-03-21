@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context'
+import { validateEmail, validateMinLength } from '../../utils/validation'
 import LoginPanel from './sections/LoginPanel/LoginPanel'
 import LoginForm  from './sections/LoginForm/LoginForm'
+import ForgotPasswordModal from './sections/ForgotPasswordModal/ForgotPasswordModal'
 import './Login.css'
-
-/* RFC 5322 email regex with TLD ≥ 2 chars */
-const emailRx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/
 
 export default function Login() {
   const { validateLogin, login, currentUser } = useAuth()
@@ -31,12 +30,14 @@ export default function Login() {
   }, [])
 
   // Form state
-  const [email, setEmail]                     = useState('')
-  const [emailError, setEmailError]           = useState('')
-  const [password, setPassword]               = useState('')
-  const [passwordError, setPasswordError]     = useState('')
-  const [showPassword, setShowPassword]       = useState(false)
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const [errors, setErrors] = useState({})
+  const [showPassword, setShowPassword] = useState(false)
   const [submitError, setSubmitError]         = useState('')
+  const [showForgot, setShowForgot]           = useState(false)
 
   // Rate-limiting state
   const [cooldownSeconds, setCooldownSeconds] = useState(0)
@@ -86,35 +87,33 @@ export default function Login() {
     if (cooldownRef.current) clearInterval(cooldownRef.current)
   }
 
+  const updateField = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+    if (errors[field]) setErrors(prev => ({ ...prev, [field]: null }))
+  }
+
   function handleSubmit(e) {
     if (e) e.preventDefault()
-    let hasError = false
+    const newErrors = {}
 
     // Rate limit check
     if (cooldownSeconds > 0) return
 
-    // Email — trim + RFC 5322
-    const trimmedEmail = email.trim()
-    if (!trimmedEmail) {
-      setEmailError('Email address is required.')
-      hasError = true
-    } else if (!emailRx.test(trimmedEmail)) {
-      setEmailError('Please enter a valid email address.')
-      hasError = true
-    }
-    if (!password.trim()) {
-      setPasswordError('Password is required.')
-      hasError = true
-    } else if (password.length < 6) {
-      setPasswordError('Password must be at least 6 characters.')
-      hasError = true
-    }
-    if (hasError) {
+    // Email validation
+    const emailErr = validateEmail(formData.email)
+    if (emailErr) newErrors.email = emailErr
+
+    // Password validation
+    const passwordErr = validateMinLength(formData.password, 6, 'Password')
+    if (passwordErr) newErrors.password = passwordErr
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
       checkRateLimit()
       return
     }
 
-    const userFound = validateLogin(trimmedEmail, password)
+    const userFound = validateLogin(formData.email.trim(), formData.password)
     if (!userFound) {
       setSubmitError('Incorrect email or password. Please try again.')
       checkRateLimit()
@@ -142,14 +141,19 @@ export default function Login() {
       <LoginPanel />
       <LoginForm
         isReturningUser={isReturningUser}
-        email={email}               onEmailChange={setEmail}
-        emailError={emailError}     onEmailErrorClear={() => setEmailError('')}
-        password={password}         onPasswordChange={setPassword}
-        passwordError={passwordError} onPasswordErrorClear={() => setPasswordError('')}
-        showPassword={showPassword} onTogglePassword={() => setShowPassword(p => !p)}
+        formData={formData}
+        updateField={updateField}
+        errors={errors}
+        showPassword={showPassword}
+        onTogglePassword={() => setShowPassword(p => !p)}
         submitError={submitError}
         cooldownSeconds={cooldownSeconds}
         onSubmit={handleSubmit}
+        onForgotClick={() => setShowForgot(true)}
+      />
+      <ForgotPasswordModal 
+        isOpen={showForgot} 
+        onClose={() => setShowForgot(false)} 
       />
     </div>
   )

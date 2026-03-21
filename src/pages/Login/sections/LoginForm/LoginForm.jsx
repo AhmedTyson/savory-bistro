@@ -6,11 +6,10 @@ import zigzagOrange from '../../../../assets/zigzag-orange.svg'
 import './LoginForm.css'
 
 export default function LoginForm({
-  isReturningUser, email, onEmailChange, emailError, onEmailErrorClear,
-  password, onPasswordChange, passwordError, onPasswordErrorClear,
+  isReturningUser, formData, updateField, errors,
   showPassword, onTogglePassword, submitError,
   cooldownSeconds = 0,
-  onSubmit
+  onSubmit, onForgotClick
 }) {
   return (
     <div className="LoginForm">
@@ -40,11 +39,11 @@ export default function LoginForm({
               <label className="LoginForm__label">Email Address</label>
               <div className="LoginForm__input-wrapper">
                 <span className="LoginForm__input-icon"><Mail size={15} /></span>
-                <input type="email" className={`LoginForm__input${emailError ? ' LoginForm__input--error' : ''}`}
-                  placeholder="john@example.com" value={email}
-                  onChange={e => { onEmailChange(e.target.value); onEmailErrorClear(); }} />
+                <input type="email" className={`LoginForm__input${errors.email ? ' LoginForm__input--error' : ''}`}
+                  placeholder="john@example.com" value={formData.email}
+                  onChange={e => updateField("email", e.target.value)} />
               </div>
-              {emailError && <span className="LoginForm__error-msg">{emailError}</span>}
+              {errors.email && <span className="LoginForm__error-msg">{errors.email}</span>}
             </div>
 
             {/* Password field */}
@@ -53,17 +52,19 @@ export default function LoginForm({
               <div className="LoginForm__input-wrapper">
                 <span className="LoginForm__input-icon"><Lock size={15} /></span>
                 <input type={showPassword ? 'text' : 'password'}
-                  className={`LoginForm__input${passwordError ? ' LoginForm__input--error' : ''}`}
-                  placeholder="Enter your password" value={password}
-                  onChange={e => { onPasswordChange(e.target.value); onPasswordErrorClear(); }} />
+                  className={`LoginForm__input${errors.password ? ' LoginForm__input--error' : ''}`}
+                  placeholder="Enter your password" value={formData.password}
+                  onChange={e => updateField("password", e.target.value)} />
                 <button type="button" className="LoginForm__toggle-pw" onClick={onTogglePassword}>
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
-              {passwordError && <span className="LoginForm__error-msg">{passwordError}</span>}
+              {errors.password && <span className="LoginForm__error-msg">{errors.password}</span>}
             </div>
 
-            <div className="LoginForm__forgot">Forgot password?</div>
+            <button type="button" className="LoginForm__forgot" onClick={onForgotClick}>
+              Forgot password?
+            </button>
             <button
               type="submit"
               className="LoginForm__submit-btn"

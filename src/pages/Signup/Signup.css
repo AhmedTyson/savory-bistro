@@ -1,8 +1,14 @@
 .auth-page {
-  display: flex; min-height: calc(100vh - 64px);
+  display: flex; 
+  height: 100%;
   font-family: var(--font-sans);
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
-  .auth-page { flex-direction: column; }
+  .auth-page { 
+    flex-direction: column; 
+    height: auto;
+    overflow: visible;
+  }
 }

@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../../context';
-import { isValidEmail, isValidPhone } from '../../../utils/validation';
+import { validateEmail, validatePhone, validateRequired } from '../../../utils/validation';
 
 const API = 'http://localhost:3001/api';
 
@@ -103,12 +103,14 @@ export function useReservations() {
     if (!formData.partySize) e.partySize = "Please select party size";
     if (!selectedDate) e.date = "Please select a date";
     if (!selectedTime) e.time = "Please select a time";
-    if (!formData.fullName.trim()) e.fullName = "Full name is required";
-    if (!formData.phone.trim()) e.phone = "Phone number is required";
-    else if (!isValidPhone(formData.phone)) e.phone = "Invalid phone number";
-    
-    if (!formData.email.trim()) e.email = "Email is required";
-    else if (!isValidEmail(formData.email)) e.email = "Invalid email";
+    const fullNameErr = validateRequired(formData.fullName, 'Full name')
+    if (fullNameErr) e.fullName = fullNameErr;
+
+    const phoneErr = validatePhone(formData.phone, 'Phone number')
+    if (phoneErr) e.phone = phoneErr;
+
+    const emailErr = validateEmail(formData.email, 'Email')
+    if (emailErr) e.email = emailErr;
     
     setErrors(e);
     return Object.keys(e).length === 0;

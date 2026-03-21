@@ -43,12 +43,14 @@ function Layout({ children, footerVariant = "full" }) {
   );
 }
 
+import "./styles/AuthLayout.css";
+
 function AuthLayout({ children }) {
   return (
-    <>
+    <div className="AuthLayout">
       <Navbar />
-      <main>{children}</main>
-    </>
+      <main className="AuthLayout__main">{children}</main>
+    </div>
   );
 }
 

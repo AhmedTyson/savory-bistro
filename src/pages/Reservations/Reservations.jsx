@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context';;
+import { useAuth } from '../../context';
 import { useReservations } from './hooks/useReservations';
 
 import ReservationHero     from './sections/ReservationHero/ReservationHero';
@@ -45,11 +45,12 @@ function Reservations() {
   };
 
   return (
-    <section className="reservations-page">
+    <section className="Reservations">
       <div className="container">
         <ReservationHero />
-        <div className="res-grid">
-          <div className="res-form-col">
+        
+        <div className="Reservations__grid">
+          <div className="Reservations__form-col">
             <ReservationForm
               handleSubmit={handleBooking}
               formData={formData}

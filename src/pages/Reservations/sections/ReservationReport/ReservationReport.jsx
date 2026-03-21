@@ -51,7 +51,7 @@ function ReservationReport({ history = [], showReport, setShowReport }) {
                 <span className="ReservationHistory__id">#{String(latestItem.id).slice(-6)}</span>
               </div>
               <div className="ReservationHistory__status">
-                <CheckCircle size={12} />
+                <CheckCircle size={12} strokeWidth={2} />
                 {isRes ? 'Confirmed' : 'Inquiry Sent'}
               </div>
             </div>
@@ -62,15 +62,19 @@ function ReservationReport({ history = [], showReport, setShowReport }) {
 
             <div className="ReservationHistory__card-grid">
               <div className="ReservationHistory__grid-item">
-                <Clock size={14} />
+                <Clock size={14} strokeWidth={1.5} className="ReservationHistory__item-icon" />
                 <span>{isRes ? latestItem.time : latestItem.eventType}</span>
               </div>
               <div className="ReservationHistory__grid-item">
-                <Users size={14} />
+                <Users size={14} strokeWidth={1.5} className="ReservationHistory__item-icon" />
                 <span>{latestItem.partySize} {parseInt(latestItem.partySize) === 1 ? 'Guest' : 'Guests'}</span>
               </div>
               <div className="ReservationHistory__grid-item">
-                {isRes ? <Info size={14} /> : <Tag size={14} />}
+                {isRes ? (
+                  <Info size={14} strokeWidth={1.5} className="ReservationHistory__item-icon" />
+                ) : (
+                  <Tag size={14} strokeWidth={1.5} className="ReservationHistory__item-icon" />
+                )}
                 <span>{isRes ? (latestItem.occasion || 'Standard Visit') : 'Private Event'}</span>
               </div>
             </div>
@@ -88,13 +92,11 @@ function ReservationReport({ history = [], showReport, setShowReport }) {
                 className="res-report-close-btn"
                 onClick={() => setShowReport(false)}
               >
-                <X size={14} />
+                <X size={14} strokeWidth={2.5} />
                 <span>Close Report</span>
               </button>
             </div>
           </div>
-          
-          <ChevronRight size={20} className="ReservationHistory__arrow" />
         </div>
       </div>
     </div>

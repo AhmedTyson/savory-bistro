@@ -13,9 +13,13 @@
   letter-spacing: 0.5px;
 }
 
-.selection-req { color: var(--color-primary); }
+.selection-req {
+  color: var(--color-primary);
+}
 
-.selection-container { position: relative; }
+.selection-container {
+  position: relative;
+}
 
 .selection-trigger {
   display: flex;
@@ -31,20 +35,28 @@
   color: var(--color-text-main);
 }
 
-.selection-trigger:hover { border-color: var(--color-primary); }
-.selection-trigger--active { 
-  border-color: var(--color-primary); 
+.selection-trigger:hover {
+  border-color: var(--color-primary);
+}
+.selection-trigger--active {
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(224, 123, 57, 0.1);
 }
-.selection-trigger--error { border-color: #ef4444; }
+.selection-trigger--error {
+  border-color: #ef4444;
+}
 
-.selection-placeholder { color: var(--color-text-muted); }
+.selection-placeholder {
+  color: var(--color-text-muted);
+}
 
-.selection-icon { 
-  color: var(--color-text-muted); 
+.selection-icon {
+  color: var(--color-text-muted);
   transition: transform 0.3s ease;
 }
-.selection-icon--rotated { transform: rotate(180deg); }
+.selection-icon--rotated {
+  transform: rotate(180deg);
+}
 
 .selection-menu {
   position: absolute;
@@ -62,8 +74,14 @@
 }
 
 @keyframes selectionFadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .selection-item {
@@ -73,10 +91,13 @@
   font-size: 0.9rem;
 }
 
-.selection-item:hover { background: #fdf5ef; color: var(--color-primary); }
-.selection-item--selected { 
-  background: var(--color-primary); 
-  color: #fff !important; 
+.selection-item:hover {
+  background: #fdf5ef;
+  color: var(--color-primary);
+}
+.selection-item--selected {
+  background: var(--color-primary);
+  color: #fff !important;
 }
 
 .selection-error-msg {

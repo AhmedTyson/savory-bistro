@@ -1,8 +1,14 @@
 .Login {
-  display: flex; min-height: calc(100vh - 64px);
+  display: flex; 
+  height: 100%;
   font-family: var(--font-sans);
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
-  .Login { flex-direction: column; }
+  .Login { 
+    flex-direction: column; 
+    height: auto;
+    overflow: visible;
+  }
 }

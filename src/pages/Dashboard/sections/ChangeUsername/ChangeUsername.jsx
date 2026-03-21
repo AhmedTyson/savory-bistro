@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../../../context';;
-import Button from '../../../../components/Button/Button';;
+import { useAuth } from '../../../../context';
+import Button from '../../../../components/Button/Button';
+import { validateMinLength } from '../../../../utils/validation';
+import DashboardCard from '../../components/DashboardCard/DashboardCard';
 import './ChangeUsername.css';
 
 function ChangeUsername() {
@@ -17,14 +19,16 @@ function ChangeUsername() {
   async function handleSave() {
     // handle name constraints
     let valid = true;
-    if (firstName.trim().length < 2) {
-      setFirstNameError('First name must be at least 2 characters.');
+    const fNameError = validateMinLength(firstName, 2, 'First name')
+    if (fNameError) {
+      setFirstNameError(fNameError);
       valid = false;
     } else {
       setFirstNameError('');
     }
-    if (lastName.trim().length < 2) {
-      setLastNameError('Last name must be at least 2 characters.');
+    const lNameError = validateMinLength(lastName, 2, 'Last name')
+    if (lNameError) {
+      setLastNameError(lNameError);
       valid = false;
     } else {
       setLastNameError('');
@@ -49,9 +53,11 @@ function ChangeUsername() {
   }
 
   return (
-    <div className="ChangeUsername">
-      <h2 className="ChangeUsername__title">Update Name</h2>
-
+    <DashboardCard 
+      title="Update Name" 
+      subtitle="Your name will be visible on reviews and reservations."
+      className="ChangeUsername"
+    >
       <div className="ChangeUsername__grid">
         <div className="ChangeUsername__group">
           <label className="ChangeUsername__label">First Name</label>
@@ -81,9 +87,11 @@ function ChangeUsername() {
       </div>
 
       <div className="ChangeUsername__footer">
-        {success && (
-          <span className="ChangeUsername__success">✓ Name updated successfully</span>
-        )}
+        <div className="ChangeUsername__status">
+          {success && (
+            <span className="ChangeUsername__success">✓ Name updated successfully</span>
+          )}
+        </div>
         <Button
           variant="primary"
           type="button"
@@ -93,7 +101,7 @@ function ChangeUsername() {
           {saving ? 'Saving...' : 'Save Changes'}
         </Button>
       </div>
-    </div>
+    </DashboardCard>
   );
 }
 

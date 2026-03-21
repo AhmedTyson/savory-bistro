@@ -1,10 +1,10 @@
-.reservations-page {
+.Reservations {
   padding: 28px 0 96px;
   background: var(--color-bg-page);
   min-height: 100vh;
 }
 
-.res-grid {
+.Reservations__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
@@ -12,10 +12,10 @@
 }
 
 @media (min-width: 1024px) {
-  .res-grid { grid-template-columns: 1fr 340px; gap: 44px; }
+  .Reservations__grid { grid-template-columns: 1fr 340px; gap: 44px; }
 }
 
-.res-form-col {
+.Reservations__form-col {
   display: flex;
   flex-direction: column;
   gap: 14px;

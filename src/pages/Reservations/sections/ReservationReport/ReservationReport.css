@@ -11,147 +11,168 @@
   width: 100%;
   height: 50px;
   padding: 0 18px;
-  background: #2D1B0E;
+  background: var(--color-text-heading);
   color: #fff;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   font-size: 14px;
   font-weight: 700;
   font-family: var(--font-sans);
   cursor: pointer;
-  transition: transform .2s, background .2s, border-radius .4s cubic-bezier(.4,0,.2,1);
-  box-shadow: 0 4px 15px rgba(45,27,14,0.15);
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-.res-report-btn:hover { background: #3d2514; transform: translateY(-1px); }
-.res-report-btn.active { border-radius: 12px 12px 0 0; }
-.res-report-btn .chevron { margin-left: auto; transition: transform .3s; }
-.res-report-btn.active .chevron { transform: rotate(180deg); }
+
+.res-report-btn:hover {
+  background: #3d2514;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.res-report-btn.active {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: var(--color-primary);
+}
+
+.res-report-btn .chevron {
+  margin-left: auto;
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+.res-report-btn.active .chevron {
+  transform: rotate(180deg);
+}
 
 .res-report-panel {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
   transition: all .4s cubic-bezier(.4,0,.2,1);
+  border: 1px solid var(--color-border-card);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.res-report-panel.active { 
-  max-height: 500px; 
-  opacity: 1; 
-  padding-top: 0px; 
+
+.res-report-panel.active {
+  max-height: 600px;
+  opacity: 1;
 }
 
 /* Card Overrides for Report Component */
 .res-card-override {
-  border-top: none !important;
-  border-radius: 0 0 16px 16px !important;
-  border-color: #2D1B0E !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: var(--space-lg);
   cursor: default !important;
 }
 
-/* Shared Styles from Dashboard (Duplicate here for component isolation) */
+/* Shared Styles from Dashboard (Synced with latest ReservationHistory.css) */
 .ReservationHistory__card {
   display: flex;
   gap: 20px;
   background: #fff;
-  border: 1px solid #E6E1DC;
-  border-radius: 16px;
-  padding: 24px;
-  transition: all .3s ease;
-  position: relative;
 }
+
 .ReservationHistory__card-sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
+
 .ReservationHistory__icon-box {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.ReservationHistory__icon-box.reservation { background: #FDF5EF; color: #E07B39; }
-.ReservationHistory__icon-box.inquiry { background: #F2F5F8; color: #2D1B0E; }
+.ReservationHistory__icon-box.reservation { background: rgba(224, 123, 57, 0.08); color: var(--color-primary); }
+.ReservationHistory__icon-box.inquiry { background: rgba(0, 0, 0, 0.05); color: var(--color-text-heading); }
 
 .ReservationHistory__line {
   flex: 1;
   width: 1px;
-  background: #EEEBE8;
+  background: var(--color-border-card);
+  opacity: 0.5;
 }
 
 .ReservationHistory__card-main { flex: 1; }
+
 .ReservationHistory__card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 .ReservationHistory__type-info { display: flex; align-items: center; gap: 10px; }
 .ReservationHistory__badge {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 2px 8px;
+  border-radius: 4px;
 }
-.ReservationHistory__badge.reservation { background: #FEEBD7; color: #B35412; }
-.ReservationHistory__badge.inquiry { background: #E8EAF6; color: #1A237E; }
-.ReservationHistory__id { font-size: 11px; color: #B2A292; font-weight: 500; }
+.ReservationHistory__badge.reservation { background: rgba(224, 123, 57, 0.12); color: var(--color-primary); }
+.ReservationHistory__badge.inquiry { background: rgba(0, 0, 0, 0.05); color: var(--color-text-body); }
+
+.ReservationHistory__id { font-size: 11px; color: var(--color-text-muted); font-weight: 500; }
+
 .ReservationHistory__status {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
+  gap: 4px;
+  font-size: 11px;
   font-weight: 700;
-  color: #1B5E20;
+  color: var(--color-green-sustain);
 }
+
 .ReservationHistory__card-title {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  color: #2D1B0E;
-  margin-bottom: 15px;
+  color: var(--color-text-heading);
+  margin-bottom: 12px;
 }
+
 .ReservationHistory__card-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
   margin-bottom: 15px;
 }
 .ReservationHistory__grid-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13.5px;
-  color: #6D635B;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-body);
   font-weight: 500;
 }
-.ReservationHistory__grid-item svg { color: #E07B39; opacity: 0.6; }
+.ReservationHistory__item-icon { color: var(--color-primary); opacity: 0.7; }
 
 .ReservationHistory__notes {
-  background: #FAF8F5;
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-top: 5px;
+  background: var(--color-bg-page);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-top: 4px;
 }
 .ReservationHistory__notes p {
-  font-size: 13px;
+  font-size: 12.5px;
   font-style: italic;
-  color: #8C6F4F;
+  color: var(--color-text-body);
+  opacity: 0.8;
   line-height: 1.5;
   margin: 0;
 }
-.ReservationHistory__arrow { align-self: center; color: #D4CDC5; }
 
 /* Report Footer Close Button */
 .res-report-footer {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px dashed #E6E1DC;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px dashed var(--color-border-card);
   display: flex;
   justify-content: flex-end;
 }
@@ -160,28 +181,28 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #FDF5EF;
-  color: #E07B39;
-  border: 1px solid #F3E4D8;
+  background: rgba(224, 123, 57, 0.05);
+  color: var(--color-primary);
+  border: 1px solid rgba(224, 123, 57, 0.15);
   padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .res-report-close-btn:hover {
-  background: #E07B39;
+  background: var(--color-primary);
   color: #fff;
-  border-color: #E07B39;
+  border-color: var(--color-primary);
   transform: translateY(-1px);
-}
-
-.res-report-close-btn svg {
-  opacity: 0.8;
+  box-shadow: 0 4px 12px rgba(224, 123, 57, 0.2);
 }
 
 @media (max-width: 600px) {
   .ReservationHistory__card-sidebar { display: none; }
+  .res-card-override { padding: var(--space-md); }
 }

@@ -10,30 +10,30 @@ function TimeSlots({
   errors,
 }) {
   return (
-    <div className="res-form__section">
-      <label className="res-label">
-        Available Times <span className="res-req">*</span>
+    <div className="ReservationForm__section">
+      <label className="ReservationForm__label">
+        Available Times <span className="ReservationForm__req">*</span>
       </label>
       {errors.time && (
-        <span className="res-error">
+        <span className="ReservationForm__error">
           <AlertCircle size={13} /> {errors.time}
         </span>
       )}
 
-      <div className="res-times">
+      <div className="TimeSlots__grid">
         {availableTimes.length > 0 ? (
           availableTimes.map((t) => (
             <button
               key={t}
               type="button"
-              className={`res-time-pill ${selectedTime === t ? "res-time-pill--active" : ""}`}
+              className={`TimeSlots__pill ${selectedTime === t ? "TimeSlots__pill--active" : ""}`}
               onClick={() => setSelectedTime(t)}
             >
               {t}
             </button>
           ))
         ) : (
-          <p className="res-times__empty">
+          <p className="TimeSlots__empty">
             {selectedDate
               ? "No available times for this date."
               : "Please select a date to see available times."}

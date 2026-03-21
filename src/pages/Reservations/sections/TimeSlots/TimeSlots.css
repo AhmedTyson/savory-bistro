@@ -1,8 +1,8 @@
 /* TimeSlots.css */
-.res-times { display: flex; flex-wrap: wrap; gap: 9px; }
-.res-times__empty { font-size: 13px; color: var(--color-text-muted); font-style: italic; }
+.TimeSlots__grid { display: flex; flex-wrap: wrap; gap: 9px; }
+.TimeSlots__empty { font-size: 13px; color: var(--color-text-muted); font-style: italic; }
 
-.res-time-pill {
+.TimeSlots__pill {
   padding: 11px 22px;
   border: 1.5px solid #E4DDD4;
   border-radius: 9px;
@@ -16,12 +16,12 @@
   min-width: 82px;
   text-align: center;
 }
-.res-time-pill:hover {
+.TimeSlots__pill:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
   background: #fff;
 }
-.res-time-pill--active {
+.TimeSlots__pill--active {
   background: var(--color-primary) !important;
   color: #fff !important;
   border-color: var(--color-primary) !important;

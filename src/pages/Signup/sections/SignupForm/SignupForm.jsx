@@ -3,22 +3,10 @@ import { Mail, Lock, User, Eye, EyeOff, CheckCircle } from 'lucide-react'
 import authBgCurve from '../../../../assets/auth-bg-curve.svg'
 import zigzag from '../../../../assets/zigzag.svg'
 import zigzagOrange from '../../../../assets/zigzag-orange.svg'
+import { getPasswordRules, getPasswordStrengthScore } from '../../../../utils/validation'
 import './SignupForm.css'
 
-/* Password strength rules */
-function getPasswordRules(password) {
-  return {
-    minLength: password.length >= 8,
-    uppercase: /[A-Z]/.test(password),
-    lowercase: /[a-z]/.test(password),
-    number:    /[0-9]/.test(password),
-    special:   /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
-  }
-}
 
-function getStrengthScore(rules) {
-  return Object.values(rules).filter(Boolean).length
-}
 
 const strengthLevels = [
   null, // 0
@@ -32,7 +20,7 @@ const strengthLevels = [
 function PasswordStrength({ password }) {
   if (!password) return null
   const rules = getPasswordRules(password)
-  const score = getStrengthScore(rules)
+  const score = getPasswordStrengthScore(password)
   if (score === 0) return null
   const level = strengthLevels[score]
 
@@ -90,16 +78,18 @@ function PasswordMatch({ password, confirmPassword }) {
 }
 
 export default function SignupForm({
-  firstName, onFirstNameChange, firstNameError, onFirstNameErrorClear,
-  lastName, onLastNameChange, lastNameError, onLastNameErrorClear,
-  email, onEmailChange, emailError, onEmailErrorClear,
-  password, onPasswordChange, passwordError, onPasswordErrorClear,
-  confirmPassword, onConfirmPasswordChange, confirmPasswordError, onConfirmPasswordErrorClear,
-  showPassword, onTogglePassword,
-  showConfirm, onToggleConfirm,
+  formData,
+  updateField,
+  errors,
+  showPassword,
+  onTogglePassword,
+  showConfirm,
+  onToggleConfirm,
   cooldownSeconds = 0,
   onSubmit
 }) {
+  const { firstName, lastName, email, password, confirmPassword } = formData;
+  
   return (
     <div className="auth-right">
       <img src={authBgCurve} className="auth-curve" alt="" aria-hidden="true" />
@@ -122,21 +112,21 @@ export default function SignupForm({
                 <label className="auth-lbl">First Name</label>
                 <div className="auth-iw">
                   <span className="auth-ii"><User size={15} /></span>
-                  <input type="text" className={`auth-inp${firstNameError ? ' err' : ''}`}
+                  <input type="text" className={`auth-inp${errors.firstName ? ' err' : ''}`}
                     placeholder="John" value={firstName}
-                    onChange={e => { onFirstNameChange(e.target.value); onFirstNameErrorClear(); }} />
+                    onChange={e => updateField('firstName', e.target.value)} />
                 </div>
-                {firstNameError && <span className="auth-em">{firstNameError}</span>}
+                {errors.firstName && <span className="auth-em">{errors.firstName}</span>}
               </div>
               <div>
                 <label className="auth-lbl">Last Name</label>
                 <div className="auth-iw">
                   <span className="auth-ii"><User size={15} /></span>
-                  <input type="text" className={`auth-inp${lastNameError ? ' err' : ''}`}
+                  <input type="text" className={`auth-inp${errors.lastName ? ' err' : ''}`}
                     placeholder="Doe" value={lastName}
-                    onChange={e => { onLastNameChange(e.target.value); onLastNameErrorClear(); }} />
+                    onChange={e => updateField('lastName', e.target.value)} />
                 </div>
-                {lastNameError && <span className="auth-em">{lastNameError}</span>}
+                {errors.lastName && <span className="auth-em">{errors.lastName}</span>}
               </div>
             </div>
 
@@ -144,11 +134,11 @@ export default function SignupForm({
               <label className="auth-lbl">Email Address</label>
               <div className="auth-iw">
                 <span className="auth-ii"><Mail size={15} /></span>
-                <input type="email" className={`auth-inp${emailError ? ' err' : ''}`}
+                <input type="email" className={`auth-inp${errors.email ? ' err' : ''}`}
                   placeholder="john@example.com" value={email}
-                  onChange={e => { onEmailChange(e.target.value); onEmailErrorClear(); }} />
+                  onChange={e => updateField('email', e.target.value)} />
               </div>
-              {emailError && <span className="auth-em">{emailError}</span>}
+              {errors.email && <span className="auth-em">{errors.email}</span>}
             </div>
 
             <div className="auth-fg">
@@ -156,14 +146,14 @@ export default function SignupForm({
               <div className="auth-iw">
                 <span className="auth-ii"><Lock size={15} /></span>
                 <input type={showPassword ? 'text' : 'password'}
-                  className={`auth-inp${passwordError ? ' err' : ''}`}
+                  className={`auth-inp${errors.password ? ' err' : ''}`}
                   placeholder="Min. 8 characters" value={password}
-                  onChange={e => { onPasswordChange(e.target.value); onPasswordErrorClear(); }} />
+                  onChange={e => updateField('password', e.target.value)} />
                 <button type="button" className="auth-eye" onClick={onTogglePassword}>
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
-              {passwordError && <span className="auth-em">{passwordError}</span>}
+              {errors.password && <span className="auth-em">{errors.password}</span>}
               <PasswordStrength password={password} />
             </div>
 
@@ -172,14 +162,14 @@ export default function SignupForm({
               <div className="auth-iw">
                 <span className="auth-ii"><Lock size={15} /></span>
                 <input type={showConfirm ? 'text' : 'password'}
-                  className={`auth-inp${confirmPasswordError ? ' err' : ''}`}
+                  className={`auth-inp${errors.confirmPassword ? ' err' : ''}`}
                   placeholder="Repeat your password" value={confirmPassword}
-                  onChange={e => { onConfirmPasswordChange(e.target.value); onConfirmPasswordErrorClear(); }} />
+                  onChange={e => updateField('confirmPassword', e.target.value)} />
                 <button type="button" className="auth-eye" onClick={onToggleConfirm}>
                   {showConfirm ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
-              {confirmPasswordError && <span className="auth-em">{confirmPasswordError}</span>}
+              {errors.confirmPassword && <span className="auth-em">{errors.confirmPassword}</span>}
               <PasswordMatch password={password} confirmPassword={confirmPassword} />
             </div>
 

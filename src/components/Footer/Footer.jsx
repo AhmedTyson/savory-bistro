@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { UtensilsCrossed, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
-import { isValidEmail } from '../../utils/validation';
+import { validateEmail } from '../../utils/validation';
 import './Footer.css';
 
 function Footer({ variant = 'full' }) {
@@ -12,15 +12,10 @@ function Footer({ variant = 'full' }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!email.trim()) {
+    const emailErr = validateEmail(email)
+    if (emailErr) {
       setStatus('error');
-      setMessage('Please enter your email.');
-      return;
-    }
-
-    if (!isValidEmail(email)) {
-      setStatus('error');
-      setMessage('Please enter a valid email.');
+      setMessage(emailErr === 'Email address is required.' ? 'Please enter your email.' : 'Please enter a valid email.');
       return;
     }
 
