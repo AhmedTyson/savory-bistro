@@ -1,3 +1,4 @@
+/** SignupPanel.jsx - Signature Dish Showcase for New Guests **/
 import { UtensilsCrossed } from 'lucide-react'
 import authLeafLines from '../../../../assets/auth-leaf-lines.svg'
 import './SignupPanel.css'

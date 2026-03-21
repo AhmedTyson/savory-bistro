@@ -1,3 +1,4 @@
+/** OurStory.jsx - Brand History & Mission Section **/
 import { ArrowRight } from 'lucide-react';
 import './OurStory.css';
 

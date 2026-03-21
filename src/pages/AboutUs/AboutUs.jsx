@@ -1,3 +1,4 @@
+/** AboutUs.jsx - Brand Philosophy & Team Overview **/
 import AboutHero from "./sections/AboutHero/AboutHero";
 import AboutChef from "./sections/AboutChef/AboutChef";
 import AboutValues from "./sections/AboutValues/AboutValues";

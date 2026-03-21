@@ -43,9 +43,9 @@ Every CSS class: ComponentName__element or ComponentName__element--modifier
   CORRECT: .Navbar__link  .Navbar__link--active  .DishCard__badge--featured
   WRONG:   .link  .active  .badge  .nav-link
 
-Tailwind → layout, spacing, flex, grid, responsive (md: lg: xl:)
-CSS file → colors (var(--)), fonts, borders, transitions, brand values
-NEVER: hardcode hex in CSS or Tailwind color classes like text-[#E07B39]
+Tailwind → REQUIRED for layout-only (containers, spacing, flex, grid, z-index, responsive md: lg: xl:)
+CSS file → REQUIRED for brand values (colors var(--), fonts, borders, transitions, hover states)
+NEVER: remove Tailwind imports or dependencies — they handle the foundational layout architecture.
 
 ──────────────────────────────────────────────
 COLORS — always var(--color-NAME), never hardcode

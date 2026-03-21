@@ -1,3 +1,4 @@
+/** AboutChef.jsx - Executive Chef Portrait & Vision **/
 import { useEffect, useRef } from "react";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutChef.css";

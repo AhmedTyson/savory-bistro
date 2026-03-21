@@ -1,3 +1,4 @@
+/** TimeSlots.jsx - Reservation Timing Selection Pills **/
 import { AlertCircle } from "lucide-react";
 import "./TimeSlots.css";
 

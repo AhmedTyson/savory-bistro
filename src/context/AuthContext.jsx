@@ -1,3 +1,4 @@
+/** AuthContext.jsx - Global Identity & Session Management **/
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 
 export const AuthContext = createContext(null);
@@ -12,7 +13,7 @@ export function AuthProvider({ children }) {
   const [allUsers, setAllUsers]       = useState([])
   const [activeToast, setActiveToast] = useState(null)
 
-  // pulls users for login validation
+  // Prefetch users for registration collision checks
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -56,7 +57,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const registerUser = useCallback(async ({ firstName, lastName, email, password }) => {
-    // block duplicate emails early
+    // Fail early if email already registered
     const duplicate = allUsers.find(
       u => u.email.toLowerCase() === email.trim().toLowerCase()
     )
@@ -86,7 +87,7 @@ export function AuthProvider({ children }) {
 
       setAllUsers(prev => [...prev, data.user])
       
-      // log in safely — don't store plain text password locally
+      // Set session (stripping sensitive password field)
       const safeUser = {
         id:        data.user.id,
         firstName: data.user.firstName,

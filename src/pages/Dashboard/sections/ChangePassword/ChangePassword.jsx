@@ -1,3 +1,4 @@
+/** ChangePassword.jsx - Account Security & Credential Updates **/
 import { useState } from 'react';
 import axios from 'axios';
 import { Eye, EyeOff } from 'lucide-react';

@@ -1,3 +1,4 @@
+/** SignupForm.jsx - Interactive Registration Interface **/
 import { Link } from 'react-router-dom'
 import { Mail, Lock, User, Eye, EyeOff, CheckCircle } from 'lucide-react'
 import authBgCurve from '../../../../assets/auth-bg-curve.svg'

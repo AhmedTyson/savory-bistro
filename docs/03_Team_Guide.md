@@ -62,6 +62,7 @@ The refactor is complete. Here is what exists and what still needs building:
 - Home page: all 6 sections built
 - All page structures: sections/ folders exist for all 8 pages
 - **Menu & Gallery:** Professionally integrated from Hagar's contributions.
+- **User Dashboard:** Full account management, reservation history with receipt-style UI, and activity overview.
 
 ### Current Phase: Stable / Maintenance
 All initial refactor phases (0-10) are complete. Documentation is synced to v3.2.0.
@@ -195,8 +196,11 @@ Run before every PR. Every item must pass.
 [ ] No <a> tags for internal links — search src/ for <a href="/"
 [ ] All CSS classes follow BEM
 [ ] mock-data.json at root level (not inside src/)
+[ ] Dashboard: toggle logic for long reports works correctly
+[ ] Dashboard: cards are static (no hover movement)
+[ ] Auth: validation.js used for all form fields
 ```
 
 ---
 
-*Savory Bistro Team Guide v3.2.0 — March 2024*
+*Savory Bistro Team Guide v3.3.0 — March 2024*

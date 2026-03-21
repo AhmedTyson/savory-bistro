@@ -13,7 +13,7 @@ The application is a modern single-page application (SPA) built using **React 19
 - **Routing**: `react-router-dom` (History API management).
 - **Icons**: `lucide-react` (SVG-based icon library).
 - **Communication**: `axios` (Promise-based HTTP client).
-- **Styling**: `tailwindcss` (Utility-first CSS framework).
+- **Styling**: **Hybrid Strategy** — `tailwindcss` (Layout architecture, spacing, grid) + **Custom CSS** (Brand identity, components, BEM).
 
 ## الـ "ليه وكيف" (Arabic)
 الـ مشروع ده عبارة عن موقع لمطعم (Savory Bistro) معمول بأحدث تكنولوجيا في عالم الـ Web Development.

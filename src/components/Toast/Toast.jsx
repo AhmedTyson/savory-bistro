@@ -1,53 +1,64 @@
+/** Toast.jsx - Portal-based Notification System **/
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { CheckCircle, X, Info, AlertTriangle, LogOut, Calendar } from "lucide-react";
 import "./Toast.css";
 
-// unified timeout constants
+/** Timing & Animation Constants **/
 export const TOAST_VISIBLE_MS = 4000;
 export const TOAST_ANIM_MS    = 500;
 
+/** Variant Configurations **/
 const TOAST_CONFIGS = {
+  // personalized signup welcome
   signup: (name) => ({
     title: `Welcome, ${name}!`,
     subtitle: "Your journey with Savory Bistro begins now.",
     icon: <CheckCircle size={22} />,
   }),
+  // returning user welcome
   login: (name) => ({
     title: `Welcome back, ${name}!`,
     subtitle: "It is wonderful to have you with us again.",
     icon: <CheckCircle size={22} />,
   }),
+  // secure signout feedback
   logout: (name) => ({
     title: `See you soon, ${name}!`,
     subtitle: "You have been signed out successfully.",
     icon: <LogOut size={22} />,
   }),
+  // booking details summary
   reservation: (name, extra) => ({
     title: "Table Confirmed!",
     subtitle: `We'll see you on ${extra?.date} at ${extra?.time}.`,
     icon: <Calendar size={22} />,
   }),
+  // event planning confirmation
   inquiry: (name) => ({
     title: "Inquiry Received",
     subtitle: "We will contact you shortly about your event.",
     icon: <Info size={22} />,
   }),
+  // general contact success
   contact: (name) => ({
     title: "Message Sent",
     subtitle: `Thank you, ${name}. We'll be in touch soon!`,
     icon: <CheckCircle size={22} />,
   }),
+  // profile update feedback
   nameUpdate: (name) => ({
     title: "Profile Updated",
     subtitle: "Your information has been saved successfully.",
     icon: <CheckCircle size={22} />,
   }),
+  // security change confirmation
   passwordUpdate: () => ({
     title: "Security Updated",
     subtitle: "Your password has been successfully changed.",
     icon: <CheckCircle size={22} />,
   }),
+  // fallback error state
   error: () => ({
     title: "Something went wrong",
     subtitle: "Please try again in a moment.",
@@ -55,7 +66,7 @@ const TOAST_CONFIGS = {
   }),
 };
 
-// portal-based — glassmorphism + manual dismissal support
+/** Glassmorphism Portal Component **/
 export default function Toast({
   type,
   firstName,
@@ -64,7 +75,6 @@ export default function Toast({
   isExiting,
 }) {
   const [localExiting, setLocalExiting] = useState(false);
-
   const exiting = isExiting || localExiting;
 
   const config =
@@ -73,7 +83,7 @@ export default function Toast({
   useEffect(() => {
     setLocalExiting(false);
 
-    // sequential dismissal: visibility period -> exit animation -> onDismiss
+    // sequential dismissal: visibility phase -> exit animation -> callback
     const exitTimer = setTimeout(() => setLocalExiting(true), TOAST_VISIBLE_MS);
     const doneTimer = setTimeout(() => onDismiss(), TOAST_VISIBLE_MS + TOAST_ANIM_MS);
 
@@ -88,7 +98,7 @@ export default function Toast({
     setTimeout(() => onDismiss(), TOAST_ANIM_MS);
   };
 
-  // портал to body guarantees it sits on top of all stacking contexts
+  // Render to document body to ensure it sits above all other stacking contexts
   return createPortal(
     <div
       className={`Toast ${exiting ? "Toast--exit" : "Toast--enter"}`}

@@ -17,6 +17,11 @@
 ### Use `00_Session_Opener.md` instead of this section
 The session opener replaces the old Section 0. It contains everything this section had plus auth rules, BEM rules, barrel import rules, and all known AI mistake warnings. Always use the session opener.
 
+### STYLING STRATEGY (Hybrid)
+- **Vanilla CSS (Primary)**: 90% of the project. Used for all brand-specific components, typography, colors, and premium animations.
+- **Tailwind CSS (Layout)**: 10% of the project. Used exclusively for layout architecture (resets, high-level containers, and basic flex/grid utilities).
+- **No Utility Overload**: Do NOT use Tailwind for colors, borders, or specific component shapes unless it's a structural layout requirement. Use design tokens from `variables.css`.
+
 ---
 
 ## SECTION 1 — QUICK LOOKUP TABLE
@@ -100,6 +105,12 @@ src/
       sections/
         SignupForm/SignupForm.jsx + SignupForm.css
         SignupPanel/SignupPanel.jsx + SignupPanel.css
+    Dashboard/
+      Dashboard.jsx + Dashboard.css
+      sections/
+        DashboardOverview/DashboardOverview.jsx + DashboardOverview.css
+        ReservationHistory/ReservationHistory.jsx + ReservationHistory.css
+        DashboardCard/DashboardCard.jsx + DashboardCard.css
     Menu/
       Menu.jsx + Menu.css
       sections/
@@ -210,6 +221,7 @@ export default function App() {
 | `/about` | AboutUs | No | full | About Us |
 | `/login` | Login | No | none | — |
 | `/signup` | Signup | No | none | — |
+| `/dashboard` | Dashboard | **Yes** | full | — |
 
 ---
 
@@ -805,4 +817,50 @@ navigate(from, { replace: true });
 
 ---
 
-*Savory Bistro PRD — Antigravity Edition v3.0 — March 2026*
+## SECTION 13 — USER DASHBOARD
+
+**Route:** `/dashboard` | **Protected:** Yes — requires login
+**Thin assembler:** `src/pages/Dashboard/Dashboard.jsx`
+
+**Sections:** DashboardOverview | ReservationHistory
+
+### 13.1 DashboardCard
+**File:** `src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx`
+**Props:** `icon`, `label`, `value`, `trend`, `trendValue`
+
+**BEM classes:**
+```
+.DashboardCard            .DashboardCard__icon-box
+.DashboardCard__content    .DashboardCard__label
+.DashboardCard__value      .DashboardCard__trend
+.DashboardCard__trend--up  .DashboardCard__trend--down
+```
+
+### 13.2 ReservationHistory
+**File:** `src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx`
+
+**Key Features:**
+- **Reports Toggle**: Displays 3 items by default. "Show All" / "Show Less" toggle state.
+- **Receipt Style**: Uses `ReservationHistory__card-sidebar` with a connecting line for a vertical timeline/receipt look.
+
+**BEM classes:**
+```
+.ReservationHistory           .ReservationHistory__list
+.ReservationHistory__card     .ReservationHistory__card-sidebar
+.ReservationHistory__line     .ReservationHistory__footer
+.ReservationHistory__toggle-btn
+```
+
+---
+
+## SECTION 14 — UTILITIES & LOGIC
+
+### 14.1 Validation Utility
+**File:** `src/utils/validation.js`
+**Functions:** `validateEmail`, `validatePhone`, `validatePassword`, `validateName`
+
+Standardized validation used across `SignupForm`, `LoginForm`, and `ReservationForm`.
+
+---
+
+*Savory Bistro PRD — Antigravity Edition v3.3.0 — March 2024*

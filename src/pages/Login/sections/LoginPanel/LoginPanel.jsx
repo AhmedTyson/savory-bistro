@@ -1,3 +1,4 @@
+/** LoginPanel.jsx - Visual Branding Sidebar for Authentication **/
 import { UtensilsCrossed } from 'lucide-react'
 import authLeafLines from '../../../../assets/auth-leaf-lines.svg'
 import './LoginPanel.css'

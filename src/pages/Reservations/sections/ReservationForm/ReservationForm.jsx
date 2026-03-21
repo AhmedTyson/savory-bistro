@@ -1,3 +1,4 @@
+/** ReservationForm.jsx - Guest Details & Booking Submission **/
 import { AlertCircle } from "lucide-react";
 import SelectionField from "../../../../components/SelectionField/SelectionField";
 import "./ReservationForm.css";

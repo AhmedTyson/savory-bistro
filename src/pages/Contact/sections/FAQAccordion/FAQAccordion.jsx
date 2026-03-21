@@ -1,3 +1,4 @@
+/** FAQAccordion.jsx - Guest Inquiry Quick Reference **/
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import './FAQAccordion.css';

@@ -1,3 +1,4 @@
+/** Login.jsx - Guest Authentication & Session Entry **/
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context'
@@ -13,7 +14,7 @@ export default function Login() {
   const location = useLocation()
   const mountedRef = useRef(false)
 
-  // Only redirect on MOUNT if user is already logged in.
+  // Redirect to home if user is already authenticated
   useEffect(() => {
     if (!mountedRef.current) {
       mountedRef.current = true
@@ -21,7 +22,7 @@ export default function Login() {
     }
   }, [currentUser, navigate])
 
-  // Returning user detection
+  // detect returning guests for personalized greetings
   const [isReturningUser, setIsReturningUser] = useState(false)
   useEffect(() => {
     if (localStorage.getItem('sb_has_logged_in') === 'true') {

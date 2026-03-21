@@ -1,3 +1,4 @@
+/** AboutValues.jsx - Sustainability & Community Mission **/
 import { Truck, Leaf, RefreshCw, Users } from "lucide-react";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutValues.css";

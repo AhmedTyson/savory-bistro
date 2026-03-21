@@ -1,3 +1,4 @@
+/** Gallery.jsx - Visual Showcase & Video Integration **/
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Play, Calendar, BookOpen, Users } from 'lucide-react';
@@ -11,7 +12,7 @@ export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [activeVideo, setActiveVideo] = useState(null);
 
-  // lock body scroll when modal is open and add escape key listener
+  // Sync scroll lock with modal state & handle Esc key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setActiveVideo(null);

@@ -1,3 +1,4 @@
+/** ProfileCard.jsx - Guest Identity & Membership Status **/
 import { UserCircle, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../../../context';
 import DashboardCard from '../../components/DashboardCard/DashboardCard';

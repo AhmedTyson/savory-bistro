@@ -53,8 +53,8 @@ The project was built collaboratively by a team of 5 developers using an AI-assi
 | 🖼️ **Gallery** | Masonry grid with category filters, video playback modal, reservation CTA overlay |
 | 📞 **Contact** | Contact form with custom dropdown, Google Maps embed, animated FAQ accordion |
 | 👥 **About Us** | Team story, chef profile, sustainability values, press testimonials |
-| 🔐 **Auth Pages** | Glassmorphism login & signup with password strength indicator and rate limiting |
-| 👤 **Dashboard** | Profile card, name update, password change, full reservation & inquiry history |
+| 🔐 **Auth Pages** | Glassmorphism login & signup with password strength indicator and **consolidated validation.js** |
+| 👤 **Dashboard** | Profile card, name update, password change, **receipt-style reservation & inquiry history with expand/collapse toggle** |
 | 🔔 **Toast System** | Animated portal-based notifications for login, signup, logout, reservation, and profile updates |
 | 📱 **Fully Responsive** | Mobile-first design from 375px through 1280px+ |
 
@@ -84,6 +84,7 @@ The project was built collaboratively by a team of 5 developers using an AI-assi
 | ESLint + React Hooks plugin | Linting & code quality |
 | CSS Custom Properties | Brand design tokens |
 | BEM methodology | CSS class naming convention |
+| validation.js utility | Centralized form logic & security |
 
 ---
 

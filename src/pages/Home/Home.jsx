@@ -1,3 +1,4 @@
+/** Home.jsx - Marketing Landing Page **/
 import mockData from "../../../mock-data.json";
 
 // Sections

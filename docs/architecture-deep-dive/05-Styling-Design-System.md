@@ -9,9 +9,10 @@ The project employs a hybrid styling strategy combining **CSS Custom Properties*
 
 ### Technical Architecture:
 1. **Design Tokens**: `variables.css` acts as the single source of truth for the design system. It defines colors, spacing, typography, and transitions using standard CSS variables.
-2. **Tailwind 4 Integration**: By importing `tailwindcss` in `index.css`, the project gains access to utility classes. Since Tailwind 4 natively supports CSS variables, there's a seamless bridge between the custom tokens and utility-first styling.
-3. **BEM Methodology**: Components like the Menu use BEM (e.g., `.Menu__hero`, `.Menu__filter-btn--active`). This ensures high specificity safely and makes the CSS predictable and scalable.
-4. **Responsive Strategy**: A centralized `.container` class with variable padding and `max-width` ensures consistent layout across mobile, tablet, and desktop viewports.
+2. **Tailwind 4 (Layout Architecture)**: Tailwind is used strictly for foundational layout (grid columns, flex containers, and responsive breakpoints). This handles the "skeleton" of the site.
+3. **Vanilla CSS (Brand & Components)**: 90% of the UI is styled via Vanilla CSS to maintain the premium, high-fidelity look that utility-first frameworks often struggle to achieve without excessive custom classes. This handles the "skin" and "personality" of the site.
+4. **BEM Methodology**: Components like `DishCard` or `DashboardCard` use strict BEM naming. This ensures style isolation and makes the codebase resilient to changes in other modules.
+5. **Responsive Strategy**: A hybrid approach using Tailwind's responsive prefixes (e.g., `md:grid-cols-2`) and CSS variables for fluid spacing.
 
 ## الـ "ليه وكيف" (Arabic)
 الـ تصميم بتاع الموقع مش مجرد ألوان، ده نظام كامل (Design System) معمول بدقة.

@@ -1,3 +1,4 @@
+/** MapEmbed.jsx - Interactive Restaurant Location Map **/
 import { useNavigate } from 'react-router-dom';
 import { Utensils, CalendarDays } from 'lucide-react';
 import './MapEmbed.css';

@@ -1,3 +1,4 @@
+/** SignatureDishes.jsx - Interactive Menu Showcase **/
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './SignatureDishes.css';
@@ -5,7 +6,7 @@ import './SignatureDishes.css';
 export default function SignatureDishes({ dishes }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // handles card-based translate offsets for smooth sliding
+  // Calculate carousel offsets for smooth sliding
   const maxIndex = Math.max(0, dishes.length - 1);
 
   const handlePrev = () => {

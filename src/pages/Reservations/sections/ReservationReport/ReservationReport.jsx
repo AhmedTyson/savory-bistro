@@ -1,3 +1,4 @@
+/** ReservationReport.jsx - Last Booking/Inquiry Summary Preview **/
 import { useMemo } from 'react';
 import { Calendar, Tag, Clock, Users, Info, ChevronRight, CheckCircle, FileText, ChevronDown, X } from 'lucide-react';
 import './ReservationReport.css';

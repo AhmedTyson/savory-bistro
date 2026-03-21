@@ -1,7 +1,8 @@
+/** validation.js - Centralized Form Validation Core **/
 // rfc 5322 compliant email regex
 export const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
 
-// basic phone regex (digits, spaces, hyphens, plus, parentheses, min 7 chars)
+// Basic phone format (digits + common separators)
 export const PHONE_REGEX = /^[\d\s\-\+\(\)]{7,}$/;
 
 export const isValidEmail = (email) => {
@@ -22,7 +23,7 @@ export const hasMinLength = (value, min) => {
   return typeof value === 'string' && value.trim().length >= min;
 };
 
-/* --- NEW FORMS VALIDATION UTILITIES --- */
+/** Password Security Logic **/
 
 const PASSWORD_RULES_CONFIG = [
   { key: 'minLength', label: 'at least 8 characters',  test: (pw) => pw.length >= 8 },
@@ -32,9 +33,7 @@ const PASSWORD_RULES_CONFIG = [
   { key: 'special',   label: 'a special character',  test: (pw) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pw) }
 ];
 
-/**
- * Returns an object with boolean values for each password rule.
- */
+/** Rules breakdown for UI feedback **/
 export const getPasswordRules = (password) => {
   const rules = {};
   PASSWORD_RULES_CONFIG.forEach(rule => {
@@ -43,17 +42,13 @@ export const getPasswordRules = (password) => {
   return rules;
 };
 
-/**
- * Returns a score from 0 to 5 based on satisfied password rules.
- */
+/** Composite strength score (0-5) **/
 export const getPasswordStrengthScore = (password) => {
   const rules = getPasswordRules(password);
   return Object.values(rules).filter(Boolean).length;
 };
 
-/**
- * Validates password strength and returns an error string or null.
- */
+/** Detailed validation with instruction string **/
 export const validatePasswordStrength = (password) => {
   if (!password || !password.trim()) {
     return 'Please choose a password.';
@@ -68,9 +63,7 @@ export const validatePasswordStrength = (password) => {
   return `Password must contain: ${labels.join(', ')}.`;
 };
 
-/**
- * Validates that two passwords match.
- */
+/** Cross-field equality check **/
 export const validatePasswordMatch = (password, confirmPassword) => {
   if (!confirmPassword || !confirmPassword.trim()) {
     return 'Please confirm your password.';
@@ -81,9 +74,7 @@ export const validatePasswordMatch = (password, confirmPassword) => {
   return null;
 };
 
-/**
- * Validates that a field is not empty.
- */
+/** Generic existence check **/
 export const validateRequired = (value, label = 'Field') => {
   if (!value || !value.trim()) {
     return `${label} is required.`;
@@ -91,9 +82,7 @@ export const validateRequired = (value, label = 'Field') => {
   return null;
 };
 
-/**
- * Validates email with specific error messages.
- */
+/** RFC-compliant email validation with UX strings **/
 export const validateEmail = (email, label = 'Email address') => {
   const trimmed = (email || '').trim();
   if (!trimmed) {
@@ -108,9 +97,7 @@ export const validateEmail = (email, label = 'Email address') => {
   return null;
 };
 
-/**
- * Validates phone format.
- */
+/** Phone format validation **/
 export const validatePhone = (phone, label = 'Phone number') => {
   const trimmed = (phone || '').trim();
   if (!trimmed) {
@@ -122,9 +109,7 @@ export const validatePhone = (phone, label = 'Phone number') => {
   return null;
 };
 
-/**
- * Validates minimum length requirement.
- */
+/** Length constraint verification **/
 export const validateMinLength = (value, min, label = 'Field') => {
   const trimmed = (value || '').trim();
   if (!trimmed) {

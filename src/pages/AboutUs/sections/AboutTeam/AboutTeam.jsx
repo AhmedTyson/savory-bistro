@@ -1,3 +1,4 @@
+/** AboutTeam.jsx - Team Member Spotlight Showcase **/
 import { Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import AboutSection from "../../components/AboutSection/AboutSection";

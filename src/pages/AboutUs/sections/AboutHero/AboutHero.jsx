@@ -1,3 +1,4 @@
+/** AboutHero.jsx - Brand History & Milestones **/
 import { Award, Star } from "lucide-react";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutHero.css";

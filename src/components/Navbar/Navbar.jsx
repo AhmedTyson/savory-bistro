@@ -1,3 +1,4 @@
+/** Navbar.jsx - Global Navigation & User Menu **/
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { UtensilsCrossed, Menu, X, UserCircle, LogOut, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../context';
@@ -23,12 +24,13 @@ function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   function handleLogout() {
-    logout();      // toast fires on home page after navigate(), not here
+    logout(); // Toast fires on redirect in App.jsx
     setIsUserDropdownOpen(false); 
     navigate('/'); 
     closeMenu();   
   }
 
+  // Filter visibility based on auth status (e.g., hide Reservations for guests)
   const visibleLinks = navLinks.filter(link => {
     if (link.path === '/reservations' && !currentUser) return false;
     return true;
@@ -59,7 +61,7 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* desktop right zone */}
+        {/* Desktop zone: Auth links or User Profile dropdown */}
         <div className="Navbar__right">
           {!currentUser ? (
             <div className="Navbar__auth">
@@ -116,7 +118,7 @@ function Navbar() {
         </div>
       </div>
 
-      {/* mobile drawer */}
+      {/* Mobile drawer: Animated slide-in menu */}
       {menuOpen && (
         <div className="Navbar__mobile-menu">
           <ul className="Navbar__mobile-links">

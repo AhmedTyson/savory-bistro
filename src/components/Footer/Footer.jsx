@@ -1,3 +1,4 @@
+/** Footer.jsx - Universal Navigation & Brand Consistency **/
 import { NavLink } from 'react-router-dom';
 import { UtensilsCrossed, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
@@ -12,7 +13,7 @@ function Footer({ variant = 'full' }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const emailErr = validateEmail(email)
+    // Validate entry before loading state
     if (emailErr) {
       setStatus('error');
       setMessage(emailErr === 'Email address is required.' ? 'Please enter your email.' : 'Please enter a valid email.');

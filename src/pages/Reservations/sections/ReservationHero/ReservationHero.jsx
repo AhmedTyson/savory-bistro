@@ -1,3 +1,4 @@
+/** ReservationHero.jsx - Booking Page Introduction & Breadcrumbs **/
 import { Link } from "react-router-dom";
 import "./ReservationHero.css";
 

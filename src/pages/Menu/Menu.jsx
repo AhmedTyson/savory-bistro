@@ -1,3 +1,4 @@
+/** Menu.jsx - Interactive Digital Menu Wrapper **/
 import { useState } from "react";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import Button from "../../components/Button/Button";
@@ -10,7 +11,7 @@ export default function Menu() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  // matches Figma design image exactly
+  // Category list synced with brand identity
   const categories = [
     { id: "all", label: "All" },
     { id: "appetizers", label: "Appetizers" },

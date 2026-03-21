@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react';
+/** SelectionField.jsx - Styled Dropdown Component **/
 import { useDropdown } from '../../hooks/useDropdown';
 import './SelectionField.css';
 

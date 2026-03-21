@@ -1,3 +1,4 @@
+/** App.jsx - Root Router & Layout Assembler **/
 import {
   BrowserRouter,
   Routes,
@@ -25,6 +26,7 @@ import {
 import { AuthContext, AuthProvider, useAuth } from "./context";
 import { TOAST_ANIM_MS } from './components/Toast/Toast';
 
+/** Auth Guard for protected pages **/
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
   const location = useLocation();
@@ -54,6 +56,7 @@ function AuthLayout({ children }) {
   );
 }
 
+/** Centralized Toast Listener **/
 function GlobalToast() {
   const { activeToast, clearToast, showToast } = useAuth();
   const location = useLocation();
@@ -73,6 +76,7 @@ function GlobalToast() {
   }, [activeToast, displayToast, isExiting]);
 
   useEffect(() => {
+    // Sync with router state (redirect toasts)
     const s = location.state;
     
     if (s && s.toast && lastHandledToastId.current !== location.key) {
@@ -83,6 +87,7 @@ function GlobalToast() {
         firstName: s.firstName,
         extra: s.toast === "reservation" ? { date: s.date, time: s.time } : null,
       });
+      // Clean history to prevent pop-on-refresh
       window.history.replaceState({}, document.title);
     }
   }, [location, showToast]);

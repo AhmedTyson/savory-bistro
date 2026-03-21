@@ -1,3 +1,4 @@
+/** server.js - Mock JSON API Server **/
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -12,11 +13,11 @@ const RESERVATIONS_FILE = path.join(__dirname, "reservations-data.json");
 
 const app = express();
 
-// Middleware
+// Middleware: CORS & JSON body parsing
 app.use(cors());
 app.use(express.json());
 
-// ─── USER ROUTES ───────────────────────────────────────────
+/** Routes: Users **/
 
 app.get("/api/users", (req, res) => {
   try {
@@ -32,7 +33,7 @@ app.post("/api/users", (req, res) => {
   try {
     const newUser = req.body;
 
-    // Validate basics
+    // Basic payload validation
     if (!newUser || !newUser.email) {
       return res.status(400).json({ error: "Invalid user data" });
     }
@@ -51,7 +52,7 @@ app.post("/api/users", (req, res) => {
         .json({ error: "User with this email already exists." });
     }
 
-    // Add user and save
+    // Persist to local JSON DB
     db.users.push(newUser);
     fs.writeFileSync(USERS_FILE, JSON.stringify(db, null, 2), "utf8");
 
@@ -66,7 +67,6 @@ app.patch("/api/users/:id", (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
-    console.log(`PATCH /api/users/${id} called with:`, updates);
 
     const data = fs.readFileSync(USERS_FILE, "utf8");
     const db = JSON.parse(data);
@@ -90,7 +90,7 @@ app.patch("/api/users/:id", (req, res) => {
   }
 });
 
-// ─── RESERVATION ROUTES ────────────────────────────────────
+/** Routes: Reservations **/
 
 app.get("/api/reservations", (req, res) => {
   try {
@@ -151,11 +151,10 @@ app.post("/api/reservations", (req, res) => {
   }
 });
 
-// ─── MESSAGE ROUTES ────────────────────────────────────────
+/** Routes: Guest Inquiries **/
 
 const MESSAGES_FILE = path.join(__dirname, "messages-data.json");
 
-console.log("DEBUG: Registering /api/messages");
 app.get("/api/messages", (req, res) => {
   try {
     if (!fs.existsSync(MESSAGES_FILE)) {
@@ -203,7 +202,7 @@ app.post("/api/messages", (req, res) => {
   }
 });
 
-// ─── START SERVER ──────────────────────────────────────────
+/** Server Entry **/
 
 const PORT = 3001;
 app.listen(PORT, () => {

@@ -41,6 +41,12 @@ The line `const maxIndex = Math.max(0, dishes.length - 1);` calculates the upper
     - **Math.max(0, ...)**: This is a **Guard Clause**. If `dishes` is an empty array (`length = 0`), the calculation results in `-1`. `Math.max(0, -1)` returns `0`, preventing a negative index which would break the `translateX` calculation.
 - **Dependency**: Used in `handleNext` to clamp the index between `0` and `maxIndex`.
 
+### 5. Dashboard Reports Toggle (`ReservationHistory.jsx`)
+The toggle logic uses a boolean state to slice the displayed array.
+
+- **Internal Logic**: `const displayedHistory = isExpanded ? history : history.slice(0, 3);`. This ensures the DOM only renders 3 items by default, improving initial render performance for high-activity accounts.
+- **Toggle State**: `setIsExpanded(prev => !prev)` is triggered by the "Show All" / "Show Less" button.
+
 ## الـ "ليه وكيف" (Arabic)
 ### بالنسبة لـ منطق الـ Filtering في صفحة المنيو:
 الـ كود اللي بيعمل "Filter" للأطباق ده بيشتغل بطريقة الـ **Declarative**.
@@ -67,6 +73,12 @@ The line `const maxIndex = Math.max(0, dishes.length - 1);` calculates the upper
 بالنسبة لـ الـ **Ternary Operator** (العلامة دي `?`), هي عبارة عن "لو" (if) سريعة جداً.
 الـ منطق بيقول: "يا متصفح، لو الـ `cat.id` اللي بنرسمه دلوقتي هو نفسه الـ `activeCategory` اللي اليوزر داس عليه، ضيف كلمة `Menu__filter-btn--active` لاسم الـ Class، ولو مش هو، ما تضيفش حاجة".
 ده بيخلي الـ CSS يطبق الـ Styles بتاعة الزرار النشط فوراً أول ما الـ State تتغير.
+
+### بالنسبة لـ الـ ReservationHistory في الـ Dashboard:
+الـ فكرة في الـ `displayedHistory` إننا بنعمل "Soft Clamp" للداتا.
+بالنسبة لـ الـ اليوزر، هو بيشوف آخر 3 حجوزات بس عشان الصفحة تفضل سريعة ونضيفة.
+الـ ميزة هنا إننا بنستخدم `.slice(0, 3)` جوه الـ Render، وده بيخلي الـ React ميرسمش الحاجات اللي مش ظاهرة أصلاً، وده بيوفر في الـ Memory والـ Browser Resources.
+لما اليوزر بيدوس "Show All"، الـ State بتتغير لـ `true` والـ React بيعيد الرسم ويعرض الـ List كاملة.
 
 ## Behind the Scenes
 ### Array Method Optimization

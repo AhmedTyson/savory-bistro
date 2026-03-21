@@ -1,3 +1,4 @@
+/** ContactForm.jsx - Guest Inquiry submission & API Integration **/
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -57,7 +58,7 @@ export default function ContactForm({ children }) {
     }
   };
 
-  // close dropdown on click outside
+  /** Click-outside listener for custom dropdown dismissal **/
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

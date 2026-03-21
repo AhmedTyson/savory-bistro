@@ -1,3 +1,4 @@
+/** AboutTestimonials.jsx - Media Mentions & Press Quotes **/
 import { useState, useEffect } from "react";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutTestimonials.css";
@@ -6,6 +7,7 @@ const AboutTestimonials = ({ reviews }) => {
   const [activeReview, setActiveReview] = useState(0);
 
   useEffect(() => {
+    /** Reveal section on scroll **/
     const timer = setInterval(() => {
       setActiveReview((prev) => (prev + 1) % reviews.length);
     }, 6000);

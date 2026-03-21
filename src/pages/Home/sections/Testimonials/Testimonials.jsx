@@ -1,3 +1,4 @@
+/** Testimonials.jsx - Social Proof & Guest Reviews **/
 import { useState, useEffect } from "react";
 import { Quote } from 'lucide-react';
 import "./Testimonials.css";
@@ -5,7 +6,7 @@ import "./Testimonials.css";
 export default function Testimonials({ reviews = [] }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // auto-advance testimonials every 5s
+  // Auto-advance testimonials every 5 seconds
   useEffect(() => {
     if (reviews.length <= 1) return;
     const timer = setInterval(() => {

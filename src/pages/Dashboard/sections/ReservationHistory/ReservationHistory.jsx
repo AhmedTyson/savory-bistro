@@ -1,3 +1,4 @@
+/** ReservationHistory.jsx - Comprehensive Guest Activity Log **/
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -21,7 +22,7 @@ function ReservationHistory() {
     const userIdStr = String(currentUser.id);
     let allActivity = [];
 
-    // inquiries pull from localstorage, reservations pull from DB
+    // Combine inquiries (Local Storage) and reservations (DB)
     const inqStored = localStorage.getItem("sb_inquiries");
     if (inqStored) {
       try {
@@ -50,7 +51,7 @@ function ReservationHistory() {
         mainInfo: r.time
       }));
       
-      // merge disparate sources — priority to local ids
+      // deduplicate between disparate data sources
       const existingIds = new Set(allActivity.map(a => a.id));
       formattedRes.forEach(r => {
         if (!existingIds.has(r.id)) allActivity.push(r);

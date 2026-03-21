@@ -1,3 +1,4 @@
+/** Reservations.jsx - Table Booking Flow & Availability Management **/
 import { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context';
@@ -28,7 +29,7 @@ function Reservations() {
   const [showInquiry, setShowInquiry] = useState(false);
   const [showReport, setShowReport] = useState(false);
 
-  // filter times based on existing bookings
+  /** Filter available time slots based on existing confirmed bookings **/
   const availableTimes = useMemo(() => {
     if (!selectedDate) return ALL_TIMES;
     const dateStr = selectedDate.toISOString().split('T')[0];

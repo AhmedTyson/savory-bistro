@@ -64,6 +64,23 @@
 - Consolidated `mock-data.json` with high-quality gallery assets.
 - Resolved merge conflicts across 8 files.
 
+## PHASE 11 — Logic Refactor & Validation
+**Branch:** `feature/logic-refactor`
+- Consolidated validation into `src/utils/validation.js`.
+- Standardized error handling across all forms.
+- Refined `AuthContext` persistence and safe user object creation.
+
+## PHASE 12 — User Dashboard
+**Branch:** `feature/user-dashboard`
+- Designed and implemented the User Dashboard assembler and sections.
+- Created reusable `DashboardCard` component.
+- Implemented receipt-style `ReservationHistory` with expand/collapse toggle.
+
+## PHASE 13 — Documentation & Optimization
+**Branch:** `master`
+- Performed comprehensive Cleanup Audit (Tailwind layout decision, pruned assets).
+- Synced all PRD and Architecture Deep Dive docs to v3.3.0.
+
 ---
 
-*Savory Bistro Changelog v3.2.0 — March 2024*
+*Savory Bistro Changelog v3.3.0 — March 2024*

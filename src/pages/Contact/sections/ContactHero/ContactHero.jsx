@@ -1,3 +1,4 @@
+/** ContactHero.jsx - Contact Info Grid & Brand Presence **/
 import { MapPin, Clock, MessageCircleQuestion, Globe, Instagram, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import './ContactHero.css';

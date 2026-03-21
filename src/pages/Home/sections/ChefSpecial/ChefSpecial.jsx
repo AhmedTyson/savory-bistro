@@ -1,3 +1,4 @@
+/** ChefSpecial.jsx - Featured Dish Highlight **/
 import './ChefSpecial.css';
 
 export default function ChefSpecial() {

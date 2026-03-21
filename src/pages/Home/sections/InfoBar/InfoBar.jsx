@@ -1,3 +1,4 @@
+/** InfoBar.jsx - Store Location & Hours Overview **/
 import { Clock, MapPin, Phone } from "lucide-react";
 import "./InfoBar.css";
 

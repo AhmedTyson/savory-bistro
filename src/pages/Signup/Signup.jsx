@@ -1,3 +1,4 @@
+/** Signup.jsx - Guest Registration & Onboarding Flow **/
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context'
@@ -17,7 +18,7 @@ export default function Signup() {
   const navigate = useNavigate()
   const mountedRef = useRef(false)
 
-  // Redirect on mount ONLY if already logged in
+  // Auth guard: redirect if already logged in
   useEffect(() => {
     if (!mountedRef.current) {
       mountedRef.current = true

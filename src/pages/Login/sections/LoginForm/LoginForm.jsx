@@ -1,3 +1,4 @@
+/** LoginForm.jsx - Interactive Sign-In Interface **/
 import { Link } from 'react-router-dom'
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import authBgCurve from '../../../../assets/auth-bg-curve.svg'

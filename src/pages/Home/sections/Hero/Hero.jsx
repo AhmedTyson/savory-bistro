@@ -1,3 +1,4 @@
+/** Hero.jsx - Landing Page Hero Section **/
 import { Link } from 'react-router-dom';
 import { ChevronsDown } from 'lucide-react';
 import Button from '../../../../components/Button/Button';

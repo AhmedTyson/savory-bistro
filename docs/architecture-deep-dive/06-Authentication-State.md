@@ -7,9 +7,9 @@
 Authentication is managed via a centralized **React Context** (`AuthContext`). It handles user sessions, persistence, and cross-component notifications.
 
 ### Functional Breakdown:
-1. **Persistence**: The user session is persisted in `localStorage`. On application mount, the `currentUser` state is initialized by reading from `localStorage`.
+1. **Persistence**: The user session is persisted in `localStorage`. On application mount, the `currentUser` state is initialized by reading the `authUser` key.
 2. **Asynchronous Operations**: Functions like `registerUser` are `async`. They perform an initial frontend check for duplicates and then communicate with a local Node/Express backend (`http://localhost:3001/api/users`).
-3. **Validation logic**: `validateLogin` performs a simple find-and-match logic against the `allUsers` array fetched from the API.
+3. **Validation logic**: Uses a centralized `src/utils/validation.js` utility for all email, phone, and password checks, ensuring consistent security rules across all forms.
 4. **Toast Queueing**: The context manages a `pendingToast` state. This is particularly useful for actions like "Logout" where you redirect the user but still want to show a notification on the destination page.
 
 ## الـ "ليه وكيف" (Arabic)

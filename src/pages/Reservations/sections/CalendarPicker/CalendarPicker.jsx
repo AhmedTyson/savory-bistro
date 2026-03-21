@@ -1,3 +1,4 @@
+/** CalendarPicker.jsx - Custom Date Selection & Availability Logic **/
 import { useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
 import { DAYS, MONTHS, toKey, daysIn, firstDay, RESERVED_DATES } from '../../utils/reservationUtils';
@@ -13,6 +14,7 @@ function CalendarPicker({
   const [calYear, setCalYear] = useState(today.getFullYear());
   const [calMonth, setCalMonth] = useState(today.getMonth());
 
+  /** Generate days for the current calendar view grid **/
   const calendarDays = useMemo(() => {
     const total = daysIn(calYear, calMonth);
     const start = firstDay(calYear, calMonth);

@@ -1,3 +1,4 @@
+/** Dashboard.jsx - Guest Account Management Overview **/
 import ProfileCard        from './sections/ProfileCard/ProfileCard';
 import ChangeUsername     from './sections/ChangeUsername/ChangeUsername';
 import ChangePassword     from './sections/ChangePassword/ChangePassword';

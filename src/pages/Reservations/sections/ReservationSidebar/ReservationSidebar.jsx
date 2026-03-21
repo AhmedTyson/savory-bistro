@@ -1,3 +1,4 @@
+/** ReservationSidebar.jsx - Helpful Booking Context & Location Info **/
 import { Clock, MapPin, MessageCircleQuestion, Phone, Mail } from 'lucide-react';
 import './ReservationSidebar.css';
 

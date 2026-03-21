@@ -742,4 +742,45 @@ Fix the import in [FILE PATH]. Show me only the corrected import line.
 
 ---
 
-*Savory Bistro Prompt Library v3.2.0 — March 2024*
+---
+
+## CHAPTER 10 — DASHBOARD SECTIONS
+
+### P10-A: DashboardCard (Reusable)
+
+```
+[PASTE 00_Session_Opener.md BLOCK]
+
+Build src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx and DashboardCard.css.
+
+PROPS: icon (Lucide), label, value, trend (up|down), trendValue
+
+DESIGN:
+Background: var(--color-bg-white), border: 1px solid var(--color-border-card)
+Radius: var(--radius-lg), padding: var(--space-lg)
+Static: No hover translation or shadow changes.
+
+BEM: .DashboardCard .DashboardCard__icon-box .DashboardCard__label .DashboardCard__value .DashboardCard__trend
+```
+
+### P10-B: ReservationHistory (with Toggle)
+
+```
+[PASTE 00_Session_Opener.md BLOCK]
+
+Build src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx and ReservationHistory.css.
+
+STATE: const [isExpanded, setIsExpanded] = useState(false)
+LOGIC: displayedHistory = isExpanded ? history : history.slice(0, 3)
+
+DESIGN:
+Receipt style with vertical sidebar line connecting items.
+Card: .ReservationHistory__card
+Toggle Button: .ReservationHistory__toggle-btn in .ReservationHistory__footer
+
+VERIFICATION: Ensure toggle correctly switches between 3 and all items.
+```
+
+---
+
+*Savory Bistro Prompt Library v3.3.0 — March 2024*

@@ -1,3 +1,4 @@
+/** PrivateDiningModal.jsx - Specialized Event Inquiry Flow **/
 import { useState, useEffect } from "react";
 import { useAuth } from "../../../../context";
 import { CheckCircle, X, AlertCircle, ChevronDown } from "lucide-react";
@@ -20,6 +21,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
+    // Prefill form if guest is logged in
     if (showInquiry && currentUser) {
       setFormData((prev) => ({
         ...prev,
@@ -28,6 +30,7 @@ function PrivateDiningModal({ showInquiry, setShowInquiry, onSuccess }) {
       }));
     }
 
+    // Lock scroll and handle global Escape key listener
     if (showInquiry) {
       document.body.style.overflow = "hidden";
       const handleEscape = (e) => e.key === "Escape" && resetInquiry();

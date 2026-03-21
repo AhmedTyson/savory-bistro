@@ -1,3 +1,4 @@
+/** ChangeUsername.jsx - Guest Profile Identity Management **/
 import { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../../../context';

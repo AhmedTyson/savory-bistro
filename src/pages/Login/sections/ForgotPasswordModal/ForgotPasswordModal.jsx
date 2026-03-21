@@ -1,3 +1,4 @@
+/** ForgotPasswordModal.jsx - Account Recovery Flow **/
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
