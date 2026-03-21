@@ -52,11 +52,11 @@ function Footer({ variant = 'full' }) {
         <div className="Footer__grid">
 
           <div className="Footer__brand">
-            <div className="Footer__brand-wrapper flex items-center gap-2 mb-3">
+            <div className="Footer__brand-wrapper">
               <UtensilsCrossed className="Footer__brand-icon" size={20} />
               <span className="Footer__brand-name">Savory Bistro</span>
             </div>
-            <p className="Footer__tagline leading-relaxed max-w-[280px]">
+            <p className="Footer__tagline">
               {variant === 'full'
                 ? 'Refining the art of seasonal dining with locally sourced ingredients and a commitment to culinary excellence.'
                 : 'Crafting unforgettable dining experiences since 2012. Our focus is on seasonal ingredients and soulful cooking.'}
@@ -85,7 +85,7 @@ function Footer({ variant = 'full' }) {
 
           <div className="Footer__column">
             <h4 className="Footer__column-title">Newsletter</h4>
-            <p className="Footer__text mb-4">Get exclusive offers and recipes delivered to your inbox.</p>
+            <p className="Footer__newsletter-desc">Get exclusive offers and recipes delivered to your inbox.</p>
             <form className="Footer__newsletter-form" onSubmit={handleSubmit}>
               <div className="Footer__newsletter">
                 <input
@@ -120,7 +120,7 @@ function Footer({ variant = 'full' }) {
         </div>
       </div>
       <div className="Footer__bottom">
-        <p className="Footer__copyright">© 2024 Savory Bistro. All rights reserved.</p>
+        <p className="Footer__copyright">© {new Date().getFullYear()} Savory Bistro. All rights reserved.</p>
       </div>
     </footer>
   );

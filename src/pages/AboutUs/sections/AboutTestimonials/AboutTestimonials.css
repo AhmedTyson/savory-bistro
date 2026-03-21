@@ -1,13 +1,13 @@
-.about-press-section {
+.AboutTestimonials {
   background-color: #f8f7f6;
   border-top: 1px solid var(--color-border-card);
 }
 
-.about-press {
+.AboutTestimonials__container {
   text-align: center;
 }
 
-.press-brands {
+.AboutTestimonials__brands {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,12 +17,12 @@
   opacity: 0.5;
 }
 
-.brand-logo {
+.AboutTestimonials__brand-logo {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-.testimonial-container-outer {
+.AboutTestimonials__box-container {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
@@ -31,7 +31,7 @@
   align-items: center;
 }
 
-.testimonial-box {
+.AboutTestimonials__box {
   background-color: #faf5f2;
   border-radius: var(--radius-lg);
   padding: 50px 70px;
@@ -45,7 +45,7 @@
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.quote-icon {
+.AboutTestimonials__quote-icon {
   color: var(--color-border-card);
   font-size: 5rem;
   font-family: var(--font-serif, serif);
@@ -55,7 +55,7 @@
   line-height: 1;
 }
 
-.testimonial-quote {
+.AboutTestimonials__quote {
   font-size: 1.3rem;
   font-style: italic;
   font-weight: 600;
@@ -66,20 +66,20 @@
   line-height: 1.6;
 }
 
-.testimonial-author {
+.AboutTestimonials__author {
   color: var(--color-primary);
   font-weight: 700;
   font-size: 0.9rem;
 }
 
-.carousel-dots {
+.AboutTestimonials__dots {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 30px;
 }
 
-.dot {
+.AboutTestimonials__dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -90,11 +90,16 @@
   transition: all var(--transition-normal);
 }
 
-.dot.active {
+.AboutTestimonials__dot--active {
   background-color: var(--color-primary);
   transform: scale(1.25);
 }
 
-.dot:hover:not(.active) {
+.AboutTestimonials__dot:hover:not(.AboutTestimonials__dot--active) {
   background-color: var(--color-text-muted);
 }
+
+/* Typography branding migrated from root AboutUs.css */
+.serif-brand { font-family: var(--font-serif, serif); }
+.sans-brand { font-family: var(--font-sans, sans-serif); letter-spacing: 2px; }
+.script-brand { font-family: var(--font-serif, serif); font-style: italic; }

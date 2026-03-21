@@ -107,8 +107,8 @@ export default function Menu() {
             <h2 className="Menu__tasting-title">Chef's Tasting Menu</h2>
 
             <div className="Menu__tasting-courses">
-              {data.tastingMenu.map((course, index) => (
-                <div key={index} className="Menu__tasting-course">
+              {data.tastingMenu.map((course) => (
+                <div key={course.course} className="Menu__tasting-course">
                   <span className="Menu__course-label">
                     {course.course}. {course.label}
                   </span>

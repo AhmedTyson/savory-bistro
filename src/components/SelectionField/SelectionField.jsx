@@ -39,9 +39,9 @@ const SelectionField = ({
         
         {isOpen && (
           <div className="selection-menu">
-            {options.map((option, idx) => (
+            {options.map((option) => (
               <div 
-                key={idx}
+                key={option}
                 className={`selection-item ${value === option ? 'selection-item--selected' : ''}`}
                 onClick={() => {
                   onSelect(option);

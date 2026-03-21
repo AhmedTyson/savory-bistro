@@ -20,6 +20,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+  animation: floatMarker 3s ease-in-out infinite;
+}
+
+@keyframes floatMarker {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 12px));
+  }
 }
 
 .MapEmbed__pin {

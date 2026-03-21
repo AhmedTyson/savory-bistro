@@ -1,3 +1,24 @@
+.DishCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.DishCard:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.DishCard__image-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
 .DishCard__image {
   width: 72px;
   height: 72px;
@@ -25,6 +46,43 @@
   padding: 2px 6px;
   border-radius: var(--radius-pill);
   white-space: nowrap;
+}
+
+.DishCard__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.DishCard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.25rem;
+}
+
+.DishCard__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-heading);
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.DishCard__price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-price);
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+
+.DishCard__description {
+  font-size: 13px;
+  color: var(--color-text-body);
+  line-height: 1.5;
+  margin-bottom: 0.375rem;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .DishCard__diet-icon {

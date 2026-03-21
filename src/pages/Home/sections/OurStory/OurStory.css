@@ -65,7 +65,7 @@
   transition: width 0.3s ease;
 }
 
-.OurStory:hover .OurStory__divider {
+.OurStory__content:hover .OurStory__divider {
   width: 100px;
 }
 
@@ -102,6 +102,16 @@
   background-color: var(--color-primary-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(224, 123, 57, 0.4);
+}
+
+.OurStory__arrow-icon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.OurStory__btn:hover .OurStory__arrow-icon {
+  transform: translateX(4px);
 }
 
 .OurStory__image-side {

@@ -6,10 +6,11 @@ import {
   useLocation,
 } from "react-router-dom";
 import { useContext, useEffect, useState, useRef } from "react";
+import { AnimatePresence } from "framer-motion";
 import "./styles/variables.css";
 import "./index.css";
 
-import { Navbar, Footer, FloatingReserveBtn, Toast } from "./components";
+import { Navbar, Footer, FloatingReserveBtn, Toast, AnimatedPage } from "./components";
 import {
   Home,
   Menu,
@@ -58,7 +59,6 @@ function GlobalToast() {
   const [isExiting, setIsExiting] = useState(false);
   const lastHandledToastId = useRef(null);
 
-  // delay unmount so exit animation can finish
   useEffect(() => {
     if (activeToast) {
       setDisplayToast(activeToast);
@@ -70,9 +70,7 @@ function GlobalToast() {
     }
   }, [activeToast, displayToast, isExiting]);
 
-  // catch nav-triggered toasts (redirects) via location key
   useEffect(() => {
-    window.scrollTo(0, 0);
     const s = location.state;
     
     if (s && s.toast && lastHandledToastId.current !== location.key) {
@@ -83,7 +81,6 @@ function GlobalToast() {
         firstName: s.firstName,
         extra: s.toast === "reservation" ? { date: s.date, time: s.time } : null,
       });
-      // clear router state to prevent repeat on refresh
       window.history.replaceState({}, document.title);
     }
   }, [location, showToast]);
@@ -101,89 +98,117 @@ function GlobalToast() {
   );
 }
 
+function AnimatedRoutes() {
+  const location = useLocation();
+  
+  return (
+    <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <AnimatedPage>
+              <Layout>
+                <Home />
+              </Layout>
+            </AnimatedPage>
+          }
+        />
+        <Route
+          path="/menu"
+          element={
+            <AnimatedPage>
+              <Layout>
+                <Menu />
+              </Layout>
+            </AnimatedPage>
+          }
+        />
+        <Route
+          path="/reservations"
+          element={
+            <ProtectedRoute>
+              <AnimatedPage>
+                <Layout>
+                  <Reservations />
+                </Layout>
+              </AnimatedPage>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/gallery"
+          element={
+            <AnimatedPage>
+              <Layout footerVariant="light">
+                <Gallery />
+              </Layout>
+            </AnimatedPage>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <AnimatedPage>
+              <Layout>
+                <Contact />
+              </Layout>
+            </AnimatedPage>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <AnimatedPage>
+              <Layout>
+                <AboutUs />
+              </Layout>
+            </AnimatedPage>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <AnimatedPage>
+              <AuthLayout>
+                <Login />
+              </AuthLayout>
+            </AnimatedPage>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <AnimatedPage>
+              <AuthLayout>
+                <Signup />
+              </AuthLayout>
+            </AnimatedPage>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <AnimatedPage>
+                <Layout footerVariant="light">
+                  <Dashboard />
+                </Layout>
+              </AnimatedPage>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <GlobalToast />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout>
-                <Home />
-              </Layout>
-            }
-          />
-          <Route
-            path="/menu"
-            element={
-              <Layout>
-                <Menu />
-              </Layout>
-            }
-          />
-          <Route
-            path="/reservations"
-            element={
-              <ProtectedRoute>
-                <Layout>
-                  <Reservations />
-                </Layout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/gallery"
-            element={
-              <Layout footerVariant="light">
-                <Gallery />
-              </Layout>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <Layout>
-                <Contact />
-              </Layout>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <Layout>
-                <AboutUs />
-              </Layout>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <AuthLayout>
-                <Login />
-              </AuthLayout>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <AuthLayout>
-                <Signup />
-              </AuthLayout>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Layout footerVariant="light">
-                  <Dashboard />
-                </Layout>
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+        <AnimatedRoutes />
       </AuthProvider>
     </BrowserRouter>
   );

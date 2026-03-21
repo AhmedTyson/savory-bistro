@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Quote } from 'lucide-react';
 import "./Testimonials.css";
 
 export default function Testimonials({ reviews = [] }) {
@@ -25,9 +26,7 @@ export default function Testimonials({ reviews = [] }) {
       <div className="Testimonials__container">
         <div className="Testimonials__wrapper">
           <div className="Testimonials__quote-icon">
-            <svg width="48" height="36" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14H15.017C13.9124 14 13.017 13.1046 13.017 12V6C13.017 4.89543 13.9124 4 15.017 4H21.017C22.1216 4 23.017 4.89543 23.017 6V12C23.017 14.5 21.017 19 18.017 21H14.017ZM1.017 21L1.017 18C1.017 16.8954 1.91243 16 3.017 16H6.017V14H2.017C0.91243 14 0.017 13.1046 0.017 12V6C0.017 4.89543 0.91243 4 2.017 4H8.017C9.12157 4 10.017 4.89543 10.017 6V12C10.017 14.5 9.017 19 5.017 21H1.017Z" />
-            </svg>
+            <Quote size={48} fill="currentColor" strokeWidth={1} />
           </div>
 
           <div className="Testimonials__content-viewport">

@@ -1,10 +1,20 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useAuth } from '../../../../context';;
 import Button from '../../../../components/Button/Button';
 import './ContactForm.css';
 
 const SUBJECT_OPTIONS = ['General Inquiry', 'Reservation', 'Feedback', 'Other'];
+
+const formRevealVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "tween", ease: "easeOut", duration: 0.8 },
+  },
+};
 
 export default function ContactForm({ children }) {
   const { showToast } = useAuth();
@@ -60,7 +70,13 @@ export default function ContactForm({ children }) {
 
   return (
     <section className="ContactForm">
-      <div className="container">
+      <motion.div 
+        className="container"
+        variants={formRevealVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
         <div className="ContactForm__grid">
           <div className="ContactForm__content">
             <div className="ContactForm__heading">
@@ -153,7 +169,7 @@ export default function ContactForm({ children }) {
             {children}
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

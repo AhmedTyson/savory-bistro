@@ -1,4 +1,5 @@
 import { MapPin, Clock, MessageCircleQuestion, Globe, Instagram, Share2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import './ContactHero.css';
 
 const ICON_MAP = {
@@ -8,6 +9,25 @@ const ICON_MAP = {
   web: Globe,
   insta: Instagram,
   share: Share2
+};
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "tween", ease: "easeOut", duration: 0.6 },
+  },
 };
 
 export default function ContactHero({ info }) {
@@ -25,11 +45,17 @@ export default function ContactHero({ info }) {
 
       <div className="ContactHero__info">
         <div className="container">
-          <div className="ContactHero__info-grid">
+          <motion.div 
+            className="ContactHero__info-grid"
+            variants={gridVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
             {Object.entries(info).map(([key, data]) => {
               const Icon = ICON_MAP[key];
               return (
-                <div className="ContactHero__card" key={key}>
+                <motion.div className="ContactHero__card" key={key} variants={cardVariants}>
                   <div className="ContactHero__card-icon-wrapper">
                     <Icon 
                       size={25} 
@@ -61,10 +87,10 @@ export default function ContactHero({ info }) {
                       })}
                     </div>
                   )}
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

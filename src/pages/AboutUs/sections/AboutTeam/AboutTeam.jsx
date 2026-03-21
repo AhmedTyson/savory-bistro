@@ -1,48 +1,65 @@
+import { Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import "./AboutTeam.css";
 
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // 200ms delay between each member fading in
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "tween", ease: "easeOut", duration: 0.6 },
+  },
+};
+
 const AboutTeam = ({ teamMembers }) => {
   return (
-    <AboutSection className="about-team-section">
-      <div className="about-team container">
-        <h2 className="team-section-title">Meet the Family</h2>
-        <p className="team-section-subtitle">
-          The talented individuals who make every visit to Savory Bistro an
-          unforgettable experience.
-        </p>
+    <AboutSection className="AboutTeam" containerClass="AboutTeam__container">
+      <h2 className="AboutTeam__title">Meet the Family</h2>
+      <p className="AboutTeam__subtitle">
+        The talented individuals who make every visit to Savory Bistro an
+        unforgettable experience.
+      </p>
 
-        <div className="team-grid">
-          {teamMembers.map((member) => (
-            <div key={member.id} className="team-member">
-              <div className="team-avatar-wrapper">
+      <motion.div 
+        className="AboutTeam__grid"
+        variants={gridVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        {teamMembers.map((member) => (
+          <motion.div key={member.id} className="AboutTeam__member" variants={itemVariants}>
+            <div className="AboutTeam__avatar-wrapper">
+              <div className="AboutTeam__avatar-inner">
                 <img src={member.image} alt={member.name} />
               </div>
-              <h4>{member.name}</h4>
-              <span className="team-role">{member.role}</span>
-              <p>{member.bio}</p>
-              <a
-                href={member.linkedin}
-                className="team-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
             </div>
-          ))}
-        </div>
-      </div>
+            <h4 className="AboutTeam__member-name">{member.name}</h4>
+            <span className="AboutTeam__role">{member.role}</span>
+            <p className="AboutTeam__desc">{member.bio}</p>
+            <a
+              href={member.linkedin}
+              className="AboutTeam__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${member.name} LinkedIn`}
+            >
+              <Linkedin size={14} strokeWidth={2} />
+            </a>
+          </motion.div>
+        ))}
+      </motion.div>
     </AboutSection>
   );
 };

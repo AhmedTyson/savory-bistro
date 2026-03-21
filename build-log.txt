@@ -1,0 +1,15 @@
+
+> savory-bistro@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 1842 modules transformed.
+✗ Build failed in 4.00s
+error during build:
+Could not resolve "../../../../components/SvgAssets/AuthLeafLines" from "src/pages/Login/sections/LoginPanel/LoginPanel.jsx"
+file: C:/Programming/C2C/savory-bistro/src/pages/Login/sections/LoginPanel/LoginPanel.jsx
+    at getRollupError (file:///C:/Programming/C2C/savory-bistro/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///C:/Programming/C2C/savory-bistro/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at ModuleLoader.handleInvalidResolvedId (file:///C:/Programming/C2C/savory-bistro/node_modules/rollup/dist/es/shared/node-entry.js:21710:24)
+    at file:///C:/Programming/C2C/savory-bistro/node_modules/rollup/dist/es/shared/node-entry.js:21670:26

@@ -34,6 +34,13 @@
   font-weight: 700;
 }
 
+.Footer__brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
 .Footer__tagline,
 .Footer__text {
   font-size: 13px;
@@ -42,6 +49,13 @@
 
 .Footer__tagline {
   line-height: 1.6;
+  max-width: 280px;
+}
+
+.Footer__newsletter-desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
 }
 
 .Footer__column-title {

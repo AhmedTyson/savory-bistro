@@ -9,7 +9,7 @@ const AboutChef = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("chef-container--visible");
+          entry.target.classList.add("AboutChef__container--visible");
           observer.unobserve(entry.target);
         }
       },
@@ -29,34 +29,34 @@ const AboutChef = () => {
 
   return (
     <AboutSection 
-      className="about-chef-section" 
-      containerClass="chef-container"
+      className="AboutChef" 
+      containerClass="AboutChef__container"
       ref={chefContainerRef}
     >
-      <div className="chef-image-box">
+      <div className="AboutChef__image-box">
         <img
           src="/images/about-us/about-chef-rossi.webp"
           alt="Chef Antonio Rossi"
         />
       </div>
-      <div className="chef-content">
-        <div className="chef-window-bg"></div>
-        <div className="chef-content-inner">
-          <h2 className="chef-title">Chef Antonio Rossi</h2>
-          <p className="chef-role">Executive Chef & Founder</p>
-          <p className="chef-desc">
+      <div className="AboutChef__content">
+        <div className="AboutChef__window-bg"></div>
+        <div className="AboutChef__content-inner">
+          <h2 className="AboutChef__title">Chef Antonio Rossi</h2>
+          <p className="AboutChef__role">Executive Chef & Founder</p>
+          <p className="AboutChef__desc">
             Trained in the rolling hills of Tuscany, Italy, Antonio brings
             over two decades of traditional Mediterranean expertise fused with
             modern innovation.
           </p>
-          <div className="chef-quote-box">
-            <p className="chef-quote">
+          <div className="AboutChef__quote-box">
+            <p className="AboutChef__quote">
               "Cooking is an act of love, a gift, a way to share with others
               the little secrets that are simmering on the back burner."
             </p>
           </div>
-          <h5 className="signature-title">SIGNATURE DISHES</h5>
-          <ul className="signature-list">
+          <h5 className="AboutChef__signature-title">SIGNATURE DISHES</h5>
+          <ul className="AboutChef__signature-list">
             <li>Wild Mushroom Risotto</li>
             <li>Tuscan Herb Crusted Lamb</li>
             <li>Deconstructed Tiramisu</li>

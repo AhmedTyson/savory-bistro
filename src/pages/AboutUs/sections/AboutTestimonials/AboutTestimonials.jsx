@@ -13,29 +13,29 @@ const AboutTestimonials = ({ reviews }) => {
   }, [reviews.length]);
 
   return (
-    <AboutSection className="about-press-section" containerClass="about-press">
-      <div className="press-brands">
-        <span className="brand-logo serif-brand">Forbes</span>
-        <span className="brand-logo sans-brand">EATER</span>
-        <span className="brand-logo script-brand">The New York Times</span>
-        <span className="brand-logo serif-brand">VOGUE</span>
+    <AboutSection className="AboutTestimonials" containerClass="AboutTestimonials__container">
+      <div className="AboutTestimonials__brands">
+        <span className="AboutTestimonials__brand-logo serif-brand">Forbes</span>
+        <span className="AboutTestimonials__brand-logo sans-brand">EATER</span>
+        <span className="AboutTestimonials__brand-logo script-brand">The New York Times</span>
+        <span className="AboutTestimonials__brand-logo serif-brand">VOGUE</span>
       </div>
 
-      <div className="testimonial-container-outer">
-        <div className="testimonial-box" key={activeReview}>
-          <div className="quote-icon">”</div>
-          <p className="testimonial-quote">"{reviews[activeReview].quote}"</p>
-          <span className="testimonial-author">
+      <div className="AboutTestimonials__box-container">
+        <div className="AboutTestimonials__box" key={activeReview}>
+          <div className="AboutTestimonials__quote-icon">”</div>
+          <p className="AboutTestimonials__quote">"{reviews[activeReview].quote}"</p>
+          <span className="AboutTestimonials__author">
             — {reviews[activeReview].author}
           </span>
         </div>
       </div>
 
-      <div className="carousel-dots">
+      <div className="AboutTestimonials__dots">
         {reviews.map((_, idx) => (
           <button
             key={idx}
-            className={`dot ${idx === activeReview ? "active" : ""}`}
+            className={`AboutTestimonials__dot ${idx === activeReview ? "AboutTestimonials__dot--active" : ""}`}
             onClick={() => setActiveReview(idx)}
             aria-label={`Go to slide ${idx + 1}`}
           ></button>

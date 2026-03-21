@@ -1,23 +1,23 @@
-.values-container {
+.AboutValues__container {
   background-color: var(--color-bg-sustain);
   border-radius: var(--radius-xl);
   padding: 60px 40px;
   text-align: center;
 }
 
-.values-title {
+.AboutValues__title {
   color: var(--color-green-sustain);
   font-size: 2rem;
   font-weight: 700;
   margin: 0 0 16px;
 }
 
-.values-subtitle {
+.AboutValues__subtitle {
   color: var(--color-text-body);
   margin-bottom: 48px;
 }
 
-.values-grid {
+.AboutValues__grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 32px;
@@ -25,25 +25,25 @@
 }
 
 @media (min-width: 600px) {
-  .values-grid {
+  .AboutValues__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 900px) {
-  .values-grid {
+  .AboutValues__grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.values-item {
+.AboutValues__item {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.values-icon-wrapper {
+.AboutValues__icon-wrapper {
   width: 64px;
   height: 64px;
   background-color: #e5eadb;
@@ -55,21 +55,21 @@
   color: var(--color-green-sustain);
 }
 
-.values-item h4 {
+.AboutValues__item h4 {
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 10px;
   color: var(--color-text-heading);
 }
 
-.values-item p {
+.AboutValues__item p {
   font-size: 0.9rem;
   color: var(--color-text-body);
   margin: 0;
   line-height: 1.5;
 }
 
-.values-logos {
+.AboutValues__logos {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -78,7 +78,7 @@
   padding-top: 40px;
 }
 
-.values-logo-box {
+.AboutValues__logo-box {
   background-color: rgba(0, 0, 0, 0.04);
   padding: 12px 24px;
   border-radius: var(--radius-md);
@@ -89,6 +89,6 @@
 }
 
 @media (max-width: 768px) {
-  .values-container { padding: 40px 20px; }
-  .values-title { font-size: 1.7rem; }
+  .AboutValues__container { padding: 40px 20px; }
+  .AboutValues__title { font-size: 1.7rem; }
 }

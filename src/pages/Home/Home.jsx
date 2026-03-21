@@ -1,7 +1,3 @@
-import { useState, useCallback, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useAuth } from '../../context';;
-import Toast from "../../components/Toast/Toast";
 import mockData from "../../../mock-data.json";
 
 // Sections
@@ -16,7 +12,7 @@ import "./Home.css";
 
 function Home() {
   return (
-    <div className="home-page overflow-x-hidden">
+    <div className="Home">
       <Hero />
       <InfoBar />
       <OurStory />

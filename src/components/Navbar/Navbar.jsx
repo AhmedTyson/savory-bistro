@@ -1,7 +1,8 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { UtensilsCrossed, Menu, X, UserCircle, LogOut, ChevronDown } from 'lucide-react';
-import { useAuth } from '../../context';;
-import { useState, useRef, useEffect } from 'react';
+import { useAuth } from '../../context';
+import { useState } from 'react';
+import { useDropdown } from '../../hooks/useDropdown';
 import './Navbar.css';
 
 const navLinks = [
@@ -15,8 +16,7 @@ const navLinks = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-  const userDropdownRef = useRef(null);
+  const { isOpen: isUserDropdownOpen, setIsOpen: setIsUserDropdownOpen, containerRef: userDropdownRef } = useDropdown(false);
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -29,16 +29,10 @@ function Navbar() {
     closeMenu();   
   }
 
-  // close dropdown on click outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
-        setIsUserDropdownOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const visibleLinks = navLinks.filter(link => {
+    if (link.path === '/reservations' && !currentUser) return false;
+    return true;
+  });
 
   return (
     <nav className="Navbar">
@@ -50,10 +44,7 @@ function Navbar() {
         </NavLink>
 
         <ul className="Navbar__links">
-          {navLinks.map((link) => {
-            if (link.path === '/reservations' && !currentUser) return null;
-            
-            return (
+          {visibleLinks.map((link) => (
               <li key={link.path}>
                 <NavLink
                   to={link.path}
@@ -65,8 +56,7 @@ function Navbar() {
                   {link.label}
                 </NavLink>
               </li>
-            );
-          })}
+          ))}
         </ul>
 
         {/* desktop right zone */}
@@ -130,10 +120,7 @@ function Navbar() {
       {menuOpen && (
         <div className="Navbar__mobile-menu">
           <ul className="Navbar__mobile-links">
-            {navLinks.map((link) => {
-               if (link.path === '/reservations' && !currentUser) return null;
-
-               return (
+            {visibleLinks.map((link) => (
                 <li key={link.path}>
                   <NavLink
                     to={link.path}
@@ -146,8 +133,7 @@ function Navbar() {
                     {link.label}
                   </NavLink>
                 </li>
-               );
-            })}
+            ))}
           </ul>
 
           <div className="Navbar__mobile-divider" />
