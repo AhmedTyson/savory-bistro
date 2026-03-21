@@ -1,0 +1,386 @@
+strict digraph "dependency-cruiser output"{
+    rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    "mock-data.json" [label=<mock-data.json> tooltip="mock-data.json" URL="mock-data.json" fillcolor="#ffee44"]
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/axios" [label=<axios> tooltip="axios" URL="https://www.npmjs.com/package/axios" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/framer-motion" [label=<framer-motion> tooltip="framer-motion" URL="https://www.npmjs.com/package/framer-motion" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/lucide-react" [label=<lucide-react> tooltip="lucide-react" URL="https://www.npmjs.com/package/lucide-react" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react" [label=<react> tooltip="react" URL="https://www.npmjs.com/package/react" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react-dom" [label=<react-dom> tooltip="react-dom" URL="https://www.npmjs.com/package/react-dom" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react-router-dom" [label=<react-router-dom> tooltip="react-router-dom" URL="https://www.npmjs.com/package/react-router-dom" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_src" {label="src" "src/App.jsx" [label=<App.jsx> tooltip="App.jsx" URL="src/App.jsx" fillcolor="#ffff77"] }
+    "src/App.jsx" -> "src/components/index.js"
+    "src/App.jsx" -> "src/components/Toast/Toast.jsx"
+    "src/App.jsx" -> "src/context/index.js"
+    "src/App.jsx" -> "src/index.css"
+    "src/App.jsx" -> "src/pages/index.js"
+    "src/App.jsx" -> "src/styles/AuthLayout.css"
+    "src/App.jsx" -> "src/styles/variables.css"
+    "src/App.jsx" -> "node_modules/framer-motion" [penwidth="1.0"]
+    "src/App.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/App.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/assets" {label="assets" "src/assets/auth-bg-curve.svg" [label=<auth-bg-curve.svg> tooltip="auth-bg-curve.svg" URL="src/assets/auth-bg-curve.svg" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/assets" {label="assets" "src/assets/auth-leaf-lines.svg" [label=<auth-leaf-lines.svg> tooltip="auth-leaf-lines.svg" URL="src/assets/auth-leaf-lines.svg" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/assets" {label="assets" "src/assets/zigzag-orange.svg" [label=<zigzag-orange.svg> tooltip="zigzag-orange.svg" URL="src/assets/zigzag-orange.svg" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/assets" {label="assets" "src/assets/zigzag.svg" [label=<zigzag.svg> tooltip="zigzag.svg" URL="src/assets/zigzag.svg" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/AnimatedPage" {label="AnimatedPage" "src/components/AnimatedPage/AnimatedPage.jsx" [label=<AnimatedPage.jsx> tooltip="AnimatedPage.jsx" URL="src/components/AnimatedPage/AnimatedPage.jsx" fillcolor="#ffff77"] } } }
+    "src/components/AnimatedPage/AnimatedPage.jsx" -> "node_modules/framer-motion" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Button" {label="Button" "src/components/Button/Button.css" [label=<Button.css> tooltip="Button.css" URL="src/components/Button/Button.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Button" {label="Button" "src/components/Button/Button.jsx" [label=<Button.jsx> tooltip="Button.jsx" URL="src/components/Button/Button.jsx" fillcolor="#ffff77"] } } }
+    "src/components/Button/Button.jsx" -> "src/components/Button/Button.css"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/DishCard" {label="DishCard" "src/components/DishCard/DishCard.css" [label=<DishCard.css> tooltip="DishCard.css" URL="src/components/DishCard/DishCard.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/DishCard" {label="DishCard" "src/components/DishCard/DishCard.jsx" [label=<DishCard.jsx> tooltip="DishCard.jsx" URL="src/components/DishCard/DishCard.jsx" fillcolor="#ffff77"] } } }
+    "src/components/DishCard/DishCard.jsx" -> "src/components/DishCard/DishCard.css"
+    "src/components/DishCard/DishCard.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/FloatingReserveBtn" {label="FloatingReserveBtn" "src/components/FloatingReserveBtn/FloatingReserveBtn.css" [label=<FloatingReserveBtn.css> tooltip="FloatingReserveBtn.css" URL="src/components/FloatingReserveBtn/FloatingReserveBtn.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/FloatingReserveBtn" {label="FloatingReserveBtn" "src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" [label=<FloatingReserveBtn.jsx> tooltip="FloatingReserveBtn.jsx" URL="src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" fillcolor="#ffff77"] } } }
+    "src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" -> "src/context/index.js"
+    "src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" -> "src/components/FloatingReserveBtn/FloatingReserveBtn.css"
+    "src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Footer" {label="Footer" "src/components/Footer/Footer.css" [label=<Footer.css> tooltip="Footer.css" URL="src/components/Footer/Footer.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Footer" {label="Footer" "src/components/Footer/Footer.jsx" [label=<Footer.jsx> tooltip="Footer.jsx" URL="src/components/Footer/Footer.jsx" fillcolor="#ffff77"] } } }
+    "src/components/Footer/Footer.jsx" -> "src/utils/validation.js"
+    "src/components/Footer/Footer.jsx" -> "src/components/Footer/Footer.css"
+    "src/components/Footer/Footer.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/components/Footer/Footer.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/components/Footer/Footer.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Navbar" {label="Navbar" "src/components/Navbar/Navbar.css" [label=<Navbar.css> tooltip="Navbar.css" URL="src/components/Navbar/Navbar.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Navbar" {label="Navbar" "src/components/Navbar/Navbar.jsx" [label=<Navbar.jsx> tooltip="Navbar.jsx" URL="src/components/Navbar/Navbar.jsx" fillcolor="#ffff77"] } } }
+    "src/components/Navbar/Navbar.jsx" -> "src/context/index.js"
+    "src/components/Navbar/Navbar.jsx" -> "src/hooks/useDropdown.js"
+    "src/components/Navbar/Navbar.jsx" -> "src/components/Navbar/Navbar.css"
+    "src/components/Navbar/Navbar.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/components/Navbar/Navbar.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/components/Navbar/Navbar.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/SectionHeader" {label="SectionHeader" "src/components/SectionHeader/SectionHeader.css" [label=<SectionHeader.css> tooltip="SectionHeader.css" URL="src/components/SectionHeader/SectionHeader.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/SectionHeader" {label="SectionHeader" "src/components/SectionHeader/SectionHeader.jsx" [label=<SectionHeader.jsx> tooltip="SectionHeader.jsx" URL="src/components/SectionHeader/SectionHeader.jsx" fillcolor="#ffff77"] } } }
+    "src/components/SectionHeader/SectionHeader.jsx" -> "src/components/SectionHeader/SectionHeader.css"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/SelectionField" {label="SelectionField" "src/components/SelectionField/SelectionField.css" [label=<SelectionField.css> tooltip="SelectionField.css" URL="src/components/SelectionField/SelectionField.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/SelectionField" {label="SelectionField" "src/components/SelectionField/SelectionField.jsx" [label=<SelectionField.jsx> tooltip="SelectionField.jsx" URL="src/components/SelectionField/SelectionField.jsx" fillcolor="#ffff77"] } } }
+    "src/components/SelectionField/SelectionField.jsx" -> "src/hooks/useDropdown.js"
+    "src/components/SelectionField/SelectionField.jsx" -> "src/components/SelectionField/SelectionField.css"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Toast" {label="Toast" "src/components/Toast/Toast.css" [label=<Toast.css> tooltip="Toast.css" URL="src/components/Toast/Toast.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" subgraph "cluster_src/components/Toast" {label="Toast" "src/components/Toast/Toast.jsx" [label=<Toast.jsx> tooltip="Toast.jsx" URL="src/components/Toast/Toast.jsx" fillcolor="#ffff77"] } } }
+    "src/components/Toast/Toast.jsx" -> "src/components/Toast/Toast.css"
+    "src/components/Toast/Toast.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/components/Toast/Toast.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/components/Toast/Toast.jsx" -> "node_modules/react-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/components" {label="components" "src/components/index.js" [label=<index.js> tooltip="index.js" URL="src/components/index.js" ] } }
+    "src/components/index.js" -> "src/components/AnimatedPage/AnimatedPage.jsx" [arrowhead="inv"]
+    "src/components/index.js" -> "src/components/Button/Button.jsx" [arrowhead="inv"]
+    "src/components/index.js" -> "src/components/DishCard/DishCard.jsx" [arrowhead="inv"]
+    "src/components/index.js" -> "src/components/FloatingReserveBtn/FloatingReserveBtn.jsx" [arrowhead="inv"]
+    "src/components/index.js" -> "src/components/Footer/Footer.jsx" [arrowhead="inv"]
+    "src/components/index.js" -> "src/components/Navbar/Navbar.jsx" [arrowhead="inv"]
+    "src/components/index.js" -> "src/components/SectionHeader/SectionHeader.jsx" [arrowhead="inv"]
+    "src/components/index.js" -> "src/components/Toast/Toast.jsx" [arrowhead="inv"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/context" {label="context" "src/context/AuthContext.jsx" [label=<AuthContext.jsx> tooltip="AuthContext.jsx" URL="src/context/AuthContext.jsx" fillcolor="#ffff77"] } }
+    "src/context/AuthContext.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/context" {label="context" "src/context/index.js" [label=<index.js> tooltip="index.js" URL="src/context/index.js" ] } }
+    "src/context/index.js" -> "src/context/AuthContext.jsx" [arrowhead="inv"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/hooks" {label="hooks" "src/hooks/useDropdown.js" [label=<useDropdown.js> tooltip="useDropdown.js" URL="src/hooks/useDropdown.js" ] } }
+    "src/hooks/useDropdown.js" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" "src/index.css" [label=<index.css> tooltip="index.css" URL="src/index.css" ] }
+    subgraph "cluster_src" {label="src" "src/main.jsx" [label=<main.jsx> tooltip="main.jsx" URL="src/main.jsx" fillcolor="#ffff77"] }
+    "src/main.jsx" -> "src/App.jsx"
+    "src/main.jsx" -> "src/context/index.js"
+    "src/main.jsx" -> "src/index.css"
+    "src/main.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/main.jsx" -> "node_modules/react-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" "src/pages/AboutUs/AboutUs.css" [label=<AboutUs.css> tooltip="AboutUs.css" URL="src/pages/AboutUs/AboutUs.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" "src/pages/AboutUs/AboutUs.jsx" [label=<AboutUs.jsx> tooltip="AboutUs.jsx" URL="src/pages/AboutUs/AboutUs.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/AboutUs/AboutUs.jsx" -> "mock-data.json"
+    "src/pages/AboutUs/AboutUs.jsx" -> "src/pages/AboutUs/AboutUs.css"
+    "src/pages/AboutUs/AboutUs.jsx" -> "src/pages/AboutUs/sections/AboutChef/AboutChef.jsx"
+    "src/pages/AboutUs/AboutUs.jsx" -> "src/pages/AboutUs/sections/AboutHero/AboutHero.jsx"
+    "src/pages/AboutUs/AboutUs.jsx" -> "src/pages/AboutUs/sections/AboutTeam/AboutTeam.jsx"
+    "src/pages/AboutUs/AboutUs.jsx" -> "src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.jsx"
+    "src/pages/AboutUs/AboutUs.jsx" -> "src/pages/AboutUs/sections/AboutValues/AboutValues.jsx"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/components" {label="components" subgraph "cluster_src/pages/AboutUs/components/AboutSection" {label="AboutSection" "src/pages/AboutUs/components/AboutSection/AboutSection.css" [label=<AboutSection.css> tooltip="AboutSection.css" URL="src/pages/AboutUs/components/AboutSection/AboutSection.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/components" {label="components" subgraph "cluster_src/pages/AboutUs/components/AboutSection" {label="AboutSection" "src/pages/AboutUs/components/AboutSection/AboutSection.jsx" [label=<AboutSection.jsx> tooltip="AboutSection.jsx" URL="src/pages/AboutUs/components/AboutSection/AboutSection.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/AboutUs/components/AboutSection/AboutSection.jsx" -> "src/pages/AboutUs/components/AboutSection/AboutSection.css"
+    "src/pages/AboutUs/components/AboutSection/AboutSection.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutChef" {label="AboutChef" "src/pages/AboutUs/sections/AboutChef/AboutChef.css" [label=<AboutChef.css> tooltip="AboutChef.css" URL="src/pages/AboutUs/sections/AboutChef/AboutChef.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutChef" {label="AboutChef" "src/pages/AboutUs/sections/AboutChef/AboutChef.jsx" [label=<AboutChef.jsx> tooltip="AboutChef.jsx" URL="src/pages/AboutUs/sections/AboutChef/AboutChef.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/AboutUs/sections/AboutChef/AboutChef.jsx" -> "src/pages/AboutUs/components/AboutSection/AboutSection.jsx"
+    "src/pages/AboutUs/sections/AboutChef/AboutChef.jsx" -> "src/pages/AboutUs/sections/AboutChef/AboutChef.css"
+    "src/pages/AboutUs/sections/AboutChef/AboutChef.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutHero" {label="AboutHero" "src/pages/AboutUs/sections/AboutHero/AboutHero.css" [label=<AboutHero.css> tooltip="AboutHero.css" URL="src/pages/AboutUs/sections/AboutHero/AboutHero.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutHero" {label="AboutHero" "src/pages/AboutUs/sections/AboutHero/AboutHero.jsx" [label=<AboutHero.jsx> tooltip="AboutHero.jsx" URL="src/pages/AboutUs/sections/AboutHero/AboutHero.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/AboutUs/sections/AboutHero/AboutHero.jsx" -> "src/pages/AboutUs/components/AboutSection/AboutSection.jsx"
+    "src/pages/AboutUs/sections/AboutHero/AboutHero.jsx" -> "src/pages/AboutUs/sections/AboutHero/AboutHero.css"
+    "src/pages/AboutUs/sections/AboutHero/AboutHero.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutTeam" {label="AboutTeam" "src/pages/AboutUs/sections/AboutTeam/AboutTeam.css" [label=<AboutTeam.css> tooltip="AboutTeam.css" URL="src/pages/AboutUs/sections/AboutTeam/AboutTeam.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutTeam" {label="AboutTeam" "src/pages/AboutUs/sections/AboutTeam/AboutTeam.jsx" [label=<AboutTeam.jsx> tooltip="AboutTeam.jsx" URL="src/pages/AboutUs/sections/AboutTeam/AboutTeam.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/AboutUs/sections/AboutTeam/AboutTeam.jsx" -> "src/pages/AboutUs/components/AboutSection/AboutSection.jsx"
+    "src/pages/AboutUs/sections/AboutTeam/AboutTeam.jsx" -> "src/pages/AboutUs/sections/AboutTeam/AboutTeam.css"
+    "src/pages/AboutUs/sections/AboutTeam/AboutTeam.jsx" -> "node_modules/framer-motion" [penwidth="1.0"]
+    "src/pages/AboutUs/sections/AboutTeam/AboutTeam.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutTestimonials" {label="AboutTestimonials" "src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.css" [label=<AboutTestimonials.css> tooltip="AboutTestimonials.css" URL="src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutTestimonials" {label="AboutTestimonials" "src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.jsx" [label=<AboutTestimonials.jsx> tooltip="AboutTestimonials.jsx" URL="src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.jsx" -> "src/pages/AboutUs/components/AboutSection/AboutSection.jsx"
+    "src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.jsx" -> "src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.css"
+    "src/pages/AboutUs/sections/AboutTestimonials/AboutTestimonials.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutValues" {label="AboutValues" "src/pages/AboutUs/sections/AboutValues/AboutValues.css" [label=<AboutValues.css> tooltip="AboutValues.css" URL="src/pages/AboutUs/sections/AboutValues/AboutValues.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/AboutUs" {label="AboutUs" subgraph "cluster_src/pages/AboutUs/sections" {label="sections" subgraph "cluster_src/pages/AboutUs/sections/AboutValues" {label="AboutValues" "src/pages/AboutUs/sections/AboutValues/AboutValues.jsx" [label=<AboutValues.jsx> tooltip="AboutValues.jsx" URL="src/pages/AboutUs/sections/AboutValues/AboutValues.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/AboutUs/sections/AboutValues/AboutValues.jsx" -> "src/pages/AboutUs/components/AboutSection/AboutSection.jsx"
+    "src/pages/AboutUs/sections/AboutValues/AboutValues.jsx" -> "src/pages/AboutUs/sections/AboutValues/AboutValues.css"
+    "src/pages/AboutUs/sections/AboutValues/AboutValues.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" "src/pages/Contact/Contact.css" [label=<Contact.css> tooltip="Contact.css" URL="src/pages/Contact/Contact.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" "src/pages/Contact/Contact.jsx" [label=<Contact.jsx> tooltip="Contact.jsx" URL="src/pages/Contact/Contact.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Contact/Contact.jsx" -> "mock-data.json"
+    "src/pages/Contact/Contact.jsx" -> "src/pages/Contact/Contact.css"
+    "src/pages/Contact/Contact.jsx" -> "src/pages/Contact/sections/ContactForm/ContactForm.jsx"
+    "src/pages/Contact/Contact.jsx" -> "src/pages/Contact/sections/ContactHero/ContactHero.jsx"
+    "src/pages/Contact/Contact.jsx" -> "src/pages/Contact/sections/FAQAccordion/FAQAccordion.jsx"
+    "src/pages/Contact/Contact.jsx" -> "src/pages/Contact/sections/MapEmbed/MapEmbed.jsx"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/ContactForm" {label="ContactForm" "src/pages/Contact/sections/ContactForm/ContactForm.css" [label=<ContactForm.css> tooltip="ContactForm.css" URL="src/pages/Contact/sections/ContactForm/ContactForm.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/ContactForm" {label="ContactForm" "src/pages/Contact/sections/ContactForm/ContactForm.jsx" [label=<ContactForm.jsx> tooltip="ContactForm.jsx" URL="src/pages/Contact/sections/ContactForm/ContactForm.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Contact/sections/ContactForm/ContactForm.jsx" -> "src/components/Button/Button.jsx"
+    "src/pages/Contact/sections/ContactForm/ContactForm.jsx" -> "src/context/index.js"
+    "src/pages/Contact/sections/ContactForm/ContactForm.jsx" -> "src/pages/Contact/sections/ContactForm/ContactForm.css"
+    "src/pages/Contact/sections/ContactForm/ContactForm.jsx" -> "node_modules/framer-motion" [penwidth="1.0"]
+    "src/pages/Contact/sections/ContactForm/ContactForm.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Contact/sections/ContactForm/ContactForm.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/ContactHero" {label="ContactHero" "src/pages/Contact/sections/ContactHero/ContactHero.css" [label=<ContactHero.css> tooltip="ContactHero.css" URL="src/pages/Contact/sections/ContactHero/ContactHero.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/ContactHero" {label="ContactHero" "src/pages/Contact/sections/ContactHero/ContactHero.jsx" [label=<ContactHero.jsx> tooltip="ContactHero.jsx" URL="src/pages/Contact/sections/ContactHero/ContactHero.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Contact/sections/ContactHero/ContactHero.jsx" -> "src/pages/Contact/sections/ContactHero/ContactHero.css"
+    "src/pages/Contact/sections/ContactHero/ContactHero.jsx" -> "node_modules/framer-motion" [penwidth="1.0"]
+    "src/pages/Contact/sections/ContactHero/ContactHero.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/FAQAccordion" {label="FAQAccordion" "src/pages/Contact/sections/FAQAccordion/FAQAccordion.css" [label=<FAQAccordion.css> tooltip="FAQAccordion.css" URL="src/pages/Contact/sections/FAQAccordion/FAQAccordion.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/FAQAccordion" {label="FAQAccordion" "src/pages/Contact/sections/FAQAccordion/FAQAccordion.jsx" [label=<FAQAccordion.jsx> tooltip="FAQAccordion.jsx" URL="src/pages/Contact/sections/FAQAccordion/FAQAccordion.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Contact/sections/FAQAccordion/FAQAccordion.jsx" -> "src/pages/Contact/sections/FAQAccordion/FAQAccordion.css"
+    "src/pages/Contact/sections/FAQAccordion/FAQAccordion.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Contact/sections/FAQAccordion/FAQAccordion.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/MapEmbed" {label="MapEmbed" "src/pages/Contact/sections/MapEmbed/MapEmbed.css" [label=<MapEmbed.css> tooltip="MapEmbed.css" URL="src/pages/Contact/sections/MapEmbed/MapEmbed.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Contact" {label="Contact" subgraph "cluster_src/pages/Contact/sections" {label="sections" subgraph "cluster_src/pages/Contact/sections/MapEmbed" {label="MapEmbed" "src/pages/Contact/sections/MapEmbed/MapEmbed.jsx" [label=<MapEmbed.jsx> tooltip="MapEmbed.jsx" URL="src/pages/Contact/sections/MapEmbed/MapEmbed.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Contact/sections/MapEmbed/MapEmbed.jsx" -> "src/pages/Contact/sections/MapEmbed/MapEmbed.css"
+    "src/pages/Contact/sections/MapEmbed/MapEmbed.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Contact/sections/MapEmbed/MapEmbed.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" "src/pages/Dashboard/Dashboard.css" [label=<Dashboard.css> tooltip="Dashboard.css" URL="src/pages/Dashboard/Dashboard.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" "src/pages/Dashboard/Dashboard.jsx" [label=<Dashboard.jsx> tooltip="Dashboard.jsx" URL="src/pages/Dashboard/Dashboard.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Dashboard/Dashboard.jsx" -> "src/pages/Dashboard/Dashboard.css"
+    "src/pages/Dashboard/Dashboard.jsx" -> "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx"
+    "src/pages/Dashboard/Dashboard.jsx" -> "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx"
+    "src/pages/Dashboard/Dashboard.jsx" -> "src/pages/Dashboard/sections/ProfileCard/ProfileCard.jsx"
+    "src/pages/Dashboard/Dashboard.jsx" -> "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/components" {label="components" subgraph "cluster_src/pages/Dashboard/components/DashboardCard" {label="DashboardCard" "src/pages/Dashboard/components/DashboardCard/DashboardCard.css" [label=<DashboardCard.css> tooltip="DashboardCard.css" URL="src/pages/Dashboard/components/DashboardCard/DashboardCard.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/components" {label="components" subgraph "cluster_src/pages/Dashboard/components/DashboardCard" {label="DashboardCard" "src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx" [label=<DashboardCard.jsx> tooltip="DashboardCard.jsx" URL="src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx" -> "src/pages/Dashboard/components/DashboardCard/DashboardCard.css"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ChangePassword" {label="ChangePassword" "src/pages/Dashboard/sections/ChangePassword/ChangePassword.css" [label=<ChangePassword.css> tooltip="ChangePassword.css" URL="src/pages/Dashboard/sections/ChangePassword/ChangePassword.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ChangePassword" {label="ChangePassword" "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" [label=<ChangePassword.jsx> tooltip="ChangePassword.jsx" URL="src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "src/components/Button/Button.jsx"
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "src/context/index.js"
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "src/utils/validation.js"
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx"
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "src/pages/Dashboard/sections/ChangePassword/ChangePassword.css"
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "node_modules/axios" [penwidth="1.0"]
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Dashboard/sections/ChangePassword/ChangePassword.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ChangeUsername" {label="ChangeUsername" "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.css" [label=<ChangeUsername.css> tooltip="ChangeUsername.css" URL="src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ChangeUsername" {label="ChangeUsername" "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" [label=<ChangeUsername.jsx> tooltip="ChangeUsername.jsx" URL="src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" -> "src/components/Button/Button.jsx"
+    "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" -> "src/context/index.js"
+    "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" -> "src/utils/validation.js"
+    "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" -> "src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx"
+    "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" -> "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.css"
+    "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" -> "node_modules/axios" [penwidth="1.0"]
+    "src/pages/Dashboard/sections/ChangeUsername/ChangeUsername.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ProfileCard" {label="ProfileCard" "src/pages/Dashboard/sections/ProfileCard/ProfileCard.css" [label=<ProfileCard.css> tooltip="ProfileCard.css" URL="src/pages/Dashboard/sections/ProfileCard/ProfileCard.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ProfileCard" {label="ProfileCard" "src/pages/Dashboard/sections/ProfileCard/ProfileCard.jsx" [label=<ProfileCard.jsx> tooltip="ProfileCard.jsx" URL="src/pages/Dashboard/sections/ProfileCard/ProfileCard.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Dashboard/sections/ProfileCard/ProfileCard.jsx" -> "src/context/index.js"
+    "src/pages/Dashboard/sections/ProfileCard/ProfileCard.jsx" -> "src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx"
+    "src/pages/Dashboard/sections/ProfileCard/ProfileCard.jsx" -> "src/pages/Dashboard/sections/ProfileCard/ProfileCard.css"
+    "src/pages/Dashboard/sections/ProfileCard/ProfileCard.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ReservationHistory" {label="ReservationHistory" "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.css" [label=<ReservationHistory.css> tooltip="ReservationHistory.css" URL="src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Dashboard" {label="Dashboard" subgraph "cluster_src/pages/Dashboard/sections" {label="sections" subgraph "cluster_src/pages/Dashboard/sections/ReservationHistory" {label="ReservationHistory" "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" [label=<ReservationHistory.jsx> tooltip="ReservationHistory.jsx" URL="src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" -> "src/context/index.js"
+    "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" -> "src/pages/Dashboard/components/DashboardCard/DashboardCard.jsx"
+    "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" -> "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.css"
+    "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" -> "node_modules/axios" [penwidth="1.0"]
+    "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/pages/Dashboard/sections/ReservationHistory/ReservationHistory.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Gallery" {label="Gallery" "src/pages/Gallery/Gallery.css" [label=<Gallery.css> tooltip="Gallery.css" URL="src/pages/Gallery/Gallery.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Gallery" {label="Gallery" "src/pages/Gallery/Gallery.jsx" [label=<Gallery.jsx> tooltip="Gallery.jsx" URL="src/pages/Gallery/Gallery.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Gallery/Gallery.jsx" -> "mock-data.json"
+    "src/pages/Gallery/Gallery.jsx" -> "src/components/Button/Button.jsx"
+    "src/pages/Gallery/Gallery.jsx" -> "src/components/SectionHeader/SectionHeader.jsx"
+    "src/pages/Gallery/Gallery.jsx" -> "src/pages/Gallery/Gallery.css"
+    "src/pages/Gallery/Gallery.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Gallery/Gallery.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/pages/Gallery/Gallery.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" "src/pages/Home/Home.css" [label=<Home.css> tooltip="Home.css" URL="src/pages/Home/Home.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" "src/pages/Home/Home.jsx" [label=<Home.jsx> tooltip="Home.jsx" URL="src/pages/Home/Home.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Home/Home.jsx" -> "mock-data.json"
+    "src/pages/Home/Home.jsx" -> "src/pages/Home/Home.css"
+    "src/pages/Home/Home.jsx" -> "src/pages/Home/sections/ChefSpecial/ChefSpecial.jsx"
+    "src/pages/Home/Home.jsx" -> "src/pages/Home/sections/Hero/Hero.jsx"
+    "src/pages/Home/Home.jsx" -> "src/pages/Home/sections/InfoBar/InfoBar.jsx"
+    "src/pages/Home/Home.jsx" -> "src/pages/Home/sections/OurStory/OurStory.jsx"
+    "src/pages/Home/Home.jsx" -> "src/pages/Home/sections/SignatureDishes/SignatureDishes.jsx"
+    "src/pages/Home/Home.jsx" -> "src/pages/Home/sections/Testimonials/Testimonials.jsx"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/ChefSpecial" {label="ChefSpecial" "src/pages/Home/sections/ChefSpecial/ChefSpecial.css" [label=<ChefSpecial.css> tooltip="ChefSpecial.css" URL="src/pages/Home/sections/ChefSpecial/ChefSpecial.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/ChefSpecial" {label="ChefSpecial" "src/pages/Home/sections/ChefSpecial/ChefSpecial.jsx" [label=<ChefSpecial.jsx> tooltip="ChefSpecial.jsx" URL="src/pages/Home/sections/ChefSpecial/ChefSpecial.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Home/sections/ChefSpecial/ChefSpecial.jsx" -> "src/pages/Home/sections/ChefSpecial/ChefSpecial.css"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/Hero" {label="Hero" "src/pages/Home/sections/Hero/Hero.css" [label=<Hero.css> tooltip="Hero.css" URL="src/pages/Home/sections/Hero/Hero.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/Hero" {label="Hero" "src/pages/Home/sections/Hero/Hero.jsx" [label=<Hero.jsx> tooltip="Hero.jsx" URL="src/pages/Home/sections/Hero/Hero.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Home/sections/Hero/Hero.jsx" -> "src/components/Button/Button.jsx"
+    "src/pages/Home/sections/Hero/Hero.jsx" -> "src/pages/Home/sections/Hero/Hero.css"
+    "src/pages/Home/sections/Hero/Hero.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Home/sections/Hero/Hero.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/InfoBar" {label="InfoBar" "src/pages/Home/sections/InfoBar/InfoBar.css" [label=<InfoBar.css> tooltip="InfoBar.css" URL="src/pages/Home/sections/InfoBar/InfoBar.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/InfoBar" {label="InfoBar" "src/pages/Home/sections/InfoBar/InfoBar.jsx" [label=<InfoBar.jsx> tooltip="InfoBar.jsx" URL="src/pages/Home/sections/InfoBar/InfoBar.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Home/sections/InfoBar/InfoBar.jsx" -> "src/pages/Home/sections/InfoBar/InfoBar.css"
+    "src/pages/Home/sections/InfoBar/InfoBar.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/OurStory" {label="OurStory" "src/pages/Home/sections/OurStory/OurStory.css" [label=<OurStory.css> tooltip="OurStory.css" URL="src/pages/Home/sections/OurStory/OurStory.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/OurStory" {label="OurStory" "src/pages/Home/sections/OurStory/OurStory.jsx" [label=<OurStory.jsx> tooltip="OurStory.jsx" URL="src/pages/Home/sections/OurStory/OurStory.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Home/sections/OurStory/OurStory.jsx" -> "src/pages/Home/sections/OurStory/OurStory.css"
+    "src/pages/Home/sections/OurStory/OurStory.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/SignatureDishes" {label="SignatureDishes" "src/pages/Home/sections/SignatureDishes/SignatureDishes.css" [label=<SignatureDishes.css> tooltip="SignatureDishes.css" URL="src/pages/Home/sections/SignatureDishes/SignatureDishes.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/SignatureDishes" {label="SignatureDishes" "src/pages/Home/sections/SignatureDishes/SignatureDishes.jsx" [label=<SignatureDishes.jsx> tooltip="SignatureDishes.jsx" URL="src/pages/Home/sections/SignatureDishes/SignatureDishes.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Home/sections/SignatureDishes/SignatureDishes.jsx" -> "src/pages/Home/sections/SignatureDishes/SignatureDishes.css"
+    "src/pages/Home/sections/SignatureDishes/SignatureDishes.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Home/sections/SignatureDishes/SignatureDishes.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/Testimonials" {label="Testimonials" "src/pages/Home/sections/Testimonials/Testimonials.css" [label=<Testimonials.css> tooltip="Testimonials.css" URL="src/pages/Home/sections/Testimonials/Testimonials.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Home" {label="Home" subgraph "cluster_src/pages/Home/sections" {label="sections" subgraph "cluster_src/pages/Home/sections/Testimonials" {label="Testimonials" "src/pages/Home/sections/Testimonials/Testimonials.jsx" [label=<Testimonials.jsx> tooltip="Testimonials.jsx" URL="src/pages/Home/sections/Testimonials/Testimonials.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Home/sections/Testimonials/Testimonials.jsx" -> "src/pages/Home/sections/Testimonials/Testimonials.css"
+    "src/pages/Home/sections/Testimonials/Testimonials.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Home/sections/Testimonials/Testimonials.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" "src/pages/Login/Login.css" [label=<Login.css> tooltip="Login.css" URL="src/pages/Login/Login.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" "src/pages/Login/Login.jsx" [label=<Login.jsx> tooltip="Login.jsx" URL="src/pages/Login/Login.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Login/Login.jsx" -> "src/context/index.js"
+    "src/pages/Login/Login.jsx" -> "src/utils/validation.js"
+    "src/pages/Login/Login.jsx" -> "src/pages/Login/Login.css"
+    "src/pages/Login/Login.jsx" -> "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx"
+    "src/pages/Login/Login.jsx" -> "src/pages/Login/sections/LoginForm/LoginForm.jsx"
+    "src/pages/Login/Login.jsx" -> "src/pages/Login/sections/LoginPanel/LoginPanel.jsx"
+    "src/pages/Login/Login.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/pages/Login/Login.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" subgraph "cluster_src/pages/Login/sections" {label="sections" subgraph "cluster_src/pages/Login/sections/ForgotPasswordModal" {label="ForgotPasswordModal" "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.css" [label=<ForgotPasswordModal.css> tooltip="ForgotPasswordModal.css" URL="src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" subgraph "cluster_src/pages/Login/sections" {label="sections" subgraph "cluster_src/pages/Login/sections/ForgotPasswordModal" {label="ForgotPasswordModal" "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx" [label=<ForgotPasswordModal.jsx> tooltip="ForgotPasswordModal.jsx" URL="src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx" -> "src/utils/validation.js"
+    "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx" -> "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.css"
+    "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx" -> "node_modules/framer-motion" [penwidth="1.0"]
+    "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Login/sections/ForgotPasswordModal/ForgotPasswordModal.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" subgraph "cluster_src/pages/Login/sections" {label="sections" subgraph "cluster_src/pages/Login/sections/LoginForm" {label="LoginForm" "src/pages/Login/sections/LoginForm/LoginForm.css" [label=<LoginForm.css> tooltip="LoginForm.css" URL="src/pages/Login/sections/LoginForm/LoginForm.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" subgraph "cluster_src/pages/Login/sections" {label="sections" subgraph "cluster_src/pages/Login/sections/LoginForm" {label="LoginForm" "src/pages/Login/sections/LoginForm/LoginForm.jsx" [label=<LoginForm.jsx> tooltip="LoginForm.jsx" URL="src/pages/Login/sections/LoginForm/LoginForm.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Login/sections/LoginForm/LoginForm.jsx" -> "src/assets/auth-bg-curve.svg"
+    "src/pages/Login/sections/LoginForm/LoginForm.jsx" -> "src/assets/zigzag-orange.svg"
+    "src/pages/Login/sections/LoginForm/LoginForm.jsx" -> "src/assets/zigzag.svg"
+    "src/pages/Login/sections/LoginForm/LoginForm.jsx" -> "src/pages/Login/sections/LoginForm/LoginForm.css"
+    "src/pages/Login/sections/LoginForm/LoginForm.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Login/sections/LoginForm/LoginForm.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" subgraph "cluster_src/pages/Login/sections" {label="sections" subgraph "cluster_src/pages/Login/sections/LoginPanel" {label="LoginPanel" "src/pages/Login/sections/LoginPanel/LoginPanel.css" [label=<LoginPanel.css> tooltip="LoginPanel.css" URL="src/pages/Login/sections/LoginPanel/LoginPanel.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Login" {label="Login" subgraph "cluster_src/pages/Login/sections" {label="sections" subgraph "cluster_src/pages/Login/sections/LoginPanel" {label="LoginPanel" "src/pages/Login/sections/LoginPanel/LoginPanel.jsx" [label=<LoginPanel.jsx> tooltip="LoginPanel.jsx" URL="src/pages/Login/sections/LoginPanel/LoginPanel.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Login/sections/LoginPanel/LoginPanel.jsx" -> "src/assets/auth-leaf-lines.svg"
+    "src/pages/Login/sections/LoginPanel/LoginPanel.jsx" -> "src/pages/Login/sections/LoginPanel/LoginPanel.css"
+    "src/pages/Login/sections/LoginPanel/LoginPanel.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Menu" {label="Menu" "src/pages/Menu/Menu.css" [label=<Menu.css> tooltip="Menu.css" URL="src/pages/Menu/Menu.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Menu" {label="Menu" "src/pages/Menu/Menu.jsx" [label=<Menu.jsx> tooltip="Menu.jsx" URL="src/pages/Menu/Menu.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Menu/Menu.jsx" -> "mock-data.json"
+    "src/pages/Menu/Menu.jsx" -> "src/components/Button/Button.jsx"
+    "src/pages/Menu/Menu.jsx" -> "src/components/DishCard/DishCard.jsx"
+    "src/pages/Menu/Menu.jsx" -> "src/components/SectionHeader/SectionHeader.jsx"
+    "src/pages/Menu/Menu.jsx" -> "src/pages/Menu/Menu.css"
+    "src/pages/Menu/Menu.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" "src/pages/Reservations/Reservations.css" [label=<Reservations.css> tooltip="Reservations.css" URL="src/pages/Reservations/Reservations.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" "src/pages/Reservations/Reservations.jsx" [label=<Reservations.jsx> tooltip="Reservations.jsx" URL="src/pages/Reservations/Reservations.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Reservations/Reservations.jsx" -> "src/context/index.js"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/hooks/useReservations.js"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/Reservations.css"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.jsx"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/sections/ReservationForm/ReservationForm.jsx"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/sections/ReservationHero/ReservationHero.jsx"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/sections/ReservationReport/ReservationReport.jsx"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.jsx"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/sections/TimeSlots/TimeSlots.jsx"
+    "src/pages/Reservations/Reservations.jsx" -> "src/pages/Reservations/utils/reservationUtils.js"
+    "src/pages/Reservations/Reservations.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/pages/Reservations/Reservations.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/hooks" {label="hooks" "src/pages/Reservations/hooks/useReservations.js" [label=<useReservations.js> tooltip="useReservations.js" URL="src/pages/Reservations/hooks/useReservations.js" ] } } } }
+    "src/pages/Reservations/hooks/useReservations.js" -> "src/context/index.js"
+    "src/pages/Reservations/hooks/useReservations.js" -> "src/utils/validation.js"
+    "src/pages/Reservations/hooks/useReservations.js" -> "node_modules/axios" [penwidth="1.0"]
+    "src/pages/Reservations/hooks/useReservations.js" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/CalendarPicker" {label="CalendarPicker" "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.css" [label=<CalendarPicker.css> tooltip="CalendarPicker.css" URL="src/pages/Reservations/sections/CalendarPicker/CalendarPicker.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/CalendarPicker" {label="CalendarPicker" "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.jsx" [label=<CalendarPicker.jsx> tooltip="CalendarPicker.jsx" URL="src/pages/Reservations/sections/CalendarPicker/CalendarPicker.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.jsx" -> "src/pages/Reservations/utils/reservationUtils.js"
+    "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.jsx" -> "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.css"
+    "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Reservations/sections/CalendarPicker/CalendarPicker.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/PrivateDiningModal" {label="PrivateDiningModal" "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.css" [label=<PrivateDiningModal.css> tooltip="PrivateDiningModal.css" URL="src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/PrivateDiningModal" {label="PrivateDiningModal" "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" [label=<PrivateDiningModal.jsx> tooltip="PrivateDiningModal.jsx" URL="src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" -> "src/context/index.js"
+    "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" -> "src/utils/validation.js"
+    "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" -> "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.css"
+    "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" -> "node_modules/framer-motion" [penwidth="1.0"]
+    "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Reservations/sections/PrivateDiningModal/PrivateDiningModal.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationForm" {label="ReservationForm" "src/pages/Reservations/sections/ReservationForm/ReservationForm.css" [label=<ReservationForm.css> tooltip="ReservationForm.css" URL="src/pages/Reservations/sections/ReservationForm/ReservationForm.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationForm" {label="ReservationForm" "src/pages/Reservations/sections/ReservationForm/ReservationForm.jsx" [label=<ReservationForm.jsx> tooltip="ReservationForm.jsx" URL="src/pages/Reservations/sections/ReservationForm/ReservationForm.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Reservations/sections/ReservationForm/ReservationForm.jsx" -> "src/components/SelectionField/SelectionField.jsx"
+    "src/pages/Reservations/sections/ReservationForm/ReservationForm.jsx" -> "src/pages/Reservations/sections/ReservationForm/ReservationForm.css"
+    "src/pages/Reservations/sections/ReservationForm/ReservationForm.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationHero" {label="ReservationHero" "src/pages/Reservations/sections/ReservationHero/ReservationHero.css" [label=<ReservationHero.css> tooltip="ReservationHero.css" URL="src/pages/Reservations/sections/ReservationHero/ReservationHero.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationHero" {label="ReservationHero" "src/pages/Reservations/sections/ReservationHero/ReservationHero.jsx" [label=<ReservationHero.jsx> tooltip="ReservationHero.jsx" URL="src/pages/Reservations/sections/ReservationHero/ReservationHero.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Reservations/sections/ReservationHero/ReservationHero.jsx" -> "src/pages/Reservations/sections/ReservationHero/ReservationHero.css"
+    "src/pages/Reservations/sections/ReservationHero/ReservationHero.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationReport" {label="ReservationReport" "src/pages/Reservations/sections/ReservationReport/ReservationReport.css" [label=<ReservationReport.css> tooltip="ReservationReport.css" URL="src/pages/Reservations/sections/ReservationReport/ReservationReport.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationReport" {label="ReservationReport" "src/pages/Reservations/sections/ReservationReport/ReservationReport.jsx" [label=<ReservationReport.jsx> tooltip="ReservationReport.jsx" URL="src/pages/Reservations/sections/ReservationReport/ReservationReport.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Reservations/sections/ReservationReport/ReservationReport.jsx" -> "src/pages/Reservations/sections/ReservationReport/ReservationReport.css"
+    "src/pages/Reservations/sections/ReservationReport/ReservationReport.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Reservations/sections/ReservationReport/ReservationReport.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationSidebar" {label="ReservationSidebar" "src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.css" [label=<ReservationSidebar.css> tooltip="ReservationSidebar.css" URL="src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/ReservationSidebar" {label="ReservationSidebar" "src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.jsx" [label=<ReservationSidebar.jsx> tooltip="ReservationSidebar.jsx" URL="src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.jsx" -> "src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.css"
+    "src/pages/Reservations/sections/ReservationSidebar/ReservationSidebar.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/TimeSlots" {label="TimeSlots" "src/pages/Reservations/sections/TimeSlots/TimeSlots.css" [label=<TimeSlots.css> tooltip="TimeSlots.css" URL="src/pages/Reservations/sections/TimeSlots/TimeSlots.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/sections" {label="sections" subgraph "cluster_src/pages/Reservations/sections/TimeSlots" {label="TimeSlots" "src/pages/Reservations/sections/TimeSlots/TimeSlots.jsx" [label=<TimeSlots.jsx> tooltip="TimeSlots.jsx" URL="src/pages/Reservations/sections/TimeSlots/TimeSlots.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Reservations/sections/TimeSlots/TimeSlots.jsx" -> "src/pages/Reservations/sections/TimeSlots/TimeSlots.css"
+    "src/pages/Reservations/sections/TimeSlots/TimeSlots.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Reservations" {label="Reservations" subgraph "cluster_src/pages/Reservations/utils" {label="utils" "src/pages/Reservations/utils/reservationUtils.js" [label=<reservationUtils.js> tooltip="reservationUtils.js" URL="src/pages/Reservations/utils/reservationUtils.js" ] } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Signup" {label="Signup" "src/pages/Signup/Signup.css" [label=<Signup.css> tooltip="Signup.css" URL="src/pages/Signup/Signup.css" ] } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Signup" {label="Signup" "src/pages/Signup/Signup.jsx" [label=<Signup.jsx> tooltip="Signup.jsx" URL="src/pages/Signup/Signup.jsx" fillcolor="#ffff77"] } } }
+    "src/pages/Signup/Signup.jsx" -> "mock-data.json"
+    "src/pages/Signup/Signup.jsx" -> "src/context/index.js"
+    "src/pages/Signup/Signup.jsx" -> "src/utils/validation.js"
+    "src/pages/Signup/Signup.jsx" -> "src/pages/Signup/sections/SignupForm/SignupForm.jsx"
+    "src/pages/Signup/Signup.jsx" -> "src/pages/Signup/sections/SignupPanel/SignupPanel.jsx"
+    "src/pages/Signup/Signup.jsx" -> "src/pages/Signup/Signup.css"
+    "src/pages/Signup/Signup.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "src/pages/Signup/Signup.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Signup" {label="Signup" subgraph "cluster_src/pages/Signup/sections" {label="sections" subgraph "cluster_src/pages/Signup/sections/SignupForm" {label="SignupForm" "src/pages/Signup/sections/SignupForm/SignupForm.css" [label=<SignupForm.css> tooltip="SignupForm.css" URL="src/pages/Signup/sections/SignupForm/SignupForm.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Signup" {label="Signup" subgraph "cluster_src/pages/Signup/sections" {label="sections" subgraph "cluster_src/pages/Signup/sections/SignupForm" {label="SignupForm" "src/pages/Signup/sections/SignupForm/SignupForm.jsx" [label=<SignupForm.jsx> tooltip="SignupForm.jsx" URL="src/pages/Signup/sections/SignupForm/SignupForm.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Signup/sections/SignupForm/SignupForm.jsx" -> "src/assets/auth-bg-curve.svg"
+    "src/pages/Signup/sections/SignupForm/SignupForm.jsx" -> "src/assets/zigzag-orange.svg"
+    "src/pages/Signup/sections/SignupForm/SignupForm.jsx" -> "src/assets/zigzag.svg"
+    "src/pages/Signup/sections/SignupForm/SignupForm.jsx" -> "src/utils/validation.js"
+    "src/pages/Signup/sections/SignupForm/SignupForm.jsx" -> "src/pages/Signup/sections/SignupForm/SignupForm.css"
+    "src/pages/Signup/sections/SignupForm/SignupForm.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "src/pages/Signup/sections/SignupForm/SignupForm.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Signup" {label="Signup" subgraph "cluster_src/pages/Signup/sections" {label="sections" subgraph "cluster_src/pages/Signup/sections/SignupPanel" {label="SignupPanel" "src/pages/Signup/sections/SignupPanel/SignupPanel.css" [label=<SignupPanel.css> tooltip="SignupPanel.css" URL="src/pages/Signup/sections/SignupPanel/SignupPanel.css" ] } } } } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" subgraph "cluster_src/pages/Signup" {label="Signup" subgraph "cluster_src/pages/Signup/sections" {label="sections" subgraph "cluster_src/pages/Signup/sections/SignupPanel" {label="SignupPanel" "src/pages/Signup/sections/SignupPanel/SignupPanel.jsx" [label=<SignupPanel.jsx> tooltip="SignupPanel.jsx" URL="src/pages/Signup/sections/SignupPanel/SignupPanel.jsx" fillcolor="#ffff77"] } } } } }
+    "src/pages/Signup/sections/SignupPanel/SignupPanel.jsx" -> "src/assets/auth-leaf-lines.svg"
+    "src/pages/Signup/sections/SignupPanel/SignupPanel.jsx" -> "src/pages/Signup/sections/SignupPanel/SignupPanel.css"
+    "src/pages/Signup/sections/SignupPanel/SignupPanel.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/pages" {label="pages" "src/pages/index.js" [label=<index.js> tooltip="index.js" URL="src/pages/index.js" ] } }
+    "src/pages/index.js" -> "src/pages/AboutUs/AboutUs.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Contact/Contact.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Dashboard/Dashboard.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Gallery/Gallery.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Home/Home.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Login/Login.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Menu/Menu.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Reservations/Reservations.jsx" [arrowhead="inv"]
+    "src/pages/index.js" -> "src/pages/Signup/Signup.jsx" [arrowhead="inv"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/styles" {label="styles" "src/styles/AuthLayout.css" [label=<AuthLayout.css> tooltip="AuthLayout.css" URL="src/styles/AuthLayout.css" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/styles" {label="styles" "src/styles/variables.css" [label=<variables.css> tooltip="variables.css" URL="src/styles/variables.css" ] } }
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/utils" {label="utils" "src/utils/validation.js" [label=<validation.js> tooltip="validation.js" URL="src/utils/validation.js" ] } }
+}
