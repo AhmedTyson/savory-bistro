@@ -1,6 +1,6 @@
-import { AlertCircle } from 'lucide-react';
-import SelectionField from '../../../../components/SelectionField/SelectionField';
-import './ReservationForm.css';
+import { AlertCircle } from "lucide-react";
+import SelectionField from "../../../../components/SelectionField/SelectionField";
+import "./ReservationForm.css";
 
 const ReservationForm = ({
   handleSubmit,
@@ -10,7 +10,7 @@ const ReservationForm = ({
   submitError,
   loading,
   OCCASIONS,
-  children
+  children,
 }) => {
   const partyOptions = Array.from({ length: 20 }, (_, i) => (i + 1).toString());
 
@@ -23,9 +23,9 @@ const ReservationForm = ({
           value={formData.partySize}
           options={partyOptions}
           placeholder="Select guests"
-          onSelect={(val) => updateField('partySize', val)}
+          onSelect={(val) => updateField("partySize", val)}
           error={errors.partySize}
-          formatOption={(n) => `${n} ${parseInt(n) === 1 ? 'Guest' : 'Guests'}`}
+          formatOption={(n) => `${n} ${parseInt(n) === 1 ? "Guest" : "Guests"}`}
           className="res-form__field"
         />
 
@@ -34,7 +34,7 @@ const ReservationForm = ({
           value={formData.occasion}
           options={OCCASIONS}
           placeholder="Select occasion (optional)"
-          onSelect={(val) => updateField('occasion', val)}
+          onSelect={(val) => updateField("occasion", val)}
           className="res-form__field"
         />
       </div>
@@ -51,7 +51,7 @@ const ReservationForm = ({
             className={`res-input ${errors.fullName ? "res-input--error" : ""}`}
             placeholder="John Doe"
             value={formData.fullName}
-            onChange={(e) => updateField('fullName', e.target.value)}
+            onChange={(e) => updateField("fullName", e.target.value)}
           />
           {errors.fullName && (
             <span className="res-error">
@@ -68,7 +68,7 @@ const ReservationForm = ({
             className={`res-input ${errors.phone ? "res-input--error" : ""}`}
             placeholder="(555) 000-0000"
             value={formData.phone}
-            onChange={(e) => updateField('phone', e.target.value)}
+            onChange={(e) => updateField("phone", e.target.value)}
           />
           {errors.phone && (
             <span className="res-error">
@@ -87,7 +87,7 @@ const ReservationForm = ({
           className={`res-input ${errors.email ? "res-input--error" : ""}`}
           placeholder="john@example.com"
           value={formData.email}
-          onChange={(e) => updateField('email', e.target.value)}
+          onChange={(e) => updateField("email", e.target.value)}
         />
         {errors.email && (
           <span className="res-error">
@@ -103,7 +103,7 @@ const ReservationForm = ({
           placeholder="Dietary restrictions, seating preferences..."
           rows={4}
           value={formData.specialReqs}
-          onChange={(e) => updateField('specialReqs', e.target.value)}
+          onChange={(e) => updateField("specialReqs", e.target.value)}
         />
       </div>
 
@@ -114,11 +114,7 @@ const ReservationForm = ({
         </div>
       )}
 
-      <button 
-        type="submit" 
-        className="res-submit-btn"
-        disabled={loading}
-      >
+      <button type="submit" className="res-submit-btn" disabled={loading}>
         {loading ? "Confirming..." : "Confirm Reservation"}
       </button>
       {errors.submit && (

@@ -12,7 +12,7 @@ export default function SignupPanel({ dishes }) {
       </div>
       {dishes.map((dish, i) => (
         <div key={dish.id} className={`dish-slot dish-slot-${i + 1}`}>
-          <img src={`/images/HomePage/${dish.name.replace(' ', '_')}.webp`} alt={dish.name}
+          <img src={`/images/home-page/${dish.name.toLowerCase().replace(' ', '-')}.webp`} alt={dish.name}
             className="dish-slot-img"
             onError={e => { e.target.style.display = 'none' }} />
           <div className="dish-slot-overlay" />
