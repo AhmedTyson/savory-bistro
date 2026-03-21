@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Mail, Lock, User, Eye, EyeOff, CheckCircle } from 'lucide-react'
-import AuthBgCurve from '../../../../components/SvgAssets/AuthBgCurve';
-import ZigZagLightning from '../../../../components/SvgAssets/ZigZagLightning';
+import authBgCurve from '../../../../assets/auth-bg-curve.svg'
+import zigzag from '../../../../assets/zigzag.svg'
+import zigzagOrange from '../../../../assets/zigzag-orange.svg'
 import './SignupForm.css'
 
 /* Password strength rules */
@@ -101,11 +102,11 @@ export default function SignupForm({
 }) {
   return (
     <div className="auth-right">
-      <AuthBgCurve className="auth-curve" aria-hidden="true" />
-      <ZigZagLightning className="zz zz-1" aria-hidden="true" />
-      <ZigZagLightning className="zz zz-2" aria-hidden="true" />
-      <ZigZagLightning className="zz zz-3" aria-hidden="true" style={{ stroke: 'var(--color-primary)' }} />
-      <ZigZagLightning className="zz zz-4" aria-hidden="true" style={{ stroke: 'var(--color-primary)' }} />
+      <img src={authBgCurve} className="auth-curve" alt="" aria-hidden="true" />
+      <img src={zigzag}       className="zz zz-1" alt="" aria-hidden="true" />
+      <img src={zigzag}       className="zz zz-2" alt="" aria-hidden="true" />
+      <img src={zigzagOrange} className="zz zz-3" alt="" aria-hidden="true" />
+      <img src={zigzagOrange} className="zz zz-4" alt="" aria-hidden="true" />
 
       <div className="auth-form-area">
         <div className="auth-form-inner">

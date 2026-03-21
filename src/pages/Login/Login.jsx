@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../../context';
+import { useAuth } from '../../context'
 import LoginPanel from './sections/LoginPanel/LoginPanel'
 import LoginForm  from './sections/LoginForm/LoginForm'
-import { isValidEmail } from '../../utils/validation'
 import './Login.css'
+
+/* RFC 5322 email regex with TLD ≥ 2 chars */
+const emailRx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/
 
 export default function Login() {
   const { validateLogin, login, currentUser } = useAuth()
@@ -96,7 +98,7 @@ export default function Login() {
     if (!trimmedEmail) {
       setEmailError('Email address is required.')
       hasError = true
-    } else if (!isValidEmail(trimmedEmail)) {
+    } else if (!emailRx.test(trimmedEmail)) {
       setEmailError('Please enter a valid email address.')
       hasError = true
     }

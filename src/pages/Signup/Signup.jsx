@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context';
+import { useAuth } from '../../context'
 import mockData from '../../../mock-data.json'
 import SignupPanel from './sections/SignupPanel/SignupPanel'
 import SignupForm  from './sections/SignupForm/SignupForm'
-import { isValidEmail, hasMinLength } from '../../utils/validation'
 import './Signup.css'
+
+/* RFC 5322 email regex with TLD ≥ 2 chars */
+const emailRx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/
 
 export default function Signup() {
   const { registerUser, currentUser } = useAuth()
@@ -89,12 +91,12 @@ export default function Signup() {
     if (cooldownSeconds > 0) return
 
     // First name
-    if (!hasMinLength(firstName, 2)) {
+    if (!firstName.trim() || firstName.trim().length < 2) {
       setFirstNameError('Please enter your first name.')
       hasError = true
     }
     // Last name
-    if (!hasMinLength(lastName, 2)) {
+    if (!lastName.trim() || lastName.trim().length < 2) {
       setLastNameError('Please enter your last name.')
       hasError = true
     }
@@ -107,13 +109,13 @@ export default function Signup() {
     } else if (trimmedEmail.length > 254) {
       setEmailError('Email address is too long (max 254 characters).')
       hasError = true
-    } else if (!isValidEmail(trimmedEmail)) {
+    } else if (!emailRx.test(trimmedEmail)) {
       setEmailError('Please enter a valid email address.')
       hasError = true
     }
 
     // Password — 5 rules
-    const passwordHasMinLength = password.length >= 8
+    const hasMinLength = password.length >= 8
     const hasUppercase = /[A-Z]/.test(password)
     const hasLowercase = /[a-z]/.test(password)
     const hasNumber    = /[0-9]/.test(password)
@@ -122,9 +124,9 @@ export default function Signup() {
     if (!password.trim()) {
       setPasswordError('Please choose a password.')
       hasError = true
-    } else if (!passwordHasMinLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecial) {
+    } else if (!hasMinLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecial) {
       const missing = []
-      if (!passwordHasMinLength) missing.push('at least 8 characters')
+      if (!hasMinLength) missing.push('at least 8 characters')
       if (!hasUppercase) missing.push('an uppercase letter')
       if (!hasLowercase) missing.push('a lowercase letter')
       if (!hasNumber)    missing.push('a number')
