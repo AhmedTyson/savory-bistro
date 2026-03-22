@@ -152,7 +152,11 @@ export function useReservations() {
       showToast({ 
         type: 'reservation', 
         firstName: currentUser.firstName, 
-        extra: { date: selectedDate, time: selectedTime, submittedAt: payload.submittedAt } 
+        extra: { 
+          date: new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), 
+          time: selectedTime, 
+          submittedAt: payload.submittedAt 
+        } 
       });
       
       // clean up fields but keep identity data
