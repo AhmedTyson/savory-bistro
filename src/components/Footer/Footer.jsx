@@ -5,18 +5,17 @@ import { useState } from 'react';
 import { validateEmail } from '../../utils/validation';
 import './Footer.css';
 
-function Footer({ variant = 'full' }) {
+function Footer() {
   const [email, setEmail]     = useState('');
   const [status, setStatus]   = useState('idle'); // idle | loading | success | error
   const [message, setMessage] = useState('');
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate entry before loading state
-    if (emailErr) {
+    const err = validateEmail(email);
+    if (err) {
       setStatus('error');
-      setMessage(emailErr === 'Email address is required.' ? 'Please enter your email.' : 'Please enter a valid email.');
+      setMessage(err === 'Email address is required.' ? 'Please enter your email.' : 'Please enter a valid email.');
       return;
     }
 
@@ -53,31 +52,25 @@ function Footer({ variant = 'full' }) {
               <span className="Footer__brand-name">Savory Bistro</span>
             </div>
             <p className="Footer__tagline">
-              {variant === 'full'
-                ? 'Refining the art of seasonal dining with locally sourced ingredients and a commitment to culinary excellence.'
-                : 'Crafting unforgettable dining experiences since 2012. Our focus is on seasonal ingredients and soulful cooking.'}
+              Refining the art of seasonal dining with locally sourced ingredients and a commitment to culinary excellence.
             </p>
           </div>
 
-          {variant === 'full' && (
-            <div className="Footer__column">
-              <h4 className="Footer__column-title">Quick Links</h4>
-              <ul className="Footer__links">
-                <li><NavLink className="Footer__link" to="/about">Our Story</NavLink></li>
-                <li><NavLink className="Footer__link" to="/reservations">Book a Table</NavLink></li>
-                <li><NavLink className="Footer__link" to="/private-events">Private Events</NavLink></li>
-                <li><NavLink className="Footer__link" to="/gift-cards">Gift Cards</NavLink></li>
-                <li><NavLink className="Footer__link" to="/careers">Careers</NavLink></li>
-              </ul>
-            </div>
-          )}
+          <div className="Footer__column">
+            <h4 className="Footer__column-title">Quick Links</h4>
+            <ul className="Footer__links">
+              <li><NavLink className="Footer__link" to="/about">Our Story</NavLink></li>
+              <li><NavLink className="Footer__link" to="/reservations">Book a Table</NavLink></li>
+              <li><NavLink className="Footer__link" to="/gallery">Gallery</NavLink></li>
+              <li><NavLink className="Footer__link" to="/contact">Contact Us</NavLink></li>
+            </ul>
+          </div>
 
-          {variant === 'light' && (
-            <div className="Footer__column">
-              <h4 className="Footer__column-title">Visit Us</h4>
-              <p className="Footer__text">123 Culinary Avenue<br />Gastronomy District, NY 10012</p>
-            </div>
-          )}
+          <div className="Footer__column">
+            <h4 className="Footer__column-title">Visit Us</h4>
+            <p className="Footer__text">123 Culinary Avenue<br />Gastronomy District, NY 10012</p>
+            <p className="Footer__text" style={{ marginTop: '8px' }}>+1 (555) 123-4567</p>
+          </div>
 
           <div className="Footer__column">
             <h4 className="Footer__column-title">Newsletter</h4>

@@ -34,13 +34,13 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
-function Layout({ children, footerVariant = "full" }) {
+function Layout({ children }) {
   return (
     <>
       <Navbar />
       <main>{children}</main>
       <FloatingReserveBtn />
-      <Footer variant={footerVariant} />
+      <Footer />
     </>
   );
 }
@@ -147,7 +147,7 @@ function AnimatedRoutes() {
           path="/gallery"
           element={
             <AnimatedPage>
-              <Layout footerVariant="light">
+              <Layout>
                 <Gallery />
               </Layout>
             </AnimatedPage>
@@ -198,7 +198,7 @@ function AnimatedRoutes() {
           element={
             <ProtectedRoute>
               <AnimatedPage>
-                <Layout footerVariant="light">
+                <Layout>
                   <Dashboard />
                 </Layout>
               </AnimatedPage>
