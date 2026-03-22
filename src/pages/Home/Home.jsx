@@ -1,5 +1,5 @@
 /** Home.jsx - Marketing Landing Page **/
-import mockData from "../../../mock-data.json";
+import mockData from "../../../data/mock-data.json";
 
 // Sections
 import Hero from "./sections/Hero/Hero";

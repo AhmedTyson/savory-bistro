@@ -1,5 +1,5 @@
 /** Contact.jsx - Inquiry & Location Page Wrapper **/
-import mockData from '../../../mock-data.json';
+import mockData from '../../../data/mock-data.json';
 import ContactHero from './sections/ContactHero/ContactHero';
 import ContactForm from './sections/ContactForm/ContactForm';
 import MapEmbed from './sections/MapEmbed/MapEmbed';

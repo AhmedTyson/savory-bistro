@@ -4,7 +4,7 @@ import AboutChef from "./sections/AboutChef/AboutChef";
 import AboutValues from "./sections/AboutValues/AboutValues";
 import AboutTeam from "./sections/AboutTeam/AboutTeam";
 import AboutTestimonials from "./sections/AboutTestimonials/AboutTestimonials";
-import mockData from "../../../mock-data.json";
+import mockData from "../../../data/mock-data.json";
 import "./AboutUs.css";
 
 const AboutUs = () => {

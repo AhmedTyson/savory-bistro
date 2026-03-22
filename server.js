@@ -8,8 +8,9 @@ import cors from "cors";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const USERS_FILE = path.join(__dirname, "users-data.json");
-const RESERVATIONS_FILE = path.join(__dirname, "reservations-data.json");
+const DATA_DIR = path.join(__dirname, "data");
+const USERS_FILE = path.join(DATA_DIR, "users-data.json");
+const RESERVATIONS_FILE = path.join(DATA_DIR, "reservations-data.json");
 
 const app = express();
 
@@ -153,7 +154,7 @@ app.post("/api/reservations", (req, res) => {
 
 /** Routes: Guest Inquiries **/
 
-const MESSAGES_FILE = path.join(__dirname, "messages-data.json");
+const MESSAGES_FILE = path.join(DATA_DIR, "messages-data.json");
 
 app.get("/api/messages", (req, res) => {
   try {

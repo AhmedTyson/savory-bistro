@@ -3,7 +3,7 @@ import { useState } from "react";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import Button from "../../components/Button/Button";
 import DishCard from "../../components/DishCard/DishCard";
-import data from "../../../mock-data.json";
+import data from "../../../data/mock-data.json";
 import "./Menu.css";
 
 export default function Menu() {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { X, Play, Calendar, BookOpen, Users } from 'lucide-react';
 import SectionHeader from '../../components/SectionHeader/SectionHeader';
 import Button from '../../components/Button/Button';
-import data from '../../../mock-data.json';
+import data from '../../../data/mock-data.json';
 import './Gallery.css';
 
 export default function Gallery() {

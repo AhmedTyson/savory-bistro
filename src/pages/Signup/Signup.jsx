@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context'
-import mockData from '../../../mock-data.json'
+import mockData from '../../../data/mock-data.json'
 import { 
   validateEmail, 
   validateMinLength, 
