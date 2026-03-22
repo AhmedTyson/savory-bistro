@@ -18,6 +18,14 @@ function ReservationReport({ history = [], showReport, setShowReport }) {
     } catch { return dateValue; }
   };
 
+  const formatTimestamp = (ts) => {
+    if (!ts) return '';
+    try {
+      const d = new Date(ts);
+      return `${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} at ${d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
+    } catch { return ''; }
+  };
+
   if (!latestItem) return null;
 
   const isRes = latestItem.type === 'reservation';
@@ -54,6 +62,9 @@ function ReservationReport({ history = [], showReport, setShowReport }) {
               <div className="ReservationHistory__status">
                 <CheckCircle size={12} strokeWidth={2} />
                 {isRes ? 'Confirmed' : 'Inquiry Sent'}
+                <span className="ReservationHistory__submitted-at">
+                  • Reserved {formatTimestamp(latestItem.submittedAt || latestItem.createdAt)}
+                </span>
               </div>
             </div>
 

@@ -29,11 +29,22 @@ const TOAST_CONFIGS = {
     icon: <LogOut size={22} />,
   }),
   // booking details summary
-  reservation: (name, extra) => ({
-    title: "Table Confirmed!",
-    subtitle: `We'll see you on ${extra?.date} at ${extra?.time}.`,
-    icon: <Calendar size={22} />,
-  }),
+  reservation: (name, extra) => {
+    const reservedAt = extra?.submittedAt 
+      ? new Date(extra.submittedAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+      : '';
+    
+    return {
+      title: "Table Confirmed!",
+      subtitle: (
+        <>
+          We'll see you on {extra?.date} at {extra?.time}.
+          {reservedAt && <span className="Toast__timestamp"> (Reserved at {reservedAt})</span>}
+        </>
+      ),
+      icon: <Calendar size={22} />,
+    };
+  },
   // event planning confirmation
   inquiry: (name) => ({
     title: "Inquiry Received",

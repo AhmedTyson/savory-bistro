@@ -76,6 +76,14 @@ function ReservationHistory() {
     } catch { return dateValue; }
   };
 
+  const formatTimestamp = (ts) => {
+    if (!ts) return '';
+    try {
+      const d = new Date(ts);
+      return `${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} at ${d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
+    } catch { return ''; }
+  };
+
   const displayedHistory = isExpanded ? history : history.slice(0, 3);
 
   return (
@@ -124,6 +132,9 @@ function ReservationHistory() {
                       <div className="ReservationHistory__status">
                         <CheckCircle size={12} />
                         {isRes ? 'Confirmed' : 'Inquiry Sent'}
+                        <span className="ReservationHistory__submitted-at">
+                          • Reserved {formatTimestamp(item.submittedAt || item.createdAt)}
+                        </span>
                       </div>
                     </div>
 

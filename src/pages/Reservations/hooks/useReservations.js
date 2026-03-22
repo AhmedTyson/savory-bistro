@@ -152,7 +152,7 @@ export function useReservations() {
       showToast({ 
         type: 'reservation', 
         firstName: currentUser.firstName, 
-        extra: { date: selectedDate, time: selectedTime } 
+        extra: { date: selectedDate, time: selectedTime, submittedAt: payload.submittedAt } 
       });
       
       // clean up fields but keep identity data

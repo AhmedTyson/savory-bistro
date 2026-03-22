@@ -105,6 +105,13 @@
   opacity: 0.85;
 }
 
+.Toast__timestamp {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
 /* Close UI */
 .Toast__close {
   background: none;
