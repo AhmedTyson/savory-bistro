@@ -22,10 +22,16 @@ app.use(express.json());
 
 app.get("/api/users", (req, res) => {
   try {
+    console.log(`[SERVER] Fetching users from ${USERS_FILE}`);
+    if (!fs.existsSync(USERS_FILE)) {
+      console.error(`[SERVER] ERROR: ${USERS_FILE} does not exist!`);
+    }
     const data = fs.readFileSync(USERS_FILE, "utf8");
-    res.json(JSON.parse(data));
+    const users = JSON.parse(data);
+    console.log(`[SERVER] SUCCESS: Found ${users.users?.length || 0} users.`);
+    res.json(users);
   } catch (error) {
-    console.error("Error reading users data:", error);
+    console.error(`[SERVER] ERROR reading users data:`, error);
     res.status(500).json({ error: "Failed to read users" });
   }
 });
