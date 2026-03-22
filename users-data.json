@@ -1,0 +1,123 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "firstName": "Sarah",
+      "lastName": "Ahmed",
+      "email": "sarah@example.com",
+      "password": "password456"
+    },
+    {
+      "id": 3,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmedm2580@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 4,
+      "firstName": "Ahmed",
+      "lastName": "Mido",
+      "email": "ahmedkk3@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 5,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmed80@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 6,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmedgg2580@gmail.com",
+      "password": "user1234"
+    },
+    {
+      "id": 7,
+      "firstName": "Vince",
+      "lastName": "Test",
+      "email": "vince@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 8,
+      "firstName": "Tester",
+      "lastName": "User",
+      "email": "tester@example.com",
+      "password": "Password123"
+    },
+    {
+      "id": 9,
+      "firstName": "Ahmed",
+      "lastName": "Gamer",
+      "email": "ahmed05@gmail.com",
+      "password": "user123"
+    },
+    {
+      "id": 10,
+      "firstName": "Verified",
+      "lastName": "tester",
+      "email": "testuser@example.com",
+      "password": "Password123!@"
+    },
+    {
+      "id": 11,
+      "firstName": "Ahmed",
+      "lastName": "Tyson",
+      "email": "ahmedmessi2580@gmail.com",
+      "password": "ggggA56789s#"
+    },
+    {
+      "id": 12,
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "test_user_unique_123@example.com",
+      "password": "Password123!"
+    },
+    {
+      "id": 13,
+      "firstName": "Ahmed",
+      "lastName": "Mido",
+      "email": "ahmed@gmail.com",
+      "password": "Ahmedtyson05@"
+    },
+    {
+      "id": 14,
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "testuser_verify_fix@example.com",
+      "password": "Password123!@"
+    },
+    {
+      "id": 15,
+      "firstName": "kk",
+      "lastName": "cc",
+      "email": "kkcc@gmail.com",
+      "password": "Pass123@"
+    },
+    {
+      "id": 16,
+      "firstName": "Master",
+      "lastName": "gg",
+      "email": "ahmedk0@gmail.com",
+      "password": "user123@A"
+    },
+    {
+      "id": 17,
+      "firstName": "Gamer",
+      "lastName": "gg",
+      "email": "ahmedkk@gmail.com",
+      "password": "Pass123!"
+    }
+  ]
+}

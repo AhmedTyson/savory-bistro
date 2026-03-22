@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 # Data files (contain user credentials / reservation data)
-users-data.json
-reservations-data.json
+# (Keep tracked so team members get initial data state)
