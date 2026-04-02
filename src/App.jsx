@@ -1,28 +1,12 @@
 /** App.jsx - Root Router & Layout Assembler **/
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, } from "react-router-dom";
 import { useContext, useEffect, useState, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import "./styles/variables.css";
 import "./index.css";
 
 import { Navbar, Footer, FloatingReserveBtn, Toast, AnimatedPage } from "./components";
-import {
-  Home,
-  Menu,
-  Reservations,
-  Gallery,
-  Contact,
-  AboutUs,
-  Login,
-  Signup,
-  Dashboard,
-} from "./pages";
+import { Home, Menu, Reservations, Gallery, Contact, AboutUs, Login, Signup, Dashboard } from "./pages";
 import { AuthContext, AuthProvider, useAuth } from "./context";
 import { TOAST_ANIM_MS } from './components/Toast/Toast';
 
@@ -111,100 +95,15 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
       <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <AnimatedPage>
-              <Layout>
-                <Home />
-              </Layout>
-            </AnimatedPage>
-          }
-        />
-        <Route
-          path="/menu"
-          element={
-            <AnimatedPage>
-              <Layout>
-                <Menu />
-              </Layout>
-            </AnimatedPage>
-          }
-        />
-        <Route
-          path="/reservations"
-          element={
-            <ProtectedRoute>
-              <AnimatedPage>
-                <Layout>
-                  <Reservations />
-                </Layout>
-              </AnimatedPage>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/gallery"
-          element={
-            <AnimatedPage>
-              <Layout>
-                <Gallery />
-              </Layout>
-            </AnimatedPage>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <AnimatedPage>
-              <Layout>
-                <Contact />
-              </Layout>
-            </AnimatedPage>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <AnimatedPage>
-              <Layout>
-                <AboutUs />
-              </Layout>
-            </AnimatedPage>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <AnimatedPage>
-              <AuthLayout>
-                <Login />
-              </AuthLayout>
-            </AnimatedPage>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <AnimatedPage>
-              <AuthLayout>
-                <Signup />
-              </AuthLayout>
-            </AnimatedPage>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <AnimatedPage>
-                <Layout>
-                  <Dashboard />
-                </Layout>
-              </AnimatedPage>
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/" element={<AnimatedPage><Layout><Home /></Layout></AnimatedPage>} />
+        <Route path="/menu" element={<AnimatedPage><Layout><Menu /></Layout></AnimatedPage>}/>
+        <Route path="/reservations" element={<ProtectedRoute><AnimatedPage><Layout><Reservations /></Layout></AnimatedPage></ProtectedRoute>}/>
+        <Route path="/gallery" element={<AnimatedPage><Layout><Gallery /></Layout></AnimatedPage>}/>
+        <Route path="/contact" element={<AnimatedPage><Layout><Contact /></Layout></AnimatedPage>}/>
+        <Route path="/about" element={<AnimatedPage><Layout><AboutUs /></Layout></AnimatedPage>}/>
+        <Route path="/login" element={<AnimatedPage><AuthLayout><Login /></AuthLayout></AnimatedPage>}/>
+        <Route path="/signup" element={<AnimatedPage><AuthLayout><Signup /></AuthLayout></AnimatedPage>}/>
+        <Route path="/dashboard" element={<ProtectedRoute><AnimatedPage><Layout><Dashboard /></Layout></AnimatedPage></ProtectedRoute>}/>
       </Routes>
     </AnimatePresence>
   );

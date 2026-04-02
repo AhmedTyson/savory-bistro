@@ -125,6 +125,13 @@
       "lastName": "Elsayed",
       "email": "ahmed02@gmail.com",
       "password": "Pass123!"
+    },
+    {
+      "id": 19,
+      "firstName": "Ahmed",
+      "lastName": "Elsayed",
+      "email": "ahmedelsayed@gmail.com",
+      "password": "Pass123!"
     }
   ]
 }

@@ -12,7 +12,9 @@
 **A full-featured, modern restaurant website built with React and Vite.**  
 Browse the menu, make reservations, explore the gallery, and manage your account — all in one polished experience.
 
-[Live Demo](https://savory-bistro.netlify.app) · [Report a Bug](https://github.com/AhmedTyson/savory-bistro/issues) · [Request a Feature](https://github.com/AhmedTyson/savory-bistro/issues)
+[![Project Version](https://img.shields.io/badge/version-3.3.0-orange.svg)](docs/04_Changelog.md)
+
+[Live Demo](https://savory-bistro.netlify.app) · [Architecture Explorer](docs/architecture-deep-dive/frontend-architecture-canvas.html) · [Report a Bug](https://github.com/AhmedTyson/savory-bistro/issues)
 
 </div>
 
@@ -29,6 +31,8 @@ Browse the menu, make reservations, explore the gallery, and manage your account
 - [Design System](#-design-system)
 - [Authentication](#-authentication)
 - [Backend API](#-backend-api)
+- [Architecture Explorer](#-architecture-explorer)
+- [Documentation Suite](#-documentation-suite)
 - [Team](#-team)
 - [Contributing](#-contributing)
 - [Git Workflow](#-git-workflow)
@@ -39,7 +43,14 @@ Browse the menu, make reservations, explore the gallery, and manage your account
 
 Savory Bistro is a multi-page restaurant website that delivers a complete digital dining experience. It features a visually rich home page, a fully filterable menu, an authenticated reservation system, a video-enabled gallery, a contact page with FAQ, an about us section, and a personal user dashboard.
 
-The project was built collaboratively by a team of 5 developers using an AI-assisted development workflow with strict design-system constraints and BEM-based CSS architecture.
+The project was built collaboratively by a team of 5 developers using an AI-assisted development workflow (Antigravity-driven) with strict design-system constraints and BEM-based CSS architecture.
+
+### 🆕 What's New (v3.3.0)
+- **Interactive Architecture canvas** for visual codebase exploration.
+- **12+ Detailed Documentation Files** covering everything from logic to styling.
+- **Backend Messaging System** for handling contact form inquiries.
+- **Cleanup Audit** resulting in optimized assets and pruned Tailwind layout decision.
+- **Receipt-style Reservation History** in the user dashboard.
 
 ---
 
@@ -336,9 +347,45 @@ The Express server (`server.js`) runs on port **3001** and handles two resources
 | `GET` | `/api/reservations` | Fetch all reservations (supports `?userId=` filter) |
 | `POST` | `/api/reservations` | Create a new reservation |
 
-Data is persisted to local JSON files (`users-data.json`, `reservations-data.json`) which are excluded from version control via `.gitignore`.
+### Messages & Inquiries
 
-> **Private dining inquiries** are stored client-side in `localStorage` under the key `sb_inquiries`.
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/messages` | Fetch all messages / inquiries (server-side persistence) |
+| `POST` | `/api/messages` | Submit a new contact form message |
+
+Data is persisted to local JSON files (`users-data.json`, `reservations-data.json`, `messages-data.json`) which are excluded from version control via `.gitignore`.
+
+> **Private dining inquiries** are now persisted via the `/api/messages` endpoint to ensuring data longevity across sessions.
+
+---
+
+## 🔍 Architecture Explorer
+
+We've implemented a custom **Frontend Architecture Canvas** to help developers and stakeholders visualize the relationship between UI components, pages, and the global state.
+
+- **Interactive Nodes:** Explore component hierarchies.
+- **Visual Mapping:** Understand how data flows from `AuthContext` to sections.
+- **Accessibility:** View the project structure in a single, zoomable interface.
+
+👉 **[Launch Architecture Explorer](docs/architecture-deep-dive/frontend-architecture-canvas.html)**  
+*(Requires opening the local file in a browser)*
+
+---
+
+## 📚 Documentation Suite
+
+The project includes an extensive library of deep-dive documentation to ensure code maintainability and clear logic flows.
+
+| Document | Purpose |
+|---|---|
+| [Project Overview](docs/architecture-deep-dive/01-Project-Overview.md) | High-level goals and architectural vision |
+| [App Structure](docs/architecture-deep-dive/02-App-Structure-Routing.md) | Routing logic and thin assembler patterns |
+| [Menu System](docs/architecture-deep-dive/04-Menu-System-Data-Handling.md) | Filter logic and data persistence |
+| [Design System](docs/architecture-deep-dive/05-Styling-Design-System.md) | BEM rules and CSS variable mappings |
+| [Logic Analysis](docs/architecture-deep-dive/07-Function-Logic-Analysis.md) | Line-by-line breakdown of critical functions |
+| [Dashboard Architecture](docs/architecture-deep-dive/09-Dashboard-Architecture.md) | State management in the user account section |
+| [Prompt Library](docs/02_Prompt_Library.md) | Ready-to-use prompts for rebuilding any section |
 
 ---
 
